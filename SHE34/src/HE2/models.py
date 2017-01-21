@@ -42,7 +42,7 @@ class Project(models.Model):
     description = models.TextField()
     manager = models.ForeignKey(User,related_name="project_manager")
     HE_Principle = models.CharField(max_length=300, choices= setList ,default="1")
-    evaluators = models.ManyToManyField(User , related_name="project_evaluator")
+    evaluators = models.ManyToManyField(User, default=manager, related_name="project_evaluator")
     # deadline = models.DateField(default=time.date())
     # creationTime = models.DateField(default=time.date())
 
