@@ -5,7 +5,7 @@ import django
 django.setup()
 
 from authtools.models import User
-from HE2.models import Project
+from HE2.models import Project, Evaluation
 
 def populate():
     user_items=[{'email': 'user1@user1.com', 'password': 'user1', 'name': 'user1'},
@@ -17,25 +17,71 @@ def populate():
                 {'email': 'user7@user7.com', 'password': 'user7', 'name': 'user7'},
                 {'email': 'user8@user8.com', 'password': 'user8', 'name': 'user8'},]
     project_items = [{'name':'p1', 'description' : ' This is project 1', 'manager':'user1',
-                    'evaluator' :['user2','user3','user4','user5' ] },
-                   {'name': 'p2', 'description': ' This is project 2', 'manager': 'user2',
-                    'evaluator': ['user1', 'user3', 'user4', 'user5']},
-                   {'name': 'p3', 'description': ' This is project 3', 'manager': 'user3',
-                    'evaluator': ['user1', 'user2', 'user4', 'user5']},
-                   {'name': 'p4', 'description': ' This is project 4', 'manager': 'user4',
-                    'evaluator': ['user1', 'user2', 'user3', 'user5']},
-                   {'name': 'p5', 'description': ' This is project 5', 'manager': 'user1',
-                    'evaluator': ['user2', 'user3', 'user4', 'user5']},
-                   {'name': 'p6', 'description': ' This is project 6', 'manager': 'user2',
-                    'evaluator': ['user1', 'user3', 'user4', 'user5']},
-                   {'name': 'p7', 'description': ' This is project 7', 'manager': 'user1',
-                    'evaluator': ['user2', 'user3', 'user4', 'user5']},
+                      'evaluator' :['user2','user3','user4','user5' ] },
+                     {'name': 'p2', 'description': ' This is project 2', 'manager': 'user2',
+                      'evaluator': ['user1', 'user3', 'user4', 'user5']},
+                     {'name': 'p3', 'description': ' This is project 3', 'manager': 'user3',
+                      'evaluator': ['user1', 'user2', 'user4', 'user5']},
+                     {'name': 'p4', 'description': ' This is project 4', 'manager': 'user4',
+                      'evaluator': ['user1', 'user2', 'user3', 'user5']},
+                     {'name': 'p5', 'description': ' This is project 5', 'manager': 'user1',
+                      'evaluator': ['user2', 'user3', 'user4', 'user5']},
+                     {'name': 'p6', 'description': ' This is project 6', 'manager': 'user2',
+                      'evaluator': ['user1', 'user3', 'user4', 'user5']},
+                     {'name': 'p7', 'description': ' This is project 7', 'manager': 'user1',
+                      'evaluator': ['user2', 'user3', 'user4', 'user5']},
+                     ]
+    eval_items = [ { 'ofProject'    :'p1',
+                     'evaluator'    :'user2',
+                     'place'        :'',
+                     'heurPrincip'  :'',
+                     'description'  :'This is an evaluation for project 1',
+                     'recommendation':'',
+                     'positivity'   :'',
+                     'severity'     :'',
+                     'frequency'    :'',
+                     'screenshot'   :''},
+                   {'ofProject': 'p1',
+                    'evaluator': 'user2',
+                    'place': '',
+                    'heurPrincip': '',
+                    'description': 'This is an evaluation for project 1',
+                    'recommendation': '',
+                    'positivity': '',
+                    'severity': '',
+                    'frequency': '',
+                    'screenshot': ''},
+                   {'ofProject': 'p1',
+                    'evaluator': 'user3',
+                    'place': '',
+                    'heurPrincip': '',
+                    'description': 'This is an evaluation for project 1',
+                    'recommendation': '',
+                    'positivity': '',
+                    'severity': '',
+                    'frequency': '',
+                    'screenshot': ''},
+                   {'ofProject': 'p1',
+                    'evaluator': 'user2',
+                    'place': '',
+                    'heurPrincip': '',
+                    'description': 'This is an evaluation for project 1',
+                    'recommendation': '',
+                    'positivity': '',
+                    'severity': '',
+                    'frequency': '',
+                    'screenshot': ''},
                    ]
+
     for user in user_items:
         addUser(user)
 
     for project in project_items:
         addProject(project)
+
+    for eval in eval_items:
+        addEvaluation(eval)
+
 
 def addUser(userdata):
     user = User.objects.get_or_create(email=userdata['email'] , password=userdata['password'] , name=userdata['name'])[0]
@@ -50,6 +96,14 @@ def addProject(projectData):
         project.evaluators.add(User.objects.get(name=evaluator))
     project.save()
     print('Added a Project')
+
+def addEvaluation(eval):
+    evaluation  = Evaluation(ofProject= Project.objects.get(name=eval['ofProject']),
+                                                   evaluator = User.objects.get(name=eval['evaluator']),
+                                                   description= eval['description'],
+                                                   )
+    evaluation.save()
+    print('Added a Evaluation')
 
 if __name__ == '__main__':
     print('Running population script...')
