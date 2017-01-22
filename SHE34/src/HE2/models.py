@@ -68,11 +68,14 @@ class Evaluation(models.Model):
 #
 #
 #
-# class ListOfEvaluations(models.Model):
-#     name = models.CharField(max_length= 50)
-#     ofProject = models.ForeignKey(Project)
-#     fromUser= models.ForeignKey(Profile , related_name="project_manager")
-#     evaluations = models.ManyToManyField(Evaluation)
-#
-#     def __str__(self):
-#         return self.name
+class ListOfEval(models.Model):
+    name = models.CharField(max_length= 50)
+    logo = models.ImageField(name='Eval-Merg-Logo',upload_to='logo/%Y-%m-%d/', null=True, blank= True )
+    ofProject = models.ForeignKey(Project)
+    fromUser= models.ForeignKey(User , related_name="Merge_manager")
+    evaluations = models.ManyToManyField(Evaluation)
+    mergeUrl = models.URLField(blank=True , null=True)
+    exportedFile= models.FileField(blank=True , null=True)
+
+    def __str__(self):
+        return self.name
