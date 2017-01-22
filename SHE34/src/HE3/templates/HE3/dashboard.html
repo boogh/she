@@ -6,7 +6,7 @@
     <ul>
 
     {% for project in asmanager %}
-        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name}} </a> </li>
+        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </li>
     {% endfor %}
 
     </ul>
@@ -16,7 +16,7 @@
     <ul>
 
     {% for project in asevalutor %}
-        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name}} </a> </li>
+        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
     {% endfor %}
 
     </ul>
