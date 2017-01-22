@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block container%}
+    <h2> Projects</h2>
+    <p> You are manager of these projects:</p>
+    <ul>
+
+    {% for project in asmanager %}
+    <li> {{ project.name}} </li>
+    {% endfor %}
+
+    </ul>
+
+    <p> You are evaluator in these projects:</p>
+
+    <ul>
+
+    {% for project in asevalutor %}
+    <li> {{ project.name}} </li>
+    {% endfor %}
+
+    </ul>
+{% endblock  %}
