@@ -6,7 +6,7 @@
     <ul>
 
     {% for project in asmanager %}
-    <li> {{ project.name}} </li>
+        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name}} </a> </li>
     {% endfor %}
 
     </ul>
@@ -16,7 +16,7 @@
     <ul>
 
     {% for project in asevalutor %}
-    <li> {{ project.name}} </li>
+        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name}} </a> </li>
     {% endfor %}
 
     </ul>
