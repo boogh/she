@@ -77,8 +77,7 @@ INSTALLED_APPS = (
 
     'profiles',
     'accounts',
-    'HE2'
-
+    'HE3'
 )
 
 MIDDLEWARE_CLASSES = (
