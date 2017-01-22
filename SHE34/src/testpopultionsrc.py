@@ -5,7 +5,7 @@ import django
 django.setup()
 
 from authtools.models import User
-from HE2.models import Project, Evaluation
+from HE3.models import Project, Evaluation
 
 def populate():
     user_items=[{'email': 'user1@user1.com', 'password': 'user1', 'name': 'user1'},
@@ -84,7 +84,8 @@ def populate():
 
 
 def addUser(userdata):
-    user = User.objects.get_or_create(email=userdata['email'] , password=userdata['password'] , name=userdata['name'])[0]
+    user = User.objects.get_or_create(email=userdata['email'] , name=userdata['name'])[0]
+    user.set_password(userdata['password'])
     user.save()
     print("Added User")
 
