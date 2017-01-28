@@ -10,4 +10,7 @@ urlpatterns = [
     # url(r'^' , views.ProjectList.as_view(), name='dashboard'),
     url(r'^project/(?P<pk>[0-9]+)/$', views.ProjectDetail.as_view(), name='project_detail'),
     url(r'^add_project/$' , views.ProjectCreate.as_view(),name='project_create'),
+    url(r'^project/(?P<pk>[0-9]+)/update/$', views.ProjectUpdate.as_view(), name='project_update'),
+    url(r'^project/(?P<pk>[0-9]+)/delete/$', views.ProjectDelete.as_view(), name='project_delete'),
+
 ]

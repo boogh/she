@@ -1,1 +1,17 @@
-<h2>{{ project.name }}</h2>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+    {% block container %}
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>{{ project.name }}</h1>
+        <p class="lead"> {{ project.description }} <br> {{ project.link }}
+        </p>
+      </div>
+     <a  class="btn btn-default" href=" {% url 'profiles:dashboard:project_update' project.id %}">Edite</a>
+        <a  class="btn btn-danger" href=" {% url 'profiles:dashboard:project_delete' project.id %}">delete</a>
+
+    </div><!-- /.container -->
+    {% endblock container %}
