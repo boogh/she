@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Template,Context
 from django.views import generic
 from HE3.models import Project
+from django.core.urlresolvers import reverse_lazy
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from HE3.forms import ProjectForm
 
@@ -52,4 +53,19 @@ class ProjectDetail(generic.detail.DetailView):
 
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['name' ,'link','description','deadline','manager','evaluators']
+    fields = ['name' ,'link','description','deadline','evaluators']
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.manager =user
+        return super(ProjectCreate,self).form_valid(form)
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    fields = ['name' ,'link','description','deadline','evaluators']
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+class ProjectDelete(DeleteView):
+    model =Project
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')

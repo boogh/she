@@ -2,9 +2,6 @@ from django.db import models
 from authtools.models import User
 from datetime import date,timedelta
 from django import utils
-# Create your models here.
-from django.conf import settings
-# from profiles.models import Profile
 
 setList = (("1", "Visibility of System Status"),
                ("2", "Match Between System and Real World"),
@@ -49,6 +46,8 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
     def __iter__(self):
         return [self.name,
