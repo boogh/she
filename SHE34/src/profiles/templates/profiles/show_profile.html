@@ -52,6 +52,9 @@
         <div class="panel-body">
 	  <strong>Bio</strong>: {{ show_user.profile.bio }}
 	</div>
+      <div class="panel-body">
+          <a class="btn btn-success" href="{% url 'profiles:dashboard:user-dashboard' %}" role="button">Show Dashboard</a>
+      </div>
       </div>
     </div>
   </div>
