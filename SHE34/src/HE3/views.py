@@ -4,7 +4,9 @@ from django.template import Template,Context
 from django.views import generic
 from HE3.models import Project
 # from django.contrib.auth.mixins import LoginRequiredMixin
+# from HE3.forms import ProjectForm
 
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 #
 def showDashboard(request):
     model = Project
@@ -45,3 +47,9 @@ class ProjectDetail(generic.detail.DetailView):
 # class ProjectList(LoginRequiredMixin,generic.ListView):
 #     template_name = 'HE/dashboard.html'
 #     model = Project
+
+# def addProject(request):
+
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ['name' ,'link','description','deadline','manager','evaluators']

@@ -3,6 +3,8 @@ from authtools.models import User
 from datetime import date,timedelta
 from django import utils
 # Create your models here.
+from django.conf import settings
+# from profiles.models import Profile
 
 setList = (("1", "Visibility of System Status"),
                ("2", "Match Between System and Real World"),
@@ -35,12 +37,13 @@ setList = (("1", "Visibility of System Status"),
 
 
 class Project(models.Model):
+    manager = models.ForeignKey(User)
+    evaluators = models.ManyToManyField(User, related_name="project_evaluator")
     name = models.CharField(max_length=40)
     link = models.URLField(blank=True)
     description = models.TextField()
-    manager = models.ForeignKey(User ,related_name="project_manager")
+    # manager = models.ForeignKey(User ,related_name="project_manager")
     # HEset = models.CharField()
-    evaluators = models.ManyToManyField(User, default=manager, related_name="project_evaluator")
     creationTime = models.DateField(default= utils.timezone.now)
     deadline = models.DateField(default= date.today() + timedelta(days=7))
 

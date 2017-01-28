@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block container%}
     <h2> Projects</h2>
     <p> You are manager of these projects:</p>
@@ -20,4 +20,7 @@
     {% endfor %}
 
     </ul>
+    <div >
+    <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
+    </div>
 {% endblock  %}
