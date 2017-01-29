@@ -1,0 +1,11 @@
+{% extends 'HE3/project_detail.html' %}
+
+{% block warnings %}
+    <div class="container col-sm-offset-4">
+<form action="" method="post">{% csrf_token %}
+    <h3>Are you sure you want to delete "{{ project }}"?</h3>
+    <input type="submit" class="btn btn-danger" value="Confirm" />
+    <input type="'submit" class="btn btn-primary" value="Abort" name="Cancel"/>
+</form>
+    </div>
+{% endblock %}

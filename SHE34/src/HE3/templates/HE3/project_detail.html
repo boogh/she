@@ -10,8 +10,15 @@
         <p class="lead"> {{ project.description }} <br> {{ project.link }}
         </p>
       </div>
+        <div class="row">
+            <div class="col-sm-offset-2">
      <a  class="btn btn-default" href=" {% url 'profiles:dashboard:project_update' project.id %}">Edite</a>
         <a  class="btn btn-danger" href=" {% url 'profiles:dashboard:project_delete' project.id %}">delete</a>
-
+                 </div>
+    </div>
+    <div>
+    {% block warnings %}
+    {% endblock warnings %}
+    </div>
     </div><!-- /.container -->
     {% endblock container %}
