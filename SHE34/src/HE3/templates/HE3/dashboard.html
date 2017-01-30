@@ -16,7 +16,7 @@
     <ul>
 
     {% for project in asevalutor %}
-        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
+        <li> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
     {% endfor %}
 
     </ul>

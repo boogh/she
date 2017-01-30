@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.template import Template,Context
+from django.template import Template, Context
 from django.views import generic
-from HE3.models import Project
+from HE3.models import Project, Evaluation
 from django.core.urlresolvers import reverse_lazy
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from HE3.forms import ProjectForm
 
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+
 #
 def showDashboard(request):
     model = Project
@@ -15,10 +17,10 @@ def showDashboard(request):
     user = request.user
     projects = Project.objects.all()
     asmanager = projects.filter(manager=user.pk)
-    asevalutor = projects.filter(evaluators =user.pk)
-    context ={'asmanager' : asmanager , 'asevalutor' : asevalutor}
+    asevalutor = projects.filter(evaluators=user.pk)
+    context = {'asmanager': asmanager, 'asevalutor': asevalutor}
 
-    return render(request, template_name,context)
+    return render(request, template_name, context)
 
 
 class ProjectDetail(generic.detail.DetailView):
@@ -30,6 +32,18 @@ class ProjectDetail(generic.detail.DetailView):
         context = super(ProjectDetail, self).get_context_data(**kwargs)
 
         return context
+
+
+class ProjectForEvaluatorDetail(generic.detail.DetailView):
+    model = Project
+    template_name = 'HE3/project_detail_for_Evaluator.html'
+    context_object_name = 'project'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectForEvaluatorDetail, self).get_context_data(**kwargs)
+
+        return context
+
 
 # class ProjectList(generic.list.ListView):
 #     model = Project
@@ -53,19 +67,47 @@ class ProjectDetail(generic.detail.DetailView):
 
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['name' ,'link','description','deadline','evaluators']
+    fields = ['name', 'link', 'description', 'deadline', 'evaluators']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
     def form_valid(self, form):
         user = self.request.user
-        form.instance.manager =user
-        return super(ProjectCreate,self).form_valid(form)
+        form.instance.manager = user
+        return super(ProjectCreate, self).form_valid(form)
+
 
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['name' ,'link','description','deadline','evaluators']
+    fields = ['name', 'link', 'description', 'deadline', 'evaluators']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
+
 class ProjectDelete(DeleteView):
-    model =Project
+    model = Project
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+
+class EvaluationCreate(CreateView):
+    model = Evaluation
+    fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    success_url = reverse_lazy('profiles:dashboard:project_detail_for_Evaluator')
+
+    def form_valid(self, form):
+        user = self.request.user
+        # projectId = self.request
+        form.instance.evaluator = user
+        return super(ProjectCreate, self).form_valid(form)
+
+
+# ofProject= models.ForeignKey(Project,related_name="evaluation_for_project")
+#     evaluator = models.ForeignKey(User,related_name="evaluator")
+#     place = models.CharField(max_length=100 , default='general')
+#     heurPrincip= models.CharField(max_length=300, choices= setList ,default="1")
+#     description = models.TextField()
+#     recommendation= models.TextField(blank=True)
+#     positivity = models.CharField(max_length=10, choices=posOrNeg , default="n")
+#     severity = models.CharField(max_length=10 , choices=severityList,default="1")
+#     frequency = models.CharField(max_length=10,choices=freq ,default="1")
+#     screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
+#                                 null=True,
+#                                 blank=True)
