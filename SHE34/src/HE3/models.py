@@ -2,6 +2,7 @@ from django.db import models
 from authtools.models import User
 from datetime import date,timedelta
 from django import utils
+from django.urls import reverse
 
 setList = (("1", "Visibility of System Status"),
                ("2", "Match Between System and Real World"),
@@ -77,6 +78,9 @@ class Evaluation(models.Model):
     screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
                                 null=True,
                                 blank=True)
+
+    def get_absolute_url(self):
+        return reverse('profiles:dashboard:project_detail_for_evaluator', kwargs={'pk': self.ofProject.pk})
 #
 #
 #

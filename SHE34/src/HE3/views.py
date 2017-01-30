@@ -1,11 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import Template, Context
 from django.views import generic
 from HE3.models import Project, Evaluation
 from django.core.urlresolvers import reverse_lazy
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from HE3.forms import ProjectForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -90,11 +86,8 @@ class ProjectDelete(DeleteView):
 class EvaluationCreate(CreateView):
     model = Evaluation
     fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
-    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+    # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(EvaluationCreate,self).get_context_data(**kwargs)
-    #     context
     def form_valid(self, form):
         user = self.request.user
         projectId = self.kwargs['pk']
@@ -117,3 +110,4 @@ class EvaluationCreate(CreateView):
 #     screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
 #                                 null=True,
 #                                 blank=True)
+
