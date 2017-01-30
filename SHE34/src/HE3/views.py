@@ -36,7 +36,7 @@ class ProjectDetail(generic.detail.DetailView):
 
 class ProjectForEvaluatorDetail(generic.detail.DetailView):
     model = Project
-    template_name = 'HE3/project_detail_for_Evaluator.html'
+    template_name = 'HE3/project_detail_for_evaluator.html'
     context_object_name = 'project'
 
     def get_context_data(self, **kwargs):
@@ -90,13 +90,19 @@ class ProjectDelete(DeleteView):
 class EvaluationCreate(CreateView):
     model = Evaluation
     fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
-    success_url = reverse_lazy('profiles:dashboard:project_detail_for_Evaluator')
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(EvaluationCreate,self).get_context_data(**kwargs)
+    #     context
     def form_valid(self, form):
         user = self.request.user
-        # projectId = self.request
+        projectId = self.kwargs['pk']
+        project = Project.objects.get(pk=projectId)
+        form.instance.ofProject = project
         form.instance.evaluator = user
-        return super(ProjectCreate, self).form_valid(form)
+
+        return super(EvaluationCreate, self).form_valid(form)
 
 
 # ofProject= models.ForeignKey(Project,related_name="evaluation_for_project")
