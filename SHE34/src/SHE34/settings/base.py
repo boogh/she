@@ -36,6 +36,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -74,10 +75,12 @@ INSTALLED_APPS = (
     'authtools',
     'crispy_forms',
     'easy_thumbnails',
+    'django_tables2',
 
     'profiles',
     'accounts',
-    'HE3'
+    'HE3',
+
 )
 
 MIDDLEWARE_CLASSES = (

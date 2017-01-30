@@ -1,6 +1,8 @@
+
 <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
     {% csrf_token %}
-    {% include 'HE3/form-template.html' %}
+
+     {% include 'HE3/form-template.html' %}
     <div class="from-group">
         <div class="col-sm-offset-2 col-sm-10" >
             <button type="submit" class="btn btn-success"> Submit</button>

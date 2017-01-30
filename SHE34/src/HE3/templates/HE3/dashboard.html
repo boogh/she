@@ -5,9 +5,9 @@
     <p> You are manager of these projects:</p>
     <ul>
 
-    {% for project in asmanager %}
-        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </li>
-    {% endfor %}
+        {% for project in asmanager %}
+            <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </li>
+        {% endfor %}
 
     </ul>
 
@@ -15,12 +15,12 @@
 
     <ul>
 
-    {% for project in asevalutor %}
-        <li> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
-    {% endfor %}
+        {% for project in asevalutor %}
+            <li> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
+        {% endfor %}
 
     </ul>
     <div >
-    <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
+        <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
     </div>
 {% endblock  %}

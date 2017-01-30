@@ -2,24 +2,24 @@
 {% load staticfiles %}
 
 
-    {% block container %}
+{% block container %}
     <div class="container">
 
-      <div class="starter-template">
-        <h1>{{ project.name }}</h1>
-        <p class="lead"> {{ project.description }} <br> {{ project.link }}
-        </p>
-      </div>
+        <div class="starter-template">
+            <h1>{{ project.name }}</h1>
+            <p class="lead"> {{ project.description }} <br> {{ project.link }}
+            </p>
+        </div>
         <div class="row">
             <div class="col-sm-offset-2">
 
                 <a  class="btn btn-primary" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">Add Evaluation</a>
-        <a  class="btn btn-danger" href=" ">delete</a>
-                 </div>
-    </div>
-    <div>
-    {% block warnings %}
-    {% endblock warnings %}
-    </div>
+                <a  class="btn btn-danger" href=" ">delete</a>
+            </div>
+        </div>
+        <div>
+            {% block warnings %}
+            {% endblock warnings %}
+        </div>
     </div><!-- /.container -->
-    {% endblock container %}
+{% endblock container %}
