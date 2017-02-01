@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from django.core.urlresolvers import reverse_lazy
 from os.path import dirname, join, exists
+import environ
 
 # Build paths inside the project like this: join(BASE_DIR, "directory")
 BASE_DIR = dirname(dirname(dirname(__file__)))
@@ -43,12 +44,11 @@ TEMPLATES = [
 ]
 
 # Use 12factor inspired environment variables or from a file
-import environ
 env = environ.Env()
 
 # Ideally move env file should be outside the git repo
 # i.e. BASE_DIR.parent.parent
-env_file = join(dirname(__file__), 'local.env')
+env_file = join(dirname(__file__), 'local.sample.env')
 if exists(env_file):
     environ.Env.read_env(str(env_file))
 
@@ -58,7 +58,6 @@ if exists(env_file):
 # SECURITY WARNING: keep the secret key used in production secret!
 # Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
-
 ALLOWED_HOSTS = []
 
 # Application definition
