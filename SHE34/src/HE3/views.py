@@ -108,16 +108,13 @@ class EvaluationCreate(CreateView):
         return super(EvaluationCreate, self).form_valid(form)
 
 
-# ofProject= models.ForeignKey(Project,related_name="evaluation_for_project")
-#     evaluator = models.ForeignKey(User,related_name="evaluator")
-#     place = models.CharField(max_length=100 , default='general')
-#     heurPrincip= models.CharField(max_length=300, choices= setList ,default="1")
-#     description = models.TextField()
-#     recommendation= models.TextField(blank=True)
-#     positivity = models.CharField(max_length=10, choices=posOrNeg , default="n")
-#     severity = models.CharField(max_length=10 , choices=severityList,default="1")
-#     frequency = models.CharField(max_length=10,choices=freq ,default="1")
-#     screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
-#                                 null=True,
-#                                 blank=True)
+def EvaluatorDelete(request , project_id):
+    user = request.user
+    project = Project.objects.get(pk=project_id)
+    evaluator = project.evaluators.get(pk=user.pk)
+
+    project.evaluators.remove(evaluator)
+    template_name= 'HE3/delete-evaluator.html'
+    return render(request,template_name =template_name,context={ 'project' : project })
+
 
