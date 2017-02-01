@@ -1,11 +1,22 @@
+{% extends 'HE3/baseHE.html' %}
+{% load staticfiles %}
+{#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
 
-<form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
-    {% csrf_token %}
+{% block container %}
+    <div class="container">
+        <div class="container" > <h2> New Project: </h2></div>
+        <div class="panel-body">
+            <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
+                {% csrf_token %}
 
-     {% include 'HE3/form-template.html' %}
-    <div class="from-group">
-        <div class="col-sm-offset-2 col-sm-10" >
-            <button type="submit" class="btn btn-success"> Submit</button>
+                {% include 'HE3/form-template.html' %}
+                <div class="from-group">
+                    <div class="col-sm-offset-2 col-sm-10" >
+                        <button type="submit" class="btn btn-primary"> Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+
+{% endblock container %}
