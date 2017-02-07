@@ -127,6 +127,7 @@ ALLOWED_HOSTS = []
 
 # Crispy Form Theme - Bootstrap 3
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+# CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3')
 
 # For Bootstrap 3, change error alert to 'danger'
 from django.contrib import messages
@@ -140,3 +141,4 @@ LOGIN_REDIRECT_URL = reverse_lazy("profiles:show_self")
 LOGIN_URL = reverse_lazy("accounts:login")
 
 THUMBNAIL_EXTENSION = 'png'     # Or any extn for your thumbnails
+
