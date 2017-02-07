@@ -22,9 +22,11 @@
                     <table class="table  table-bordered table-striped table-hover">
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
-                            <th>Link</th>
                             <th>Description</th>
+
+                            <th>Link</th>
                             <th>Status</th>
                             <th>Number of Evaluators</th>
                             <th>Number of Evaluations</th>
@@ -34,9 +36,11 @@
                         <tbody>
                         {% for project in asmanager %}
                             <tr>
+                                <td>  {{ forloop.counter }} </td>
                                 <td> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name }} </a></td>
-                                <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
-                                <td>{{ project.description }}</td>
+                                <td> {{ project.description }} </td>
+                                <td> <a href="{{ project.link }}">{{ project.link }} </a> </td>
+
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -52,9 +56,9 @@
 
         {% else %}
             <div class="jumbotron">
-            <div> <p class="lead text-primary">You do not have any project as the manager. Create a new one!</p>
-                <div class="col-sm-offset-6"> <a class="btn btn-primary" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
-            </div>
+                <div> <p class="lead text-primary">You do not have any project as the manager. Create a new one!</p>
+                    <div class="col-sm-offset-6"> <a class="btn btn-primary" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
+                </div>
             </div>
         {% endif %}
         <hr>
@@ -66,9 +70,11 @@
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
-                            <th>Link</th>
                             <th>Description</th>
+
+                            <th>Link</th>
                             <th>Status</th>
                             <th>Number of submitted evaluations</th>
                             <th>Operations</th>
@@ -77,9 +83,10 @@
                         <tbody>
                         {% for project in asevalutor %}
                             <tr>
+                                <td>{{ forloop.counter }}</td>
                                 <td> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> {{ project.name}}  </a>  </td>
-                                <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
                                 <td>{{ project.description }} </td>
+                                <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
 
                                 <td> </td>
 
