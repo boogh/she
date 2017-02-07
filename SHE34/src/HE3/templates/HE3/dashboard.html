@@ -51,8 +51,10 @@
             </div>
 
         {% else %}
-            <div class="page-header "> <h3 class="text-primary">You do not have any project as manager. Create a new one!</h3>
-                <div class="text-right"> <a class="btn btn-info" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
+            <div class="jumbotron">
+            <div> <p class="lead text-primary">You do not have any project as the manager. Create a new one!</p>
+                <div class="col-sm-offset-6"> <a class="btn btn-primary" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
+            </div>
             </div>
         {% endif %}
         <hr>
