@@ -3,6 +3,9 @@
 html, body{
     height:100%;		/* For full height images */
 }
+body {
+    padding-top: 90px;
+  }
 
 .starter-template {
   padding: 40px 15px;
@@ -177,3 +180,4 @@ body>.navbar-transparent {
 .form-box form .form-control:focus {
   z-index: 2;
 }
+
