@@ -3,35 +3,86 @@
 {% block content %}
     <div class="col-sm-offset-1 col-sm-8">
 
+        {% if asmanager %}
 
-        <div class="panel-group"> <strong>You are manager of these projects:</strong></div>
-        <ul>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <strong>You are the manager of these projects:</strong>
+                    <a class="btn btn-default align-right" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a>
 
-            {% for project in asmanager %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ project.name }}</div>
-                    <div class="panel-body"> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </div>
                 </div>
-            {% endfor %}
 
-        </ul>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Number of Evaluators</th>
+                        <th>Number of Evaluations</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for project in asmanager %}
+                        <tr>
+                            <td> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name }} </a></td>
+                            <td></td>
+                            <td>{{ project.description }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
 
-        <div class="panel-group"> <strong>You are evaluator in these projects:</strong></div>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
 
-        <ul>
+            </div>
 
-            {% for project in asevalutor %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ project.name }}</div>
+        {% else %}
+            <div class="page-header "> <h3 class="text-primary">You do not have any project as manager. Create a new one!</h3>
+                <div class="text-center"> <a class="btn btn-info" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
+            </div>
+        {% endif %}
 
-                    <div class="panel-body"> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </div>
-                </div>
-            {% endfor %}
+        {% if asevalutor %}
+            <div class="panel panel-primary">
+                <div class="panel-heading"><strong>You are the evaluator in these projects:</strong></div>
 
-        </ul>
-        <div >
-            <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
-        </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Number of submitted evaluations</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for project in asevalutor %}
+                        <tr>
+                            <td> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> {{ project.name}}  </a>  </td>
+                            <td> </td>
+                            <td>{{ project.description }} </td>
+
+                            <td> </td>
+
+                            <td> </td>
+
+                            <td> </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        {% endif %}
+
     </div>
 {% endblock  %}
