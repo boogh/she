@@ -6,11 +6,16 @@
         {% if asmanager %}
 
             <div class="panel panel-primary">
-                <div class="panel-heading"> <strong>You are the manager of these projects:</strong>
-                    <a class="btn btn-info btn-xs pull-right" href="{% url 'profiles:dashboard:project_create' %}">
-                        <span class="glyphicon glyphicon-plus myglyphicon" aria-hidden="true"></span>
-                        Create a new Project
-                    </a>
+                <div class="row panel-heading">
+                    <div class="col-sm-4">
+                        <p class="lead">You are the <strong>manager</strong> of these projects:</p>
+                    </div>
+                    <div class="col-sm-offset-10">
+                        <a class="btn btn-info btn-lg" href="{% url 'profiles:dashboard:project_create' %}">
+                            <span class="glyphicon glyphicon-plus myglyphicon " aria-hidden="true"></span>
+                            Create a new Project
+                        </a>
+                    </div>
 
                 </div>
                 <div class="table-responsive">
@@ -50,10 +55,11 @@
                 <div class="text-right"> <a class="btn btn-info" href="{% url 'profiles:dashboard:project_create' %}"> Create a new Project</a></div>
             </div>
         {% endif %}
+        <hr>
 
         {% if asevalutor %}
             <div class="panel panel-primary">
-                <div class="panel-heading"><strong>You are the evaluator in these projects:</strong></div>
+                <div class="panel-heading"><p class="lead">You are the <strong>evaluator</strong> in these projects:</p></div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
