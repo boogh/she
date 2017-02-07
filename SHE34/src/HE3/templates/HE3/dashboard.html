@@ -1,27 +1,37 @@
 {% extends "HE3/baseHE.html" %}
 {% load staticfiles %}
 {% block content %}
-    <div class="col-sm-9">
-                <div class=".page-header"> You are manager of these projects:</div>
-                <ul>
+    <div class="col-sm-offset-1 col-sm-8">
 
-                    {% for project in asmanager %}
-                        <li> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </li>
-                    {% endfor %}
 
-                </ul>
+        <div class="panel-group"> <strong>You are manager of these projects:</strong></div>
+        <ul>
 
-                <p> You are evaluator in these projects:</p>
-
-                <ul>
-
-                    {% for project in asevalutor %}
-                        <li> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </li>
-                    {% endfor %}
-
-                </ul>
-                <div >
-                    <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
+            {% for project in asmanager %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ project.name }}</div>
+                    <div class="panel-body"> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> LOGO - {{ project.name}} </a>  - STATUS - Number of Evaluators - Number of submited Evaluations - Edit - Merge </div>
                 </div>
-            </div>
+            {% endfor %}
+
+        </ul>
+
+        <div class="panel-group"> <strong>You are evaluator in these projects:</strong></div>
+
+
+        <ul>
+
+            {% for project in asevalutor %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ project.name }}</div>
+
+                    <div class="panel-body"> <a href="{% url 'profiles:dashboard:project_detail_for_evaluator' project.id %}"> LOGO - {{ project.name}}  </a> - STATUS - Add Evaluation  </div>
+                </div>
+            {% endfor %}
+
+        </ul>
+        <div >
+            <a class="btn btn-default" href="{% url 'profiles:dashboard:project_create' %}"> Create Project</a>
+        </div>
+    </div>
 {% endblock  %}
