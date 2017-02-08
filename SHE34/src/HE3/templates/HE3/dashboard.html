@@ -50,8 +50,8 @@
                                 <td> <a href="{{ project.link }}"> {{ project.link }} </a> </td>
 
                                 {% if project.deadline > now %}
-                                    <td> Under evaluation<br>
-                                        {{ project.deadline|timeuntil }} till deadline </td>
+                                    <td> Deadline is in
+                                        {{ project.deadline|timeuntil }}</td>
                                 {% else %}
                                     <td>Evaluation time is finished.</td>
                                 {% endif %}
@@ -120,8 +120,8 @@
                                 <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
 
                                 {% if project.deadline > now %}
-                                    <td> Under evaluation<br>
-                                        {{ project.deadline|timeuntil }} till deadline </td>
+                                    <td> Deadline is in
+                                        {{ project.deadline|timeuntil }} </td>
                                 {% else %}
                                     <td>Evaluation time is finished.</td>
                                 {% endif %}
@@ -130,14 +130,16 @@
                                 <td> </td>
 
                                 <td class="text-center">
+                                    <span class="btn-group-sm">
                                     {% if project.deadline > now %}
-                                    <span class=" btn-group-sm">
-                                    <a class="btn btn-info btn-xs" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
+
+                                        <a class="btn btn-info" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
-                                        {% endif %}
+                                    {% endif %}
 
-                                    <a class="btn btn-warning btn-xs" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                    <a class="btn btn-warning" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}">
+                                        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
                                         Del
                                     </a>
                                     </span>
@@ -151,7 +153,8 @@
             </div>
         {% endif %}
 
-        <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
-
+        <div class="text-left">
+            <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
+        </div>
     </div>
 {% endblock  %}
