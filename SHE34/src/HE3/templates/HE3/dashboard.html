@@ -48,7 +48,13 @@
                                 <td> {{ project.description }} </td>
 
                                 <td> <a href="{{ project.link }}"> {{ project.link }} </a> </td>
-                                <td> {{ project.deadline|timeuntil }} till deadline for evaluation </td>
+
+                                {% if project.deadline > now %}
+                                    <td> Under evaluation<br>
+                                        {{ project.deadline|timeuntil }} till deadline </td>
+                                {% else %}
+                                    <td>Evaluation time is finished.</td>
+                                {% endif %}
 
                                 <td></td>
                                 <td></td>
@@ -113,21 +119,24 @@
                                 <td>{{ project.description }} </td>
                                 <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
 
-                                {% if project.deadline|timeuntil > '0 minutes' %}
-                                <td> Under evaluation<br>
-                                    {{ project.deadline|timeuntil }} till deadline </td>
+                                {% if project.deadline > now %}
+                                    <td> Under evaluation<br>
+                                        {{ project.deadline|timeuntil }} till deadline </td>
                                 {% else %}
-                                <td>Evaluation time is finished.</td>
+                                    <td>Evaluation time is finished.</td>
                                 {% endif %}
 
 
                                 <td> </td>
 
                                 <td class="text-center">
+                                    {% if project.deadline > now %}
                                     <span class=" btn-group-sm">
                                     <a class="btn btn-info btn-xs" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
+                                        {% endif %}
+
                                     <a class="btn btn-warning btn-xs" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
                                         Del
                                     </a>

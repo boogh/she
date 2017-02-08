@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 # from .forms import ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView
+from django.utils import timezone
 
 
 #
@@ -15,7 +16,8 @@ def showDashboard(request):
     projects = Project.objects.all()
     asmanager = projects.filter(manager=user.pk)
     asevalutor = projects.filter(evaluators=user.pk)
-    context = {'asmanager': asmanager, 'asevalutor': asevalutor}
+    now = timezone.now()
+    context = {'asmanager': asmanager, 'asevalutor': asevalutor , 'now' : now.date()}
 
     return render(request, template_name, context)
 
