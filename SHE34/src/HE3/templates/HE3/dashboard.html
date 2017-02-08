@@ -1,8 +1,13 @@
 {% extends "HE3/baseHE.html" %}
 {% load staticfiles %}
-{% block content %}
-    <div class="col-sm-9">
 
+
+{% block titleOfPage %}  Dashboard  {% endblock %}
+{% block dashboard-active %} active {% endblock %}
+
+{% block content %}
+    <div class="col-sm-9" >
+        <a name="top-of-page"></a>
         {% if asmanager %}
 
             <div class="panel panel-primary">
@@ -124,6 +129,8 @@
                 </div>
             </div>
         {% endif %}
+
+        <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
 
     </div>
 {% endblock  %}
