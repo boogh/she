@@ -2,9 +2,12 @@
 {% load staticfiles %}
 {#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
 
-{% block container %}
-    <div class="container">
-        <div class="container" > <h2> New Project: </h2></div>
+{% block titleOfPage %} Create a project {% endblock %}
+{% block createProjectActive %} active {% endblock %}
+
+{% block content %}
+    <div class="col-sm-9">
+        <div class="container" > <div class="page-header"> <h2>New Project:</h2> </div>
         <div class="panel-body">
             <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
                 {% csrf_token %}
@@ -19,4 +22,4 @@
         </div>
     </div>
 
-{% endblock container %}
+{% endblock content %}
