@@ -1,6 +1,16 @@
 
 {% extends 'base.html' %}
+
 {% load staticfiles %}
+
+{% block splash %}
+    <ul class="breadcrumb">
+        <li class="breadcrumb" > <a href="{% url 'home' %}">Home</a> </li>
+        {% block breadcrumb %}
+        {% endblock %}
+    </ul>
+{% endblock %}
+
 {% block container %}
     <div class="container-fluid">
         <div class="row content">

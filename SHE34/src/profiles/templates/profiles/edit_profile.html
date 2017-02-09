@@ -6,7 +6,15 @@
 
 {% block title %}{{ block.super }}Profile{% endblock %}
 
-<!-- Benefits of the Django application -->
+
+{% block splash %}
+    <ul class="breadcrumb">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'profiles:show_self' %}">Show Profile</a> </li>
+        <li><a class="text-muted" href="{% url 'profiles:edit_self' %}">Edit Profile</a></li>
+    </ul>
+{% endblock %}
+
 {% block container %}
 
 <div class="container">
