@@ -14,8 +14,8 @@
     <title>{% block title %}{% include "_brandname.html" %} :: {% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
+    <!--link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Custom styles for this site -->
     {% block styles %}
         <link href="{% static 'site/css/main.css' %}" rel="stylesheet">
@@ -94,6 +94,9 @@
     {% endif %}
 {% endblock %}
 
+
+
+
 {% block splash %}
 {% endblock splash %}
 
@@ -132,7 +135,8 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!--script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% block scripts %}
 {% endblock scripts %}
 </body>
