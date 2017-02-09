@@ -56,8 +56,8 @@
                                     <td>Evaluation time is finished.</td>
                                 {% endif %}
 
-                                <td> {{ project.evaluators.all | length }}</td>
-                                <td></td>
+                                <td> {{ project.evaluators.all | length }} evaluators</td>
+                                <td>{{ project.evaluation_for_project.all | length }} submitted evaluations</td>
                                 <td class="text-center">
                                     <span class="btn-group-sm">
                                     <a class="btn btn-info btn-sm" href=" {% url 'profiles:dashboard:project_update' project.id %}">
