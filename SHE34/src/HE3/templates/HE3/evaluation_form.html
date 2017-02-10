@@ -3,9 +3,17 @@
 
 
 
+{% block breadcrumb %}
+    <li> <a href="{% url 'profiles:dashboard:user-dashboard' %}">Dashboard</a></li>
+    <li> <a href="{% url 'profiles:dashboard:project_detail'  project.pk %}">Project detail</a></li>
+    <li> <a class="text-muted" href="{% url 'profiles:dashboard:Add-Evaluation'  project.pk %}">Evaluation-form</a> </li>
+
+{% endblock %}
+
 {% block container %}
     <div class="container">
         <div class="row"> <h2>Add Evaluation:</h2> </div>
+
         <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'HE3/form-template.html' %}

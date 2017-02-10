@@ -109,6 +109,10 @@ class EvaluationCreate(CreateView):
 
         return super(EvaluationCreate, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context= super(EvaluationCreate,self).get_context_data(**kwargs)
+        context['project'] = self.kwargs
+        return context
 
 def EvaluatorDelete(request , project_id):
     user = request.user
