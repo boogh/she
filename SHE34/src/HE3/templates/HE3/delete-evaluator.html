@@ -11,5 +11,8 @@
 
 {% block warning %}
     By pressing delete button you will remove this evaluation and all it`s submitted data!
+{% endblock %}
 
+{% block href %}
+href ="{% url 'profiles:dashboard:delete-evaluator' project.id %}"
 {% endblock %}

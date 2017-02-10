@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from HE3.models import Project, Evaluation
 from django.core.urlresolvers import reverse_lazy
@@ -115,12 +115,12 @@ class EvaluationCreate(CreateView):
         return context
 
 def EvaluatorDelete(request , project_id):
+
     user = request.user
     project = Project.objects.get(pk=project_id)
     evaluator = project.evaluators.get(pk=user.pk)
-
     project.evaluators.remove(evaluator)
-    template_name= 'HE3/delete-evaluator.html'
-    return render(request,template_name =template_name,context={ 'project' : project })
+
+    return redirect('profiles:dashboard:user-dashboard')
 
 
