@@ -1,5 +1,14 @@
 <!-- This code is based on this source code: http://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable -->
 
+
+
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
 <div class="container">
     <div class="row">
 
@@ -165,7 +174,7 @@
 </div>
 
 <script>$(document).ready(function(){
-$("#mytable #checkall").click(function () {
+    $("#mytable #checkall").click(function () {
         if ($("#mytable #checkall").is(':checked')) {
             $("#mytable input[type=checkbox]").each(function () {
                 $(this).prop("checked", true);

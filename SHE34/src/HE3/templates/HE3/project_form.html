@@ -2,12 +2,12 @@
 {% load staticfiles %}
 {#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
 
-{% block titleOfPage %} Create a project {% endblock %}
+{% block titleOfPage %} Create a Project {% endblock %}
 {% block createProjectActive %} active {% endblock %}
 
 {% block breadcrumb %}
     <li> <a href="{% url 'profiles:dashboard:user-dashboard' %}">Dashboard</a></li>
-    <li> <a class="text-muted" href="{% url 'profiles:dashboard:project_create' %}">Project-form</a></li>
+    <li> <a class="text-muted" href="{% url 'profiles:dashboard:project_create' %}">Create a Project</a></li>
 {% endblock %}
 
 {% block content %}

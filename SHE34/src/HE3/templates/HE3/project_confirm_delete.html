@@ -1,11 +1,24 @@
-{% extends 'HE3/project_detail.html' %}
 
-{% block warnings %}
-    <div class="container col-sm-offset-4">
-<form action="" method="post">{% csrf_token %}
-    <h3>Are you sure you want to delete "{{ project }}"?</h3>
-    <input type="submit" class="btn btn-danger" value="Confirm" />
-    <input type="'submit" class="btn btn-primary" value="Abort" name="Cancel"/>
-</form>
-    </div>
-{% endblock %}
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<div class="container">
+    <form action="" method="post">{% csrf_token %}
+        <h3>Are you sure you want to delete "{{ project }}"?</h3>
+        <input type="submit" class="btn btn-warning" value="Confirm" />
+        <a  href="{% url 'profiles:dashboard:user-dashboard' %}" class="btn btn-default" value="Abort"> Cancel</a>
+    </form>
+</div>
+
+<!-- This code is based on this source code: http://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable -->
+
+
+
+
+
+
+
+
+
+
