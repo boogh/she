@@ -1,24 +1,14 @@
+{% extends 'HE3/delete_confirmation.html' %}
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% block id %}
+    id="project_delete_confirmation"
+{% endblock %}
 
+{% block title %}
+    Delete this project!
+{% endblock %}
 
-<div class="container">
-    <form action="" method="post">{% csrf_token %}
-        <h3>Are you sure you want to delete "{{ project }}"?</h3>
-        <input type="submit" class="btn btn-warning" value="Confirm" />
-        <a  href="{% url 'profiles:dashboard:user-dashboard' %}" class="btn btn-default" value="Abort"> Cancel</a>
-    </form>
-</div>
+{% block warning %}
+    By pressing delete button you will remove this project and all it`s submitted data!
 
-<!-- This code is based on this source code: http://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable -->
-
-
-
-
-
-
-
-
-
-
+{% endblock %}

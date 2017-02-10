@@ -1,4 +1,5 @@
 {% extends "HE3/baseHE.html" %}
+
 {% load staticfiles %}
 
 {% block titleOfPage %}  Dashboard  {% endblock %}
@@ -73,12 +74,12 @@
                                     </a>
                                     </span>
 
-                                    <span class="btn btn-group-xs">
-                                    <a class="btn btn-warning" href="{% url 'profiles:dashboard:project_delete' project.id %}">
+                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">
+                                        {#                                    <a class="btn btn-warning" href="{% url 'profiles:dashboard:project_delete' project.id %}">#}
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
-                                    </a>
-                                    </span>
+                                        {#                                    </a>#}
+                                    </button>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -141,10 +142,16 @@
                                     </a>
                                     {% endif %}
 
-                                        <a class="btn btn-warning" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}">
-                                        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                        {#                                        <a class="btn btn-warning" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}">#}
+{#                                        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>#}
+{#                                        Del#}
+{#                                    </a>#}
+                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
+{#                                    <a class="btn btn-warning" href="{% url 'profiles:dashboard:project_delete' project.id %}">#}
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
-                                    </a>
+{#                                    </a>#}
+                                    </button>
                                     </span>
                                 </td>
 
@@ -160,4 +167,9 @@
             <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
         </div>
     </div>
+
+    {% include 'HE3/project_confirm_delete.html' %}
+    {% include 'HE3/delete-evaluator.html'%}
+
+
 {% endblock  %}

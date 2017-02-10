@@ -1,3 +1,15 @@
-<h1>Are you sure you want to delete project {{ project.name }} ?  </h1> <br>
+{% extends 'HE3/delete_confirmation.html' %}
 
-<a class="btn btn-success" href="{% url 'profiles:dashboard:user-dashboard' %}" role="button">Show Dashboard</a>
+
+{% block id %}
+    id="evaluator_delete_confirmation"
+{% endblock %}
+
+{% block title %}
+    Delete this evaluation!
+{% endblock %}
+
+{% block warning %}
+    By pressing delete button you will remove this evaluation and all it`s submitted data!
+
+{% endblock %}
