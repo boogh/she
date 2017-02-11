@@ -1,5 +1,10 @@
 {% extends 'HE3/baseHE.html' %}
+{% load render_table from django_tables2 %}
+
 {% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-reverse"> <a class="" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
@@ -7,6 +12,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="col-sm-9">
 
 
@@ -43,7 +49,7 @@
                                     {% if project.deadline > now %}
 
                                         <a class="btn btn-info" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Add Evaluation
                                     </a>
                                     {% endif %}
 
@@ -58,10 +64,9 @@
 
                     </table>
 
-                    {% for e in evaluations %}
-                        <p> e.id</p>
-                    {% endfor %}
+                    <div> {% render_table evaluations %}
 
+                    </div>
 
 
 
