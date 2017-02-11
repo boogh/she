@@ -134,6 +134,6 @@ def projectDetailForEvaluator(request, project_id):
     table = EvaluationsTables(evaluationsOfUser)
     RequestConfig(request).configure(table)
     template_name = 'HE3/project_detail_for_evaluator.html'
-    context = {'now': timezone.now().date() ,'project': project , 'table' : table }
+    context = {'now': timezone.now().date() ,'project': project , 'table' : table ,'evaluations' :evaluationsOfUser }
 
     return render(request,template_name, context )
