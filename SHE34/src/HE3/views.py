@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView
 from django.utils import timezone
-from .tables import EvaluationsTables
+# from .tables import EvaluationsTables
 from django_tables2 import RequestConfig
 
 #
@@ -131,9 +131,10 @@ def projectDetailForEvaluator(request, project_id):
     user = request.user
     evaluationsOfUser = project.evaluation_for_project.filter(evaluator = user)
 
-    table = EvaluationsTables(evaluationsOfUser)
-    RequestConfig(request).configure(table)
+    # table = EvaluationsTables(evaluationsOfUser)
+    # RequestConfig(request).configure(table)
+
     template_name = 'HE3/project_detail_for_evaluator.html'
-    context = {'now': timezone.now().date() ,'project': project , 'table' : table ,'evaluations' :evaluationsOfUser }
+    context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluationsOfUser }
 
     return render(request,template_name, context )

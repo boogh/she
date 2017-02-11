@@ -54,13 +54,14 @@
                                 <td> <a href="{{ project.link }}"> {{ project.link }} </a> </td>
 
                                 <td> {{ project.deadline }}
-
+                                    <span class="small">
                                     {% if project.deadline > now %}
                                         ( Deadline is in
                                         {{ project.deadline|timeuntil }} )
                                     {% else %}
                                         (Evaluation time is finished!)
                                     {% endif %}
+                                    </span>
                                 </td>
 
                                 <td> {{ project.evaluators.all | length }} evaluators</td>
@@ -125,12 +126,15 @@
 
                                 <td> {{ project.deadline }}
 
+                                     <span class="small">
                                     {% if project.deadline > now %}
                                         ( Deadline is in
                                         {{ project.deadline|timeuntil }} )
                                     {% else %}
                                         (Evaluation time is finished!)
                                     {% endif %}
+                                    </span>
+
                                 </td>
 
                                 <td class="text-center">
