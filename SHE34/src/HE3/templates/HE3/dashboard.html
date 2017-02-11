@@ -53,12 +53,15 @@
 
                                 <td> <a href="{{ project.link }}"> {{ project.link }} </a> </td>
 
-                                {% if project.deadline > now %}
-                                    <td> Deadline is in
-                                        {{ project.deadline|timeuntil }}</td>
-                                {% else %}
-                                    <td>Evaluation time is finished.</td>
-                                {% endif %}
+                                <td> {{ project.deadline }}
+
+                                    {% if project.deadline > now %}
+                                        ( Deadline is in
+                                        {{ project.deadline|timeuntil }} )
+                                    {% else %}
+                                        (Evaluation time is finished!)
+                                    {% endif %}
+                                </td>
 
                                 <td> {{ project.evaluators.all | length }} evaluators</td>
                                 <td>{{ project.evaluation_for_project.all | length }} submitted evaluations</td>
@@ -80,7 +83,6 @@
                                     </button>
                                 </td>
                             </tr>
-                                {% include 'HE3/project_confirm_delete.html' %}
                         {% endfor %}
                         </tbody>
                     </table>
@@ -122,12 +124,15 @@
                                 <td>{{ project.description }} </td>
                                 <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
 
-                                {% if project.deadline > now %}
-                                    <td> Deadline is in
-                                        {{ project.deadline|timeuntil }} </td>
-                                {% else %}
-                                    <td>Evaluation time is finished.</td>
-                                {% endif %}
+                                <td> {{ project.deadline }}
+
+                                    {% if project.deadline > now %}
+                                        ( Deadline is in
+                                        {{ project.deadline|timeuntil }} )
+                                    {% else %}
+                                        (Evaluation time is finished!)
+                                    {% endif %}
+                                </td>
 
 
                                 <td> </td>
@@ -141,7 +146,7 @@
                                     </a>
                                     {% endif %}
 
-                                     <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
                                     </button>
@@ -149,8 +154,6 @@
                                 </td>
 
                             </tr>
-                                {% include 'HE3/delete-evaluator.html'%}
-
                         {% endfor %}
                         </tbody>
                     </table>
@@ -162,6 +165,13 @@
             <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
         </div>
     </div>
+
+
+
+
+    {#  delete confirmation   #}
+
+
 
 
 

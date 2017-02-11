@@ -10,7 +10,9 @@ urlpatterns = [
     # url(r'^' , views.ProjectList.as_view(), name='dashboard'),
     url(r'^project/(?P<pk>[0-9]+)/$', views.ProjectDetail.as_view(), name='project_detail'),
 
-    url(r'^project/evaluator/(?P<pk>[0-9]+)/$', views.ProjectForEvaluatorDetail.as_view(), name='project_detail_for_evaluator'),
+    # url(r'^project/evaluator/(?P<pk>[0-9]+)/$', views.ProjectForEvaluatorDetail.as_view(), name='project_detail_for_evaluator'),
+    url(r'^project/evaluator/(?P<project_id>[0-9]+)/$', views.projectDetailForEvaluator, name='project_detail_for_evaluator'),
+
     url(r'^project/evaluator/(?P<project_id>[0-9]+)/deleteProject/$' , views.EvaluatorDelete , name='delete-evaluator'),
 
     url(r'^add_project/$' , views.ProjectCreate.as_view(),name='project_create'),

@@ -14,7 +14,10 @@
 
                 <div class="text-center"><span class=" alert alert-danger glyphicon glyphicon-warning-sign bigglyphicon"></span></div>
                 <div class="text-center">
-                    <h4> {% block warning %}
+
+                    <h4>
+                        {{ project.name }} - {{ project.id }}
+                        {% block warning %}
                         {% endblock warning %}
                     </h4>
                 </div>

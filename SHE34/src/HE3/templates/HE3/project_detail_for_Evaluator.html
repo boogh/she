@@ -1,25 +1,83 @@
-{% extends 'base.html' %}
+{% extends 'HE3/baseHE.html' %}
 {% load staticfiles %}
 
+{% block breadcrumb %}
+    <li class="breadcrumb-reverse"> <a class="" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
+    <li class="breadcrumb-reverse active"><a class="text-muted" href="">Project Detail</a> </li>
+{% endblock %}
 
-{% block container %}
-    <div class="container">
+{% block content %}
+    <div class="col-sm-9">
 
-        <div class="starter-template">
-            <h1>{{ project.name }}</h1>
-            <p class="lead"> {{ project.description }} <br> {{ project.link }}
-            </p>
-        </div>
-        <div class="row">
-            <div class="col-sm-offset-2">
 
-                <a  class="btn btn-primary" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}"> Add Evaluation</a>
-                <a  class="btn btn-danger" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> delete</a>
-            </div>
-        </div>
-        <div>
-            {% block warnings %}
-            {% endblock warnings %}
-        </div>
-    </div><!-- /.container -->
-{% endblock container %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center"> <h2>{{ project.name }} </h2></div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Link</th>
+                            <th>Status</th>
+                            <th>Number of your submitted evaluations</th>
+                            <th>Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td> {{ project.description }} </td>
+                            <td> {{ project.link }}</td>
+                            <td> {{ project.deadline }}
+
+                                {% if project.deadline > now %}
+                                    ( Deadline is in
+                                    {{ project.deadline|timeuntil }} )
+                                {% else %}
+                                    (Evaluation time is finished!)
+                                {% endif %}
+                            </td>
+                            <td></td>
+                            <td class="text-center">
+                                    <span class="btn-group-sm">
+                                    {% if project.deadline > now %}
+
+                                        <a class="btn btn-info" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
+                                    </a>
+                                    {% endif %}
+
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        Del
+                                    </button>
+                                    </span>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                    {% for e in evaluations %}
+                        <p> e.id</p>
+                    {% endfor %}
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-2">
+
+                        <a  class="btn btn-primary" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}"> Add Evaluation</a>
+                        <a  class="btn btn-danger" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> delete</a>
+                    </div>
+                </div>
+                <div>
+                    {% block warnings %}
+                    {% endblock warnings %}
+                </div>
+            </div><!--Panel body -->
+        </div><!--Panel -->
+    </div><!-- col-sm-9 -->
+{% endblock  %}

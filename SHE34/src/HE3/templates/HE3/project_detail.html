@@ -1,8 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'HE3/baseHE.html' %}
 {% load staticfiles %}
 
+{% block breadcrumb %}
+        <li class="breadcrumb-reverse"> <a class="text-muted" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
+        <li class="breadcrumb-reverse active"><a class="text-muted" href="">Project Detail</a> </li>
+{% endblock %}
 
-{% block container %}
+{% block content %}
     <div class="container">
 
         <div class="starter-template">
@@ -19,9 +23,22 @@
             </div>
         </div>
         <div>
-            {% block warnings %}
-            {% endblock warnings %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <p class="lead">You are the <strong>manager</strong> of these projects:</p>
+                        </div>
+                        <div class="aligned">
+                            <a class="btn btn-info btn-sm" href="{% url 'profiles:dashboard:project_create' %}">
+                                <span class="glyphicon glyphicon-plus myglyphicon " aria-hidden="true"></span>
+                                Create a new Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div><!-- /.container -->
-{% endblock container %}
+{% endblock %}
 

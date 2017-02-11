@@ -33,15 +33,16 @@ class ProjectDetail(generic.detail.DetailView):
         return context
 
 
-class ProjectForEvaluatorDetail(generic.detail.DetailView):
-    model = Project
-    template_name = 'HE3/project_detail_for_evaluator.html'
-    context_object_name = 'project'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectForEvaluatorDetail, self).get_context_data(**kwargs)
-
-        return context
+# class ProjectForEvaluatorDetail(generic.detail.DetailView):
+#     model = Project
+#     template_name = 'HE3/project_detail_for_evaluator.html'
+#     context_object_name = 'project'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(ProjectForEvaluatorDetail, self).get_context_data(**kwargs)
+#         now = timezone.now()
+#         context['now'] = now.date()
+#         return context
 
 
 # class ProjectList(generic.list.ListView):
@@ -124,3 +125,12 @@ def EvaluatorDelete(request , project_id):
     return redirect('profiles:dashboard:user-dashboard')
 
 
+def projectDetailForEvaluator(request, project_id):
+    project = Project.objects.get(pk = project_id)
+    user = request.user
+    evaluationsOfUser = project.evaluation_for_project.filter(evaluator = user)
+
+    template_name = 'HE3/project_detail_for_evaluator.html'
+    context = {'now': timezone.now().date() ,'project': project , 'evaluations' : evaluationsOfUser }
+
+    return render(request,template_name, context )
