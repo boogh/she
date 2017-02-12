@@ -19,35 +19,35 @@
     <div class="col-sm-9">
 
         <div class="row">
-        <div class="panel panel-primary">
-            <div class="panel-heading text-center"> <span class="page-header"><h2>{{ project.name }} </h2></span></div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Link</th>
-                            <th>Status</th>
-                            <th>Number of your submitted evaluations</th>
-                            <th>Operations</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td> {{ project.description }} </td>
-                            <td> {{ project.link }}</td>
-                            <td> {{ project.deadline }}
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center"> <span class="page-header"><h2>{{ project.name }} </h2></span></div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Link</th>
+                                <th>Status</th>
+                                <th>Number of your submitted evaluations</th>
+                                <th>Operations</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td> {{ project.description }} </td>
+                                <td> {{ project.link }}</td>
+                                <td> {{ project.deadline }}
 
-                                {% if project.deadline > now %}
-                                    ( Deadline is in
-                                    {{ project.deadline|timeuntil }} )
-                                {% else %}
-                                    (Evaluation time is finished!)
-                                {% endif %}
-                            </td>
-                            <td> {{ evaluations|length }}</td>
-                            <td class="text-center">
+                                    {% if project.deadline > now %}
+                                        ( Deadline is in
+                                        {{ project.deadline|timeuntil }} )
+                                    {% else %}
+                                        (Evaluation time is finished!)
+                                    {% endif %}
+                                </td>
+                                <td> {{ evaluations|length }}</td>
+                                <td class="text-center">
                                     <span class="btn-group-sm">
                                     {% if project.deadline > now %}
 
@@ -61,69 +61,72 @@
                                         Delete Project
                                     </button>
                                     </span>
-                            </td>
-                        </tr>
-                        </tbody>
+                                </td>
+                            </tr>
+                            </tbody>
 
-                    </table>
+                        </table>
 
-                </div>
-                {#                        <a  class="btn btn-danger" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> delete</a>#}
-                <div>
-                    {% block warnings %}
-                    {% endblock warnings %}
-                </div>
-            </div><!--Panel body -->
-        </div><!--Panel -->
+                    </div>
+                    {#                        <a  class="btn btn-danger" href="{% url 'profiles:dashboard:delete-evaluator' project.id %}"> delete</a>#}
+                    <div>
+                        {% block warnings %}
+                        {% endblock warnings %}
+                    </div>
+                </div><!--Panel body -->
+            </div><!--Panel -->
         </div>
 
 
         <div class="row">
-                <div class="panel panel-success">
-                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
-                    <div class="panel-body">
-                        <div class="table table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
+            <div class="panel panel-success">
+                <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
+                <div class="panel-body">
+                    <div class="table table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Heuristic Principe</th>
+
+                                <th>Place</th>
+                                <th>Description</th>
+
+                                <th>Recommendation</th>
+                                <th>Positivity</th>
+                                <th>Severity</th>
+                                <th>Frequency</th>
+                                <th>Screenshot</th>
+                                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for e in evaluations %}
                                 <tr>
-                                    <th>#</th>
-                                    <th>Heuristic Principe</th>
+                                <td>{{ forloop.counter }}</td>
+                                <td>  {{ e.heurPrincip}}   </td>
+                                <td>{{ e.place }}</td>
 
-                                    <th>Place</th>
-                                    <th>Description</th>
+                                <td>{{ e.description }} </td>
+                                <td>{{ e.recommendation}}</td>
 
-                                    <th>Recommendation</th>
-                                    <th>Positivity</th>
-                                    <th>Severity</th>
-                                    <th>Frequency</th>
-                                    <th>Screenshot</th>
+                                <td> {{ e.positivity }}</td>
 
+                                <td>{{ e.severity }}</td>
+                                <td>{{ e.frequency }}</td>
+                                <td>{{ e.screenshot }}</td>
+                                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for e in evaluations %}
-                                    <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>  {{ e.heurPrincip}}   </td>
-                                    <td>{{ e.place }}</td>
-
-                                    <td>{{ e.description }} </td>
-                                    <td>{{ e.recommendation}}</td>
-
-                                    <td> {{ e.positivity }}</td>
-
-                                    <th>{{ e.severity }}</th>
-                                    <th>{{ e.frequency }}</th>
-                                    <th>{{ e.screenshot }}</th>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
+
             </div>
+        </div>
 
     </div><!-- col-sm-9 -->
 {% endblock  %}
