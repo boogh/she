@@ -23,15 +23,17 @@ def showDashboard(request):
     return render(request, template_name, context)
 
 
-class ProjectDetail(generic.detail.DetailView):
-    model = Project
-    template_name = 'HE3/project_detail.html'
-    context_object_name = 'project'
+# class ProjectDetail(generic.detail.DetailView):
+#     model = Project
+#     template_name = 'HE3/project_detail.html'
+#     context_object_name = 'project'
+#
+#     def get_context_data(self,model, **kwargs):
+#         context = super(ProjectDetail, self).get_context_data(**kwargs)
+#         context['now'] = timezone.now().date()
+#
+#         return context
 
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetail, self).get_context_data(**kwargs)
-        context['now'] = timezone.now().date()
-        return context
 
 
 # class ProjectForEvaluatorDetail(generic.detail.DetailView):
@@ -136,5 +138,18 @@ def projectDetailForEvaluator(request, project_id):
 
     template_name = 'HE3/project_detail_for_evaluator.html'
     context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluationsOfUser }
+
+    return render(request,template_name, context )
+
+def projectDetailForManager(request, project_id):
+    project = Project.objects.get(pk = project_id)
+    user = request.user
+    evaluations= project.evaluation_for_project.all()
+    evaluators=project.evaluators.all()
+    # table = EvaluationsTables(evaluationsOfUser)
+    # RequestConfig(request).configure(table)
+
+    template_name = 'HE3/project_detail.html'
+    context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluations ,'evaluators':evaluators }
 
     return render(request,template_name, context )
