@@ -78,10 +78,10 @@
                                     </a>
                                     </span>
 
-                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        Del
-                                    </button>
+{#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
+                                        <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            Del </a>
+{#                                    </button>#}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -145,11 +145,10 @@
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
                                     {% endif %}
-
                                         <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
-                                    </button>
+                                        </button>
                                     </span>
                                 </td>
 
