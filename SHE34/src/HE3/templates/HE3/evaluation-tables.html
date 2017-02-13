@@ -1,0 +1,50 @@
+{% block evaluation-table %}
+
+    {% for evaluator in evaluators %}
+        <div class="profile-head"><h3>{{ evaluator.name }} : </h3></div>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+{#                <th>#</th>#}
+{#                <th>Evaluator</th>#}
+                <th>Heuristic Principe</th>
+
+                <th>Place</th>
+                <th>Description</th>
+
+                <th>Recommendation</th>
+                <th>Positivity</th>
+                <th>Severity</th>
+                <th>Frequency</th>
+                <th>Screenshot</th>
+                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for e in evaluations %}
+                {% if e.evaluator == evaluator %}
+                    <tr>
+{#                    <td>{{ forloop.counter }}</td>#}
+{#                    <td>{{ e.evaluator.name }}</td>#}
+                    <td>  {{ e.heurPrincip}}   </td>
+                    <td>{{ e.place }}</td>
+
+                    <td>{{ e.description }} </td>
+                    <td>{{ e.recommendation}}</td>
+
+                    <td> {{ e.positivity }}</td>
+
+                    <td>{{ e.severity }}</td>
+                    <td>{{ e.frequency }}</td>
+                    <td>{{ e.screenshot }}</td>
+                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
+                {% endif %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock%}

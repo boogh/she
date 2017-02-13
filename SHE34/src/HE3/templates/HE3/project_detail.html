@@ -2,9 +2,12 @@
 {% load staticfiles %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-reverse"> <a class="text-muted" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
-    <li class="breadcrumb-reverse active"><a class="text-muted" href="">Project Detail</a> </li>
+    <li class="breadcrumb"> <a href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
+    <li class="breadcrumb active"><a class="text-muted" href="">Project Detail for Manager</a> </li>
 {% endblock %}
+
+{% block titleOfPage %} {{ project.name }}{% endblock %}
+
 
 {% block content %}
     <div class="col-sm-9">
@@ -86,51 +89,54 @@
                 <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
                 <div class="panel-body">
                     <div class="table table-responsive">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Evaluator</th>
-                                <th>Heuristic Principe</th>
-
-                                <th>Place</th>
-                                <th>Description</th>
-
-                                <th>Recommendation</th>
-                                <th>Positivity</th>
-                                <th>Severity</th>
-                                <th>Frequency</th>
-                                <th>Screenshot</th>
-                                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for evaluator in evaluators %}
-                                {% for e in evaluations %}
-                                    {% if e.evaluator == evaluator %}
-                                    <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ e.evaluator.name }}</td>
-                                    <td>  {{ e.heurPrincip}}   </td>
-                                    <td>{{ e.place }}</td>
-
-                                    <td>{{ e.description }} </td>
-                                    <td>{{ e.recommendation}}</td>
-
-                                    <td> {{ e.positivity }}</td>
-
-                                    <td>{{ e.severity }}</td>
-                                    <td>{{ e.frequency }}</td>
-                                    <td>{{ e.screenshot }}</td>
-                                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
-                                    {% endif %}
-
-                                {% endfor %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
+{#                        <table class="table table-bordered table-striped table-hover">#}
+{#                            <thead>#}
+{#                            <tr>#}
+{#                                <th>#</th>#}
+{#                                <th>Evaluator</th>#}
+{#                                <th>Heuristic Principe</th>#}
+{##}
+{#                                <th>Place</th>#}
+{#                                <th>Description</th>#}
+{##}
+{#                                <th>Recommendation</th>#}
+{#                                <th>Positivity</th>#}
+{#                                <th>Severity</th>#}
+{#                                <th>Frequency</th>#}
+{#                                <th>Screenshot</th>#}
+{#                                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
+{##}
+{##}
+{#                            </tr>#}
+{#                            </thead>#}
+{#                            <tbody>#}
+{#                            {% for evaluator in evaluators %}#}
+{#                                {% for e in evaluations %}#}
+{#                                    {% if e.evaluator == evaluator %}#}
+{#                                    <tr>#}
+{#                                    <td>{{ forloop.counter }}</td>#}
+{#                                    <td>{{ e.evaluator.name }}</td>#}
+{#                                    <td>  {{ e.heurPrincip}}   </td>#}
+{#                                    <td>{{ e.place }}</td>#}
+{##}
+{#                                    <td>{{ e.description }} </td>#}
+{#                                    <td>{{ e.recommendation}}</td>#}
+{##}
+{#                                    <td> {{ e.positivity }}</td>#}
+{##}
+{#                                    <td>{{ e.severity }}</td>#}
+{#                                    <td>{{ e.frequency }}</td>#}
+{#                                    <td>{{ e.screenshot }}</td>#}
+{#                                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
+{#                                    {% endif %}#}
+{##}
+{#                                {% endfor %}#}
+{#                            {% endfor %}#}
+{#                            </tbody>#}
+{#                        </table>#}
+                    </div>
+                    <div class="table table-responsive" >
+                        {% include 'HE3/evaluation-tables.html' %}
                     </div>
                 </div>
 
