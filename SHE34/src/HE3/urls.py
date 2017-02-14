@@ -19,7 +19,9 @@ urlpatterns = [
     url(r'^add_project/$' , views.ProjectCreate.as_view(),name='project_create'),
     url(r'^project/(?P<pk>[0-9]+)/update/$', views.ProjectUpdate.as_view(), name='project_update'),
     url(r'^project/(?P<pk>[0-9]+)/delete/$', views.ProjectDelete.as_view(), name='project_delete'),
+
     url(r'^project/AddEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationCreate.as_view(), name='Add-Evaluation'),
+    url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationUpdate.as_view(), name='evaluation-update'),
 
 
 ]

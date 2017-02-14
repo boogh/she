@@ -118,6 +118,23 @@ class EvaluationCreate(CreateView):
         context['project'] = self.kwargs
         return context
 
+class EvaluationUpdate(UpdateView):
+    model = Evaluation
+    fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+
+    # def form_valid(self, form):
+    #     user = self.request.user
+    #     projectId = self.kwargs['pk']
+    #     project = Project.objects.get(pk=projectId)
+    #     form.instance.ofProject = project
+    #     form.instance.evaluator = user
+    #
+    #     return super(EvaluationUpdate, self).form_valid(form)
+    def get_context_data(self, **kwargs):
+        context= super(EvaluationUpdate,self).get_context_data(**kwargs)
+        context['project'] = self.kwargs
+        return context
+
 def EvaluatorDelete(request , project_id):
 
     user = request.user
