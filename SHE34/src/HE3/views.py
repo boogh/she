@@ -1,10 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
 from HE3.models import Project, Evaluation
 from django.core.urlresolvers import reverse_lazy
 # from .forms import ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
 # from .tables import EvaluationsTables
 
@@ -152,7 +152,7 @@ def projectDetailForEvaluator(request, project_id):
     # table = EvaluationsTables(evaluationsOfUser)
     # RequestConfig(request).configure(table)
 
-    template_name = 'HE3/project_detail_for_evaluator.html'
+    template_name = 'HE3/project_detail.html'
     context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluationsOfUser }
 
     return render(request,template_name, context )
@@ -169,3 +169,23 @@ def projectDetailForManager(request, project_id):
     context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluations ,'evaluators':evaluators }
 
     return render(request,template_name, context )
+
+class ProjectDetail(DetailView):
+    model = Project
+    template_name = 'HE3/project_detail.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Project,pk =self.kwargs.get('pk'))
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetail,self).get_context_data(**kwargs)
+        project = self.get_object()
+        allEvaluations = project.evaluation_for_project.all()
+        evaluationsOfUser = allEvaluations.filter(evaluator= self.request.user)
+        # evaluators = project.evaluators.all()
+
+        context = { 'project' : project ,
+                    'now' : timezone.now().date(),
+                    'allEvaluations' : allEvaluations,
+                    'evaluationsOfUser': evaluationsOfUser,
+                     }
+        return context

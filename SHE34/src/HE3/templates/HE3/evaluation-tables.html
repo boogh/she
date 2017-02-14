@@ -1,6 +1,6 @@
 {% block evaluation-table %}
 
-    {% for evaluator in evaluators %}
+    {% for evaluator in project.evaluators.all %}
         <div class="profile-head"><h3>{{ evaluator.name }} : </h3></div>
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for e in evaluations %}
+            {% for e in project.evaluation_for_project.all %}
                 {% if e.evaluator == evaluator %}
                     <tr>
 {#                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ forloop.counter }}</a></td>#}
