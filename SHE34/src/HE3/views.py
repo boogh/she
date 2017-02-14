@@ -121,14 +121,6 @@ class EvaluationUpdate(UpdateView):
     model = Evaluation
     fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
 
-    # def form_valid(self, form):
-    #     user = self.request.user
-    #     projectId = self.kwargs['pk']
-    #     project = Project.objects.get(pk=projectId)
-    #     form.instance.ofProject = project
-    #     form.instance.evaluator = user
-    #
-    #     return super(EvaluationUpdate, self).form_valid(form)
     def get_context_data(self, **kwargs):
         context= super(EvaluationUpdate,self).get_context_data(**kwargs)
         context['project'] = self.kwargs
@@ -144,31 +136,31 @@ def EvaluatorDelete(request , project_id):
     return redirect('profiles:dashboard:user-dashboard')
 
 
-def projectDetailForEvaluator(request, project_id):
-    project = Project.objects.get(pk = project_id)
-    user = request.user
-    evaluationsOfUser = project.evaluation_for_project.filter(evaluator = user)
+# def projectDetailForEvaluator(request, project_id):
+#     project = Project.objects.get(pk = project_id)
+#     user = request.user
+#     evaluationsOfUser = project.evaluation_for_project.filter(evaluator = user)
+#
+#     # table = EvaluationsTables(evaluationsOfUser)
+#     # RequestConfig(request).configure(table)
+#
+#     template_name = 'HE3/project_detail.html'
+#     context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluationsOfUser }
+#
+#     return render(request,template_name, context )
 
-    # table = EvaluationsTables(evaluationsOfUser)
-    # RequestConfig(request).configure(table)
-
-    template_name = 'HE3/project_detail.html'
-    context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluationsOfUser }
-
-    return render(request,template_name, context )
-
-def projectDetailForManager(request, project_id):
-    project = Project.objects.get(pk = project_id)
-    user = request.user
-    evaluations= project.evaluation_for_project.all()
-    evaluators=project.evaluators.all()
-    # table = EvaluationsTables(evaluationsOfUser)
-    # RequestConfig(request).configure(table)
-
-    template_name = 'HE3/project_detail.html'
-    context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluations ,'evaluators':evaluators }
-
-    return render(request,template_name, context )
+# def projectDetailForManager(request, project_id):
+#     project = Project.objects.get(pk = project_id)
+#     user = request.user
+#     evaluations= project.evaluation_for_project.all()
+#     evaluators=project.evaluators.all()
+#     # table = EvaluationsTables(evaluationsOfUser)
+#     # RequestConfig(request).configure(table)
+#
+#     template_name = 'HE3/project_detail.html'
+#     context = {'now': timezone.now().date() ,'project': project ,'evaluations' :evaluations ,'evaluators':evaluators }
+#
+#     return render(request,template_name, context )
 
 class ProjectDetail(DetailView):
     model = Project
@@ -185,7 +177,6 @@ class ProjectDetail(DetailView):
 
         context = { 'project' : project ,
                     'now' : timezone.now().date(),
-                    'allEvaluations' : allEvaluations,
                     'evaluationsOfUser': evaluationsOfUser,
                      }
         return context

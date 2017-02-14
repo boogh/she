@@ -82,7 +82,7 @@ class Evaluation(models.Model):
                                 blank=True)
 
     def get_absolute_url(self):
-        return reverse('profiles:dashboard:project_detail_for_evaluator', kwargs={'pk': self.ofProject.pk})
+        return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
 #
 #
 #
