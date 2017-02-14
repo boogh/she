@@ -4,18 +4,23 @@ from datetime import date,timedelta
 from django import utils
 from django.urls import reverse
 
-setList = (("1", "Visibility of System Status"),
-               ("2", "Match Between System and Real World"),
-               ("3", "User Control and Freedom"),
-               ("4", "Consistency and Standards"),
-               ("5", "Error Prevention"),
-               ("6", "Recognition Rather than Recall"),
-               ("7", "Flexibility and Efficiency of Use"),
-               ("8", "Aesthetic and Minimalistic Design"),
-               ("9", "Help Users Recognize, Diagnose, and Recover from Errors"),
-               ("10", "Help and Documentation"))
+HEURISTICLIST = (("1", "Visibility of System Status"),
+                 ("2", "Match Between System and Real World"),
+                 ("3", "User Control and Freedom"),
+                 ("4", "Consistency and Standards"),
+                 ("5", "Error Prevention"),
+                 ("6", "Recognition Rather than Recall"),
+                 ("7", "Flexibility and Efficiency of Use"),
+                 ("8", "Aesthetic and Minimalistic Design"),
+                 ("9", "Help Users Recognize, Diagnose, and Recover from Errors"),
+                 ("10", "Help and Documentation"))
+
+POSITIVITY= (("p" , "Positive") , ("n" , "Negative"))
+SEVERITY= (("1" , "No problem at all"), ("2", "Cosmetic problem"), ("3" , "Minor usability problem") , ("4", "Major usability problem"), ("5", "Catastrophic"))
+FREQUENCY=(("1", "almost never"), ("2", "rarely (< 10 % )") , ("3", "occasionally (11-50 %"), ("4" , "regularly(51-89 %"), ("5" , "constantly (>90 %"))
+
 # class HEset(models.Model):
-#     setList = (("1" , "Visibility of System Status"),
+#     HEURISTICLIST = (("1" , "Visibility of System Status"),
 #                 ("2" , "Match Between System and Real World"),
 #                 ("3","User Control and Freedom"),
 #                 ("4","Consistency and Standards"),
@@ -28,7 +33,7 @@ setList = (("1", "Visibility of System Status"),
 #
 #
 #     name = models.CharField(max_length=50)
-#     set = models.CharField(max_length=200 , choices=setList)
+#     set = models.CharField(max_length=200 , choices=HEURISTICLIST)
 #
 #     def __str__(self):
 #         return self.name
@@ -61,22 +66,23 @@ class Project(models.Model):
                ]
 
 class Evaluation(models.Model):
-
-    posOrNeg= (("p" , "Positive") , ("n" , "Negative"))
-    severityList= (("1" , "No problem at all"), ("2","Cosmetic problem"),("3" ,"Minor usability problem") ,("4","Major usability problem"),("5","Catastrophic"))
-    freq=(("1","almost never"),("2","rarely (< 10 % )") ,("3", "occasionally (11-50 %"),("4" ,"regularly(51-89 %"), ("5" , "constantly (>90 %"))
+    POSITIVITY = (("p", "Positive"), ("n", "Negative"))
+    SEVERITY = (("1", "No problem at all"), ("2", "Cosmetic problem"), ("3", "Minor usability problem"),
+                ("4", "Major usability problem"), ("5", "Catastrophic"))
+    FREQUENCY = (("1", "almost never"), ("2", "rarely (< 10 % )"), ("3", "occasionally (11-50 %)"), ("4", "regularly(51-89 %)"),
+    ("5", "constantly (>90 %)"))
 
     ofProject= models.ForeignKey(Project,related_name="evaluation_for_project")
     evaluator = models.ForeignKey(User,related_name="evaluator")
     title = models.CharField(max_length=300 , default='title')
     place = models.CharField(max_length=100 , default='general')
     tags = models.CharField(max_length=400 , default='tags')
-    heurPrincip= models.CharField(max_length=300, choices= setList ,default="1")
+    heurPrincip= models.CharField(max_length=300, choices= HEURISTICLIST, default="1")
     description = models.TextField()
     recommendation= models.TextField(blank=True)
-    positivity = models.CharField(max_length=10, choices=posOrNeg , default="n")
-    severity = models.CharField(max_length=10 , choices=severityList,default="1")
-    frequency = models.CharField(max_length=10,choices=freq ,default="1")
+    positivity = models.CharField(max_length=10, choices=POSITIVITY, default="n")
+    severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
+    frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
     screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
                                 null=True,
                                 blank=True)

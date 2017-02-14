@@ -6,6 +6,7 @@
 {#    <li class="breadcrumb active"><a class="text-muted" href="">Project Detail for Manager</a> </li>#}
 {#{% endblock %}#}
 
+
 {% if user == project.manager %}
     {% include 'HE3/project_detail_manager.html' %}
 {%elif user in project.evaluators.all %}

@@ -15,7 +15,7 @@ setList = (("1", "Visibility of System Status"),
                ("9", "Help Users Recognize, Diagnose, and Recover from Errors"),
                ("10", "Help and Documentation"))
 # class HEset(models.Model):
-#     setList = (("1" , "Visibility of System Status"),
+#     HEURISTICLIST = (("1" , "Visibility of System Status"),
 #                 ("2" , "Match Between System and Real World"),
 #                 ("3","User Control and Freedom"),
 #                 ("4","Consistency and Standards"),
@@ -28,7 +28,7 @@ setList = (("1", "Visibility of System Status"),
 #
 #
 #     name = models.CharField(max_length=50)
-#     set = models.CharField(max_length=200 , choices=setList)
+#     set = models.CharField(max_length=200 , choices=HEURISTICLIST)
 #
 #     def __str__(self):
 #         return self.name
