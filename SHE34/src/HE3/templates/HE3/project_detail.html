@@ -6,10 +6,10 @@
 {#    <li class="breadcrumb active"><a class="text-muted" href="">Project Detail for Manager</a> </li>#}
 {#{% endblock %}#}
 
-{% ifequal user project.manager %}
-   <p> you are the manager </p>
+{% if user == project.manager %}
     {% include 'HE3/project_detail_manager.html' %}
-    {% else %}
-    <p> you are evaluator</p>
+{%elif user in project.evaluators.all %}
     {% include 'HE3/project_detail_for_evaluator.html' %}
-{% endifequal %}
+{% else %}
+    <h1> Page not found!</h1>
+{% endif %}
