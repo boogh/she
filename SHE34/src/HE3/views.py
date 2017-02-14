@@ -7,7 +7,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView
 from django.utils import timezone
 # from .tables import EvaluationsTables
-from django_tables2 import RequestConfig
 
 #
 def showDashboard(request):

@@ -68,7 +68,9 @@ class Evaluation(models.Model):
 
     ofProject= models.ForeignKey(Project,related_name="evaluation_for_project")
     evaluator = models.ForeignKey(User,related_name="evaluator")
+    title = models.CharField(max_length=300 , default='title')
     place = models.CharField(max_length=100 , default='general')
+    tags = models.CharField(max_length=400 , default='tags')
     heurPrincip= models.CharField(max_length=300, choices= setList ,default="1")
     description = models.TextField()
     recommendation= models.TextField(blank=True)

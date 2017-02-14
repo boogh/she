@@ -88,11 +88,11 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Title</th>
                                 <th>Heuristic Principe</th>
-
                                 <th>Place</th>
+                                <th>Tags</th>
                                 <th>Description</th>
-
                                 <th>Recommendation</th>
                                 <th>Positivity</th>
                                 <th>Severity</th>
@@ -106,19 +106,23 @@
                             <tbody>
                             {% for e in evaluations %}
                                 <tr>
-                                <td><a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ forloop.counter }}</a></td>
-                                <td>  {{ e.heurPrincip}}   </td>
-                                <td>{{ e.place }}</td>
+                                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ forloop.counter }}</a></td>
+                                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ e.title }}</a></td>
+                                    <td>  {{ e.heurPrincip}}   </td>
+                                    <td>{{ e.place }}</td>
+                                    <td>{{ e.tags }}</td>
 
-                                <td>{{ e.description }} </td>
-                                <td>{{ e.recommendation}}</td>
+                                    <td>{{ e.description }} </td>
+                                    <td>{{ e.recommendation}}</td>
 
-                                <td> {{ e.positivity }}</td>
+                                    <td> {{ e.positivity }}</td>
 
-                                <td>{{ e.severity }}</td>
-                                <td>{{ e.frequency }}</td>
-                                <td>{{ e.screenshot }}</td>
-                                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
+                                    <td>{{ e.severity }}</td>
+                                    <td>{{ e.frequency }}</td>
+                                    <td>{{ e.screenshot }}</td> </a>
+                                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
+                                </tr>
+
 
                             {% endfor %}
                             </tbody>
