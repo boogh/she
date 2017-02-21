@@ -8,7 +8,6 @@
                 <th>title</th>
                 <th>Heuristic Principe</th>
                 <th>Place</th>
-                <th>Tags</th>
                 <th>Description</th>
                 <th>Recommendation</th>
                 <th>Positivity</th>
@@ -26,10 +25,9 @@
                     <tr>
 {#                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ forloop.counter }}</a></td>#}
                     <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ e.title }}</a></td>
-                    <td>  {{ e.get_heurPrincip_display}}   </td>
+                    <td>  {{ e.heurPrincip}}   </td>
                     <td>{{ e.place }}</td>
-                    <td>{{ e.tags }}</td>
-                    <td>{{ e.description }} </td>
+                    <td>{{ e.description | truncatewords_html:5 }} </td>
                     <td>{{ e.recommendation}}</td>
                     <td> {{ e.get_positivity_display }}</td>
                     <td>{{ e.get_severity_display }}</td>
