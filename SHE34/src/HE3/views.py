@@ -69,7 +69,7 @@ def showDashboard(request):
 
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['name', 'link', 'description', 'deadline', 'evaluators']
+    fields = ['name', 'link', 'setOfHeuristics', 'description', 'deadline', 'evaluators']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
     def form_valid(self, form):
@@ -89,7 +89,7 @@ class ProjectCreate(CreateView):
 
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['name', 'link', 'description', 'deadline', 'evaluators']
+    fields = ['name', 'link', 'setOfHeuristics', 'description', 'deadline', 'evaluators']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
 

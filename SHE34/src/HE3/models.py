@@ -41,6 +41,7 @@ FREQUENCY=(("1", "almost never"), ("2", "rarely (< 10 % )") , ("3", "occasionall
 #         return self.name
 
 class SetOfHeuristics(models.Model):
+    creator = models.ForeignKey(User , null=True)
     title = models.CharField(max_length=500 , verbose_name='Title')
     discription = models.TextField(verbose_name='Discription' , blank= True)
 
