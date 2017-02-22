@@ -120,7 +120,6 @@ class ListOfEval(models.Model):
     fromUser = models.ForeignKey(User, related_name="Merge_manager")
     evaluations = models.ManyToManyField(Evaluation)
     name = models.CharField(max_length= 50)
-    logo = models.ImageField(name='Eval-Merg-Logo',upload_to='logo/%Y-%m-%d/', null=True, blank= True )
     mergeUrl = models.URLField(blank=True , null=True)
     exportedFile= models.FileField(blank=True , null=True)
 
