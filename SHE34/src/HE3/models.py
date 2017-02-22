@@ -108,11 +108,13 @@ class Evaluation(models.Model):
 
     class Meta:
         ordering= ['evaluator' ,'heurPrincip', 'place' , '-severity' ]
+
     def get_absolute_url(self):
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
-#
-#
-#
+
+    def __str__(self):
+        return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
+
 class ListOfEval(models.Model):
     ofProject = models.ForeignKey(Project)
     fromUser = models.ForeignKey(User, related_name="Merge_manager")
@@ -125,4 +127,6 @@ class ListOfEval(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
 
