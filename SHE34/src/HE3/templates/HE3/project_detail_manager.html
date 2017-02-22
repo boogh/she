@@ -11,7 +11,6 @@
 
 {% block content %}
     <div class="col-sm-9">
-    <div class="panel panel-primary">
         <div class="row"> <!-- row for project information-->
             <div class="panel panel-primary"> <!-- panel for project detail -->
                 <div class="panel-heading text-center">
@@ -73,14 +72,7 @@
         </div> <!-- end of row for project information-->
 
         <div class="row"> <!-- row for Evaluaiton-lists -->
-            <div class="panel panel-default" >
-                <div class="panel-heading text-center"> <h4 class="lead text-success"> Evaluation-Lists </h4> </div>
-                <div class="panel-body">
-                    There is no Evaluation-list, make a new one!
-                    <a class="btn btn-primary" href="{% url 'merge:making-evaluation-list' project.id %}"> Make an Evaluation-list</a>
-                </div>
-
-            </div> <!-- end of panel for Evaluation-lists-->
+           {% include 'HE3/evaluation-lists.html' %}
         </div> <!-- end of row for Evaluaiton-lists -->
 
         <div class="row"> <!-- row for panel for evaluations -->
