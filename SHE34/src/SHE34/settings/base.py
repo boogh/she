@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'profiles',
     'accounts',
     'HE3',
+    'Merge',
 
 )
 

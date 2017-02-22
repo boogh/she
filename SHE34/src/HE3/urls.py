@@ -23,6 +23,4 @@ urlpatterns = [
 
     url(r'^project/AddEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationCreate.as_view(), name='Add-Evaluation'),
     url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationUpdate.as_view(), name='evaluation-update'),
-
-
 ]
