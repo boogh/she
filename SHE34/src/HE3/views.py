@@ -100,7 +100,7 @@ class ProjectDelete(DeleteView):
 
 class EvaluationCreate(CreateView):
     model = Evaluation
-    fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
     def form_valid(self, form):
@@ -119,7 +119,7 @@ class EvaluationCreate(CreateView):
 
 class EvaluationUpdate(UpdateView):
     model = Evaluation
-    fields = ['place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
 
     def get_context_data(self, **kwargs):
         context= super(EvaluationUpdate,self).get_context_data(**kwargs)
