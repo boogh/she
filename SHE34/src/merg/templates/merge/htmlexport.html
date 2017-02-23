@@ -1,0 +1,38 @@
+<h1>{{ project.name }} Report:</h1>
+
+{% if evaluations %}
+    <table>
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>Heuristic Principe</th>
+            <th>Place</th>
+            <th>Description</th>
+            <th>Recommendation</th>
+            <th>Positivity</th>
+            <th>Severity</th>
+            <th>Frequency</th>
+            <th>Screenshot</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for e in evaluations %}
+            <tr>
+                <td> {{ e.title }}</td>
+                <td>  {{ e.heurPrincip}}   </td>
+                <td>{{ e.place }}</td>
+                <td>{{ e.description }} </td>
+                <td>{{ e.recommendation }}</td>
+                <td> {{ e.get_positivity_display }}</td>
+                <td>{{ e.get_severity_display }}</td>
+                <td>{{ e.get_frequency_display }}</td>
+                <td>{{ e.screenshot }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endif %}
+
