@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'authtools',
     'crispy_forms',
     'easy_thumbnails',
-    'django_tables2',
 
     'profiles',
     'accounts',
