@@ -6,7 +6,11 @@ projectsSearchModelsDic = {}
 projectsNNmodels ={}
 
 def getEvalSF(project):
-
+    '''
+    A method which get a project and return a SFrame of it`s evaluations
+    :param project:
+    :return: A SFrame of Evaluation in the project
+    '''
 
     evaldic = [e.__dict__ for e in project.evaluation_for_project.all()]
 
@@ -22,6 +26,11 @@ def getEvalSF(project):
     return evalsf
 
 def evaltfidf(evalsf):
+    '''
+    A Method which get a evaluation SFrame and add TFIDF column for description, recommendation and tags
+    :param evalsf:
+    :return:
+    '''
     evalsf['desWordCount'] = gl.text_analytics.count_words(evalsf['description'])
     evalsf['recommendation'] = gl.text_analytics.count_words(evalsf['recommendation'])
     evalsf['tagsWordCount'] = gl.text_analytics.count_words(evalsf['tags'])
@@ -95,6 +104,20 @@ def updataAllNNmodels():
     p2 = allprojects.get(name='p2')
     projectsNNmodels.update({ p1.id : updateNNmodels(p1)})
     projectsNNmodels.update({ p2.id : updateNNmodels(p2)})
+
+
+def descriptionBase(eval):
+    '''
+    A Method which give similar evaluations to a given evaluatioln
+    :param eval: An evaluation
+    :return: SFrame with similar evalautions
+    '''
+
+    evalsf = evaltfidf(getEvalSF(eval.ofProject))
+    evalrow = evalsf[evalsf['id'] == str(eval.id)]
+    model = projectsNNmodels[eval.ofProject.id]['nnDesModel']
+
+    return model.query(evalrow)
 
 
 if __name__ == '__main__':
