@@ -159,8 +159,3 @@ def fillDocFile(project, listofeval):
     return doc
 
 
-def placebase(eval, listOfeval):
-
-    recommendList = listOfeval.evaluations.filter(place__icontains=eval.place)
-
-    return recommendList
