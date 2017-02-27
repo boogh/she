@@ -3,6 +3,7 @@ from HE3.models import Project
 
 allprojects = Project.objects.all()
 projectsSearchModelsDic = {}
+projectsNNmodels ={}
 
 def getEvalSF(project):
 
@@ -17,6 +18,19 @@ def getEvalSF(project):
     evalsf['recommendation'] = [i['recommendation'] for i in evaldic]
     evalsf['tags'] = [i['tags'] for i in evaldic]
     evalsf['heurPrincip_id'] = [str(i['heurPrincip_id']) for i in evaldic]
+
+    return evalsf
+
+def evaltfidf(evalsf):
+    evalsf['desWordCount'] = gl.text_analytics.count_words(evalsf['description'])
+    evalsf['recommendation'] = gl.text_analytics.count_words(evalsf['recommendation'])
+    evalsf['tagsWordCount'] = gl.text_analytics.count_words(evalsf['tags'])
+    tfidfDes = gl.text_analytics.tf_idf(evalsf['desWordCount'])
+    tfidfRec = gl.text_analytics.tf_idf(evalsf['recommendation'])
+    tfidfTags = gl.text_analytics.tf_idf(evalsf['tagsWordCount'])
+    evalsf['tfidfDes'] = tfidfDes
+    evalsf['tfidfRec'] = tfidfRec
+    evalsf['tfidfTags'] = tfidfTags
 
     return evalsf
 
@@ -45,10 +59,10 @@ def updateAllSearchModels():
     p1 = allprojects.get(name='p1')
     p2 = allprojects.get(name='p2')
     # for p in allprojects:
-        # print( '1' + p.name + '  start building searchmodel')
+    # print( '1' + p.name + '  start building searchmodel')
     projectsSearchModelsDic.update({p1.id  :updateSearchModels(p1)})
     projectsSearchModelsDic.update({p2.id : updateSearchModels(p2)})
-        # print('4'+ p.name + '  finish building searchmodel')
+    # print('4'+ p.name + '  finish building searchmodel')
 
 def placebase(eval):
 
@@ -64,6 +78,29 @@ def projectbase(eval):
     return result
 
 
+def updateNNmodels(project):
+    sf = evaltfidf(getEvalSF(project))
+    nnRec = gl.nearest_neighbors.create(sf, features=['tfidfRec'], label='id')
+    nnDes = gl.nearest_neighbors.create(sf, features=['tfidfDes'], label='id')
+    nnTags = gl.nearest_neighbors.create(sf, features=['tfidfTags'], label='id')
+
+    modeldic = {'nnRecModel' : nnRec ,
+                'nnDesModel' : nnDes ,
+                'nnTagsModel': nnTags}
+    return modeldic
+
+def updataAllNNmodels():
+    # for p in allprojects:
+    p1 = allprojects.get(name='p1')
+    p2 = allprojects.get(name='p2')
+    projectsNNmodels.update({ p1.id : updateNNmodels(p1)})
+    projectsNNmodels.update({ p2.id : updateNNmodels(p2)})
+
+
 if __name__ == '__main__':
     print('Running index update script...')
     updateAllSearchModels()
+    updataAllNNmodels()
+
+
+
