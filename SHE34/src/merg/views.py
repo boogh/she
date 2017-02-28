@@ -1,10 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from django.views.generic import DetailView,CreateView
-from HE3.models import Project , ListOfEval
+from HE3.models import Project , ListOfEval, Evaluation
 from django.utils import timezone
 from docx import Document
 import csv
+import graphlab as gl
+from graphlab import SFrame
+import merg.recommend as rec
+
 from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
@@ -21,16 +25,31 @@ class DesktopMerge(DetailView):
         context = super(DesktopMerge, self).get_context_data(**kwargs)
         project = self.get_object()
         allEvaluations = project.evaluation_for_project.all()
-        evaluationsOfUser = allEvaluations.filter(evaluator=self.request.user)
+        # evaluationsOfUser = allEvaluations.filter(evaluator=self.request.user)
         # evaluators = project.evaluators.all()
         # tableAllE = EvaluationsTablesForManager(allEvaluations)
         # RequestConfig(self.request).configure(tableAllE)
 
         context = {'project': project,
                    'now': timezone.now().date(),
-                   'evaluationsOfUser': evaluationsOfUser,
+                   'evaluations': allEvaluations,
                    }
         return context
+
+def recommend(request , eval_id):
+
+    # dicOfRec ={}
+    eval = Evaluation.objects.get(id = eval_id)
+    resultplace = rec.placebase(eval)
+    resultdes = rec.descriptionBase(eval)
+    # context = {'result': eval.ofProject}
+    result = set(resultplace + resultdes)
+    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+    return HttpResponse( result )
+
+
+
 
 
 
