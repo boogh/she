@@ -172,11 +172,14 @@ class ProjectDetail(DetailView):
         context = super(ProjectDetail,self).get_context_data(**kwargs)
         project = self.get_object()
         allEvaluations = project.evaluation_for_project.all()
-        evaluationsOfUser = allEvaluations.filter(evaluator= self.request.user)
-        # evaluators = project.evaluators.all()
+
+        if (self.request.user == project.manager):
+            evaluations = allEvaluations
+        elif (self.request.user in project.evaluators.all()):
+            evaluations = allEvaluations.filter(evaluator= self.request.user)
 
         context = { 'project' : project ,
                     'now' : timezone.now().date(),
-                    'evaluationsOfUser': evaluationsOfUser,
+                    'evaluations': evaluations,
                      }
         return context
