@@ -38,15 +38,17 @@ class DesktopMerge(DetailView):
 
 def recommend(request , eval_id):
 
-    # dicOfRec ={}
+    template_name = 'merge/recommendations.html'
     eval = Evaluation.objects.get(id = eval_id)
+    project =eval.ofProject
     resultplace = rec.placebase(eval)
     resultdes = rec.descriptionBase(eval)
     # context = {'result': eval.ofProject}
-    result = set(resultplace + resultdes)
+    resultids = set(resultplace + resultdes)
+    recommendList = project.evaluation_for_project.filter(pk__in =resultids)
     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-    return HttpResponse( result )
+    return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
 
 
 

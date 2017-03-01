@@ -53,7 +53,7 @@ def placebase(eval):
     sf= getEvalSF(project)
     placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place'])
     result = placeSearchModel.query(eval.place)
-    return  result['id']
+    return  list(result['id'])
 
 
 
@@ -70,7 +70,7 @@ def descriptionBase(eval):
     model = gl.nearest_neighbors.create(evalsf, features=['tfidfDes'], label='id')
     result = model.query(evalrow)
     result = result[result['distance'] <= 0.6]['reference_label']
-    return result
+    return list(result)
 
 
 # def updateSearchModels(project):
