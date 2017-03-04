@@ -52,14 +52,31 @@ def placebase(eval):
     # result = projectsSearchModelsDic[project.id]['placeSearchModel'].query(eval.place)
     sf= getEvalSF(project)
     placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place'])
-    result = placeSearchModel.query(eval.place)
+    result = placeSearchModel.query(eval.place).filter_by(str(eval.id) , 'id' , exclude= True)
     return  list(result['id'])
 
 
 
-def descriptionBase(eval):
+# def descriptionBase(eval):
+#     '''
+#     A Method which give similar evaluations to a given evaluatioln
+#     :param eval: An evaluation
+#     :return: SFrame with similar evalautions
+#     '''
+#
+#     evalsf = evaltfidf(eval.ofProject)
+#     evalrow = evalsf[evalsf['id'] == str(eval.id)]
+#     # model = projectsNNmodels[eval.ofProject.id]['nnDesModel']
+#     model = gl.nearest_neighbors.create(evalsf, features=['tfidfDes'], label='id')
+#     result = model.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
+#     print(result)
+#     result = result[result['distance'] <= 0.6]['reference_label']
+#     return list(result)
+
+
+def nearestN(eval):
     '''
-    A Method which give similar evaluations to a given evaluatioln
+    A Method which give similar evaluations to a given evaluatioln based on NN algorithm
     :param eval: An evaluation
     :return: SFrame with similar evalautions
     '''
@@ -67,11 +84,21 @@ def descriptionBase(eval):
     evalsf = evaltfidf(eval.ofProject)
     evalrow = evalsf[evalsf['id'] == str(eval.id)]
     # model = projectsNNmodels[eval.ofProject.id]['nnDesModel']
-    model = gl.nearest_neighbors.create(evalsf, features=['tfidfDes'], label='id')
-    result = model.query(evalrow)
-    result = result[result['distance'] <= 0.6]['reference_label']
-    return list(result)
+    modelDes = gl.nearest_neighbors.create(evalsf, features=['tfidfDes'], label='id')
+    modelRec = gl.nearest_neighbors.create(evalsf, features=['tfidfRec'], label='id')
+    modelTags = gl.nearest_neighbors.create(evalsf, features=['tfidfTags'], label='id')
+    resultDes = modelDes.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
+    resultRec = modelRec.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
+    resultTags = modelTags.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
+    resultDes = resultDes[resultDes['distance'] <= 0.6]['reference_label']
+    resultRec = resultRec[resultRec['distance'] <= 0.6]['reference_label']
+    resultTags = resultTags[resultTags['distance'] <= 0.6]['reference_label']
 
+    result = {'resultDes' : resultDes ,
+              'resultRec' : resultRec ,
+              'resultTags': resultTags,}
+
+    return result
 
 # def updateSearchModels(project):
 #

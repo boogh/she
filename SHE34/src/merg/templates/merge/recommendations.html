@@ -1,44 +1,95 @@
-<div class="panel panel-default">
-    {% if recommendList %}
-        <table class="table table-responsive table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>
-                <th>#</th>
-                {% block user-th %} {% endblock %}
-                <th>title</th>
-                <th>Heuristic Principe</th>
-                <th>Place</th>
-                <th>Description</th>
-                <th>Recommendation</th>
-                <th>Positivity</th>
-                <th>Severity</th>
-                <th>Frequency</th>
-                <th>Screenshot</th>
-                <th>Operations</th>
-            </tr>
-            </thead>
+{% extends 'base.html' %}
 
-            {% for e in recommendList %}
-                <tr>
-                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
-                    <td> {{ forloop.counter }}</td>
-                    {% block user-td %} {% endblock %}
-                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ e.title }}</a></td>
-                    <td>  {{ e.heurPrincip}}   </td>
-                    <td>{{ e.place }}</td>
-                    <td>{{ e.description | truncatewords:5 }} </td>
-                    <td>{{ e.recommendation | truncatewords:5}}</td>
-                    <td> {{ e.get_positivity_display }}</td>
-                    <td>{{ e.get_severity_display }}</td>
-                    <td>{{ e.get_frequency_display }}</td>
-                    <td>{{ e.screenshot }}</td>
-                    <td></td>
-                </tr>
+{% block container %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Place base</div>
+            <div class="panel-body">
+                {% if placeBase %}
+                    {% for e in placeBase %}
+                        {{ e.id }}
+                    {% endfor %}
+                {% endif %}
 
-            {% endfor %}
+            </div>
+        </div>
 
-        </table>
-    {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Discription base</div>
+            <div class="panel-body">
+                {% if desBase %}
+                    {% for e in desBase %}
+                        {{ e.id }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Tags base</div>
+            <div class="panel-body">
+                {% if tagBase %}
+                    {% for e in tagBase %}
+                        {{ e.id }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
 
-</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Recommendation base</div>
+            <div class="panel-body">
+                {% if recBase %}
+                    {% for e in recBase %}
+                        {{ e.id }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{#<div class="panel panel-default">#}
+{#    {% if recommendList %}#}
+{#        <table class="table table-responsive table-bordered table-striped table-hover">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
+{#                <th>#</th>#}
+{#                {% block user-th %} {% endblock %}#}
+{#                <th>title</th>#}
+{#                <th>Heuristic Principe</th>#}
+{#                <th>Place</th>#}
+{#                <th>Description</th>#}
+{#                <th>Recommendation</th>#}
+{#                <th>Positivity</th>#}
+{#                <th>Severity</th>#}
+{#                <th>Frequency</th>#}
+{#                <th>Screenshot</th>#}
+{#                <th>Operations</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{##}
+{#            {% for e in recommendList %}#}
+{#                <tr>#}
+{#                    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
+{#                    <td> {{ forloop.counter }}</td>#}
+{#                    {% block user-td %} {% endblock %}#}
+{#                    <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ e.title }}</a></td>#}
+{#                    <td>  {{ e.heurPrincip}}   </td>#}
+{#                    <td>{{ e.place }}</td>#}
+{#                    <td>{{ e.description | truncatewords:5 }} </td>#}
+{#                    <td>{{ e.recommendation | truncatewords:5}}</td>#}
+{#                    <td> {{ e.get_positivity_display }}</td>#}
+{#                    <td>{{ e.get_severity_display }}</td>#}
+{#                    <td>{{ e.get_frequency_display }}</td>#}
+{#                    <td>{{ e.screenshot }}</td>#}
+{#                    <td></td>#}
+{#                </tr>#}
+{##}
+{#            {% endfor %}#}
+{##}
+{#        </table>#}
+{#    {% endif %}#}
+{##}
+{#</div>#}

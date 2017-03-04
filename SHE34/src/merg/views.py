@@ -36,20 +36,44 @@ class DesktopMerge(DetailView):
                    }
         return context
 
+# def recommend(request , eval_id):
+#
+#     template_name = 'merge/recommendations.html'
+#     eval = Evaluation.objects.get(id = eval_id)
+#     project =eval.ofProject
+#     resultplace = rec.placebase(eval)
+#     resultdes = rec.descriptionBase(eval)
+#     # result = rec.nearestN(eval)
+#     # context = {'result': eval.ofProject}
+#     resultids = set(resultplace + resultdes)
+#     recommendList = project.evaluation_for_project.filter(pk__in =resultids)
+#     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+#     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+#     return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
+
+
 def recommend(request , eval_id):
 
     template_name = 'merge/recommendations.html'
     eval = Evaluation.objects.get(id = eval_id)
     project =eval.ofProject
     resultplace = rec.placebase(eval)
-    resultdes = rec.descriptionBase(eval)
+    # resultdes = rec.descriptionBase(eval)
+    result = rec.nearestN(eval)
     # context = {'result': eval.ofProject}
-    resultids = set(resultplace + resultdes)
-    recommendList = project.evaluation_for_project.filter(pk__in =resultids)
-    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-    return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
 
+    recPlaceBase = project.evaluation_for_project.filter(pk__in =resultplace)
+    recDesBase = project.evaluation_for_project.filter(pk__in =result['resultDes'])
+    recRecBase = project.evaluation_for_project.filter(pk__in =result['resultRec'])
+    recTagseBase = project.evaluation_for_project.filter(pk__in =result['resultTags'])
+    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
+
+    context = {'placeBase' : recPlaceBase ,
+               'desBase' : recDesBase ,
+               'recBase' :  recRecBase ,
+               'tagBase' : recTagseBase}
+    return render(request,template_name=template_name,context= context )
 
 
 
