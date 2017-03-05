@@ -6,9 +6,12 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 # from .tables import EvaluationsTables
 
 #
+@login_required
 def showDashboard(request):
     model = Project
     template_name = 'HE3/dashboard.html'
@@ -132,6 +135,7 @@ class EvaluationUpdate(UpdateView):
         context['project'] = self.kwargs
         return context
 
+@login_required
 def EvaluatorDelete(request , project_id):
 
     user = request.user
@@ -141,6 +145,7 @@ def EvaluatorDelete(request , project_id):
 
     return redirect('profiles:dashboard:user-dashboard')
 
+@login_required
 def evaluationDuplicate(request , eval_id):
 
     eval = Evaluation.objects.get(id = eval_id)

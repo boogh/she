@@ -8,6 +8,8 @@ import csv
 import graphlab as gl
 from graphlab import SFrame
 import merg.recommend as rec
+from django.contrib.auth.decorators import login_required
+
 
 from django.core.urlresolvers import reverse_lazy
 
@@ -51,7 +53,7 @@ class DesktopMerge(DetailView):
 #     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
 #     return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
 
-
+@login_required
 def recommend(request , eval_id):
 
     template_name = 'merge/recommendations.html'
@@ -120,6 +122,7 @@ class EvaluationList(CreateView):
         #        context['project'] = self.kwargs
         #        return context
 
+@login_required
 def exportHtmlFile(request , list_id):
 
     listofeval = ListOfEval.objects.get(pk=list_id)
@@ -131,7 +134,7 @@ def exportHtmlFile(request , list_id):
 
     return render(request,template_name=template_name,context=context)
 
-
+@login_required
 def exportDocFile(request, list_id):
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     response['Content-Disposition'] = 'attachment; filename=demo.docx'
@@ -143,7 +146,7 @@ def exportDocFile(request, list_id):
     doc.save(response)
 
     return response
-
+@login_required
 def exportCsvFile(request,list_id):
 
     listofeval = ListOfEval.objects.get(pk=list_id)
@@ -169,7 +172,7 @@ def exportCsvFile(request,list_id):
     return response
 
 
-
+@login_required
 def fillDocFile(project, listofeval):
     doc = Document()
     doc.add_heading(str(project.name + 'Report'))
