@@ -2,6 +2,8 @@
 from django.conf.urls import url
 from . import views
 
+
+# namespace = profiles:dashboard:
 app_name='HE3'
 
 
@@ -22,5 +24,7 @@ urlpatterns = [
     url(r'^project/(?P<pk>[0-9]+)/delete/$', views.ProjectDelete.as_view(), name='project_delete'),
 
     url(r'^project/AddEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationCreate.as_view(), name='Add-Evaluation'),
+    url(r'^project/EvaluationDeatil/(?P<pk>[0-9]+)/$', views.EvaluationDetail.as_view(), name='evaluation-detail'),
     url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', views.EvaluationUpdate.as_view(), name='evaluation-update'),
+    url(r'^project/DuplicateEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDuplicate, name='evaluation-duplicate'),
 ]

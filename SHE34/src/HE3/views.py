@@ -117,6 +117,12 @@ class EvaluationCreate(CreateView):
         context['project'] = self.kwargs
         return context
 
+class EvaluationDetail(DetailView):
+    model =Evaluation
+    template_name = 'HE3/evaluations/evaluation_detail.html'
+    context_object_name = 'evaluation'
+
+
 class EvaluationUpdate(UpdateView):
     model = Evaluation
     fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
@@ -134,6 +140,26 @@ def EvaluatorDelete(request , project_id):
     project.evaluators.remove(evaluator)
 
     return redirect('profiles:dashboard:user-dashboard')
+
+def evaluationDuplicate(request , eval_id):
+
+    eval = Evaluation.objects.get(id = eval_id)
+    eval.pk =None
+    eval.title = eval.title + '_copy'
+    eval.save()
+
+    # Evaluation.objects.create( ofProject=eval.ofProject,
+    #     manager=eval.manager,
+    #                           evaluator=request.user,
+    #                            heurPrincip=eval.heurPrincip,
+    #                            place=eval.place,
+    #                            description=eval.description,
+    #                            recommendation=eval.recommendation,
+    #
+    #
+    #                           )
+
+    return redirect('profiles:dashboard:project_detail' , eval.ofProject.id)
 
 
 # def projectDetailForEvaluator(request, project_id):

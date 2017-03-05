@@ -25,7 +25,7 @@
                 <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
                 <td> {{ forloop.counter }}</td>
                 {% block user-td %} {% endblock %}
-                <td> <a href="{% url 'profiles:dashboard:evaluation-update' e.pk %}">{{ e.title }}</a></td>
+                <td> <a href="{% url 'profiles:dashboard:evaluation-detail' e.pk %}">{{ e.title }}</a></td>
                 <td>  {{ e.heurPrincip}}   </td>
                 <td>{{ e.place }}</td>
                 <td>{{ e.description | truncatewords:5 }} </td>
@@ -34,7 +34,8 @@
                 <td>{{ e.get_severity_display }}</td>
                 <td>{{ e.get_frequency_display }}</td>
                 <td>{{ e.screenshot }}</td>
-                <td><a class="btn btn-primary" href="{% url 'merge:recommend' e.id %}" > Similar Evaluations </a></td>
+                <td><a class="btn btn-primary" href="{% url 'merge:recommend' e.id %}" > Similar Evaluations </a>
+                <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' e.id %}">Duplicate this Evaluation</a> </td>
             </tr>
 
         {% endfor %}
