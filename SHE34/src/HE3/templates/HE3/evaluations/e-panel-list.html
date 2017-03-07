@@ -1,0 +1,11 @@
+{% for e in evaluations %}
+    <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}"> <li class="list-group-item">  {{ e.title }} <br> <small>{{ e.evaluator.name }}</small></li></a>
+{% endfor %}
+
+<div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
