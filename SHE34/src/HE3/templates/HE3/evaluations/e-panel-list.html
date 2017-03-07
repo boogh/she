@@ -1,9 +1,21 @@
 {% for e in evaluations %}
-    <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}"> <li class="list-group-item">  {{ e.title }} <br> <small>{{ e.evaluator.name }}</small></li></a>
+    <li class="list-group-item">
+        <div>
+            <div class="checkbox"> <label> <input type="checkbox"></label>
+            </div>
+            <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}">
+                <div>
+                    {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
+                </div>
+            </a>
+            <div> <a class="btn btn-sm btn-info">Similar Evaluations</a> </div>
+        </div>
+
+    </li>
 {% endfor %}
 
 <div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
         </div>
