@@ -1,14 +1,14 @@
 {% for e in evaluations %}
     <li class="list-group-item">
-        <div>
-            <div class="checkbox"> <label> <input type="checkbox"></label>
+        <div class="checkbox pull-right checkBoxClass">  <input type="checkbox" class="checkBoxClass"  />
+        </div>
+        <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}">
+            <div>
+                {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
             </div>
-            <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}">
-                <div>
-                    {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
-                </div>
-            </a>
-            <div> <a class="btn btn-sm btn-info">Similar Evaluations</a> </div>
+        </a>
+        <div>
+            <a class="btn btn-sm btn-info" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>
         </div>
 
     </li>
