@@ -6,21 +6,21 @@
             <div class="panel-heading">Place base</div>
             <div class="panel-body">
                 {% if placeBase %}
-                    {% for e in placeBase %}
-                        {{ e.id }}
-                    {% endfor %}
+                    {% with placeBase as evaluations %}
+                        {% include 'HE3/evaluations/e-panel-list.html' %}
+                    {% endwith %}
                 {% endif %}
 
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Discription base</div>
+            <div class="panel-heading">Description base</div>
             <div class="panel-body">
                 {% if desBase %}
-                    {% for e in desBase %}
-                        {{ e.id }}
-                    {% endfor %}
+                    {% with desBase as evaluations %}
+                        {% include 'HE3/evaluations/e-panel-list.html' %}
+                    {% endwith %}
                 {% endif %}
             </div>
         </div>
@@ -28,9 +28,9 @@
             <div class="panel-heading">Tags base</div>
             <div class="panel-body">
                 {% if tagBase %}
-                    {% for e in tagBase %}
-                        {{ e.id }}
-                    {% endfor %}
+                    {% with tagBase as evaluations %}
+                        {% include 'HE3/evaluations/e-panel-list.html' %}
+                    {% endwith %}
                 {% endif %}
             </div>
         </div>
@@ -39,9 +39,9 @@
             <div class="panel-heading">Recommendation base</div>
             <div class="panel-body">
                 {% if recBase %}
-                    {% for e in recBase %}
-                        {{ e.id }}
-                    {% endfor %}
+                    {% with recBase as evaluations %}
+                        {% include 'HE3/evaluations/e-panel-list.html' %}
+                    {% endwith %}
                 {% endif %}
             </div>
         </div>
