@@ -4,6 +4,7 @@
 
 $(document).ready(function () {
     $("#action").hide();
+    $('.addToReport').hide();
     $("#checkBoxes").click(function () {
         $(".checkBoxClass").prop('checked', $(this).prop('checked'));
     });
@@ -23,6 +24,14 @@ $(document).ready(function () {
         if (checkedList.length != 1) {
             $("#action").hide();
         };
+        if (checkedList.length > 0) {
+            $(".addToReport").show();
+
+        }
+        else {
+            console.log('hier')
+            $(".addToReport").hide();
+        }
     });
 });
 
