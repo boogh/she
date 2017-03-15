@@ -9,7 +9,11 @@ $(document).ready(function () {
     });
     $(".checkBoxClass").click(function() {
         // console.log('clicked 1')
-        recommend($(this).val())
+        if ($(this).is(':checked')) {
+            console.log('is checked!')
+            recommend($(this).val())
+
+        }
 
         checkedList = getValueUsingClass();
         if (checkedList.length == 1) {
