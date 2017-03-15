@@ -11,6 +11,7 @@ $(document).ready(function () {
         // console.log('clicked 1')
         if ($(this).is(':checked')) {
             recommend($(this).val())
+            recommendContentBase($(this).val())
 
         }
 
@@ -36,7 +37,6 @@ function getValueUsingClass(){
 
 function recommend(eval_id){
     var url = '/merge/project/'+ eval_id + '/recommend_ajax';
-    console.log(url);
     $.ajax({
         type :'GET',
         url : url,
@@ -44,6 +44,20 @@ function recommend(eval_id){
         async : true ,
         success: function(html) {
             $('#output').html(html);
+        }
+    });
+}
+
+
+function recommendContentBase(eval_id) {
+    var url = '/merge/project/' + eval_id + '/recommend';
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'html',
+        async: true,
+        success: function (html) {
+            $('#recContBase').html(html);
         }
     });
 }

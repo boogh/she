@@ -55,7 +55,6 @@ class DesktopMerge(DetailView):
 @login_required
 def recommend(request , eval_id):
 
-    template_name = 'merge/recommendations.html'
     eval = Evaluation.objects.get(id = eval_id)
     project =eval.ofProject
     resultplace = rec.placebase(eval)
@@ -70,10 +69,17 @@ def recommend(request , eval_id):
     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
 
-    context = {'placeBase' : recPlaceBase ,
-               'desBase' : recDesBase ,
-               'recBase' :  recRecBase ,
-               'tagBase' : recTagseBase}
+    if request.is_ajax():
+        template_name = 'HE3/evaluations/e-panel-list.html'
+        context = {'evaluations' : set (list(recDesBase) + list(recTagseBase) + list(recRecBase))}
+
+    else:
+        template_name = 'merge/recommendations.html'
+        context = {'placeBase': recPlaceBase,
+                   'desBase': recDesBase,
+                   'recBase': recRecBase,
+                   'tagBase': recTagseBase}
+
     return render(request,template_name=template_name,context= context )
 
 
