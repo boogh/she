@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,get_object_or_404,redirect,render_to_response
 from django.http import HttpResponse
 from django.views.generic import DetailView,CreateView
 from HE3.models import Project , ListOfEval, Evaluation
@@ -84,9 +84,10 @@ def recommendAjax(request, eval_id):
     resultplace = rec.placebase(eval)
     result = {}
     result['evaluations'] = resultplace
+    recPlaceBase = project.evaluation_for_project.filter(pk__in =resultplace)
 
-    return HttpResponse(json.dumps(result) , content_type='application/json')
-
+    # return HttpResponse(json.dumps(result) , content_type='application/json')
+    return render_to_response(template_name='HE3/evaluations/e-panel-list.html' , context= {'evaluations' : recPlaceBase})
 
 class EvaluationList(CreateView):
     model = ListOfEval

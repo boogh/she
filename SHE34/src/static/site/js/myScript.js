@@ -10,7 +10,6 @@ $(document).ready(function () {
     $(".checkBoxClass").click(function() {
         // console.log('clicked 1')
         if ($(this).is(':checked')) {
-            console.log('is checked!')
             recommend($(this).val())
 
         }
@@ -41,11 +40,10 @@ function recommend(eval_id){
     $.ajax({
         type :'GET',
         url : url,
-        dataType:'json',
+        dataType:'html',
         async : true ,
-        success: function (json) {
-            console.log(json['evaluations']);
-            // $('#output').html(json.evaluations);
+        success: function(html) {
+            $('#output').html(html);
         }
     });
 }
