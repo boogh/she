@@ -5,10 +5,9 @@ from HE3.models import Project , ListOfEval, Evaluation
 from django.utils import timezone
 from docx import Document
 import csv
-import graphlab as gl
-from graphlab import SFrame
 import merg.recommend as rec
 from django.contrib.auth.decorators import login_required
+import json
 
 
 from django.core.urlresolvers import reverse_lazy
@@ -78,7 +77,15 @@ def recommend(request , eval_id):
     return render(request,template_name=template_name,context= context )
 
 
+def recommendAjax(request, eval_id):
 
+    eval = Evaluation.objects.get(id=eval_id)
+    project = eval.ofProject
+    resultplace = rec.placebase(eval)
+    result = {}
+    result['evaluations'] = resultplace
+
+    return HttpResponse(json.dumps(result) , content_type='application/json')
 
 
 class EvaluationList(CreateView):
