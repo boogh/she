@@ -6,7 +6,7 @@ $(document).ready(function () {
     $("#action").hide();
     $('.addToReport').hide();
     $("#checkBoxes").click(function () {
-        $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
     });
     $(".checkBoxClass").click(function() {
         // console.log('clicked 1')
@@ -33,6 +33,12 @@ $(document).ready(function () {
             $(".addToReport").hide();
         }
     });
+    $('a.popup').click(function(){
+		newwindow=window.open($(this).attr('href'),'','height=200,width=150');
+		if (window.focus) {newwindow.focus()}
+		return false;
+	});
+
 });
 
 
