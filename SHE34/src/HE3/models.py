@@ -118,7 +118,7 @@ class Evaluation(models.Model):
 class ListOfEval(models.Model):
     ofProject = models.ForeignKey(Project)
     fromUser = models.ForeignKey(User, related_name="Merge_manager")
-    evaluations = models.ManyToManyField(Evaluation)
+    evaluations = models.ManyToManyField(Evaluation , blank= True)
     name = models.CharField(max_length= 50)
     mergeUrl = models.URLField(blank=True , null=True)
     exportedFile= models.FileField(blank=True , null=True)
