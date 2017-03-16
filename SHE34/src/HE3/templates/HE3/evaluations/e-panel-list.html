@@ -2,7 +2,7 @@
     <li class="list-group-item">
         <div class="checkbox pull-right checkBoxClass">  <input type="checkbox" value={{ e.id }} class="checkBoxClass"  />
         </div>
-        <a data-toggle="modal" data-target="#e-detail" href="{% url 'profiles:dashboard:evaluation-detail' e.id %}">
+        <a  data-toggle="modal" data-target="#e-detail"  href="{% url 'profiles:dashboard:evaluation-detail' e.id %}" >
             <div>
                 {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
             </div>
@@ -14,6 +14,8 @@
     </li>
 {% endfor %}
 
+
+{#data-target="#e-detail"#}
 <div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

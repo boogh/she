@@ -1,4 +1,9 @@
 
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+{##}
+{#<div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">#}
+{#    <div class="modal-dialog modal-lg" role="document">#}
+{#        <div class="modal-content">#}
 
 <div class="modal-header">
     <div class="panel">
@@ -37,10 +42,10 @@
                 <td>{{ evaluation.get_frequency_display }}</td>
                 <td> <a class="btn btn-default btn-sm" href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"> Edit </a> </td>
                 {#                <td>{{ evaluation.screenshot }}</td>#}
-{#                <td><span class="btn-group-sm"><a class="btn btn-primary" href="{% url 'merge:recommend' evaluation.id %}" > Similar Evaluations </a>#}
-{#                    <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}">Duplicate this Evaluation</a>#}
-{#                </span>#}
-{#                </td>#}
+                {#                <td><span class="btn-group-sm"><a class="btn btn-primary" href="{% url 'merge:recommend' evaluation.id %}" > Similar Evaluations </a>#}
+                {#                    <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}">Duplicate this Evaluation</a>#}
+                {#                </span>#}
+                {#                </td>#}
             </tr>
         </table>
     </div>
@@ -57,3 +62,7 @@
 
 </div>
 
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
