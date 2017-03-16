@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^project/(?P<eval_id>[0-9]+)/recommend$', views.recommend, name='recommend'),
     url(r'^project/(?P<eval_id>[0-9]+)/recommend_ajax$', views.recommendAjax, name='recommend-ajax'),
 
+    url(r'^project/newEvalList$', views.newEvalList, name='newEvalList-ajax'),
+
 
 ]

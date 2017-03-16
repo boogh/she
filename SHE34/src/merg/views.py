@@ -8,6 +8,8 @@ import csv
 import merg.recommend as rec
 from django.contrib.auth.decorators import login_required
 import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 from django.core.urlresolvers import reverse_lazy
@@ -51,8 +53,25 @@ def makeReport(request, project_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
+@csrf_exempt
+def newEvalList(request):
 
-
+    print('hier')
+    if request.method == 'POST' :
+        if 'name' in request.POST:
+            name = request.POST['name']
+        else:
+            # name = request.POST.get['name' , False]
+            name =False
+        # evalList = ListOfEval()
+        # evalList.fromuser = request.user
+        # projectId = request['pk']
+        # project = Project.objects.get(pk=projectId)
+        # evalList.ofProject = project
+        # evalList.save()
+        print('hier2')
+        # return HttpResponse(evalList.id)
+        return HttpResponse(name)
 # def recommend(request , eval_id):
 #
 #     template_name = 'merge/recommendations.html'
@@ -129,6 +148,7 @@ class EvaluationList(CreateView):
         context = super(EvaluationList, self).get_context_data(**kwargs)
         context['project'] = self.kwargs
         return context
+
 
         # ofProject = models.ForeignKey(Project)
         # fromUser = models.ForeignKey(User, related_name="Merge_manager")
@@ -235,5 +255,3 @@ def fillDocFile(project, listofeval):
     doc.add_page_break()
 
     return doc
-
-

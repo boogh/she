@@ -85,9 +85,31 @@ function listname() {
     $('#input-name').hide();
     $('#report').html(html).show();
     $('#edit-name').removeClass('hide');
+    createList(name)
 }
 function showListname() {
     $('#input-name').show();
     $('#report').hide();
-
 }
+
+function createList(name) {
+    url = '/merge/project/newEvalList';
+            // $.post(url , {name : name} , function (data){
+            //    console.log(data)
+            // });
+    $.ajax({
+            type: 'POST',
+            url: url,
+            // dataType: dataType,
+            async: true,
+            data : {csrfmiddlewaretoken:'{{csrf_token}}' },
+            success: function (html) {
+                console.log(html);
+            }
+        });
+}
+
+// function createList(name) {
+//
+//
+// }
