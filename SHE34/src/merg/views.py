@@ -14,28 +14,44 @@ from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
 
+#
+# class DesktopMerge(DetailView):
+#     model = Project
+#     template_name = 'merge/project-merge-desktop.html'
+#
+#     def get_object(self, queryset=None):
+#         return get_object_or_404(Project, pk=self.kwargs.get('pk'))
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(DesktopMerge, self).get_context_data(**kwargs)
+#         project = self.get_object()
+#         allEvaluations = project.evaluation_for_project.all()
+#         # evaluationsOfUser = allEvaluations.filter(evaluator=self.request.user)
+#         # evaluators = project.evaluators.all()
+#         # tableAllE = EvaluationsTablesForManager(allEvaluations)
+#         # RequestConfig(self.request).configure(tableAllE)
+#
+#         context = {'project': project,
+#                    'now': timezone.now().date(),
+#                    'evaluations': allEvaluations,
+#                    }
+#         return context
 
-class DesktopMerge(DetailView):
-    model = Project
-    template_name = 'merge/project-merge-desktop.html'
+def makeReport(request, project_id):
 
-    def get_object(self, queryset=None):
-        return get_object_or_404(Project, pk=self.kwargs.get('pk'))
-
-    def get_context_data(self, **kwargs):
-        context = super(DesktopMerge, self).get_context_data(**kwargs)
-        project = self.get_object()
+    project = Project.objects.get(pk = project_id);
+    if (project.manager == request.user):
+        template_name = 'merge/merge.html'
         allEvaluations = project.evaluation_for_project.all()
-        # evaluationsOfUser = allEvaluations.filter(evaluator=self.request.user)
-        # evaluators = project.evaluators.all()
-        # tableAllE = EvaluationsTablesForManager(allEvaluations)
-        # RequestConfig(self.request).configure(tableAllE)
-
         context = {'project': project,
                    'now': timezone.now().date(),
                    'evaluations': allEvaluations,
                    }
-        return context
+        return render(request,template_name,context)
+    else:
+        return HttpResponse('Only Manager can access this page!')
+
+
 
 # def recommend(request , eval_id):
 #
