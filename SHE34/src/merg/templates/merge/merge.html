@@ -37,13 +37,21 @@
                 </div>
             </div> <!-- End of Evaluations panel -->
             <div class=" col-sm-3 bg-warning"><!-- -->
-                <div class="" >
-                    <div class="text-center">
-                        <div class="row"> <h4>Report </h4> <hr></div>
-                        <div class="row">
-                            <div class="col-sm-offset-7">
-                                <input type="checkbox" id="checkBoxes" />
+                <div id="input-name"> <strong> Enter a name for your list: </strong>
+                    <input id="name-eval-list" class="" >  </input> <a class="btn btn-sm" href="javascript:listname()">Submit</a>
+                </div>
+                <div class="text-center" >
+                    <div class="row">
+                        <div  class="col-sm-offset-0">
+                            <div id="report">
+
                             </div>
+                            <div id="edit-name" class="hide">
+                                <a class="small glyphicon glyphicon-edit" href="#"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-7">
+                            <input type="checkbox" id="checkBoxes" />
                         </div>
                     </div>
                     {#                    <div class="" style="overflow: scroll ; overflow-y: scroll">#}

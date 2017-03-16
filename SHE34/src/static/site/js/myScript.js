@@ -39,6 +39,8 @@ $(document).ready(function () {
 		return false;
 	});
 
+
+
 });
 
 
@@ -75,4 +77,12 @@ function recommendContentBase(eval_id) {
             $('#recContBase').html(html);
         }
     });
+}
+
+function listname() {
+    name = $('#name-eval-list').val();
+    html = '<h4>'+ name + '</h4>'
+    $('#input-name').hide()
+    $('#report').html(html);
+    $('#edit-name').removeClass('hide');
 }
