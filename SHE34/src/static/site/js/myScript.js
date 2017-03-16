@@ -34,10 +34,10 @@ $(document).ready(function () {
         }
     });
     $('a.popup').click(function(){
-		newwindow=window.open($(this).attr('href'),'','height=200,width=150');
-		if (window.focus) {newwindow.focus()}
-		return false;
-	});
+        newwindow=window.open($(this).attr('href'),'','height=200,width=150');
+        if (window.focus) {newwindow.focus()}
+        return false;
+    });
 
 
 
@@ -82,7 +82,12 @@ function recommendContentBase(eval_id) {
 function listname() {
     name = $('#name-eval-list').val();
     html = '<h4>'+ name + '</h4>'
-    $('#input-name').hide()
-    $('#report').html(html);
+    $('#input-name').hide();
+    $('#report').html(html).show();
     $('#edit-name').removeClass('hide');
+}
+function showListname() {
+    $('#input-name').show();
+    $('#report').hide();
+
 }
