@@ -82,7 +82,7 @@ function listname() {
     $('#input-name').hide();
     $('#report').html(html).show();
     $('#edit-name').removeClass('hide');
-    createList(name)
+    // createList(name)
 }
 function showListname() {
     $('#input-name').show();

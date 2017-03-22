@@ -38,7 +38,11 @@
             </div> <!-- End of Evaluations panel -->
             <div class=" col-sm-3 bg-warning"><!-- -->
                 <div id="input-name"> <h6> Enter a name for your list: </h6>
-                    <form action="" method ='post'><input id="name-eval-list" name ='name' >  </input> <a class="btn btn-sm" href="javascript:listname()">Submit</a> </form>
+                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>
+                        {% csrf_token %}<input type = 'text' id="name-eval-list" name ='name' >  </input>
+                        <input type="submit" value="Create a list">
+                        <a class="btn btn-sm" href="javascript:listname()">Submit</a>
+                    </form>
                 </div>
                 <div class="text-center" >
                     <div class="row">

@@ -53,25 +53,28 @@ def makeReport(request, project_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-@csrf_exempt
-def newEvalList(request):
-
-    print('hier')
+# @csrf_exempt
+def newEvalList(request , project_id):
+    project = Project.objects.get(pk=project_id)
     if request.method == 'POST' :
+        # name = request.POST.get['name' , False]
+
         if 'name' in request.POST:
             name = request.POST['name']
         else:
-            # name = request.POST.get['name' , False]
-            name =False
-        # evalList = ListOfEval()
-        # evalList.fromuser = request.user
-        # projectId = request['pk']
-        # project = Project.objects.get(pk=projectId)
-        # evalList.ofProject = project
-        # evalList.save()
-        print('hier2')
-        # return HttpResponse(evalList.id)
-        return HttpResponse(name)
+            return HttpResponse('Failer')
+        evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
+        
+        return HttpResponse(evalList.id)
+    return HttpResponse('Success')
+
+def display_meta(request):
+    values = request.META.items()
+    values.sort()
+    html = []
+    for k, v in values:
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))
 # def recommend(request , eval_id):
 #
 #     template_name = 'merge/recommendations.html'
