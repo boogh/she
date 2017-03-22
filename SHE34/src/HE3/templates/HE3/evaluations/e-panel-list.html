@@ -1,25 +1,21 @@
+
+
 {% for e in evaluations %}
     <li class="list-group-item">
         <div class="checkbox pull-right checkBoxClass">  <input type="checkbox" value={{ e.id }} class="checkBoxClass"  />
         </div>
-        <a  data-toggle="modal" data-target="#e-detail"  href="{% url 'profiles:dashboard:evaluation-detail' e.id %}" >
+        <a href="javascript:evalDetail({{ e.id }})" >
             <div>
                 {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
             </div>
         </a>
-{#        <div>#}
-{#            <a class="btn btn-sm btn-info" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>#}
-{#        </div>#}
+        {#        <div>#}
+        {#            <a class="btn btn-sm btn-info" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>#}
+        {#        </div>#}
 
     </li>
+
 {% endfor %}
 
+{##}
 
-{#data-target="#e-detail"#}
-<div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-
-        </div>
-    </div>
-</div>

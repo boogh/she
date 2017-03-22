@@ -78,10 +78,10 @@
                                     </a>
                                     </span>
 
-{#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                        <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            Del </a>
-{#                                    </button>#}
+                                    {#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
+                                    <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        Del </a>
+                                    {#                                    </button>#}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -126,7 +126,7 @@
 
                                 <td> {{ project.deadline }}
 
-                                     <span class="small">
+                                    <span class="small">
                                     {% if project.deadline > now %}
                                         ( Deadline is in
                                         {{ project.deadline|timeuntil }} )

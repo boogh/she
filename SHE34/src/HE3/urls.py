@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^project/(?P<pk>[0-9]+)/delete/$', login_required(views.ProjectDelete.as_view()), name='project_delete'),
 
     url(r'^project/AddEvaluation/(?P<pk>[0-9]+)/$', login_required(views.EvaluationCreate.as_view()), name='Add-Evaluation'),
-    url(r'^project/EvaluationDeatil/(?P<pk>[0-9]+)/$', login_required(views.EvaluationDetail.as_view()), name='evaluation-detail'),
+    url(r'^project/EvaluationDetail/(?P<pk>[0-9]+)/$', login_required(views.EvaluationDetail.as_view()), name='evaluation-detail'),
     url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', login_required(views.EvaluationUpdate.as_view()), name='evaluation-update'),
     url(r'^project/DuplicateEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDuplicate, name='evaluation-duplicate'),
 ]

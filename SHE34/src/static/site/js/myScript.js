@@ -1,5 +1,4 @@
 /**
- * Created by Hammer on 3/13/17.
  */
 
 $(document).ready(function () {
@@ -38,8 +37,6 @@ $(document).ready(function () {
         if (window.focus) {newwindow.focus()}
         return false;
     });
-
-
 
 });
 
@@ -113,3 +110,28 @@ function createList(name) {
 //
 //
 // }
+
+// function evalDetail(e_id) {
+//     console.log('In');
+//     url = "{% url 'profiles:dashboard:evaluation-detail' e.id %";
+//     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
+//     console.log(url);
+//     $.ajax({
+//         type: 'GET',
+//         url: url,
+//         dataType: 'html',
+//         async: true,
+//         success: function (html) {
+//             $('#e-detail-content').html(html);
+//         }
+//     });
+//
+// }
+function evalDetail(e_id) {
+    url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
+    console.log('hier');
+    $('#e-detail-content').load(url);
+    $('#e-detail').modal('show');
+
+}
+
