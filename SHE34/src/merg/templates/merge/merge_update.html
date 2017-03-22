@@ -1,0 +1,108 @@
+{% extends 'merge/baseReport.html' %}
+
+{% block breadcrumb-report %}
+    <li class="breadcrumb" > <a class="text-muted" href="#"> Making a Report </a></li>
+{% endblock %}
+
+
+{% block container %}
+    <div class="container">
+        <div class="row" style="height:50% "><!-- -->
+            <div class="col-sm-3" ><!-- Evaluations panel  -->
+                <div class="text-center ">
+                    <div class="row"> <h4>Evaluations </h4> <hr></div>
+                    <div class="row">
+                        <div class="col-sm-offset-1">
+                            <a class="btn btn-sm btn-primary addToReport"  href="#">Add to Report</a>
+                            <div id="action" class="btn-group ">
+                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Actions <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Edit</a></li>
+                                    <li><a href="#">Duplicate</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-7">
+                            <input type="checkbox" id="checkBoxes" />
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="eval-list" style="overflow: scroll ; overflow-y: scroll">
+                    {% include 'HE3/evaluations/e-panel-list.html' %}
+                </div>
+            </div> <!-- End of Evaluations panel -->
+            <div class=" col-sm-3 bg-warning"><!-- -->
+                <div id="input-name"> <h6> {{ eval_list.name }} </h6>
+{#                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>#}
+{#                        {% csrf_token %}<input type = 'text' id="name-eval-list" name ='name' >  </input>#}
+{#                        <input type="submit" value="Create a list">#}
+{#                        <a class="btn btn-sm" href="javascript:listname()">Submit</a>#}
+{#                    </form>#}
+                </div>
+                <div class="text-center" >
+                    <div class="row">
+                        <div  class="col-sm-offset-0">
+                            <div id="report">
+
+                            </div>
+                            <div id="edit-name" class="hide">
+                                <a class="small glyphicon glyphicon-edit" href="javascript:showListname()"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-7">
+                            <input type="checkbox" id="checkBoxes" />
+                        </div>
+                    </div>
+                    {#                    <div class="" style="overflow: scroll ; overflow-y: scroll">#}
+                    {#                    </div>#}
+                </div>
+            </div> <!-- End of Evaluaion list -->
+            <div class=" col-sm-3 bg-info"><!-- -->
+                <div class="" >
+                    <div class="text-center">
+                        <div class=""> <h4>Evaluations from similar place </h4> <hr></div>
+                        <div class="row">
+                            <div class="col-sm-offset-7">
+                                <input type="checkbox" id="checkBoxes" />
+                            </div>
+                        </div>
+                    </div>
+                    {#                    <div class="panel-body" style="overflow: scroll ; overflow-y: scroll">#}
+                    <div id="output"> </div>
+                    {#                    </div>#}
+                </div>
+            </div><!-- End of recommendation based of Place  -->
+            <div class=" col-sm-3 bg-info"><!-- -->
+                <div class="" >
+                    <div class="" >
+                        <div class="text-center">
+                            <div class="row"> <h4>Evaluations with similar content</h4> <hr></div>
+                            <div class="row">
+                                <div class="col-sm-offset-7">
+                                    <input type="checkbox" id="checkBoxes" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="recContBase"></div>
+                    </div>
+                </div>
+            </div><!--  End of recommendation based of Tags-->
+        </div>
+    </div><!-- End of container -->
+    <div class="modal fade" id="e-detail" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div id="e-detail-content" class="modal-content">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

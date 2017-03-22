@@ -54,19 +54,36 @@ def makeReport(request, project_id):
         return HttpResponse('Only Manager can access this page!')
 
 # @csrf_exempt
+
 def newEvalList(request , project_id):
     project = Project.objects.get(pk=project_id)
     if request.method == 'POST' :
         # name = request.POST.get['name' , False]
 
-        if 'name' in request.POST:
+        if 'name' in request.POST and request.POST['name']:
             name = request.POST['name']
         else:
-            return HttpResponse('Failer')
+            return redirect('merge:merge-project-desktop' , project_id )
         evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
-        
-        return HttpResponse(evalList.id)
-    return HttpResponse('Success')
+
+        return redirect('merge:merge-project-desktop', {'project_id' : project_id})
+    return HttpResponse('Problem')
+
+def updateReport (request ,list_id):
+    eval_list = ListOfEval.objects.get(pk=list_id)
+    project = eval_list.ofProject
+
+    if project.manager == request.user:
+        template_name = 'merge/merge_update.html'
+        allEvaluations = project.evaluation_for_project.all()
+        context = {'project': project,
+                   'now': timezone.now().date(),
+                   'evaluations': allEvaluations,
+                    'eval_list' : eval_list,
+                   }
+        return render(request, template_name, context)
+    else:
+        return HttpResponse('Only Manager can access this page!')
 
 def display_meta(request):
     values = request.META.items()
