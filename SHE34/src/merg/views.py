@@ -66,8 +66,9 @@ def newEvalList(request , project_id):
             return redirect('merge:merge-project-desktop' , project_id )
         evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
 
-        return redirect('merge:merge-project-desktop', {'project_id' : project_id})
-    return HttpResponse('Problem')
+        return redirect('merge:report-update',  evalList.id )
+    return redirect('merge:merge-project-desktop', project_id)
+
 
 def updateReport (request ,list_id):
     eval_list = ListOfEval.objects.get(pk=list_id)

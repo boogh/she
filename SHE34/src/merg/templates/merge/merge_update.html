@@ -38,11 +38,11 @@
             </div> <!-- End of Evaluations panel -->
             <div class=" col-sm-3 bg-warning"><!-- -->
                 <div id="input-name"> <h6> {{ eval_list.name }} </h6>
-{#                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>#}
-{#                        {% csrf_token %}<input type = 'text' id="name-eval-list" name ='name' >  </input>#}
-{#                        <input type="submit" value="Create a list">#}
-{#                        <a class="btn btn-sm" href="javascript:listname()">Submit</a>#}
-{#                    </form>#}
+                    {#                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>#}
+                    {#                        {% csrf_token %}<input type = 'text' id="name-eval-list" name ='name' >  </input>#}
+                    {#                        <input type="submit" value="Create a list">#}
+                    {#                        <a class="btn btn-sm" href="javascript:listname()">Submit</a>#}
+                    {#                    </form>#}
                 </div>
                 <div class="text-center" >
                     <div class="row">
@@ -58,8 +58,11 @@
                             <input type="checkbox" id="checkBoxes" />
                         </div>
                     </div>
-                    {#                    <div class="" style="overflow: scroll ; overflow-y: scroll">#}
-                    {#                    </div>#}
+                    <div class="row" style="overflow: scroll ; overflow-y: scroll">
+                        {% with eval_list.evaluations.all as evaluations %}
+                            {% include 'HE3/evaluations/e-panel-list.html' %}
+                        {% endwith %}
+                    </div>
                 </div>
             </div> <!-- End of Evaluaion list -->
             <div class=" col-sm-3 bg-info"><!-- -->
