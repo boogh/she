@@ -77,14 +77,21 @@ def updateReport (request ,list_id):
     if project.manager == request.user:
         template_name = 'merge/merge_update.html'
         allEvaluations = project.evaluation_for_project.all()
+        evalInList= eval_list.evaluations.all()
+        evaluations = allEvaluations.exclude(id__in = evalInList)
         context = {'project': project,
                    'now': timezone.now().date(),
-                   'evaluations': allEvaluations,
+                   'evaluations': evaluations,
                     'eval_list' : eval_list,
                    }
         return render(request, template_name, context)
     else:
         return HttpResponse('Only Manager can access this page!')
+
+
+# def addEvalToReport(request )
+
+
 
 
 def deleteList(request , list_id):

@@ -1,6 +1,9 @@
 
 <div class="panel panel-default" >
-    <div class="panel-heading text-center"> <h4 class="lead text-success"> Evaluation-Lists </h4> </div>
+    <div class="panel-heading text-center">
+        <h4 class="lead text-success"> Evaluation-Lists </h4>
+        <div> <a class="btn btn-primary" href="{% url 'merge:making-evaluation-list' project.id %}">New List</a> </div>
+    </div>
     <div class="panel-body">
 
         {% if project.listofeval_set.count != 0 %}
@@ -18,7 +21,7 @@
                     {% for listEval in project.listofeval_set.all %}
                         <tr>
                             <td> {{ forloop.counter }} </td>
-                            <td> <a href="#"> {{ listEval }} </a> </td>
+                            <td> <a href=""> {{ listEval }} </a> </td>
                             <td> {{ listEval.evaluations.count }} </td>
                             <td class="text-center btn-group-sm">
                                                             <span class="btn-group-sm">
