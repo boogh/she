@@ -88,10 +88,22 @@ def updateReport (request ,list_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
+@csrf_exempt
+def addEvalToReport(request , list_id):
+    print('list_id =  ' , list_id)
 
-# def addEvalToReport(request )
-
-
+    # if request.is_ajax():
+    #     print('request is ajax!')
+    #     ids = request.POST.get('ids')
+    #     print('ids is : ' , ids)
+    #     if ids:
+    #         ids = json.loads(ids)
+    #         print ('ids are : ' , ids)
+    #
+    # return redirect('merge:report-update', list_id)
+    ids = request.POST.getlist('ids[]')
+    print (ids)
+    return HttpResponse('<table>%s</table>')
 
 
 def deleteList(request , list_id):

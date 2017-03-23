@@ -14,8 +14,8 @@ $(document).ready(function () {
 
     $('#eval-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked')) {
-            recommend($(this).val())
-            recommendContentBase($(this).val())
+            // recommend($(this).val())
+            // recommendContentBase($(this).val())
 
         }
 
@@ -119,19 +119,19 @@ function showListname() {
 
 function createList(name) {
     url = '/merge/project/newEvalList';
-            // $.post(url , {name : name} , function (data){
-            //    console.log(data)
-            // });
+    // $.post(url , {name : name} , function (data){
+    //    console.log(data)
+    // });
     $.ajax({
-            type: 'POST',
-            url: url,
-            // dataType: dataType,
-            async: true,
-            data : {csrfmiddlewaretoken:'{{csrf_token}}' },
-            success: function (html) {
-                console.log(html);
-            }
-        });
+        type: 'POST',
+        url: url,
+        // dataType: dataType,
+        async: true,
+        data : {csrfmiddlewaretoken:'{{csrf_token}}' },
+        success: function (html) {
+            console.log(html);
+        }
+    });
 }
 
 // function createList(name) {
@@ -163,3 +163,18 @@ function evalDetail(e_id) {
 
 }
 
+function addToReport(eval_id) {
+    ids = getValueUsingClass('#eval-list');
+    url = '/merge/project/'+ eval_id + '/add-evaluation-to-list';
+    console.log(ids)
+    $.ajax({
+        type: 'POST',
+        url: url,
+        // contentType: 'data',
+        data : {ids: [1,2,4] , type: 'info' },
+        // success: function (data) {
+        //     console.log(data);
+        // }
+    });
+    console.log('finish')
+}
