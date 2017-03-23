@@ -86,6 +86,16 @@ def updateReport (request ,list_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
+
+def deleteList(request , list_id):
+
+    list = ListOfEval.objects.get(pk = list_id)
+    project = list.ofProject
+    list.delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
 def display_meta(request):
     values = request.META.items()
     values.sort()
@@ -93,6 +103,9 @@ def display_meta(request):
     for k, v in values:
         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
+
+
+
 # def recommend(request , eval_id):
 #
 #     template_name = 'merge/recommendations.html'

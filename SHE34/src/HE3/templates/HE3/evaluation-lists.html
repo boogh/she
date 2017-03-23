@@ -32,7 +32,7 @@
                                                             </a>
                                                             </span>
                                 {#                                <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                <a class="btn btn-warning" href="# ">
+                                <a class="btn btn-warning" href="{% url 'merge:delete-list' listEval.id %}">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     Del
                                 </a>
