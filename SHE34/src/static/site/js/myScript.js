@@ -2,36 +2,64 @@
  */
 
 $(document).ready(function () {
-    $("#action").hide();
-    $('.addToReport').hide();
-    $("#checkBoxes").click(function () {
+    $(".action-dropdown").hide();
+    $('.add-remove-to-report').hide();
+    $("#eval-checkBoxes").click(function () {
         $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
     });
-    $(".checkBoxClass").click(function() {
-        // console.log('clicked 1')
+
+    $("#report-checkBoxes").click(function () {
+        $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+    });
+
+    $('#eval-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked')) {
             recommend($(this).val())
             recommendContentBase($(this).val())
 
         }
 
-        checkedList = getValueUsingClass();
+        checkedList = getValueUsingClass('#eval-list');
         if (checkedList.length == 1) {
-            $("#action").show();
+            $("#eval-action").show();
         };
 
         if (checkedList.length != 1) {
-            $("#action").hide();
+            $("#eval-action").hide();
         };
         if (checkedList.length > 0) {
-            $(".addToReport").show();
+            $("#add-to-report").show();
 
         }
         else {
             console.log('hier')
-            $(".addToReport").hide();
+            $("#add-to-report").hide();
         }
     });
+    $('#report-list').find(".checkBoxClass").click(function() {
+        // if ($(this).is(':checked')) {
+        //     recommend($(this).val())
+        //     recommendContentBase($(this).val())
+        //
+        // }
+
+        checkedList = getValueUsingClass('#report-list');
+        if (checkedList.length == 1) {
+            $("#report-action").show();
+        };
+
+        if (checkedList.length != 1) {
+            $("#report-action").hide();
+        };
+        if (checkedList.length > 0) {
+            $("#remove-from-report").show();
+
+        }
+        else {
+            $("#remove-from-report").hide();
+        }
+    });
+
     $('a.popup').click(function(){
         newwindow=window.open($(this).attr('href'),'','height=200,width=150');
         if (window.focus) {newwindow.focus()}
@@ -41,9 +69,9 @@ $(document).ready(function () {
 });
 
 
-function getValueUsingClass(){
+function getValueUsingClass(id){
     var chkArray = [];
-    $(".checkBoxClass:checked").each(function() {
+    $(id).find(".checkBoxClass:checked").each(function() {
         chkArray.push($(this).val());
     });
     return chkArray;
