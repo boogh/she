@@ -18,6 +18,7 @@ def getEvalSF(project):
     evalsf['id'] = [str(i['id']) for i in evaldic]
     evalsf['title'] = [i['title'] for i in evaldic]
     evalsf['place'] = [i['place'] for i in evaldic]
+    evalsf['a_place'] = [i['a_place'] for i in evaldic]
     evalsf['description'] = [i['description'] for i in evaldic]
     evalsf['recommendation'] = [i['recommendation'] for i in evaldic]
     evalsf['tags'] = [i['tags'] for i in evaldic]
@@ -51,7 +52,7 @@ def placebase(eval):
     # updateAllSearchModels()
     # result = projectsSearchModelsDic[project.id]['placeSearchModel'].query(eval.place)
     sf= getEvalSF(project)
-    placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place'])
+    placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place' , 'a_place'])
     result = placeSearchModel.query(eval.place).filter_by(str(eval.id) , 'id' , exclude= True)
     return  list(result['id'])
 
