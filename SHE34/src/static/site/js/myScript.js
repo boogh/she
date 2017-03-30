@@ -1,6 +1,8 @@
 /**
  */
 
+rec_engin = false
+
 $(document).ready(function () {
     $(".action-dropdown").hide();
     $('.add-remove-to-report').hide();
@@ -13,7 +15,7 @@ $(document).ready(function () {
     });
 
     $('#eval-list').find(".checkBoxClass").click(function() {
-        if ($(this).is(':checked')) {
+        if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val())
             recommendContentBase($(this).val())
 
@@ -37,7 +39,7 @@ $(document).ready(function () {
         }
     });
     $('#report-list').find(".checkBoxClass").click(function() {
-        if ($(this).is(':checked')) {
+        if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val())
             recommendContentBase($(this).val())
 
