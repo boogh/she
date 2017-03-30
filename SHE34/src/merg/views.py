@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect,render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse , HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView
 from HE3.models import Project , ListOfEval, Evaluation
 from django.utils import timezone
@@ -91,19 +92,18 @@ def updateReport (request ,list_id):
 @csrf_exempt
 def addEvalToReport(request , list_id):
     print('list_id =  ' , list_id)
-
-    # if request.is_ajax():
-    #     print('request is ajax!')
-    #     ids = request.POST.get('ids')
-    #     print('ids is : ' , ids)
-    #     if ids:
-    #         ids = json.loads(ids)
-    #         print ('ids are : ' , ids)
-    #
+    list = ListOfEval.objects.get(pk = list_id)
+    project = list.ofProject
+    if request.is_ajax():
+        ids = request.POST.getlist('ids[]')
+        if ids:
+            evals= Evaluation.objects.filter(pk__in= ids)
+            list.evaluations.add(*evals)
     # return redirect('merge:report-update', list_id)
-    ids = request.POST.getlist('ids[]')
-    print (ids)
-    return HttpResponse('<table>%s</table>')
+    # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
+    return HttpResponse('success!')
+
+
 
 
 def deleteList(request , list_id):

@@ -165,18 +165,15 @@ function evalDetail(e_id) {
 
 }
 
-function addToReport(eval_id) {
+function addToReport(list_id) {
     ids = getValueUsingClass('#eval-list');
-    url = '/merge/project/'+ eval_id + '/add-evaluation-to-list';
+    url = '/merge/project/'+ list_id + '/add-evaluation-to-list';
     console.log(ids)
     $.ajax({
         type: 'POST',
         url: url,
         // contentType: 'data',
-        data : {ids: [1,2,4] , type: 'info' },
-        // success: function (data) {
-        //     console.log(data);
-        // }
+        data : {ids: ids  , type: 'info' },
     });
-    console.log('finish')
+    location.reload();
 }
