@@ -21,7 +21,7 @@ def getEvalSF(project):
     evalsf['description'] = [i['description'] for i in evaldic]
     evalsf['recommendation'] = [i['recommendation'] for i in evaldic]
     evalsf['tags'] = [i['tags'] for i in evaldic]
-    evalsf['heurPrincip_id'] = [str(i['heurPrincip_id']) for i in evaldic]
+    # evalsf['heurPrincip_id'] = [str(i['heurPrincip_id']) for i in evaldic]
 
     return evalsf
 
