@@ -83,6 +83,9 @@ class Project(models.Model):
     #             self.creationTime,
     #             self.deadline,
     #            ]
+class Screenshot(models.Model):
+    caption = models.CharField(max_length=1000)
+    screenshot = models.ImageField(name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
 
 class Evaluation(models.Model):
     POSITIVITY = (("p", "Positive"), ("n", "Negative"))
@@ -93,7 +96,7 @@ class Evaluation(models.Model):
 
     ofProject= models.ForeignKey(Project,related_name="evaluation_for_project" , verbose_name='Project')
     evaluator = models.ForeignKey(User,related_name="evaluator" , verbose_name='Evaluator')
-    heurPrincip= models.ForeignKey(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle')
+    heurPrincip= models.ManyToManyField(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle')
     title = models.CharField(max_length=300 , default='title' ,verbose_name='Title')
     place = models.CharField(max_length=100 , default='general')
     tags = models.CharField(max_length=400 , default='tags')
@@ -102,12 +105,10 @@ class Evaluation(models.Model):
     positivity = models.CharField(max_length=10, choices=POSITIVITY, default="n")
     severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
-    screenshot = models.ImageField(name="Screenshot" , upload_to='screenshots/%Y-%m-%d/',
-                                null=True,
-                                blank=True)
+    screenshots = models.ManyToManyField(Screenshot,blank=True , name="screenshots" , related_name="screenshots")
 
     class Meta:
-        ordering= ['evaluator' ,'heurPrincip', 'place' , '-severity' ]
+        ordering= ['evaluator', 'place' , '-severity' ]
 
     def get_absolute_url(self):
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
@@ -128,4 +129,6 @@ class ListOfEval(models.Model):
 
     def get_absolute_url(self):
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
+
+
 
