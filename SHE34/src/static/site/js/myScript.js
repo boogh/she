@@ -8,10 +8,12 @@ $(document).ready(function () {
     $('.add-remove-to-report').hide();
     $("#eval-checkBoxes").click(function () {
         $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        showActions('#eval-list')
     });
 
     $("#report-checkBoxes").click(function () {
         $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        showActions('#report-list')
     });
 
     $('#eval-list').find(".checkBoxClass").click(function() {
@@ -20,23 +22,24 @@ $(document).ready(function () {
             recommendContentBase($(this).val())
 
         }
+        showActions('#eval-list')
 
-        checkedList = getValueUsingClass('#eval-list');
-        if (checkedList.length == 1) {
-            $("#eval-action").show();
-        };
-
-        if (checkedList.length != 1) {
-            $("#eval-action").hide();
-        };
-        if (checkedList.length > 0) {
-            $("#add-to-report").show();
-
-        }
-        else {
-            console.log('hier')
-            $("#add-to-report").hide();
-        }
+        // checkedList = getValueUsingClass('#eval-list');
+        // if (checkedList.length == 1) {
+        //     $("#eval-action").show();
+        // };
+        //
+        // if (checkedList.length != 1) {
+        //     $("#eval-action").hide();
+        // };
+        // if (checkedList.length > 0) {
+        //     $("#add-to-report").show();
+        //
+        // }
+        // else {
+        //     console.log('hier')
+        //     $("#add-to-report").hide();
+        // }
     });
     $('#report-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
@@ -44,22 +47,23 @@ $(document).ready(function () {
             recommendContentBase($(this).val())
 
         }
+        showActions('#report-list')
 
-        checkedList = getValueUsingClass('#report-list');
-        if (checkedList.length == 1) {
-            $("#report-action").show();
-        };
-
-        if (checkedList.length != 1) {
-            $("#report-action").hide();
-        };
-        if (checkedList.length > 0) {
-            $("#remove-from-report").show();
-
-        }
-        else {
-            $("#remove-from-report").hide();
-        }
+        // checkedList = getValueUsingClass('#report-list');
+        // if (checkedList.length == 1) {
+        //     $("#report-action").show();
+        // };
+        //
+        // if (checkedList.length != 1) {
+        //     $("#report-action").hide();
+        // };
+        // if (checkedList.length > 0) {
+        //     $("#remove-from-report").show();
+        //
+        // }
+        // else {
+        //     $("#remove-from-report").hide();
+        // }
     });
 
     $('a.popup').click(function(){
@@ -189,4 +193,51 @@ function removeFromReport(list_id) {
         data : {ids: ids  , type: 'info' },
     });
     location.reload();
+}
+
+
+/**
+ * Function to show possible buttons based on chosen checkboxes
+ * @param id : id of a top div of checkboxes
+ *
+ */
+function showActions(id){
+    checkedList = getValueUsingClass(id);
+
+        if(id == '#eval-list') {
+        if (checkedList.length == 1) {
+            $("#eval-action").show();
+        };
+
+        if (checkedList.length != 1) {
+            $("#eval-action").hide();
+        };
+        if (checkedList.length > 0) {
+            $("#add-to-report").show();
+
+        }
+        else {
+            console.log('hier')
+            $("#add-to-report").hide();
+        }
+        }
+
+        if (id =='#report-list') {
+            if (checkedList.length == 1) {
+            $("#report-action").show();
+        };
+
+        if (checkedList.length != 1) {
+            $("#report-action").hide();
+        };
+        if (checkedList.length > 0) {
+            $("#remove-from-report").show();
+
+        }
+        else {
+            $("#remove-from-report").hide();
+        }
+
+        }
+
 }
