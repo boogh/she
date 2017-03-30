@@ -42,7 +42,7 @@
                     <div class="row"> <h4> {{ eval_list.name | capfirst }} </h4> <hr></div>
                     <div class="row">
                         <div class="col-sm-offset-1">
-                            <a id='remove-from-report' class="btn btn-sm btn-primary add-remove-to-report"  href="#">Remove from Report</a>
+                            <a id='remove-from-report' class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:removeFromReport({{ eval_list.id }})">Remove from Report</a>
                             <div id="report-action" class="btn-group action-dropdown">
                                 <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Actions <span class="caret"></span>

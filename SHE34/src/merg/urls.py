@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^project/(?P<list_id>[0-9]+)/delete-list$', views.deleteList , name='delete-list'),
 
     url(r'^project/(?P<list_id>[0-9]+)/add-evaluation-to-list', views.addEvalToReport , name='add-evaluation-to-list' ),
+    url(r'^project/(?P<list_id>[0-9]+)/remove-evaluation-from-list', views.removeEvalFromReport , name='remove-evaluation-from-list' ),
 
     url(r'^project/(?P<list_id>[0-9]+)/export-docx', views.exportDocFile, name='export-doc-file'),
     url(r'^project/(?P<list_id>[0-9]+)/export-html$', views.exportHtmlFile, name='export-html-file'),

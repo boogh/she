@@ -91,7 +91,7 @@ def updateReport (request ,list_id):
 
 @csrf_exempt
 def addEvalToReport(request , list_id):
-    print('list_id =  ' , list_id)
+
     list = ListOfEval.objects.get(pk = list_id)
     project = list.ofProject
     if request.is_ajax():
@@ -99,11 +99,21 @@ def addEvalToReport(request , list_id):
         if ids:
             evals= Evaluation.objects.filter(pk__in= ids)
             list.evaluations.add(*evals)
-    # return redirect('merge:report-update', list_id)
-    # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
     return HttpResponse('success!')
 
+@csrf_exempt
+def removeEvalFromReport(request , list_id):
 
+    list = ListOfEval.objects.get(pk = list_id)
+    project = list.ofProject
+    if request.is_ajax():
+        ids = request.POST.getlist('ids[]')
+        if ids:
+            evals= Evaluation.objects.filter(pk__in= ids)
+            list.evaluations.remove(*evals)
+            print(list.evaluations.count())
+    # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
+    return HttpResponse('success!')
 
 
 def deleteList(request , list_id):

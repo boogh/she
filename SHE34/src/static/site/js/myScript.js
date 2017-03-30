@@ -177,3 +177,16 @@ function addToReport(list_id) {
     });
     location.reload();
 }
+
+function removeFromReport(list_id) {
+    ids = getValueUsingClass('#report-list');
+    url = '/merge/project/'+ list_id + '/remove-evaluation-from-list';
+    console.log(ids)
+    $.ajax({
+        type: 'POST',
+        url: url,
+        // contentType: 'data',
+        data : {ids: ids  , type: 'info' },
+    });
+    location.reload();
+}
