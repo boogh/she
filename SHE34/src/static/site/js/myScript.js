@@ -14,8 +14,8 @@ $(document).ready(function () {
 
     $('#eval-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked')) {
-            // recommend($(this).val())
-            // recommendContentBase($(this).val())
+            recommend($(this).val())
+            recommendContentBase($(this).val())
 
         }
 
@@ -37,11 +37,11 @@ $(document).ready(function () {
         }
     });
     $('#report-list').find(".checkBoxClass").click(function() {
-        // if ($(this).is(':checked')) {
-        //     recommend($(this).val())
-        //     recommendContentBase($(this).val())
-        //
-        // }
+        if ($(this).is(':checked')) {
+            recommend($(this).val())
+            recommendContentBase($(this).val())
+
+        }
 
         checkedList = getValueUsingClass('#report-list');
         if (checkedList.length == 1) {
