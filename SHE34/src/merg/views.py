@@ -10,9 +10,6 @@ import merg.recommend as rec
 from django.contrib.auth.decorators import login_required
 import json
 from django.views.decorators.csrf import csrf_exempt
-
-
-
 from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
@@ -318,3 +315,38 @@ def fillDocFile(project, listofeval):
     doc.add_page_break()
 
     return doc
+
+
+# merging evaluations -----------------------------------------------------
+
+def mergeFields(evalList):
+    # result = {k : "" for k in evalList[0].__dict__.keys()}
+    result ={}
+    stringList = ['description' , 'recommendation']
+    stringWithKomma = ['place' , 'a_place' , 'tags']
+    forAvg = ['frequency' , 'severity']
+    for field in stringList :
+        allvalues = set([ i.__dict__[field] for i in evalList])
+        result [field] = "\n" .join(allvalues)
+    for field in stringWithKomma :
+        allvalues = set([i.__dict__[field]for i in evalList])
+        result[field] = ",".join(allvalues)
+    for field in forAvg :
+        allvalues = [int(i.__dict__[field]) for i in evalList]
+        result[field] = str(sum(allvalues) / len(allvalues))
+
+    return result
+
+def mergeEvals(request , list_id):
+
+    list = ListOfEval.objects.get(pk=list_id)
+    project = list.ofProject
+    resultEval = Evaluation(ofProject = project , evaluator = project.manager)
+
+    if request.is_ajax():
+        ids = request.POST.getlist('ids[]')
+        if ids:
+            evals = Evaluation.objects.filter(pk__in=ids)
+            resultEval.__dict__.update = mergeFields(evals)
+            print resultEval
+    return HttpResponse('success!')
