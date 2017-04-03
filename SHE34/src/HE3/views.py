@@ -8,6 +8,7 @@ from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
+
 # from .tables import EvaluationsTables
 
 #
