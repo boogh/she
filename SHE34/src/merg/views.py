@@ -360,5 +360,8 @@ def mergeEvals(request , list_id):
 
             if addtolist :
                 list.evaluations.add(resultEval)
-            print ('result : ' , resultEval.__dict__)
-    return redirect('profiles:dashboard:evaluation-update' , resultEval.id)
+
+            url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/';
+            response = {'status' : 1 , 'message' : 'You can edite the result of merge!' , 'url' : url}
+            return HttpResponse(json.dumps(response), content_type='application/json')
+    return render_to_response('not success')

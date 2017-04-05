@@ -37,7 +37,6 @@ $(document).ready(function () {
         //
         // }
         // else {
-        //     console.log('hier')
         //     $("#add-to-report").hide();
         // }
     });
@@ -163,7 +162,6 @@ function createList(name) {
 // }
 function evalDetail(e_id) {
     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
-    console.log('hier');
     $('#e-detail-content').load(url);
     $('#e-detail').modal('show');
 
@@ -178,8 +176,9 @@ function addToReport(list_id) {
         url: url,
         // contentType: 'data',
         data : {ids: ids  , type: 'info' },
+
     });
-    location.reload();
+    // location.reload();
 }
 
 function removeFromReport(list_id) {
@@ -217,7 +216,6 @@ function showActions(id){
 
         }
         else {
-            console.log('hier')
             $("#add-to-report").hide();
         }
         }
@@ -253,7 +251,11 @@ function merge(list_id){
         url: url,
         // contentType: 'data',
         data : {ids: ids  , type: 'info' , name: name , addtolist : addtolist },
+        success:function (data) {
+            if(data.status == 1){
+                open(data.url)
+            }
+        },
     });
     location.reload();
-
 }
