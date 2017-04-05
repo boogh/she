@@ -337,7 +337,7 @@ def mergeFields(evalList):
 
     return result
 
-@csrf_exempt
+# @csrf_exempt
 def mergeEvals(request , list_id):
 
     list = ListOfEval.objects.get(pk=list_id)
@@ -351,7 +351,6 @@ def mergeEvals(request , list_id):
         if ids and len(ids) > 1:
             evals = Evaluation.objects.filter(pk__in=ids)
             resultEval.__dict__.update(mergeFields(evals))
-
             if name:
                 resultEval.title = name
             else:
@@ -361,7 +360,7 @@ def mergeEvals(request , list_id):
             if addtolist :
                 list.evaluations.add(resultEval)
 
-            url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/';
+            url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/'
             response = {'status' : 1 , 'message' : 'You can edite the result of merge!' , 'url' : url}
             return HttpResponse(json.dumps(response), content_type='application/json')
-    return render_to_response('not success')
+    return HttpResponse('not success')

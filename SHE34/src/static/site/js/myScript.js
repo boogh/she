@@ -240,22 +240,62 @@ function showActions(id){
 
 }
 
+// function merge(list_id){
+//     ids = getValueUsingClass('.common-action');
+//     console.log(ids);
+//     // url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
+//     url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
+//         console.log(url);
+//     name = 'ajax-title',
+//     addtolist = false
+//     $.ajax({
+//         type: 'POST',
+//         url: url,
+//         // contentType: 'data',
+//         data : {ids: ids  , type: 'info' , name: name , addtolist : addtolist },
+//         success:function (data) {
+//             if(data.status == 1){
+//                 open(data.url)
+//             }
+//         },
+//     });
+//     // location.reload();
+// }
+
 function merge(list_id){
     ids = getValueUsingClass('.common-action');
-    console.log(ids);
+    // console.log(ids);
     url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
-    name = 'ajax-title'
+    // url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
+    //     console.log(url);
+    name = 'ajax-title',
     addtolist = false
-    $.ajax({
-        type: 'POST',
-        url: url,
-        // contentType: 'data',
-        data : {ids: ids  , type: 'info' , name: name , addtolist : addtolist },
-        success:function (data) {
+    $.post(url ,
+        { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) , addtolist :addtolist},
+        function (data) {
             if(data.status == 1){
-                open(data.url)
+                open(data.url);
+                location.reload();
             }
-        },
-    });
-    location.reload();
+        });
+
+    };
+
+
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
