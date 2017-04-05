@@ -337,6 +337,7 @@ def mergeFields(evalList):
 
     return result
 
+@csrf_exempt
 def mergeEvals(request , list_id):
 
     list = ListOfEval.objects.get(pk=list_id)
@@ -345,8 +346,19 @@ def mergeEvals(request , list_id):
 
     if request.is_ajax():
         ids = request.POST.getlist('ids[]')
-        if ids:
+        name = request.POST.get('name')
+        addtolist = request.POST.get('addtolist')
+        if ids and len(ids) > 1:
             evals = Evaluation.objects.filter(pk__in=ids)
-            resultEval.__dict__.update = mergeFields(evals)
-            print resultEval
-    return HttpResponse('success!')
+            resultEval.__dict__.update(mergeFields(evals))
+
+            if name:
+                resultEval.title = name
+            else:
+                resultEval.title = 'Merged Evaluations'
+            resultEval.save()
+
+            if addtolist :
+                list.evaluations.add(resultEval)
+            print ('result : ' , resultEval.__dict__)
+    return redirect('profiles:dashboard:evaluation-update' , resultEval.id)

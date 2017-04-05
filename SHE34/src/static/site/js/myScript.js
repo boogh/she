@@ -75,9 +75,9 @@ $(document).ready(function () {
 });
 
 
-function getValueUsingClass(id){
+function getValueUsingClass(att){
     var chkArray = [];
-    $(id).find(".checkBoxClass:checked").each(function() {
+    $(att).find(".checkBoxClass:checked").each(function() {
         chkArray.push($(this).val());
     });
     return chkArray;
@@ -239,5 +239,21 @@ function showActions(id){
         }
 
         }
+
+}
+
+function merge(list_id){
+    ids = getValueUsingClass('.common-action');
+    console.log(ids);
+    url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
+    name = 'ajax-title'
+    addtolist = false
+    $.ajax({
+        type: 'POST',
+        url: url,
+        // contentType: 'data',
+        data : {ids: ids  , type: 'info' , name: name , addtolist : addtolist },
+    });
+    location.reload();
 
 }

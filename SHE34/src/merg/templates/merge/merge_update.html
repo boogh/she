@@ -8,6 +8,9 @@
 
 {% block container %}
     <div class="container">
+        <div class="row">
+            <a class="btn btn-primary btn-lg s_action" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
+        </div>
         <div class="row" style="height:50% "><!-- -->
             <div class="col-sm-3" ><!-- Evaluations panel  -->
                 <div class="text-center ">
@@ -33,7 +36,7 @@
                     </div>
                 </div>
                 <br>
-                <div id="eval-list" style="overflow: scroll ; overflow-y: scroll">
+                <div id="eval-list" class="common-action" style="overflow: scroll ; overflow-y: scroll">
                     {% include 'HE3/evaluations/e-panel-list.html' %}
                 </div>
             </div> <!-- End of Evaluations panel -->
@@ -62,7 +65,7 @@
                         </div>
                     </div>
                     <br>
-                    <div id="report-list" style="overflow: scroll ; overflow-y: scroll">
+                    <div id="report-list"  class="common-action" style="overflow: scroll ; overflow-y: scroll">
                         {% with eval_list.evaluations.all as evaluations %}
                             {% include 'HE3/evaluations/e-panel-list.html' %}
                         {% endwith %}
@@ -80,7 +83,7 @@
                         </div>
                     </div>
                     {#                    <div class="panel-body" style="overflow: scroll ; overflow-y: scroll">#}
-                    <div id="output"> </div>
+                    <div id="output" class="common-action"> </div>
                     {#                    </div>#}
                 </div>
             </div><!-- End of recommendation based of Place  -->
@@ -96,7 +99,7 @@
                             </div>
 
                         </div>
-                        <div id="recContBase"></div>
+                        <div id="recContBase" class="common-action"></div>
                     </div>
                 </div>
             </div><!--  End of recommendation based of Tags-->
