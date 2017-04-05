@@ -222,7 +222,11 @@ function getCookie(name) {
     return cookieValue;
 }
 
+$('.btn-toggle').click(function () {
+    $(this).find('.btn').toggleClass('btn-primary');
+    $(this).find('.btn').toggleClass('btn-default');
 
+});
 
 //
 // function listname() {
