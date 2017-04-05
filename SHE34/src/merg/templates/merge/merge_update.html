@@ -9,8 +9,11 @@
 {% block container %}
     <div class="container">
         <div class="row">
-            <a class="btn btn-primary btn-lg s_action" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
+            <div class="col-sm-offset-9 merge-bar">
+            <a class="btn btn-primary btn-sm s_action" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
+            </div>
         </div>
+        <hr>
         <div class="row" style="height:50% "><!-- -->
             <div class="col-sm-3" ><!-- Evaluations panel  -->
                 <div class="text-center ">

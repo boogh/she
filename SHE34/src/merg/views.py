@@ -346,6 +346,6 @@ def mergeEvals(request , list_id):
                 list.evaluations.add(resultEval)
 
             url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/'
-            response = {'status' : 1 , 'message' : 'You can edite the result of merge!' , 'url' : url}
+            response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
             return HttpResponse(json.dumps(response), content_type='application/json')
     return HttpResponse('not success')
