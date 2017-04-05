@@ -1,7 +1,7 @@
 /**
  */
 
-rec_engin = false
+rec_engin = true
 
 $(document).ready(function () {
     $(".action-dropdown").hide();
@@ -225,6 +225,12 @@ function getCookie(name) {
 $('.btn-toggle').click(function () {
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
+    if ($(this).find('.btn-primary').html() == 'OFF') {
+        rec_engin = false;
+    }
+    else{
+        rec_engin = true;
+    };
 
 });
 
