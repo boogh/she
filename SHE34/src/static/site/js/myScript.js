@@ -5,24 +5,32 @@ rec_engin = false
 
 $(document).ready(function () {
     $(".action-dropdown").hide();
+    $(".merge-bar").hide();
     $('.add-remove-to-report').hide();
     $("#eval-checkBoxes").click(function () {
         $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
-        showActions('#eval-list')
+        showActions('#eval-list');
+        showActions('.common-action');
+
     });
 
     $("#report-checkBoxes").click(function () {
         $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
-        showActions('#report-list')
+        showActions('#report-list');
+        showActions('.common-action');
+
+    });
+
+     $('.common-action').find(".checkBoxClass").click(function() {
+        showActions('.common-action');
     });
 
     $('#eval-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
-            recommend($(this).val())
-            recommendContentBase($(this).val())
-
+            recommend($(this).val());
+            recommendContentBase($(this).val());
         }
-        showActions('#eval-list')
+        showActions('#eval-list');
     });
     $('#report-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
@@ -32,7 +40,6 @@ $(document).ready(function () {
         }
         showActions('#report-list')
     });
-
     $('a.popup').click(function(){
         newwindow=window.open($(this).attr('href'),'','height=200,width=150');
         if (window.focus) {newwindow.focus()}
@@ -143,6 +150,15 @@ function showActions(id){
             $("#remove-from-report").hide();
         }
 
+        }
+
+        if(id == '.common-action'){
+            if (checkedList.length > 1) {
+              $(".merge-bar").show();
+              }
+            else{
+                $(".merge-bar").hide();
+            }
         }
 
 }
