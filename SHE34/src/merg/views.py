@@ -51,8 +51,6 @@ def makeReport(request, project_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-# @csrf_exempt
-
 def newEvalList(request , project_id):
     project = Project.objects.get(pk=project_id)
     if request.method == 'POST' :
@@ -66,7 +64,6 @@ def newEvalList(request , project_id):
 
         return redirect('merge:report-update',  evalList.id )
     return redirect('merge:merge-project-desktop', project_id)
-
 
 def updateReport (request ,list_id):
     eval_list = ListOfEval.objects.get(pk=list_id)
@@ -86,7 +83,6 @@ def updateReport (request ,list_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-@csrf_exempt
 def addEvalToReport(request , list_id):
 
     list = ListOfEval.objects.get(pk = list_id)
@@ -98,7 +94,6 @@ def addEvalToReport(request , list_id):
             list.evaluations.add(*evals)
     return HttpResponse('success!')
 
-@csrf_exempt
 def removeEvalFromReport(request , list_id):
 
     list = ListOfEval.objects.get(pk = list_id)
@@ -108,10 +103,8 @@ def removeEvalFromReport(request , list_id):
         if ids:
             evals= Evaluation.objects.filter(pk__in= ids)
             list.evaluations.remove(*evals)
-            print(list.evaluations.count())
     # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
     return HttpResponse('success!')
-
 
 def deleteList(request , list_id):
 
@@ -120,8 +113,6 @@ def deleteList(request , list_id):
     list.delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
-
-
 def display_meta(request):
     values = request.META.items()
     values.sort()
@@ -129,8 +120,6 @@ def display_meta(request):
     for k, v in values:
         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-
 
 # def recommend(request , eval_id):
 #
@@ -176,7 +165,6 @@ def recommend(request , eval_id):
                    'tagBase': recTagseBase}
 
     return render(request,template_name=template_name,context= context )
-
 
 def recommendAjax(request, eval_id):
 
@@ -281,7 +269,6 @@ def exportCsvFile(request,list_id):
 
     return response
 
-
 @login_required
 def fillDocFile(project, listofeval):
     doc = Document()
@@ -316,7 +303,6 @@ def fillDocFile(project, listofeval):
 
     return doc
 
-
 # merging evaluations -----------------------------------------------------
 
 def mergeFields(evalList):
@@ -337,7 +323,6 @@ def mergeFields(evalList):
 
     return result
 
-# @csrf_exempt
 def mergeEvals(request , list_id):
 
     list = ListOfEval.objects.get(pk=list_id)

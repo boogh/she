@@ -23,22 +23,6 @@ $(document).ready(function () {
 
         }
         showActions('#eval-list')
-
-        // checkedList = getValueUsingClass('#eval-list');
-        // if (checkedList.length == 1) {
-        //     $("#eval-action").show();
-        // };
-        //
-        // if (checkedList.length != 1) {
-        //     $("#eval-action").hide();
-        // };
-        // if (checkedList.length > 0) {
-        //     $("#add-to-report").show();
-        //
-        // }
-        // else {
-        //     $("#add-to-report").hide();
-        // }
     });
     $('#report-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
@@ -47,22 +31,6 @@ $(document).ready(function () {
 
         }
         showActions('#report-list')
-
-        // checkedList = getValueUsingClass('#report-list');
-        // if (checkedList.length == 1) {
-        //     $("#report-action").show();
-        // };
-        //
-        // if (checkedList.length != 1) {
-        //     $("#report-action").hide();
-        // };
-        // if (checkedList.length > 0) {
-        //     $("#remove-from-report").show();
-        //
-        // }
-        // else {
-        //     $("#remove-from-report").hide();
-        // }
     });
 
     $('a.popup').click(function(){
@@ -72,7 +40,6 @@ $(document).ready(function () {
     });
 
 });
-
 
 function getValueUsingClass(att){
     var chkArray = [];
@@ -95,7 +62,6 @@ function recommend(eval_id){
     });
 }
 
-
 function recommendContentBase(eval_id) {
     var url = '/merge/project/' + eval_id + '/recommend';
     $.ajax({
@@ -108,58 +74,6 @@ function recommendContentBase(eval_id) {
         }
     });
 }
-
-function listname() {
-    name = $('#name-eval-list').val();
-    html = '<h4>'+ name + '</h4>'
-    $('#input-name').hide();
-    $('#report').html(html).show();
-    $('#edit-name').removeClass('hide');
-    // createList(name)
-}
-function showListname() {
-    $('#input-name').show();
-    $('#report').hide();
-}
-
-function createList(name) {
-    url = '/merge/project/newEvalList';
-    // $.post(url , {name : name} , function (data){
-    //    console.log(data)
-    // });
-    $.ajax({
-        type: 'POST',
-        url: url,
-        // dataType: dataType,
-        async: true,
-        data : {csrfmiddlewaretoken:'{{csrf_token}}' },
-        success: function (html) {
-            console.log(html);
-        }
-    });
-}
-
-// function createList(name) {
-//
-//
-// }
-
-// function evalDetail(e_id) {
-//     console.log('In');
-//     url = "{% url 'profiles:dashboard:evaluation-detail' e.id %";
-//     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
-//     console.log(url);
-//     $.ajax({
-//         type: 'GET',
-//         url: url,
-//         dataType: 'html',
-//         async: true,
-//         success: function (html) {
-//             $('#e-detail-content').html(html);
-//         }
-//     });
-//
-// }
 function evalDetail(e_id) {
     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
     $('#e-detail-content').load(url);
@@ -170,27 +84,20 @@ function evalDetail(e_id) {
 function addToReport(list_id) {
     ids = getValueUsingClass('#eval-list');
     url = '/merge/project/'+ list_id + '/add-evaluation-to-list';
-    console.log(ids)
-    $.ajax({
-        type: 'POST',
-        url: url,
-        // contentType: 'data',
-        data : {ids: ids  , type: 'info' },
-
-    });
-    // location.reload();
+    $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
+    location.reload();
 }
 
 function removeFromReport(list_id) {
     ids = getValueUsingClass('#report-list');
     url = '/merge/project/'+ list_id + '/remove-evaluation-from-list';
-    console.log(ids)
-    $.ajax({
-        type: 'POST',
-        url: url,
-        // contentType: 'data',
-        data : {ids: ids  , type: 'info' },
-    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: url,
+    //     // contentType: 'data',
+    //     data : {ids: ids  , type: 'info' },
+    // });
+    $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
     location.reload();
 }
 
@@ -267,7 +174,6 @@ function merge(list_id){
     // console.log(ids);
     url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
     // url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
-    //     console.log(url);
     name = 'ajax-title',
     addtolist = false
     $.post(url ,
@@ -299,3 +205,50 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+//
+// function listname() {
+//     name = $('#name-eval-list').val();
+//     html = '<h4>'+ name + '</h4>'
+//     $('#input-name').hide();
+//     $('#report').html(html).show();
+//     $('#edit-name').removeClass('hide');
+// }
+// function showListname() {
+//     $('#input-name').show();
+//     $('#report').hide();
+// }
+// function createList(name) {
+//     url = '/merge/project/newEvalList';
+//     // $.post(url , {name : name} , function (data){
+//     //    console.log(data)
+//     // });
+//     $.ajax({
+//         type: 'POST',
+//         url: url,
+//         // dataType: dataType,
+//         async: true,
+//         data : {csrfmiddlewaretoken:'{{csrf_token}}' },
+//         success: function (html) {
+//             console.log(html);
+//         }
+//     });
+// }
+// function evalDetail(e_id) {
+//     console.log('In');
+//     url = "{% url 'profiles:dashboard:evaluation-detail' e.id %";
+//     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
+//     console.log(url);
+//     $.ajax({
+//         type: 'GET',
+//         url: url,
+//         dataType: 'html',
+//         async: true,
+//         success: function (html) {
+//             $('#e-detail-content').html(html);
+//         }
+//     });
+//
+// }
