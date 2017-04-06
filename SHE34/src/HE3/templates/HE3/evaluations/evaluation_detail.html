@@ -34,7 +34,8 @@
                             {#                {% block user-td %} {% endblock %}#}
                             <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.email }}</small></td>
                             {#                <td> {{ evaluation.title }} </td>#}
-                            <td>  {{ evaluation.heurPrincip}} </td>
+{#                            <td>  {{ evaluation.heurPrincip.all}} </td>#}
+                            <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
                             <td>{{ evaluation.place }}</td>
                             {#                <td>{{ evaluation.description | truncatewords:5 }} </td>#}
                             {#                <td>{{ evaluation.recommendation | truncatewords:5}}</td>#}

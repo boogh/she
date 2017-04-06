@@ -26,7 +26,7 @@
                 <td> {{ forloop.counter }}</td>
                 {% block user-td %} {% endblock %}
                 <td> <a href="{% url 'profiles:dashboard:evaluation-detail' e.pk %}">{{ e.title }}</a></td>
-                <td>  {{ e.heurPrincip}}   </td>
+                <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>
                 <td>{{ e.place }}</td>
                 <td>{{ e.description | truncatewords:5 }} </td>
                 <td>{{ e.recommendation | truncatewords:5}}</td>
@@ -35,7 +35,7 @@
                 <td>{{ e.get_frequency_display }}</td>
                 <td>{{ e.screenshot }}</td>
                 <td><a class="btn btn-primary" href="{% url 'merge:recommend' e.id %}" > Similar Evaluations </a>
-                <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' e.id %}">Duplicate this Evaluation</a> </td>
+                    <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' e.id %}">Duplicate this Evaluation</a> </td>
             </tr>
 
         {% endfor %}
