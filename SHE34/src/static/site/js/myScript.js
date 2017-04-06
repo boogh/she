@@ -4,7 +4,7 @@
 rec_engin = true
 
 $(document).ready(function () {
-    $(".action-dropdown").hide();
+    // $(".action-dropdown").hide();
     $(".merge-bar").hide();
     $('.add-remove-to-report').hide();
     $("#eval-checkBoxes").click(function () {

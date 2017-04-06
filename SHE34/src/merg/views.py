@@ -240,7 +240,6 @@ def exportDocFile(request, list_id):
     listofeval = ListOfEval.objects.get(pk=list_id)
     project = listofeval.ofProject
     doc = fillDocFile(project, listofeval)
-
     doc.save(response)
 
     return response
@@ -269,7 +268,7 @@ def exportCsvFile(request,list_id):
 
     return response
 
-@login_required
+
 def fillDocFile(project, listofeval):
     doc = Document()
     doc.add_heading(str(project.name + 'Report'))

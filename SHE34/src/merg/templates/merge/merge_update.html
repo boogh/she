@@ -50,21 +50,23 @@
             <div class="col-sm-3" ><!-- Report panel  -->
                 {% block report %}
                     <div class="text-center ">
-                        <div class="row"> <h4> {{ eval_list.name | capfirst }} </h4> <hr></div>
+                        <div class="row">
+                            <div><h4> {{ eval_list.name | capfirst }} </h4>  <hr> </div></div>
                         <div class="row">
                             <div class="col-sm-offset-1">
                                 <a id='remove-from-report' class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:removeFromReport({{ eval_list.id }})">Remove from Report</a>
-{#                                <div id="report-action" class="btn-group action-dropdown">#}
-{#                                    <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                                        Actions <span class="caret"></span>#}
-{#                                    </button>#}
-{#                                    <ul class="dropdown-menu">#}
-{#                                        <li><a href="#">Edit</a></li>#}
-{#                                        <li><a href="#">Duplicate</a></li>#}
+                                <div id="report-action" class="btn-group action-dropdown">
+                                    <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Export <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a target="_blank" href="{% url 'merge:export-doc-file' eval_list.id %}"> Export as Docx </a></li>
+                                        <li><a target="_blank" href="{% url 'merge:export-html-file' eval_list.id %}"> Export as html </a></li>
+                                        <li><a target="_blank" href="{% url 'merge:export-csv-file' eval_list.id %}"> Export as csv </a></li>
 {#                                        <li role="separator" class="divider"></li>#}
 {#                                        <li><a href="#">Delete</a></li>#}
-{#                                    </ul>#}
-{#                                </div>#}
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-sm-offset-7">
                                 <input type="checkbox" id="report-checkBoxes" />
