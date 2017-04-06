@@ -25,17 +25,17 @@
                     <div class="row">
                         <div class="col-sm-offset-1">
                             <a id = 'add-to-report'class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:addToReport({{ eval_list.id }})">Add to Report</a>
-                            <div id="eval-action" class="btn-group action-dropdown ">
-                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Actions <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Edit</a></li>
-                                    <li><a href="#">Duplicate</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Delete</a></li>
-                                </ul>
-                            </div>
+{#                            <div id="eval-action" class="btn-group action-dropdown ">#}
+{#                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                    Actions <span class="caret"></span>#}
+{#                                </button>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                    <li><a href="javascript:">Edit</a></li>#}
+{#                                    <li><a href="#">Duplicate</a></li>#}
+{#                                    <li role="separator" class="divider"></li>#}
+{#                                    <li><a href="#">Delete</a></li>#}
+{#                                </ul>#}
+{#                            </div>#}
                         </div>
                         <div class="col-sm-offset-7 ">
                             <input type="checkbox" id="eval-checkBoxes" />
@@ -54,17 +54,17 @@
                         <div class="row">
                             <div class="col-sm-offset-1">
                                 <a id='remove-from-report' class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:removeFromReport({{ eval_list.id }})">Remove from Report</a>
-                                <div id="report-action" class="btn-group action-dropdown">
-                                    <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Actions <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Edit</a></li>
-                                        <li><a href="#">Duplicate</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Delete</a></li>
-                                    </ul>
-                                </div>
+{#                                <div id="report-action" class="btn-group action-dropdown">#}
+{#                                    <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                        Actions <span class="caret"></span>#}
+{#                                    </button>#}
+{#                                    <ul class="dropdown-menu">#}
+{#                                        <li><a href="#">Edit</a></li>#}
+{#                                        <li><a href="#">Duplicate</a></li>#}
+{#                                        <li role="separator" class="divider"></li>#}
+{#                                        <li><a href="#">Delete</a></li>#}
+{#                                    </ul>#}
+{#                                </div>#}
                             </div>
                             <div class="col-sm-offset-7">
                                 <input type="checkbox" id="report-checkBoxes" />

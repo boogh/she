@@ -118,13 +118,13 @@ function showActions(id){
     checkedList = getValueUsingClass(id);
 
         if(id == '#eval-list') {
-        if (checkedList.length == 1) {
-            $("#eval-action").show();
-        };
+        // if (checkedList.length == 1) {
+        //     $("#eval-action").show();
+        // };
 
-        if (checkedList.length != 1) {
-            $("#eval-action").hide();
-        };
+        // if (checkedList.length != 1) {
+        //     $("#eval-action").hide();
+        // };
         if (checkedList.length > 0) {
             $("#add-to-report").show();
 
@@ -135,13 +135,13 @@ function showActions(id){
         }
 
         if (id =='#report-list') {
-            if (checkedList.length == 1) {
-            $("#report-action").show();
-        };
+        //     if (checkedList.length == 1) {
+        //     $("#report-action").show();
+        // };
 
-        if (checkedList.length != 1) {
-            $("#report-action").hide();
-        };
+        // if (checkedList.length != 1) {
+        //     $("#report-action").hide();
+        // };
         if (checkedList.length > 0) {
             $("#remove-from-report").show();
 

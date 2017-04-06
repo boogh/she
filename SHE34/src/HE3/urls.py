@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^project/EvaluationDetail/(?P<pk>[0-9]+)/$', login_required(views.EvaluationDetail.as_view()), name='evaluation-detail'),
     url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', login_required(views.EvaluationUpdate.as_view()), name='evaluation-update'),
     url(r'^project/DuplicateEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDuplicate, name='evaluation-duplicate'),
+    url(r'^project/DeleteEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDelete, name='evaluation-delete'),
 ]

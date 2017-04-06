@@ -215,3 +215,8 @@ class ProjectDetail(DetailView):
                     'evaluations': evaluations,
                      }
         return context
+
+def evaluationDelete(request , eval_id):
+    Evaluation.objects.get(pk = eval_id).delete()
+    print (request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER'))
