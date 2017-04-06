@@ -320,7 +320,11 @@ def mergeFields(evalList):
         allvalues = [int(i.__dict__[field]) for i in evalList]
         result[field] = str(sum(allvalues) / len(allvalues))
 
-    return result
+    heurPrincips =[]
+    for e in evalList:
+        heurPrincips.extend(list(e.heurPrincip.all()))
+    heurPrincips = list(set(heurPrincips))
+    return result , heurPrincips
 
 def mergeEvals(request , list_id):
 
@@ -334,12 +338,14 @@ def mergeEvals(request , list_id):
         addtolist = request.POST.get('addtolist')
         if ids and len(ids) > 1:
             evals = Evaluation.objects.filter(pk__in=ids)
-            resultEval.__dict__.update(mergeFields(evals))
+            fields , heurPrincips = mergeFields(evals)
+            resultEval.__dict__.update(fields)
             if name:
                 resultEval.title = name
             else:
                 resultEval.title = 'Merged Evaluations'
             resultEval.save()
+            resultEval.heurPrincip.add(*heurPrincips)
 
             if addtolist :
                 list.evaluations.add(resultEval)
