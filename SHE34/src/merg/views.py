@@ -324,6 +324,9 @@ def mergeFields(evalList):
     for e in evalList:
         heurPrincips.extend(list(e.heurPrincip.all()))
     heurPrincips = list(set(heurPrincips))
+
+    # TODO screenshots
+
     return result , heurPrincips
 
 def mergeEvals(request , list_id):
