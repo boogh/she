@@ -1,10 +1,20 @@
 /**
  */
 
-rec_engin = true
+rec_engin = false
 
 $(document).ready(function () {
-    // $(".action-dropdown").hide();
+
+    // Delete confirmation modal in dashboard
+    $('#delModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var url = button.data('url')
+        var project_name = button.data('project')
+        var modal = $(this)
+        modal.find('.project_name').text('project '+ project_name );
+        modal.find('.modal-footer #deleteButton').attr('href' , url);
+    })
+
     $(".merge-bar").hide();
     $('.add-remove-to-report').hide();
     $("#eval-checkBoxes").click(function () {
@@ -21,7 +31,7 @@ $(document).ready(function () {
 
     });
 
-     $('.common-action').find(".checkBoxClass").click(function() {
+    $('.common-action').find(".checkBoxClass").click(function() {
         showActions('.common-action');
     });
 
@@ -117,7 +127,7 @@ function removeFromReport(list_id) {
 function showActions(id){
     checkedList = getValueUsingClass(id);
 
-        if(id == '#eval-list') {
+    if(id == '#eval-list') {
         // if (checkedList.length == 1) {
         //     $("#eval-action").show();
         // };
@@ -132,9 +142,9 @@ function showActions(id){
         else {
             $("#add-to-report").hide();
         }
-        }
+    }
 
-        if (id =='#report-list') {
+    if (id =='#report-list') {
         //     if (checkedList.length == 1) {
         //     $("#report-action").show();
         // };
@@ -150,16 +160,16 @@ function showActions(id){
             $("#remove-from-report").hide();
         }
 
-        }
+    }
 
-        if(id == '.common-action'){
-            if (checkedList.length > 1) {
-              $(".merge-bar").show();
-              }
-            else{
-                $(".merge-bar").hide();
-            }
+    if(id == '.common-action'){
+        if (checkedList.length > 1) {
+            $(".merge-bar").show();
         }
+        else{
+            $(".merge-bar").hide();
+        }
+    }
 
 }
 
@@ -191,7 +201,7 @@ function merge(list_id){
     url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
     // url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
     name = 'ajax-title',
-    addtolist = false
+        addtolist = false
     $.post(url ,
         { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) , addtolist :addtolist},
         function (data) {
@@ -201,7 +211,7 @@ function merge(list_id){
             }
         });
 
-    };
+};
 
 
 

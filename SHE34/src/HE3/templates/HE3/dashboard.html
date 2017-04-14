@@ -79,8 +79,8 @@
                                     </span>
 
                                     {#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                    <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        Del </a>
+                                    <button type="button" class="btn btn-warning" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:project_delete' project.id %}" data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        Del </button>
                                     {#                                    </button>#}
                                 </td>
                             </tr>
@@ -145,7 +145,7 @@
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
                                     {% endif %}
-                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:delete-evaluator' project.id %}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
                                         </button>
@@ -165,10 +165,25 @@
         </div>
     </div>
 
+    {#  delete confirmation Modal   #}
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-warning wy-text-large" id="exampleModalLabel" >WARNING!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Be careful! If you click delete you will remove <span class="project_name"></span> !</p>
 
-
-
-    {#  delete confirmation   #}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id= 'deleteButton' class="btn btn-danger" href=""> Delete <span class="project_name"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#  End of  delete confirmation Modal   #}
 
 
 
