@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
 from HE3.models import Project, Evaluation
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy,reverse
 # from .forms import ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, ListView,DetailView
@@ -94,12 +94,25 @@ class ProjectCreate(CreateView):
 class ProjectUpdate(UpdateView):
     model = Project
     fields = ['name', 'link', 'setOfHeuristics', 'description', 'deadline', 'evaluators']
-    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+    # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse('profiles:dashboard:project_detail' , kwargs={'pk' : pk})
 
 
-class ProjectDelete(DeleteView):
-    model = Project
-    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+# class ProjectDelete(DeleteView):
+#     model = Project
+#     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+#     # success_url =  reverse_lazy(request.META.get('HTTP_REFERER'))
+#     def get_success_url(self):
+#         return reverse_lazy(self.request.META.get('HTTP_REFERER'))
+
+@login_required
+def projectDelete(request, project_id):
+    Project.objects.get(pk=project_id).delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
 
 
 class EvaluationCreate(CreateView):
@@ -144,7 +157,8 @@ def EvaluatorDelete(request , project_id):
     evaluator = project.evaluators.get(pk=user.pk)
     project.evaluators.remove(evaluator)
 
-    return redirect('profiles:dashboard:user-dashboard')
+    # return redirect('profiles:dashboard:user-dashboard')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def evaluationDuplicate(request , eval_id):
@@ -164,8 +178,9 @@ def evaluationDuplicate(request , eval_id):
     #
     #
     #                           )
+    return redirect(request.META.get('HTTP_REFERER'))
 
-    return redirect('profiles:dashboard:project_detail' , eval.ofProject.id)
+    # return redirect('profiles:dashboard:project_detail' , eval.ofProject.id)
 
 
 # def projectDetailForEvaluator(request, project_id):
