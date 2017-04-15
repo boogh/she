@@ -111,7 +111,7 @@ class ProjectUpdate(UpdateView):
 @login_required
 def projectDelete(request, project_id):
     Project.objects.get(pk=project_id).delete()
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('profiles:dashboard:user-dashboard')
 
 
 
@@ -156,9 +156,8 @@ def EvaluatorDelete(request , project_id):
     project = Project.objects.get(pk=project_id)
     evaluator = project.evaluators.get(pk=user.pk)
     project.evaluators.remove(evaluator)
-
-    # return redirect('profiles:dashboard:user-dashboard')
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('profiles:dashboard:user-dashboard')
+    # return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def evaluationDuplicate(request , eval_id):

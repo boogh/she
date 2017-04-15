@@ -52,12 +52,12 @@
                                     <span class="btn-group-sm">
                                     {% if project.deadline > now %}
 
-                                        <a class="btn btn-primary" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
+                                        <a class="btn btn-primary" href="{% url 'profiles:dashboard:Add-Evaluation' project.id %}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Add Evaluation
                                     </a>
                                     {% endif %}
 
-                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#evaluator_delete_confirmation">
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-url="{% url 'profiles:dashboard:delete-evaluator' project.id %}" data-project="{{ project.name }}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Delete Project
                                     </button>
@@ -78,18 +78,20 @@
             </div><!--Panel -->
         </div> <!-- end of row for project detail-->
 
+        {% if evaluations %}
+            <div class="row">
+                <div class="panel panel-success">
+                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
+                    <div class="panel-body">
+                        {% include 'HE3/evaluation-tables.html' %}
 
-        <div class="row">
-            <div class="panel panel-success">
-                <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
-                <div class="panel-body">
-                    {% include 'HE3/evaluation-tables.html' %}
+                    </div>
+
                 </div>
-
             </div>
-        </div>
-
+        {% endif %}
     </div><!-- col-sm-9 -->
+    {% include 'HE3/delete_confirmation.html' %}
 {% endblock  %}
 
 

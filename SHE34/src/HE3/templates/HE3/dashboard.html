@@ -164,29 +164,5 @@
             <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
         </div>
     </div>
-
-    {#  delete confirmation Modal   #}
-    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-warning wy-text-large" id="exampleModalLabel" >WARNING!</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Be careful! If you click delete you will remove <span class="project_name"></span> !</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id= 'deleteButton' class="btn btn-danger" href=""> Delete <span class="project_name"></span> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {#  End of  delete confirmation Modal   #}
-
-
-
-
-
+    {% include 'HE3/delete_confirmation.html' %}
 {% endblock  %}

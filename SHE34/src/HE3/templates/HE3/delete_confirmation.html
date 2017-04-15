@@ -1,39 +1,19 @@
-
-
-
-<div class="modal fade" {% block id %} {% endblock %} tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
+{#  delete confirmation Modal   #}
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align text-danger" id="Heading">{% block title %} {% endblock title %}</h4>
+                <h4 class="modal-title text-warning wy-text-large" id="exampleModalLabel" >WARNING!</h4>
             </div>
-
-
             <div class="modal-body">
-
-                <div class="text-center"><span class=" alert alert-danger glyphicon glyphicon-warning-sign bigglyphicon"></span></div>
-                <div class="text-center">
-
-                    <h4>
-                        {{ project.name }} - {{ project.id }}
-                        {% block warning %}
-                        {% endblock warning %}
-                    </h4>
-                </div>
+                <p>Be careful! If you click delete you will remove <span class="project_name"></span> !</p>
 
             </div>
-
-            <div class="modal-footer ">
-                {% block delete %}
-                <a {% block href %} {% endblock href %} class="btn btn-warning" ><span class="glyphicon glyphicon-ok-sign"></span> Delete</a>
-                {% endblock delete %}
-                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Don`t delete</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a id= 'deleteButton' class="btn btn-danger" href=""> Delete <span class="project_name"></span> </a>
             </div>
-
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-
+{#  End of  delete confirmation Modal   #}
