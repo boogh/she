@@ -43,7 +43,7 @@ FREQUENCY=(("1", "almost never"), ("2", "rarely (< 10 % )") , ("3", "occasionall
 class SetOfHeuristics(models.Model):
     creator = models.ForeignKey(User , null=True)
     title = models.CharField(max_length=500 , verbose_name='Title')
-    discription = models.TextField(verbose_name='Discription' , blank= True)
+    discription = models.TextField(verbose_name='Discription', blank= True)
 
     def __str__(self):
         return self.title
@@ -52,7 +52,7 @@ class SetOfHeuristics(models.Model):
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')
     title = models.CharField(max_length=500 , verbose_name='Heuristic Principle' )
-    discription = models.TextField( blank= True)
+    discription = models.TextField(blank= True)
 
     def __str__(self):
         return self.title
@@ -96,7 +96,7 @@ class Evaluation(models.Model):
 
     ofProject= models.ForeignKey(Project,related_name="evaluation_for_project" , verbose_name='Project')
     evaluator = models.ForeignKey(User,related_name="evaluator" , verbose_name='Evaluator')
-    heurPrincip= models.ManyToManyField(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle')
+    heurPrincip= models.ManyToManyField(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle', blank=True )
     title = models.CharField(max_length=300 , default='title' ,verbose_name='Title')
     place = models.CharField(max_length=300 , default='general')
     a_place = models.CharField(max_length=1000 , blank= True ,verbose_name="Alternate Names of the Place")
@@ -116,6 +116,7 @@ class Evaluation(models.Model):
 
     def __str__(self):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
+
 
 class ListOfEval(models.Model):
     ofProject = models.ForeignKey(Project)
