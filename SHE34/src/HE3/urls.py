@@ -30,4 +30,6 @@ urlpatterns = [
     url(r'^project/UpdateEvaluation/(?P<pk>[0-9]+)/$', login_required(views.EvaluationUpdate.as_view()), name='evaluation-update'),
     url(r'^project/DuplicateEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDuplicate, name='evaluation-duplicate'),
     url(r'^project/DeleteEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDelete, name='evaluation-delete'),
+
+    url(r'^CreateHeuristicSet' , login_required(views.HeuristicSetCreate.as_view()), name='HeuristicSet_create'),
 ]

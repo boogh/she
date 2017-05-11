@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project
+from .models import Project,SetOfHeuristics,HeuristicPrinciples
 from django import utils
 from datetime import date,timedelta
 from authtools.models import User
@@ -25,3 +25,10 @@ from crispy_forms.layout import Submit
 #     class Meta:
 #         model = Project
 #         fields = ('name' ,'link' ,'description' , 'deadline', 'evaluators')
+
+# class HeSet(forms.Form):
+#
+#     title = forms.CharField(max_length=500 , required= True)
+#     description = forms.CharField(widget=forms.Textarea , required=False)
+
+# class Evaluation_form(forms.Form):
