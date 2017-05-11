@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
-from HE3.models import Project, Evaluation
+from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples
 from django.core.urlresolvers import reverse_lazy,reverse
 # from .forms import ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,10 +18,11 @@ def showDashboard(request):
     template_name = 'HE3/dashboard.html'
     user = request.user
     projects = Project.objects.all()
+    heuristicSets = SetOfHeuristics.objects.all().filter(creator = user)
     asmanager = projects.filter(manager=user.pk)
     asevalutor = projects.filter(evaluators=user.pk)
     now = timezone.now()
-    context = {'asmanager': asmanager, 'asevalutor': asevalutor , 'now' : now.date()}
+    context = {'asmanager': asmanager, 'asevalutor': asevalutor , 'heuristicSets' : heuristicSets , 'now' : now.date()}
 
     return render(request, template_name, context)
 
@@ -233,3 +234,16 @@ class ProjectDetail(DetailView):
 def evaluationDelete(request , eval_id):
     Evaluation.objects.get(pk = eval_id).delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+class HeuristicSetCreate(CreateView):
+    model = SetOfHeuristics
+    fields = ['title', 'discription']
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.creator = user
+        return super(HeuristicSetCreate , self).form_valid(form)
+
+

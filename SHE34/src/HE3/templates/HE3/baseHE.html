@@ -18,8 +18,8 @@
                 <div class="page-header "> <h1 class="text-primary"> {% block titleOfPage %} Title {% endblock %}</h1></div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="{% block dashboard-active%} {% endblock %}"><a href="{% url 'profiles:dashboard:user-dashboard' %}" >Dashboard</a></li>
-
                     <li class="{% block createProjectActive %} {% endblock %}"><a href="{% url 'profiles:dashboard:project_create' %}">Create a new project</a></li>
+                    <li class="{% block createHeuristics %} {% endblock %}"><a href="{% url 'profiles:dashboard:HeuristicSet_create' %}">Create a new heuristic set</a></li>
                     {% block sidebar %} {% endblock %}
                 </ul><br>
                 <div class="input-group">
