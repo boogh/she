@@ -238,7 +238,7 @@ def evaluationDelete(request , eval_id):
 
 class HeuristicSetCreate(CreateView):
     model = SetOfHeuristics
-    fields = ['title', 'discription']
+    fields = ['title', 'description']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
     def form_valid(self, form):

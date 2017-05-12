@@ -43,7 +43,7 @@ FREQUENCY=(("1", "almost never"), ("2", "rarely (< 10 % )") , ("3", "occasionall
 class SetOfHeuristics(models.Model):
     creator = models.ForeignKey(User , null=True)
     title = models.CharField(max_length=500 , verbose_name='Title')
-    discription = models.TextField(verbose_name='Discription', blank= True)
+    description = models.TextField(verbose_name='Description', blank= True)
 
     def __str__(self):
         return self.title
@@ -52,7 +52,7 @@ class SetOfHeuristics(models.Model):
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')
     title = models.CharField(max_length=500 , verbose_name='Heuristic Principle' )
-    discription = models.TextField(blank= True)
+    description = models.TextField(blank= True)
 
     def __str__(self):
         return self.title
@@ -66,7 +66,7 @@ class Project(models.Model):
     link = models.URLField(blank=True)
     description = models.TextField()
     creationTime = models.DateField(default= utils.timezone.now)
-    deadline = models.DateField(default= date.today() + timedelta(days=7))
+    deadline = models.DateField(default= date.today() + timedelta(days=15))
 
     class Meta:
         ordering =['manager' , 'name' , '-creationTime']
@@ -108,6 +108,11 @@ class Evaluation(models.Model):
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
     screenshots = models.ManyToManyField(Screenshot,blank=True , name="screenshots" , related_name="screenshots")
 
+    # Fiels for merged evaluations
+    merged = models.BooleanField(default=False)
+    merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators')
+
+
     class Meta:
         ordering= ['evaluator', 'place' , '-severity' ]
 
@@ -118,11 +123,14 @@ class Evaluation(models.Model):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
 
 
+# Name should be refactored to MergeLists
 class ListOfEval(models.Model):
     ofProject = models.ForeignKey(Project)
     fromUser = models.ForeignKey(User, related_name="Merge_manager")
     evaluations = models.ManyToManyField(Evaluation , blank= True)
     name = models.CharField(max_length= 50)
+
+    # these two should be deleted
     mergeUrl = models.URLField(blank=True , null=True)
     exportedFile= models.FileField(blank=True , null=True)
 
@@ -133,4 +141,17 @@ class ListOfEval(models.Model):
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
 
 
+
+class Environment(models.Model):
+
+    GENDER = (('1' , 'Male') , ('2' , 'Female') , ('3' , 'Other'))
+
+    creator = models.ForeignKey(User, related_name= 'creator')
+    age = models.IntegerField( verbose_name='Age' , blank=True)
+    gender = models.CharField(max_length=15 , verbose_name='Gender' , blank=True  , choices=GENDER)
+    webbrowser = models.CharField(max_length= 100 , verbose_name='Webbrowser',blank=True, help_text='Types of webbrowser used for evaluation' )
+    os = models.CharField(max_length=100 , verbose_name='Operation system' ,blank=True, help_text= 'Types of operation systems used in evaluation process, like windows and osx ...' )
+    monitorSize = models.CharField(max_length=100 , verbose_name= 'Monitor size' ,blank=True, help_text='Size of monitor used in evaluation process')
+    monitorResolustion = models.CharField(max_length=100 , verbose_name='Monitor Resolution' ,blank=True, help_text='Resolution of the monitur used in evaluation process')
+    otherData = models.CharField(max_length=500 , verbose_name='Other relevant data' ,blank=True, help_text='Enter other data related to environment involved in evaluation process')
 
