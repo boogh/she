@@ -111,6 +111,7 @@ class Evaluation(models.Model):
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)
     merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators')
+    mergedFromEvaluations = models.ManyToManyField('self' , related_name='fromEvaluations' , blank=True)
 
 
     class Meta:
