@@ -186,7 +186,8 @@
                                         <a class="btn btn-info" href="">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edite
                                     </a>
-                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ set.title }}" data-url="">
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ set.title }}"
+                                                data-url=" {% url 'profiles:dashboard:HeuristicSet_delete' set.id %}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
                                         </button>
