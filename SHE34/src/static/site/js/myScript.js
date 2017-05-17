@@ -11,7 +11,7 @@ $(document).ready(function () {
         var url = button.data('url')
         var project_name = button.data('project')
         var modal = $(this)
-        modal.find('.project_name').text('project '+ project_name );
+        modal.find('.project_name').text( project_name );
         modal.find('.modal-footer #deleteButton').attr('href' , url);
     })
 
