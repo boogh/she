@@ -52,7 +52,7 @@ class SetOfHeuristics(models.Model):
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')
     title = models.CharField(max_length=500 , verbose_name='Heuristic Principle' )
-    description = models.TextField(blank= True)
+    description = models.TextField(blank= True , verbose_name='Description')
 
     def __str__(self):
         return self.title
