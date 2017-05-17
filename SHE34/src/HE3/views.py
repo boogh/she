@@ -239,11 +239,33 @@ def evaluationDelete(request , eval_id):
 class HeuristicSetCreate(CreateView):
     model = SetOfHeuristics
     fields = ['title', 'description']
-    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
     def form_valid(self, form):
         user = self.request.user
         form.instance.creator = user
         return super(HeuristicSetCreate , self).form_valid(form)
+
+    # def get_success_url(self):
+    #     set_id = self.kwargs['pk']
+    #     return reverse('profiles:dashboard:set-detail' , kwargs={'set_id' : set_id})
+
+
+
+@login_required
+def setDelete(request, set_id):
+    SetOfHeuristics.objects.get(pk=set_id).delete()
+    return redirect('profiles:dashboard:user-dashboard')
+
+# class HeuristicPrinciple(CreateView):
+#     model = HeuristicPrinciples
+#     fields = ['title' , 'description','SetOfHeuristics']
+#     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+
+@login_required
+def setDetail(request , set_id):
+    set = SetOfHeuristics.objects.get(pk= set_id)
+
+    return render(request, template_name='HE3/set/set_detail.html' , context={'set' : set})
 
 

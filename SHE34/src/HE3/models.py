@@ -48,6 +48,9 @@ class SetOfHeuristics(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('profiles:dashboard:set-detail', kwargs={'set_id': self.pk})
+
 
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')

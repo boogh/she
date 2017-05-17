@@ -32,4 +32,9 @@ urlpatterns = [
     url(r'^project/DeleteEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDelete, name='evaluation-delete'),
 
     url(r'^CreateHeuristicSet' , login_required(views.HeuristicSetCreate.as_view()), name='HeuristicSet_create'),
+    url(r'^DeleteHeuristicSet/(?P<set_id>[0-9]+)/$' , views.setDelete, name='HeuristicSet_delete'),
+    # url(r'^HeuristicPrincipleCreate/(?P<pk>[0-9]+)/$', login_required(views.HeuristicPrinciple.as_view()),
+    #     name='add-principle'),
+    url(r'^SetDetail/(?P<set_id>[0-9]+)/$', views.setDetail, name='set-detail'),
+
 ]
