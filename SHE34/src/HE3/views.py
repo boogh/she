@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
 from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples
 from django.core.urlresolvers import reverse_lazy,reverse
-# from .forms import ProjectForm
+from .forms import Principle
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
@@ -256,16 +256,31 @@ def setDelete(request, set_id):
     SetOfHeuristics.objects.get(pk=set_id).delete()
     return redirect('profiles:dashboard:user-dashboard')
 
-class HeuristicPrinciple(CreateView):
-    model = HeuristicPrinciples
-    fields = ['title' , 'description','belongsToSet']
-    template_name = 'HE3/set/heuristicprinciples_form.html'
+
+# TODO convering to method with pop up effect
+# class HeuristicPrinciple(CreateView):
+#     model = HeuristicPrinciples
+#     fields = ['title' , 'description','belongsToSet']
+#     template_name = 'HE3/set/heuristicprinciples_form.html'
 
 
 @login_required
 def setDetail(request , set_id):
     set = SetOfHeuristics.objects.get(pk= set_id)
+    princips = set.SetOfHeuristics.all()
+    return render(request, template_name='HE3/set/set_detail.html' , context={'set' : set , 'princips' : princips})
 
-    return render(request, template_name='HE3/set/set_detail.html' , context={'set' : set})
 
+def addPrinciple(request, set_id):
+    heurSet = SetOfHeuristics.objects.get(pk=set_id)
+
+    if request.method == 'POST':
+        form = Principle(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            princip = HeuristicPrinciples(title=title, description=description, belongsToSet=heurSet)
+            princip.save()
+
+    return redirect(heurSet)
 
