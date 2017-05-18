@@ -1,1 +1,16 @@
-{{ set.title }}
+{% extends "HE3/baseHE.html" %}
+
+{% load staticfiles %}
+
+{% block titleOfPage %}  Update {{ set.title }}  {% endblock %}
+{% block dashboard-active %} active {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-reverse active"> <a class="" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
+    <li class="breadcrumb-reverse active"> <a class="text-muted" href=""> Update heuristic set </a> </li>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <a href="{% url 'profiles:dashboard:add-principle' set.id %}"> Add Principle</a>
+
+{% endblock %}

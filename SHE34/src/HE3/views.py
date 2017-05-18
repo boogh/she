@@ -256,10 +256,10 @@ def setDelete(request, set_id):
     SetOfHeuristics.objects.get(pk=set_id).delete()
     return redirect('profiles:dashboard:user-dashboard')
 
-# class HeuristicPrinciple(CreateView):
-#     model = HeuristicPrinciples
-#     fields = ['title' , 'description','SetOfHeuristics']
-#     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+class HeuristicPrinciple(CreateView):
+    model = HeuristicPrinciples
+    fields = ['title' , 'description','belongsToSet']
+    template_name = 'HE3/set/heuristicprinciples_form.html'
 
 
 @login_required

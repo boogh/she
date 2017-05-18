@@ -60,6 +60,9 @@ class HeuristicPrinciples(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('profiles:dashboard:set-detail', kwargs={'set_id': self.belongsToSet.pk})
+
 
 class Project(models.Model):
     manager = models.ForeignKey(User)

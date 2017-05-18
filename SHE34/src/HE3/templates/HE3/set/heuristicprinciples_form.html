@@ -3,17 +3,18 @@
 {% load staticfiles %}
 {#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
 
-{% block titleOfPage %} Create a Set of Heuristic Principles {% endblock %}
+{% block titleOfPage %} Add a new principle {% endblock %}
 {% block createHeuristics %} active {% endblock %}
 
 {% block breadcrumb %}
     <li> <a href="{% url 'profiles:dashboard:user-dashboard' %}">Dashboard</a></li>
-    <li> <a class="text-muted" href="">Create a Heuristic Set</a></li>
+    <li> <a class="" href="">Heuristic set detail</a></li>
+    <li> <a class="text-muted" href="">Add a new principle</a></li>
 {% endblock %}
 
 {% block content %}
     <div class="col-sm-9">
-        <div class="container" > <div class="page-header"> <h2>New Heuristic Set:</h2> </div>
+        <div class="container" > <div class="page-header"> <h2>New Heuristic Principle:</h2> </div>
             <div class="panel-body">
                 <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
                     {% csrf_token %}
