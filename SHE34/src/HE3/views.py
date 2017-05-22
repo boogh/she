@@ -295,3 +295,17 @@ def deletePrinciple(request, p_id):
         princip.delete()
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def updatePrinciple(request, p_id):
+
+    princip = HeuristicPrinciples.objects.get(pk=p_id)
+    if(request.user == princip.belongsToSet.creator):
+        if request.method == 'POST':
+            form = Principle(request.POST)
+            if form.is_valid():
+                princip.title = form.cleaned_data['title']
+                princip.description = form.cleaned_data['description']
+                princip.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))

@@ -13,7 +13,18 @@ $(document).ready(function () {
         var modal = $(this)
         modal.find('.project_name').text( project_name );
         modal.find('.modal-footer #deleteButton').attr('href' , url);
-    })
+    });
+    $('#modal-princip').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var p_title = button.data('title');
+        var p_des = button.data('des');
+        var p_url = button.data('url');
+        var modal = $(this);
+        modal.find('#title').attr('value' , p_title)
+        modal.find('#description').text(p_des);
+        modal.find('#add-princip').attr('action' , p_url);
+    });
+
 
     $(".merge-bar").hide();
     $('.add-remove-to-report').hide();

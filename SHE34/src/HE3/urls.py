@@ -36,6 +36,7 @@ urlpatterns = [
     # url(r'^HeuristicPrincipleCreate/(?P<pk>[0-9]+)/$', login_required(views.HeuristicPrinciple.as_view()),name='add-principle'),
     url(r'^SetDetail/(?P<set_id>[0-9]+)/$', views.setDetail, name='set-detail'),
     url(r'^addPrinciple/(?P<set_id>[0-9]+)/$', views.addPrinciple, name='add-principle'),
+    url(r'^updatePrinciple/(?P<p_id>[0-9]+)/$', views.updatePrinciple, name='update-principle'),
     url(r'^deletePrinciple/(?P<p_id>[0-9]+)/$', views.deletePrinciple, name='del-principle'),
 
 ]
