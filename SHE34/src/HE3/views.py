@@ -248,12 +248,12 @@ class HeuristicSetCreate(CreateView):
     # def get_success_url(self):
     #     set_id = self.kwargs['pk']
     #     return reverse('profiles:dashboard:set-detail' , kwargs={'set_id' : set_id})
-
-
-
 @login_required
 def setDelete(request, set_id):
-    SetOfHeuristics.objects.get(pk=set_id).delete()
+    set = SetOfHeuristics.objects.get(pk=set_id)
+    if request.user == set.creator :
+        set.delete()
+
     return redirect('profiles:dashboard:user-dashboard')
 
 
@@ -271,6 +271,7 @@ def setDetail(request , set_id):
     return render(request, template_name='HE3/set/set_detail.html' , context={'set' : set , 'princips' : princips})
 
 
+@login_required
 def addPrinciple(request, set_id):
     heurSet = SetOfHeuristics.objects.get(pk=set_id)
 
@@ -284,3 +285,13 @@ def addPrinciple(request, set_id):
 
     return redirect(heurSet)
 
+
+@login_required
+def deletePrinciple(request, p_id):
+
+    princip = HeuristicPrinciples.objects.get(pk=p_id)
+
+    if(request.user == princip.belongsToSet.creator):
+        princip.delete()
+
+    return redirect(request.META.get('HTTP_REFERER'))
