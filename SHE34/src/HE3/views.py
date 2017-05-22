@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
-from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples
+from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment
 from django.core.urlresolvers import reverse_lazy,reverse
 from .forms import Principle
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -19,10 +19,11 @@ def showDashboard(request):
     user = request.user
     projects = Project.objects.all()
     heuristicSets = SetOfHeuristics.objects.all().filter(creator = user)
+    environments = Environment.objects.all().filter(creator = user)
     asmanager = projects.filter(manager=user.pk)
     asevalutor = projects.filter(evaluators=user.pk)
     now = timezone.now()
-    context = {'asmanager': asmanager, 'asevalutor': asevalutor , 'heuristicSets' : heuristicSets , 'now' : now.date()}
+    context = {'asmanager': asmanager, 'asevalutor': asevalutor , 'heuristicSets' : heuristicSets , 'environments' :environments ,'now' : now.date()}
 
     return render(request, template_name, context)
 
@@ -309,3 +310,23 @@ def updatePrinciple(request, p_id):
                 princip.save()
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+class EnvironmentCreate(CreateView):
+    model = Environment
+    template_name = 'HE3/set/environment_form.html'
+    fields = ['age', 'gender', 'os', 'webbrowser' , 'monitorSize', 'monitorResolustion', 'otherData']
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.creator = user
+        return super(EnvironmentCreate, self).form_valid(form)
+
+def deleteEnvironment(request, env_id):
+
+    env = Environment.objects.get(pk=env_id)
+
+    if(request.user == env.creator):
+        env.delete()
+
+    return redirect('profiles:dashboard:user-dashboard')

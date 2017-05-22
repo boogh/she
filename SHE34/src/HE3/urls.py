@@ -31,12 +31,15 @@ urlpatterns = [
     url(r'^project/DuplicateEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDuplicate, name='evaluation-duplicate'),
     url(r'^project/DeleteEvaluation/(?P<eval_id>[0-9]+)/$', views.evaluationDelete, name='evaluation-delete'),
 
-    url(r'^CreateHeuristicSet' , login_required(views.HeuristicSetCreate.as_view()), name='HeuristicSet_create'),
+    url(r'^CreateHeuristicSet' , login_required(views.HeuristicSetCreate.as_view()), name='HeuristicSet-create'),
     url(r'^DeleteHeuristicSet/(?P<set_id>[0-9]+)/$' , views.setDelete, name='HeuristicSet_delete'),
     # url(r'^HeuristicPrincipleCreate/(?P<pk>[0-9]+)/$', login_required(views.HeuristicPrinciple.as_view()),name='add-principle'),
     url(r'^SetDetail/(?P<set_id>[0-9]+)/$', views.setDetail, name='set-detail'),
     url(r'^addPrinciple/(?P<set_id>[0-9]+)/$', views.addPrinciple, name='add-principle'),
     url(r'^updatePrinciple/(?P<p_id>[0-9]+)/$', views.updatePrinciple, name='update-principle'),
     url(r'^deletePrinciple/(?P<p_id>[0-9]+)/$', views.deletePrinciple, name='del-principle'),
+
+    url(r'^CreateEnvironment', login_required(views.EnvironmentCreate.as_view()), name='environment-create'),
+    url(r'^delEnvironment/(?P<env_id>[0-9]+)/', views.deleteEnvironment , name='environment-del'),
 
 ]

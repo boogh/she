@@ -160,5 +160,5 @@ class Environment(models.Model):
     os = models.CharField(max_length=100 , verbose_name='Operation system' ,blank=True, help_text= 'Types of operation systems used in evaluation process, like windows and osx ...' )
     monitorSize = models.CharField(max_length=100 , verbose_name= 'Monitor size' ,blank=True, help_text='Size of monitor used in evaluation process')
     monitorResolustion = models.CharField(max_length=100 , verbose_name='Monitor Resolution' ,blank=True, help_text='Resolution of the monitur used in evaluation process')
-    otherData = models.CharField(max_length=500 , verbose_name='Other relevant data' ,blank=True, help_text='Enter other data related to environment involved in evaluation process')
+    otherData = models.CharField(max_length=500 , verbose_name='Other Relevant Data' ,blank=True, help_text='Enter other data related to environment involved in evaluation process')
 

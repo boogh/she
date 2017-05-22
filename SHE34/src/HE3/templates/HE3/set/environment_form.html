@@ -1,0 +1,32 @@
+{% extends 'HE3/baseHE.html' %}
+{% load staticfiles %}
+{#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
+
+{% block titleOfPage %} Create a Project {% endblock %}
+{% block createProjectActive %} active {% endblock %}
+
+{% block breadcrumb %}
+    <li> <a href="{% url 'profiles:dashboard:user-dashboard' %}">Dashboard</a></li>
+    <li> <a class="text-muted" href="{% url 'profiles:dashboard:project_create' %}">Create a Project</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-9">
+        <div class="container" > <div class="page-header"> <h2>New Environment:</h2> </div>
+            <div class="panel-body">
+                <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% include 'HE3/form-template.html' %}
+                    <div class="from-group">
+                        <div class="col-sm-offset-2 col-sm-10" >
+                            <button type="submit" class="btn btn-primary"> Submit</button>
+                            <a class="btn btn-primary" href="{% url 'profiles:dashboard:user-dashboard' %}"> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

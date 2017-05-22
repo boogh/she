@@ -201,6 +201,51 @@
                 </div>
             </div>
         {% endif %}
+        {% if environments %}
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <p class="lead"> You defined these <strong>Environments</strong> </p></div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>OS</th>
+                            <th>Webbrowser</th>
+                            <th>Monitor Size</th>
+                            <th>Monitor Resolution</th>
+                            <th>Other Data</th>
+                            <th>Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for env in environments %}
+                            <tr>
+                                <td> {{ forloop.counter }}</td>
+                                <td>{{ env.os }}</td>
+                                <td>{{ env.webbrowser}}</td>
+                                <td> {{ env.monitorSize }}</td>
+                                <td> {{ env.monitorResolution }}</td>
+                                <td> {{ env.otherData }}</td>
+                                <td class="text-center">
+                                    <span class="btn-group-sm">
+                                        <a class="btn btn-info" href="">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                                    </a>
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project=" this environment "
+                                                data-url="{% url 'profiles:dashboard:environment-del' env.id %}">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        Del
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        {% endif %}
 
         <div class="text-left">
             <a class="btn btn-info" href="#top-of-page"> <span class="glyphicon glyphicon-triangle-top"></span></a>
