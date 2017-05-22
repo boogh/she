@@ -2,12 +2,12 @@
 {% load staticfiles %}
 {#<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
 
-{% block titleOfPage %} Create a Project {% endblock %}
-{% block createProjectActive %} active {% endblock %}
+{% block titleOfPage %} Create a New Environment {% endblock %}
+{% block createEnvironment %} active {% endblock %}
 
 {% block breadcrumb %}
     <li> <a href="{% url 'profiles:dashboard:user-dashboard' %}">Dashboard</a></li>
-    <li> <a class="text-muted" href="{% url 'profiles:dashboard:project_create' %}">Create a Project</a></li>
+    <li> <a class="text-muted" href="{% url 'profiles:dashboard:environment-create' %}">Create a New Environment</a></li>
 {% endblock %}
 
 {% block content %}
@@ -20,8 +20,8 @@
                     {% include 'HE3/form-template.html' %}
                     <div class="from-group">
                         <div class="col-sm-offset-2 col-sm-10" >
-                            <button type="submit" class="btn btn-primary"> Submit</button>
-                            <a class="btn btn-primary" href="{% url 'profiles:dashboard:user-dashboard' %}"> Cancel</a>
+                            <button type="submit" class="btn btn-lg btn-primary"> Submit</button>
+                            <a class="btn btn-default btn-lg" href="{% url 'profiles:dashboard:user-dashboard' %}"> Cancel</a>
                         </div>
                     </div>
                 </form>
