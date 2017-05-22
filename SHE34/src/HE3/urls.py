@@ -41,5 +41,6 @@ urlpatterns = [
 
     url(r'^CreateEnvironment', login_required(views.EnvironmentCreate.as_view()), name='environment-create'),
     url(r'^delEnvironment/(?P<env_id>[0-9]+)/', views.deleteEnvironment , name='environment-del'),
+    url(r'^UpdateEnvironment/(?P<pk>[0-9]+)/', login_required(views.EnvironmentUpdate.as_view()) , name='environment-update'),
 
 ]

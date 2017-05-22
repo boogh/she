@@ -325,8 +325,14 @@ class EnvironmentCreate(CreateView):
 def deleteEnvironment(request, env_id):
 
     env = Environment.objects.get(pk=env_id)
-
     if(request.user == env.creator):
         env.delete()
 
     return redirect('profiles:dashboard:user-dashboard')
+
+class EnvironmentUpdate(UpdateView):
+    model = Environment
+    template_name = 'HE3/set/environment_form.html'
+    fields = ['age', 'gender', 'os', 'webbrowser' , 'monitorSize', 'monitorResolustion', 'otherData']
+    success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+
