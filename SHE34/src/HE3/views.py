@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
 from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment
 from django.core.urlresolvers import reverse_lazy,reverse
-from .forms import Principle
+from .forms import Principle , EvaluationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
@@ -119,8 +119,9 @@ def projectDelete(request, project_id):
 
 class EvaluationCreate(CreateView):
     model = Evaluation
-    fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
+    form_class = EvaluationForm
 
     def form_valid(self, form):
         user = self.request.user
@@ -135,6 +136,16 @@ class EvaluationCreate(CreateView):
         context= super(EvaluationCreate,self).get_context_data(**kwargs)
         context['project'] = self.kwargs
         return context
+
+# def evaluationCreate(request,project_id):
+#
+#     project = Project.objects.get(pk=project_id)
+#
+#     if request.method == 'POST':
+#         form = EvaluationForm(request.POST)
+#
+#         if form.is_valid():
+#             pass
 
 class EvaluationDetail(DetailView):
     model =Evaluation
