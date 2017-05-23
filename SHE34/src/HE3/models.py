@@ -55,7 +55,7 @@ class SetOfHeuristics(models.Model):
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')
     title = models.CharField(max_length=500 , verbose_name='Heuristic Principle' )
-    description = models.TextField(blank= True , verbose_name='Description')
+    description = models.TextField(blank= True , verbose_name='Description' ,help_text='This description is used as a hint for the principle')
 
     def __str__(self):
         return self.title
@@ -104,9 +104,10 @@ class Evaluation(models.Model):
     evaluator = models.ForeignKey(User,related_name="evaluator" , verbose_name='Evaluator')
     heurPrincip= models.ManyToManyField(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle', blank=True )
     title = models.CharField(max_length=300 , default='title' ,verbose_name='Title')
-    place = models.CharField(max_length=300 , default='general')
+    place = models.CharField(max_length=300 , default='general' )
     a_place = models.CharField(max_length=1000 , blank= True ,verbose_name="Alternate Names of the Place")
-    tags = models.CharField(max_length=400 , default='tags')
+    link = models.URLField(blank=True , verbose_name= 'Link', help_text='The link of the page to which evaluation refers')
+    tags = models.CharField(max_length=400 , default='tags' ,blank=True , help_text= 'Keywords of this evaluation')
     description = models.TextField()
     recommendation= models.TextField(blank=True)
     positivity = models.CharField(max_length=10, choices=POSITIVITY, default="n")
@@ -154,11 +155,11 @@ class Environment(models.Model):
     GENDER = (('1' , 'Male') , ('2' , 'Female') , ('3' , 'Other'))
 
     creator = models.ForeignKey(User, related_name= 'creator')
-    age = models.IntegerField( verbose_name='Age' , blank=True)
-    gender = models.CharField(max_length=15 , verbose_name='Gender' , blank=True  , choices=GENDER)
+    age = models.IntegerField( verbose_name='Age' , blank=True , help_text='Enter your age')
+    gender = models.CharField(max_length=15 , verbose_name='Gender' , blank=True  , choices=GENDER , help_text= 'Enter your gender')
     webbrowser = models.CharField(max_length= 100 , verbose_name='Webbrowser',blank=True, help_text='Types of webbrowser used for evaluation' )
     os = models.CharField(max_length=100 , verbose_name='Operation system' ,blank=True, help_text= 'Types of operation systems used in evaluation process, like windows and osx ...' )
     monitorSize = models.CharField(max_length=100 , verbose_name= 'Monitor size' ,blank=True, help_text='Size of monitor used in evaluation process')
-    monitorResolustion = models.CharField(max_length=100 , verbose_name='Monitor Resolution' ,blank=True, help_text='Resolution of the monitur used in evaluation process')
+    monitorResolution = models.CharField(max_length=100 , verbose_name='Monitor Resolution' ,blank=True, help_text='Resolution of the monitur used in evaluation process')
     otherData = models.CharField(max_length=500 , verbose_name='Other Relevant Data' ,blank=True, help_text='Enter other data related to environment involved in evaluation process')
 
