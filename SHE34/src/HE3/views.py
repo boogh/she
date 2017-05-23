@@ -123,6 +123,8 @@ class EvaluationCreate(CreateView):
     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
     form_class = EvaluationForm
 
+
+
     def form_valid(self, form):
         user = self.request.user
         projectId = self.kwargs['pk']
@@ -137,15 +139,11 @@ class EvaluationCreate(CreateView):
         context['project'] = self.kwargs
         return context
 
-# def evaluationCreate(request,project_id):
-#
-#     project = Project.objects.get(pk=project_id)
-#
-#     if request.method == 'POST':
-#         form = EvaluationForm(request.POST)
-#
-#         if form.is_valid():
-#             pass
+    def get_form_kwargs(self):
+        kwargs = super(EvaluationCreate, self ).get_form_kwargs()
+        kwargs ['project_id'] = self.kwargs['pk']
+        return kwargs
+
 
 class EvaluationDetail(DetailView):
     model =Evaluation
