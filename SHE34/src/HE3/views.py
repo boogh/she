@@ -153,10 +153,6 @@ class EvaluationCreate(CreateView):
 
         return super(EvaluationCreate, self).form_valid(form)
 
-    def form_invalid(self, form ):
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  screenshotForm=screenshotForm))
 
     def get_context_data(self, **kwargs):
         context= super(EvaluationCreate,self).get_context_data(**kwargs)

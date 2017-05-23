@@ -43,4 +43,4 @@ class EvaluationForm(forms.ModelForm):
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' )
+        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' )
