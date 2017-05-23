@@ -60,10 +60,12 @@
                                         </a>
                                     </span>
                                 {#                            <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}">
+                                {#                                <a class="btn btn-warning" href=" {% url 'profiles:dashboard:project_delete' project.id %}">#}
+                                <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ project.name }} "
+                                        data-url="{% url 'profiles:dashboard:project_delete' project.id %}">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     Del
-                                </a>
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -97,18 +99,19 @@
                 </div>
                 <div class="modal-body">
                     <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>
-                      {% csrf_token %}
+                        {% csrf_token %}
                         <input type = 'text' id="name-eval-list" name ='name' >  </input>
                         <input type="submit" value="Create a list">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-{#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                    {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
                 </div>
             </div>
         </div>
     </div>
+    {% include 'HE3/delete_confirmation.html' %}
 
 {% endblock %}
 
