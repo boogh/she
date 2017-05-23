@@ -1,5 +1,6 @@
 from django import forms
-from .models import Project,Evaluation,SetOfHeuristics,HeuristicPrinciples
+from django.forms import inlineformset_factory
+from .models import Project,Evaluation,SetOfHeuristics,HeuristicPrinciples , Screenshot
 from django import utils
 from datetime import date,timedelta
 from authtools.models import User
@@ -42,4 +43,4 @@ class EvaluationForm(forms.ModelForm):
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip')
+        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' )

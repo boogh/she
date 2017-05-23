@@ -1,13 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
-from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment
+from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment , Screenshot
 from django.core.urlresolvers import reverse_lazy,reverse
 from .forms import Principle , EvaluationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
+from django.forms import inlineformset_factory
 
 # from .tables import EvaluationsTables
 
@@ -122,8 +122,26 @@ class EvaluationCreate(CreateView):
     # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
     form_class = EvaluationForm
+    # form2 = modelform_factory(Screenshot, fields=['screenshot','caption'] )
 
-
+    # def get(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form_class = self.get_form_class()
+    #     form = self.get_form(form_class)
+    #     screenshotForm = ScreenshotForm()
+    #     return self.render_to_response(
+    #         self.get_context_data(form=form,
+    #                               screenshotForm=screenshotForm))
+    # def post(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form_class = self.get_form_class()
+    #     form = self.get_form(form_class)
+    #     screenshotForm = ScreenshotForm(self.request.POST)
+    #     if (form.is_valid() and screenshotForm.is_valid() and
+    #             screenshotForm.is_valid()):
+    #         return self.form_valid(form, screenshotForm)
+    #     else:
+    #         return self.form_invalid(form, screenshotForm)
 
     def form_valid(self, form):
         user = self.request.user
@@ -131,8 +149,14 @@ class EvaluationCreate(CreateView):
         project = Project.objects.get(pk=projectId)
         form.instance.ofProject = project
         form.instance.evaluator = user
+        # form.instance.s
 
         return super(EvaluationCreate, self).form_valid(form)
+
+    def form_invalid(self, form ):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  screenshotForm=screenshotForm))
 
     def get_context_data(self, **kwargs):
         context= super(EvaluationCreate,self).get_context_data(**kwargs)

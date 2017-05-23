@@ -113,12 +113,14 @@ class Evaluation(models.Model):
     positivity = models.CharField(max_length=10, choices=POSITIVITY, default="n")
     severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
-    screenshots = models.ManyToManyField(Screenshot,blank=True , name="screenshots" , related_name="screenshots")
+    screenshot = models.ImageField (blank=True , name = 'Screenshot',upload_to='screenshots/%Y-%m-%d/')
 
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)
     merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators')
-    mergedFromEvaluations = models.ManyToManyField('self' , related_name='fromEvaluations' , blank=True)
+    mergedFromEvaluations = models.ManyToManyField('self' , related_name='fromEvaluations' , blank=True )
+    mergedScreenshots = models.ManyToManyField(Screenshot,blank=True , name="Merged-Screenshots" , related_name="screenshots")
+
 
 
     class Meta:
