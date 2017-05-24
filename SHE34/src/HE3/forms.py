@@ -46,14 +46,27 @@ class EvaluationForm(forms.ModelForm):
         fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' )
 
 
-class MergeEvaluationForm(forms.ModelForm):
+class EvaluationFormUpdate(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        pk = kwargs.pop('project_id' , None)
-        super(EvaluationForm, self).__init__(*args, **kwargs)
-        project = Project.objects.get(pk=pk)
-        princips = project.setOfHeuristics.SetOfHeuristics.all()
+        pk = kwargs.pop('eval_id' , None)
+        super(EvaluationFormUpdate, self).__init__(*args, **kwargs)
+        eval = Evaluation.objects.get(pk=pk)
+        princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
         self.fields['heurPrincip'].queryset = princips
+
+    class Meta:
+        model = Evaluation
+        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' )
+
+class MergeEvaluationForm(forms.ModelForm):
+    #
+    # def __init__(self, *args, **kwargs):
+    #     pk = kwargs.pop('project_id' , None)
+    #     super(MergeEvaluationForm, self).__init__(*args, **kwargs)
+    #     project = Project.objects.get(pk=pk)
+    #     princips = project.setOfHeuristics.SetOfHeuristics.all()
+    #     self.fields['heurPrincip'].queryset = princips
 
     class Meta:
         model = Evaluation

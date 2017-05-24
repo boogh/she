@@ -8,7 +8,7 @@ from django.views.generic import FormView, ListView,DetailView
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
-
+from HE3.forms import EvaluationForm, EvaluationFormUpdate
 # from .tables import EvaluationsTables
 
 #
@@ -173,12 +173,19 @@ class EvaluationDetail(DetailView):
 
 class EvaluationUpdate(UpdateView):
     model = Evaluation
-    fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    form_class = EvaluationFormUpdate
 
     def get_context_data(self, **kwargs):
         context= super(EvaluationUpdate,self).get_context_data(**kwargs)
-        context['project'] = self.kwargs
+        eval = Evaluation.objects.get(pk=self.kwargs['pk'])
+        context['project'] = eval.ofProject
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(EvaluationUpdate, self ).get_form_kwargs()
+        kwargs ['eval_id'] = self.kwargs['pk']
+        return kwargs
 
 @login_required
 def EvaluatorDelete(request , project_id):
