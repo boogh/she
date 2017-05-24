@@ -51,7 +51,6 @@ class SetOfHeuristics(models.Model):
     def get_absolute_url(self):
         return reverse('profiles:dashboard:set-detail', kwargs={'set_id': self.pk})
 
-
 class HeuristicPrinciples(models.Model):
     belongsToSet = models.ForeignKey(SetOfHeuristics , related_name= 'SetOfHeuristics')
     title = models.CharField(max_length=500 , verbose_name='Heuristic Principle' )
@@ -62,7 +61,6 @@ class HeuristicPrinciples(models.Model):
 
     def get_absolute_url(self):
         return reverse('profiles:dashboard:set-detail', kwargs={'set_id': self.belongsToSet.pk})
-
 
 class Project(models.Model):
     manager = models.ForeignKey(User)
@@ -89,9 +87,6 @@ class Project(models.Model):
     #             self.creationTime,
     #             self.deadline,
     #            ]
-class Screenshot(models.Model):
-    caption = models.CharField(max_length=1000)
-    screenshot = models.ImageField(name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
 
 class Evaluation(models.Model):
     POSITIVITY = (("p", "Positive"), ("n", "Negative"))
@@ -118,8 +113,8 @@ class Evaluation(models.Model):
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)
     merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators')
-    mergedFromEvaluations = models.ManyToManyField('self' , related_name='fromEvaluations' , blank=True )
-    mergedScreenshots = models.ManyToManyField(Screenshot,blank=True , name="Merged-Screenshots" , related_name="screenshots")
+    mergedFromEvaluations = models.ManyToManyField('self' ,verbose_name='Evaluators', related_name='fromEvaluations' , blank=True ,help_text='Evaluators who found this issue')
+    # mergedScreenshots = models.ManyToManyField(Screenshot,blank=True , verbose_name="Merged-Screenshots" , related_name="screenshots")
 
 
 
@@ -131,6 +126,11 @@ class Evaluation(models.Model):
 
     def __str__(self):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
+
+class Screenshots(models.Model):
+        ofEvaluation = models.ForeignKey(Evaluation , related_name='screenshot_of_evaluation')
+        caption = models.CharField(max_length=1000 , blank=True)
+        screenshot = models.ImageField(verbose_name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
 
 
 # Name should be refactored to MergeLists
@@ -149,8 +149,6 @@ class ListOfEval(models.Model):
 
     def get_absolute_url(self):
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
-
-
 
 class Environment(models.Model):
 
