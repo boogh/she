@@ -381,6 +381,11 @@ def mergeEvaluations(request , project_id):
             resultEval.save()
             resultEval.heurPrincip.add(*heurPrincips)
 
+            # adding evaluators and evaluations id to the merged evaluation
+            eval_ids = evals.values_list('pk' ,flat=True)
+            evaluator_ids = evals.values_list('evaluator_id' , flat=True).distinct()
+            resultEval.mergedFromEvaluations.add(*eval_ids)
+            resultEval.merdedFromEvaluators.add(*evaluator_ids)
 
             # url = '/users/me/dashboard/project/update-merged-evaluation/' + str(resultEval.id) + '/'
             url = '/merge/project/' + str(resultEval.id) +'/update-merged-evaluation/'
