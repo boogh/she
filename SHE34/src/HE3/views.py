@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
-from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment , Screenshot
+from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment , Screenshots
 from django.core.urlresolvers import reverse_lazy,reverse
 from .forms import Principle , EvaluationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView

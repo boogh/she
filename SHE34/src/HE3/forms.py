@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Project,Evaluation,SetOfHeuristics,HeuristicPrinciples , Screenshot
+from .models import Project,Evaluation,SetOfHeuristics,HeuristicPrinciples , Screenshots
 from django import utils
 from datetime import date,timedelta
 from authtools.models import User
@@ -61,13 +61,13 @@ class EvaluationFormUpdate(forms.ModelForm):
 
 class MergeEvaluationForm(forms.ModelForm):
     #
-    # def __init__(self, *args, **kwargs):
-    #     pk = kwargs.pop('project_id' , None)
-    #     super(MergeEvaluationForm, self).__init__(*args, **kwargs)
-    #     project = Project.objects.get(pk=pk)
-    #     princips = project.setOfHeuristics.SetOfHeuristics.all()
-    #     self.fields['heurPrincip'].queryset = princips
+    def __init__(self, *args, **kwargs):
+        pk = kwargs.pop('eval_id' , None)
+        super(MergeEvaluationForm, self).__init__(*args, **kwargs)
+        eval = Evaluation.objects.get(pk=pk)
+        princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
+        self.fields['heurPrincip'].queryset = princips
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' )
+        fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators' )

@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect,render_to_response
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView,CreateView
+from django.views.generic import DetailView,CreateView , UpdateView
 from HE3.models import Project , ListOfEval, Evaluation
 from django.utils import timezone
 from docx import Document
@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse_lazy
+from HE3.forms import MergeEvaluationForm
 
 # Create your views here.
 
@@ -308,7 +309,7 @@ def mergeFields(evalList):
     # result = {k : "" for k in evalList[0].__dict__.keys()}
     result ={}
     stringList = ['description' , 'recommendation']
-    stringWithKomma = ['place' , 'a_place' , 'tags']
+    stringWithKomma = ['place' , 'a_place' ]
     forAvg = ['frequency' , 'severity']
     for field in stringList :
         allvalues = set([ i.__dict__[field] for i in evalList])
@@ -357,3 +358,57 @@ def mergeEvals(request , list_id):
             response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
             return HttpResponse(json.dumps(response), content_type='application/json')
     return HttpResponse('not success')
+
+
+# function to merge multiple evaluation
+def mergeEvaluations(request , project_id):
+
+    project = Project.objects.get(pk=project_id)
+    resultEval = Evaluation(ofProject =project , evaluator=project.manager , merged= True)
+
+    if request.is_ajax():
+        ids = request.POST.getlist('ids[]')
+        name = request.POST.get('name')
+
+        if ids and len(ids) > 1:
+            evals = Evaluation.objects.filter(pk__in=ids)
+            fields , heurPrincips = mergeFields(evals)
+            resultEval.__dict__.update(fields)
+            if name:
+                resultEval.title = name
+            else:
+                resultEval.title = 'Merged Evaluations'
+            resultEval.save()
+            resultEval.heurPrincip.add(*heurPrincips)
+
+
+            # url = '/users/me/dashboard/project/update-merged-evaluation/' + str(resultEval.id) + '/'
+            url = '/merge/project/' + str(resultEval.id) +'/update-merged-evaluation/'
+            response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
+            return HttpResponse(json.dumps(response), content_type='application/json')
+    return HttpResponse('not success')
+
+
+class UpdateMergedEvaluation(UpdateView):
+
+    # eval = Evaluation.objects.get(pk=eval_id)
+    # project = eval.ofProject
+    template_name ='HE3/evaluation_form.html'
+
+    # form =MergeEvaluationForm(eval)
+    model = Evaluation
+    # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
+    form_class = MergeEvaluationForm
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateMergedEvaluation, self).get_context_data(**kwargs)
+        eval = Evaluation.objects.get(pk=self.kwargs['pk'])
+        context['project'] = eval.ofProject
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdateMergedEvaluation, self).get_form_kwargs()
+        kwargs['eval_id'] = self.kwargs['pk']
+        return kwargs
+
+    # return render(request, context={'project': project,'form' : form} ,template_name=template_name)

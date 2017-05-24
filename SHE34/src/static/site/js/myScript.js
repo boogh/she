@@ -206,15 +206,15 @@ function showActions(id){
 //     // location.reload();
 // }
 
-function merge(list_id){
+function merge(project_id){
     ids = getValueUsingClass('.common-action');
     // console.log(ids);
-    url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
+    url = '/merge/project/'+ project_id + '/merge_selected_evaluations';
     // url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
     name = 'ajax-title',
-        addtolist = false
+        // addtolist = false
     $.post(url ,
-        { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) , addtolist :addtolist},
+        { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) },
         function (data) {
             if(data.status == 1){
                 open(data.url);
