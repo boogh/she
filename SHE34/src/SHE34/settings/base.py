@@ -142,3 +142,9 @@ LOGIN_URL = reverse_lazy("accounts:login")
 
 THUMBNAIL_EXTENSION = 'png'     # Or any extn for your thumbnails
 
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (100, 100), 'crop': True},
+        'big' : { 'size' : (400 ,400) , 'crop' : True},
+    },
+}

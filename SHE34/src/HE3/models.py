@@ -3,6 +3,10 @@ from authtools.models import User
 from datetime import date,timedelta
 from django import utils
 from django.urls import reverse
+from easy_thumbnails.fields import ThumbnailerImageField
+from django.template.loader import render_to_string
+
+
 
 HEURISTICLIST = (("1", "Visibility of System Status"),
                  ("2", "Match Between System and Real World"),
@@ -65,10 +69,14 @@ class HeuristicPrinciples(models.Model):
 class Screenshots(models.Model):
         # ofEvaluation = models.ForeignKey(Evaluation , related_name='screenshot_of_evaluation')
     caption = models.CharField(max_length=1000, blank=True)
-    screenshot = models.ImageField(verbose_name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
+    screenshot = ThumbnailerImageField(verbose_name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
+
+    # def thumbnail(self):
+    #     return render_to_string('HE3/thumbnail.html', {'image': self})
 
     def __str__(self):
-        return 'Screenshot' + str (self.id) + " : " + self.caption
+        return 'Screenshot' + str (self.id) + " : "
+
 
 class Project(models.Model):
     manager = models.ForeignKey(User)
@@ -116,7 +124,7 @@ class Evaluation(models.Model):
     positivity = models.CharField(max_length=10, choices=POSITIVITY, default="n")
     severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
-    screenshot = models.ImageField (blank=True ,upload_to='screenshots/%Y-%m-%d/')
+    screenshot = ThumbnailerImageField(blank=True ,upload_to='screenshots/%Y-%m-%d/')
     caption = models.CharField(blank=True , max_length=1000, help_text='Enter a caption for the screenshot')
 
     # Fiels for merged evaluations

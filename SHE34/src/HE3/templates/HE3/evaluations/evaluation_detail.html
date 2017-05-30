@@ -4,7 +4,7 @@
 {#<div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">#}
 {#    <div class="modal-dialog modal-lg" role="document">#}
 {#        <div class="modal-content">#}
-
+{% load thumbnail %}
 
             <div class="modal-header">
                 <div class="panel">
@@ -64,7 +64,7 @@
                 <p> {{ evaluation.recommendation }}</p>
                 <br>
                 <h4> Screenshot:</h4>
-                {{ evaluation.screenshot }}
+                <img src="{{ evaluation.screenshot.big.url }}" alt="" />
 
             </div>
 
