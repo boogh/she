@@ -57,7 +57,7 @@ class EvaluationFormUpdate(forms.ModelForm):
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' )
+        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' ,'caption' )
 
 class MergeEvaluationForm(forms.ModelForm):
     #
@@ -67,7 +67,11 @@ class MergeEvaluationForm(forms.ModelForm):
         eval = Evaluation.objects.get(pk=pk)
         princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
         self.fields['heurPrincip'].queryset = princips
+        self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators' )
+        fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
+        widgets = {
+            'mergedScreenshots' : forms.CheckboxSelectMultiple()
+        }

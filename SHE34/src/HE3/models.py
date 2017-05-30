@@ -67,6 +67,9 @@ class Screenshots(models.Model):
     caption = models.CharField(max_length=1000, blank=True)
     screenshot = models.ImageField(verbose_name="Screenshot", upload_to='screenshots/%Y-%m-%d/')
 
+    def __str__(self):
+        return 'Screenshot' + str (self.id) + " : " + self.caption
+
 class Project(models.Model):
     manager = models.ForeignKey(User)
     setOfHeuristics = models.ForeignKey(SetOfHeuristics,related_name='project_SetOfHeuristics' , verbose_name='Set of Heuristic principles')

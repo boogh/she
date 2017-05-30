@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect,render_to_respons
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView , UpdateView
-from HE3.models import Project , ListOfEval, Evaluation
+from HE3.models import Project , ListOfEval, Evaluation, Screenshots
 from django.utils import timezone
 from docx import Document
 import csv
@@ -360,6 +360,14 @@ def mergeEvals(request , list_id):
     return HttpResponse('not success')
 
 
+def mergeScreenshots(resultEval, listEvals):
+    for eval in listEvals:
+        screenobject =Screenshots(caption=eval.caption , screenshot =eval.screenshot)
+        print(screenobject)
+        screenobject.save()
+        resultEval.mergedScreenshots.add(screenobject)
+        print('done!')
+
 # function to merge multiple evaluation
 def mergeEvaluations(request , project_id):
 
@@ -380,7 +388,7 @@ def mergeEvaluations(request , project_id):
                 resultEval.title = 'Merged Evaluations'
             resultEval.save()
             resultEval.heurPrincip.add(*heurPrincips)
-
+            mergeScreenshots(resultEval,evals)
             # adding evaluators and evaluations id to the merged evaluation
             eval_ids = evals.values_list('pk' ,flat=True)
             evaluator_ids = evals.values_list('evaluator_id' , flat=True).distinct()
