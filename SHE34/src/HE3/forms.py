@@ -68,6 +68,7 @@ class MergeEvaluationForm(forms.ModelForm):
         princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
         self.fields['heurPrincip'].queryset = princips
         self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
+        self.fields['mergedScreenshots'].queryset = eval.mergedScreenshots.all()
 
     class Meta:
         model = Evaluation
