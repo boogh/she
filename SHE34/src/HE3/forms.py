@@ -5,7 +5,7 @@ from django import utils
 from datetime import date,timedelta
 from authtools.models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit,Button, Layout , ButtonHolder,HTML
 
 #
 # class ProjectForm(forms.ModelForm):
@@ -31,7 +31,6 @@ class Principle(forms.Form):
     title = forms.CharField(max_length=500 , required= True)
     description = forms.CharField(widget=forms.Textarea , required=False)
 
-
 class EvaluationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -45,22 +44,22 @@ class EvaluationForm(forms.ModelForm):
         model = Evaluation
         fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' )
 
-
-class EvaluationFormUpdate(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        pk = kwargs.pop('eval_id' , None)
-        super(EvaluationFormUpdate, self).__init__(*args, **kwargs)
-        eval = Evaluation.objects.get(pk=pk)
-        princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
-        self.fields['heurPrincip'].queryset = princips
-
-    class Meta:
-        model = Evaluation
-        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' ,'caption' )
+# class EvaluationFormUpdate(forms.ModelForm):
+#
+#     def __init__(self, *args, **kwargs):
+#         pk = kwargs.pop('eval_id' , None)
+#         super(EvaluationFormUpdate, self).__init__(*args, **kwargs)
+#         eval = Evaluation.objects.get(pk=pk)
+#         princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
+#         self.fields['heurPrincip'].queryset = princips
+#
+#     class Meta:
+#         model = Evaluation
+#         fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' ,'caption' )
 
 class MergeEvaluationForm(forms.ModelForm):
-    #
+
+
     def __init__(self, *args, **kwargs):
         pk = kwargs.pop('eval_id' , None)
         super(MergeEvaluationForm, self).__init__(*args, **kwargs)
@@ -76,3 +75,32 @@ class MergeEvaluationForm(forms.ModelForm):
         widgets = {
             'mergedScreenshots' : forms.CheckboxSelectMultiple()
         }
+
+
+class EvaluationFormUpdate(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        pk = kwargs.pop('eval_id' , None)
+        super(EvaluationFormUpdate, self).__init__(*args, **kwargs)
+        eval = Evaluation.objects.get(pk=pk)
+        princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
+        self.fields['heurPrincip'].queryset = princips
+        self.helper = FormHelper(self)
+        url = """<a class="btn btn-warning" href={% url "profiles:dashboard:evaluation-detail" """+ str(pk)+ """%}>Cancel</a>"""
+        layout = Layout(ButtonHolder(
+            Submit('Save' , 'Save'),
+            HTML(url),
+
+        ))
+        self.helper.layout.insert(15,layout)
+        # self.helper.layout = Layout(
+        #     Div(
+        #         Submit('save', 'save', css_class='btn btn-primary'),
+        #         css_class='col-lg-offset-3 col-lg-9',
+        #         # Button('cancel', 'Cancel', css_class='btn-default',)
+        #     )
+        # )
+
+    class Meta:
+        model = Evaluation
+        fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' ,'caption' )

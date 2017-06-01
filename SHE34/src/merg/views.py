@@ -363,10 +363,8 @@ def mergeEvals(request , list_id):
 def mergeScreenshots(resultEval, listEvals):
     for eval in listEvals:
         screenobject =Screenshots(caption=eval.caption , screenshot =eval.screenshot)
-        print(screenobject)
         screenobject.save()
         resultEval.mergedScreenshots.add(screenobject)
-        print('done!')
 
 # function to merge multiple evaluation
 def mergeEvaluations(request , project_id):
