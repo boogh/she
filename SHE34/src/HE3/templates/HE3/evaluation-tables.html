@@ -36,17 +36,13 @@
                 <td>{{ e.get_severity_display }}</td>
                 <td>{{ e.get_frequency_display }}</td>
                 {% block other-td %}
-                    <td> <img src="{{ e.screenshot.avatar.url }}"</td>
+                    <td> <img src="{{ e.screenshot.avatar.url }}"/></td>
                 {% endblock %}
-
-                <td class="btn-group-sm"> <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' e.id %}"> Edit </a>
+                <td class="btn-group-sm"> <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' e.id %}"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit </a>
                     <button type="button" class="btn btn-warning" data-project="{{ e.title }}" data-url= {% url 'profiles:dashboard:evaluation-delete' e.id %} data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         Del </button>
-
-
                 </td>
             </tr>
-t
         {% endfor %}
 
     </table>
