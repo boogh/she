@@ -27,7 +27,7 @@
                 <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
                 <td> {{ forloop.counter }}</td>
                 {% block user-td %} {% endblock %}
-                <td> <a href="{% url 'profiles:dashboard:evaluation-detail' e.pk %}">{{ e.title }}</a></td>
+                <td> <a href="javascript:evalDetail({{ e.id }})">{{ e.title }}</a></td>
                 <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>
                 <td>{{ e.place }}</td>
                 <td>{{ e.description | truncatewords:5 }} </td>
@@ -36,7 +36,7 @@
                 <td>{{ e.get_severity_display }}</td>
                 <td>{{ e.get_frequency_display }}</td>
                 {% block other-td %}
-                    <td>{{ e.screenshot }}</td>
+                    <td> <img src="{{ e.screenshot.avatar.url }}"</td>
                 {% endblock %}
 
                 <td><a class="btn btn-primary" href="" > Edit </a>
