@@ -39,10 +39,14 @@
                     <td> <img src="{{ e.screenshot.avatar.url }}"</td>
                 {% endblock %}
 
-                <td><a class="btn btn-primary" href="" > Edit </a>
-                    <a class="btn btn-default" href="">Delete</a> </td>
-            </tr>
+                <td class="btn-group-sm"> <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' e.id %}"> Edit </a>
+                    <button type="button" class="btn btn-warning" data-project="{{ e.title }}" data-url= {% url 'profiles:dashboard:evaluation-delete' e.id %} data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        Del </button>
 
+
+                </td>
+            </tr>
+t
         {% endfor %}
 
     </table>
