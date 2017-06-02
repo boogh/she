@@ -75,59 +75,85 @@
             </div> <!-- end of panel for project detail -->
         </div> <!-- end of row for project information-->
 
-        {% if mergedEvals %}
-            <div class="row"> <!-- row for panel for evaluations -->
-                <div class="panel panel-success"> <!-- panel for evaluations -->
-                    <div class="panel-heading text-center"> <h4 class="lead text-success">Merged Evaluations </h4> </div>
-                    <div class="panel-body">
-                        <div class="table table-responsive" >
-                            {% with mergedEvals as evaluations %}
-                                {% include 'HE3/evaluation-lists.html' %}
-                            {% endwith %}
+
+        <div class="panel-group" id="accordion">
+            {% if mergedEvals %}
+                <div class="panel panel-success" id="panel1">
+                    <div class="panel-heading">
+                        <h4 class="lead">
+                            <a data-toggle="collapse" data-target="#collapseOne"
+                               href="#collapseOne">
+                                Merged Evaluations
+                            </a>
+                        </h4>
+
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="table table-responsive" >
+                                {% with mergedEvals as evaluations %}
+                                    {% include 'HE3/evaluation-lists.html' %}
+                                {% endwith %}
+                                {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
+                            </div>
                         </div>
                     </div>
-                </div> <!-- end of panel for evaluations -->
-            </div> <!-- End of row for panel for evaluations -->
-        {% endif %}
-        {% if evaluations %}
-            <div class="row"> <!-- row for panel for evaluations -->
-                <div class="panel panel-success"> <!-- panel for evaluations -->
-                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
-                    <div class="panel-body">
-                        <div class="table table-responsive" >
+                </div>
+            {% endif %}
+
+            {% if evaluations %}
+                <div class="panel panel-default" id="panel2">
+                    <div class="panel-heading">
+                        <h4 class="lead">
+                            <a data-toggle="collapse" data-target="#collapseTwo"
+                               href="#collapseTwo" class="collapsed">
+                                Submitted Evaluations
+                            </a>
+                        </h4>
+
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
                             {% include 'HE3/evaluation-table-with-user.html' %}
-                            {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
                         </div>
                     </div>
-                </div> <!-- end of panel for evaluations -->
-            </div> <!-- End of row for panel for evaluations -->
-        {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+        <!-- Post Info -->
+
+
     </div><!-- /.container -->
     <!-- Modal -->
-    <div class="modal fade" id="reportForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Enter a name for your list:</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>
-                        {% csrf_token %}
-                        <input type = 'text' id="name-eval-list" name ='name' >  </input>
-                        <input type="submit" value="Create a list">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
-                </div>
-            </div>
-        </div>
-    </div>
     {% include 'HE3/delete_confirmation.html' %}
 
 {% endblock %}
+
+
+
+{#    <div class="modal fade" id="reportForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">#}
+{#        <div class="modal-dialog" role="document">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+{#                    <h4 class="modal-title" id="myModalLabel">Enter a name for your list:</h4>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form action="{% url 'merge:newEvalList-ajax' project.id %}" method ='post'>#}
+{#                        {% csrf_token %}#}
+{#                        <input type = 'text' id="name-eval-list" name ='name' >  </input>#}
+{#                        <input type="submit" value="Create a list">#}
+{#                    </form>#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+{#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
 
 
 {#                        <table class="table table-bordered table-striped table-hover">#}
@@ -204,3 +230,34 @@
 {#            </div>#}
 {#        </div>#}
 
+
+
+{##}
+{#        {% if mergedEvals %}#}
+{#            <div class="row"> <!-- row for panel for evaluations -->#}
+{#                <div class="panel panel-success" > <!-- panel for evaluations -->#}
+{#                    <div class="panel-heading text-center"> <h4 class="lead text-success">Merged Evaluations </h4> </div>#}
+{#                    <div class="panel-body">#}
+{#                        <div class="table table-responsive" >#}
+{#                            {% with mergedEvals as evaluations %}#}
+{#                                {% include 'HE3/evaluation-lists.html' %}#}
+{#                            {% endwith %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div> <!-- end of panel for evaluations -->#}
+{#            </div> <!-- End of row for panel for evaluations -->#}
+{#        {% endif %}#}
+{##}
+{#        {% if evaluations %}#}
+{#            <div class="row"> <!-- row for panel for evaluations -->#}
+{#                <div class="panel panel-success"> <!-- panel for evaluations -->#}
+{#                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>#}
+{#                    <div class="panel-body">#}
+{#                        <div class="table table-responsive" >#}
+{#                            {% include 'HE3/evaluation-table-with-user.html' %}#}
+                            {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div> <!-- end of panel for evaluations -->#}
+{#            </div> <!-- End of row for panel for evaluations -->#}
+{#        {% endif %}#}
