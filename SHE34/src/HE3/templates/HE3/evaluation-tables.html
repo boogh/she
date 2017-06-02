@@ -15,7 +15,9 @@
             <th>Positivity</th>
             <th>Severity</th>
             <th>Frequency</th>
-            <th>Screenshot</th>
+            {% block other-th %}
+                <th>Screenshot</th>
+            {% endblock %}
             <th>Operations</th>
         </tr>
         </thead>
@@ -33,9 +35,12 @@
                 <td> {{ e.get_positivity_display }}</td>
                 <td>{{ e.get_severity_display }}</td>
                 <td>{{ e.get_frequency_display }}</td>
-                <td>{{ e.screenshot }}</td>
-                <td><a class="btn btn-primary" href="{% url 'merge:recommend' e.id %}" > Similar Evaluations </a>
-                    <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' e.id %}">Duplicate this Evaluation</a> </td>
+                {% block other-td %}
+                    <td>{{ e.screenshot }}</td>
+                {% endblock %}
+
+                <td><a class="btn btn-primary" href="" > Edit </a>
+                    <a class="btn btn-default" href="">Delete</a> </td>
             </tr>
 
         {% endfor %}

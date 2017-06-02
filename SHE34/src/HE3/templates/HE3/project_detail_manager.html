@@ -75,9 +75,20 @@
             </div> <!-- end of panel for project detail -->
         </div> <!-- end of row for project information-->
 
-        <div class="row"> <!-- row for Evaluaiton-lists -->
-            {% include 'HE3/evaluation-lists.html' %}
-        </div> <!-- end of row for Evaluaiton-lists -->
+        {% if mergedEvals %}
+            <div class="row"> <!-- row for panel for evaluations -->
+                <div class="panel panel-success"> <!-- panel for evaluations -->
+                    <div class="panel-heading text-center"> <h4 class="lead text-success">Merged Evaluations </h4> </div>
+                    <div class="panel-body">
+                        <div class="table table-responsive" >
+                            {% with mergedEvals as evaluations %}
+                                {% include 'HE3/evaluation-lists.html' %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div> <!-- end of panel for evaluations -->
+            </div> <!-- End of row for panel for evaluations -->
+        {% endif %}
         {% if evaluations %}
             <div class="row"> <!-- row for panel for evaluations -->
                 <div class="panel panel-success"> <!-- panel for evaluations -->
@@ -85,6 +96,7 @@
                     <div class="panel-body">
                         <div class="table table-responsive" >
                             {% include 'HE3/evaluation-table-with-user.html' %}
+                            {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
                         </div>
                     </div>
                 </div> <!-- end of panel for evaluations -->

@@ -258,13 +258,16 @@ class ProjectDetail(DetailView):
         allEvaluations = project.evaluation_for_project.all()
 
         if (self.request.user == project.manager):
-            evaluations = allEvaluations
+            evaluations = allEvaluations.filter(merged=False)
+            mergedEvals = allEvaluations.filter(merged=True)
         elif (self.request.user in project.evaluators.all()):
-            evaluations = allEvaluations.filter(evaluator= self.request.user)
+            evaluations = allEvaluations.filter(evaluator= self.request.user , merged=False)
+            mergedEvals = allEvaluations.filter(evaluator= self.request.user , merged=True)
 
         context = { 'project' : project ,
                     'now' : timezone.now().date(),
                     'evaluations': evaluations,
+                    'mergedEvals': mergedEvals,
                      }
         return context
 
