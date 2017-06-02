@@ -1,0 +1,52 @@
+
+{#{% load crispy_forms_tags %}#}
+{#{{  form | crispy }}#}
+{##}
+{##}
+{##}
+{#{%  if form.instance.screenshot %}#}
+{##}
+{#                <img src="{{ form.instance.screenshot.big.url }}" alt="" />#}
+{#{% endif %}#}
+{##}
+{#{{ form.mergedScreenshots.label_tag }}#}
+{##}
+{#{{  form | crispy }}#}
+{##}
+{#{{ form.instance.mergedScreenshots }}#}
+
+{#<div class="btn-group" data-toggle="buttons">#}
+{#{% for checkbox in form.mergedScreenshots %}#}
+{#   <img src="{{ checkbox.choice_label }}" />#}
+{#{% endfor %}#}
+{#</div>#}
+
+<div class="form-horizontal">
+{% for field in form %}
+    <div class="form-group">
+        {{ field.errors }}
+        <label class="col-sm-2">
+            {{ field.label_tag }}
+        </label>
+        <div class="col-sm-10">
+            {% if field.id_for_label == 'id_mergedScreenshots_0' %}
+                {% for checkbox in form.mergedScreenshots %}
+                    {{ checkbox.tag }}
+                    <img src="{{ checkbox.choice_label }}" /><br>
+                {% endfor %}
+            {% else %}
+                {{ field }}
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+</div>
+{#{% for field in form %}#}
+{#    [...]#}
+{#    {% if field.field.widget|is_checkbox %}#}
+{#      {{ field }}{{ field.label_tag }}#}
+{#    {% else %}#}
+{#      {{ field.label_tag }}{{ field }}#}
+{#    {% endif %}#}
+{#    [...]#}
+{#{% endfor %}#}
