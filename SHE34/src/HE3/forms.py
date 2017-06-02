@@ -97,9 +97,8 @@ class MergeEvaluationForm(forms.ModelForm):
             HTML(url),
 
         ))
-        layout2 = Layout( Field('mergedScreenshots' ))
+
         self.helper.layout.insert(18,layout)
-        self.helper.layout.insert(19,layout2)
 
 
     class Meta:
@@ -119,6 +118,7 @@ class EvaluationFormUpdate(forms.ModelForm):
         self.fields['heurPrincip'].queryset = princips
         self.helper = FormHelper(self)
         url = """<a class="btn btn-warning" href={% url "profiles:dashboard:evaluation-detail" """+ str(pk)+ """%}>Cancel</a>"""
+
         layout = Layout(ButtonHolder(
             Submit('Save' , 'Save'),
             HTML(url),
