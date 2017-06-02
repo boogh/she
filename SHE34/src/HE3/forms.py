@@ -5,7 +5,7 @@ from django import utils
 from datetime import date,timedelta
 from authtools.models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit,Button, Layout , ButtonHolder,HTML
+from crispy_forms.layout import Submit,Button, Layout , ButtonHolder,HTML,Field
 
 #
 # class ProjectForm(forms.ModelForm):
@@ -57,6 +57,25 @@ class EvaluationForm(forms.ModelForm):
 #         model = Evaluation
 #         fields = ('title' , 'place' , 'a_place','link' ,'tags' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip', 'screenshot' ,'caption' )
 
+# class MergeEvaluationForm(forms.ModelForm):
+#
+#
+#     def __init__(self, *args, **kwargs):
+#         pk = kwargs.pop('eval_id' , None)
+#         super(MergeEvaluationForm, self).__init__(*args, **kwargs)
+#         eval = Evaluation.objects.get(pk=pk)
+#         princips = eval.ofProject.setOfHeuristics.SetOfHeuristics.all()
+#         self.fields['heurPrincip'].queryset = princips
+#         self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
+#         self.fields['mergedScreenshots'].queryset = eval.mergedScreenshots.all()
+#
+#     class Meta:
+#         model = Evaluation
+#         fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
+#         widgets = {
+#             'mergedScreenshots' : forms.CheckboxSelectMultiple()
+#         }
+
 class MergeEvaluationForm(forms.ModelForm):
 
 
@@ -69,13 +88,26 @@ class MergeEvaluationForm(forms.ModelForm):
         self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
         self.fields['mergedScreenshots'].queryset = eval.mergedScreenshots.all()
 
+        self.helper = FormHelper(self)
+
+        url = """<a class="btn btn-warning" href={% url "profiles:dashboard:evaluation-detail" """ + str(
+            pk) + """%}>Cancel</a>"""
+        layout = Layout(ButtonHolder(
+            Submit('Save', 'Save'),
+            HTML(url),
+
+        ))
+        layout2 = Layout( Field('mergedScreenshots' ))
+        self.helper.layout.insert(18,layout)
+        self.helper.layout.insert(19,layout2)
+
+
     class Meta:
         model = Evaluation
         fields = ('title' , 'place' , 'a_place', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
         widgets = {
             'mergedScreenshots' : forms.CheckboxSelectMultiple()
         }
-
 
 class EvaluationFormUpdate(forms.ModelForm):
 
@@ -90,7 +122,6 @@ class EvaluationFormUpdate(forms.ModelForm):
         layout = Layout(ButtonHolder(
             Submit('Save' , 'Save'),
             HTML(url),
-
         ))
         self.helper.layout.insert(15,layout)
         # self.helper.layout = Layout(

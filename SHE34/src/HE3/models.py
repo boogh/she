@@ -4,7 +4,6 @@ from datetime import date,timedelta
 from django import utils
 from django.urls import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
-from django.template.loader import render_to_string
 
 
 
@@ -75,7 +74,11 @@ class Screenshots(models.Model):
     #     return render_to_string('HE3/thumbnail.html', {'image': self})
 
     def __str__(self):
-        return 'Screenshot' + str (self.id) + " : "
+        if self.screenshot:
+            return  "" + self.screenshot['big'].url
+        else:
+            return 'Screenshot' + str (self.id) + " : "
+
 
 
 class Project(models.Model):
