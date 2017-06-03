@@ -13,7 +13,9 @@
             <thead>
             <tr>
                 {#            <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
-                <th>Evaluator</th>
+                {% if evaluation.merged == False %}
+                    <th>Evaluator</th>
+                {% endif %}
                 {#            {% block user-th %} {% endblock %}#}
                 {#                <th>Title</th>#}
                 <th>Heuristic Principe</th>
@@ -23,7 +25,9 @@
                 <th>Positivity</th>
                 <th>Severity</th>
                 <th>Frequency</th>
-                {#            <th>Screenshot</th>#}
+                {% if evaluation.merged == True %}
+                    <th>Found By</th>
+                {% endif %}
                 <th>Operations</th>
             </tr>
             </thead>
@@ -32,7 +36,9 @@
                 {#                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
                 {#                <td> {{ forloop.counter }}</td>#}
                 {#                {% block user-td %} {% endblock %}#}
-                <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.email }}</small></td>
+                {% if evaluation.merged == False %}
+                    <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.evaluator.email }}</small></td>
+                {% endif %}
                 {#                <td> {{ evaluation.title }} </td>#}
                 {#                            <td>  {{ evaluation.heurPrincip.all}} </td>#}
                 <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
@@ -42,6 +48,9 @@
                 <td> {{ evaluation.get_positivity_display }}</td>
                 <td>{{ evaluation.get_severity_display }}</td>
                 <td>{{ evaluation.get_frequency_display }}</td>
+                {% if evaluation.merged == True %}
+                    <td> {% for e in evaluation.merdedFromEvaluators.all %} {{ e.name }} <br> {% endfor %} </td>
+                {% endif %}
                 <td>
                     <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"> Edit </a>
                     <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
@@ -60,13 +69,16 @@
     <h4> Description:</h4>
     <p> {{ evaluation.description }}</p>
     <br>
-    <h4> Recommendaion:</h4>
-    <p> {{ evaluation.recommendation }}</p>
-    <br>
+    {% if evaluation.recommendation %}
+        <h4> Recommendaion:</h4>
+        <p> {{ evaluation.recommendation }}</p>
+        <br>
+    {% endif %}
     <h4> Screenshot:</h4>
     <img src="{{ evaluation.screenshot.big.url }}" alt="" />
-
+    {% for scr in evaluation.mergedScreenshots.all %} <img src="{{ scr.screenshot.big.url }}" <br> {% endfor %}
 </div>
+<td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>
 
 
 {#        </div>#}
