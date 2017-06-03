@@ -1,27 +1,16 @@
 
-{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
-{##}
-{#<div class="modal fade" id="e-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">#}
-{#    <div class="modal-dialog modal-lg" role="document">#}
-{#        <div class="modal-content">#}
 {% load thumbnail %}
-
 <div class="modal-header">
     <div class="panel">
         <div class="page-header"> <h2> {{ evaluation.title }} : </h2> </div>
         <table class="table table-responsive table-bordered table-striped table-hover">
             <thead>
             <tr>
-                {#            <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
                 {% if evaluation.merged == False %}
                     <th>Evaluator</th>
                 {% endif %}
-                {#            {% block user-th %} {% endblock %}#}
-                {#                <th>Title</th>#}
                 <th>Heuristic Principe</th>
                 <th>Place</th>
-                {#            <th>Description</th>#}
-                {#            <th>Recommendation</th>#}
                 <th>Positivity</th>
                 <th>Severity</th>
                 <th>Frequency</th>
@@ -31,20 +20,12 @@
                 <th>Operations</th>
             </tr>
             </thead>
-
             <tr>
-                {#                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
-                {#                <td> {{ forloop.counter }}</td>#}
-                {#                {% block user-td %} {% endblock %}#}
                 {% if evaluation.merged == False %}
                     <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.evaluator.email }}</small></td>
                 {% endif %}
-                {#                <td> {{ evaluation.title }} </td>#}
-                {#                            <td>  {{ evaluation.heurPrincip.all}} </td>#}
                 <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
                 <td>{{ evaluation.place }}</td>
-                {#                <td>{{ evaluation.description | truncatewords:5 }} </td>#}
-                {#                <td>{{ evaluation.recommendation | truncatewords:5}}</td>#}
                 <td> {{ evaluation.get_positivity_display }}</td>
                 <td>{{ evaluation.get_severity_display }}</td>
                 <td>{{ evaluation.get_frequency_display }}</td>
@@ -56,11 +37,6 @@
                     <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
                     <a class="btn btn-default btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>
                 </td>
-                {#                <td>{{ evaluation.screenshot }}</td>#}
-                {#                <td><span class="btn-group-sm"><a class="btn btn-primary" href="{% url 'merge:recommend' evaluation.id %}" > Similar Evaluations </a>#}
-                {#                    <a class="btn btn-default" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}">Duplicate this Evaluation</a>#}
-                {#                </span>#}
-                {#                </td>#}
             </tr>
         </table>
     </div>
@@ -79,9 +55,3 @@
     {% for scr in evaluation.mergedScreenshots.all %} <img src="{{ scr.screenshot.big.url }}" <br> {% endfor %}
 </div>
 <td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>
-
-
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{##}
