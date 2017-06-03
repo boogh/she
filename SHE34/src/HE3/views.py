@@ -122,6 +122,7 @@ class EvaluationCreate(CreateView):
     # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
     # success_url = reverse_lazy('profiles:dashboard:user-dashboard')
     form_class = EvaluationForm
+    template_name = 'HE3/evaluation_form.html'
     # form2 = modelform_factory(Screenshot, fields=['screenshot','caption'] )
 
     # def get(self, request, *args, **kwargs):
@@ -175,6 +176,7 @@ class EvaluationUpdate(UpdateView):
     model = Evaluation
     # fields = ['title','place', 'heurPrincip', 'description', 'recommendation', 'positivity' , 'severity' ,'frequency' ]
     form_class = EvaluationFormUpdate
+    template_name = 'HE3/evaluation_form.html'
 
     def get_context_data(self, **kwargs):
         context= super(EvaluationUpdate,self).get_context_data(**kwargs)

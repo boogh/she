@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect,render_to_respons
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView , UpdateView
-from HE3.models import Project , ListOfEval, Evaluation, Screenshots
+from HE3.models import Project, Evaluation, Screenshots, ListOfEval
 from django.utils import timezone
 from docx import Document
 import csv
@@ -66,23 +66,23 @@ def makeReport(request, project_id):
 #         return redirect('merge:report-update',  evalList.id )
 #     return redirect('merge:merge-project-desktop', project_id)
 
-def updateReport (request ,list_id):
-    eval_list = ListOfEval.objects.get(pk=list_id)
-    project = eval_list.ofProject
-
-    if project.manager == request.user:
-        template_name = 'merge/merge_update.html'
-        allEvaluations = project.evaluation_for_project.all()
-        evalInList= eval_list.evaluations.all()
-        evaluations = allEvaluations.exclude(id__in = evalInList)
-        context = {'project': project,
-                   'now': timezone.now().date(),
-                   'evaluations': evaluations,
-                    'eval_list' : eval_list,
-                   }
-        return render(request, template_name, context)
-    else:
-        return HttpResponse('Only Manager can access this page!')
+# def updateReport (request ,list_id):
+#     eval_list = ListOfEval.objects.get(pk=list_id)
+#     project = eval_list.ofProject
+#
+#     if project.manager == request.user:
+#         template_name = 'merge/merge_update.html'
+#         allEvaluations = project.evaluation_for_project.all()
+#         evalInList= eval_list.evaluations.all()
+#         evaluations = allEvaluations.exclude(id__in = evalInList)
+#         context = {'project': project,
+#                    'now': timezone.now().date(),
+#                    'evaluations': evaluations,
+#                     'eval_list' : eval_list,
+#                    }
+#         return render(request, template_name, context)
+#     else:
+#         return HttpResponse('Only Manager can access this page!')
 
 # def addEvalToReport(request , list_id):
 #
@@ -221,89 +221,9 @@ def recommendAjax(request, eval_id):
 #         #        context['project'] = self.kwargs
 #         #        return context
 
-@login_required
-def exportHtmlFile(request , list_id):
+#---- export methods ---
 
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
-    project = listofeval.ofProject
-    template_name = 'merge/htmlexport.html'
-    context = { 'project' : project ,
-                'evaluations': evaluations}
-
-    return render(request,template_name=template_name,context=context)
-
-@login_required
-def exportDocFile(request, list_id):
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    response['Content-Disposition'] = 'attachment; filename=demo.docx'
-
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    project = listofeval.ofProject
-    doc = fillDocFile(project, listofeval)
-    doc.save(response)
-
-    return response
-@login_required
-def exportCsvFile(request,list_id):
-
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
-    project = listofeval.ofProject
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment;filename = "Report.csv"'
-
-    writer = csv.writer(response)
-    writer.writerow([ 'Project: ', project.name,' Description: ' ,project.description,' link: ', project.link , ' Manager: ', project.manager])
-    for e in evaluations:
-        writer.writerow([e.title ,
-                         e.place,
-                         e.heurPrincip,
-                         e.description,
-                         e.recommendation,
-                         e.get_positivity_display(),
-                         e.get_severity_display(),
-                         e.get_frequency_display(),
-                         e.tags,
-                         e.evaluator])
-
-    return response
-
-
-def fillDocFile(project, listofeval):
-    doc = Document()
-    doc.add_heading(str(project.name + 'Report'))
-    p = doc.add_paragraph('A plain paragraph')
-    p.add_run('bold').bold = True
-    p.add_run(' and some')
-    p.add_run('italic.').italic = True
-
-    doc.add_heading('Heading, level 1', level=1)
-    doc.add_paragraph('Intense quote', style='IntenseQuote')
-
-    doc.add_paragraph(
-        'first item in unordered list', style='ListBullet'
-    )
-    doc.add_paragraph(
-        'first item in ordered list', style='ListNumber'
-    )
-
-    table = doc.add_table(rows=1, cols=3)
-    hdr_cells = table.rows[0].cells
-    hdr_cells[0].text = 'Qty'
-    hdr_cells[1].text = 'Id'
-    hdr_cells[2].text = 'Desc'
-    # for item in listofeval.objects.all():
-    #     row_cells = table.add_row().cells
-    #     row_cells[0].text = str(item.name)
-    #     row_cells[1].text = str(item.genre)
-    #     row_cells[2].text = item.artist
-
-    doc.add_page_break()
-
-    return doc
-
-# merging evaluations -----------------------------------------------------
+# -----------merging evaluations -----------------------------------------------------
 
 def mergeFields(evalList):
     # result = {k : "" for k in evalList[0].__dict__.keys()}
@@ -357,7 +277,6 @@ def mergeFields(evalList):
 #             return HttpResponse(json.dumps(response), content_type='application/json')
 #     return HttpResponse('not success')
 
-
 def mergeScreenshots(resultEval, listEvals):
     for eval in listEvals:
         screenobject =Screenshots(caption=eval.caption , screenshot =eval.screenshot)
@@ -397,12 +316,11 @@ def mergeEvaluations(request , project_id):
             return HttpResponse(json.dumps(response), content_type='application/json')
     return HttpResponse('not success')
 
-
 class UpdateMergedEvaluation(UpdateView):
 
     # eval = Evaluation.objects.get(pk=eval_id)
     # project = eval.ofProject
-    template_name ='HE3/evaluation_form.html'
+    template_name ='HE3/evaluations/evaluation-form-merged.html'
 
     # form =MergeEvaluationForm(eval)
     model = Evaluation
@@ -421,3 +339,89 @@ class UpdateMergedEvaluation(UpdateView):
         return kwargs
 
     # return render(request, context={'project': project,'form' : form} ,template_name=template_name)
+
+
+
+# --------Export methods  ---------------------------------------------------------------
+
+@login_required
+def exportHtmlFile(request , list_id):
+
+    listofeval = ListOfEval.objects.get(pk=list_id)
+    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
+    project = listofeval.ofProject
+    template_name = 'merge/htmlexport.html'
+    context = { 'project' : project ,
+                'evaluations': evaluations}
+
+    return render(request,template_name=template_name,context=context)
+
+@login_required
+def exportDocFile(request, list_id):
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+    response['Content-Disposition'] = 'attachment; filename=demo.docx'
+
+    listofeval = ListOfEval.objects.get(pk=list_id)
+    project = listofeval.ofProject
+    doc = fillDocFile(project, listofeval)
+    doc.save(response)
+
+    return response
+@login_required
+def exportCsvFile(request,list_id):
+
+    listofeval = ListOfEval.objects.get(pk=list_id)
+    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
+    project = listofeval.ofProject
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment;filename = "Report.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow([ 'Project: ', project.name,' Description: ' ,project.description,' link: ', project.link , ' Manager: ', project.manager])
+    for e in evaluations:
+        writer.writerow([e.title ,
+                         e.place,
+                         e.heurPrincip,
+                         e.description,
+                         e.recommendation,
+                         e.get_positivity_display(),
+                         e.get_severity_display(),
+                         e.get_frequency_display(),
+                         e.tags,
+                         e.evaluator])
+
+    return response
+
+def fillDocFile(project, listofeval):
+    doc = Document()
+    doc.add_heading(str(project.name + 'Report'))
+    p = doc.add_paragraph('A plain paragraph')
+    p.add_run('bold').bold = True
+    p.add_run(' and some')
+    p.add_run('italic.').italic = True
+
+    doc.add_heading('Heading, level 1', level=1)
+    doc.add_paragraph('Intense quote', style='IntenseQuote')
+
+    doc.add_paragraph(
+        'first item in unordered list', style='ListBullet'
+    )
+    doc.add_paragraph(
+        'first item in ordered list', style='ListNumber'
+    )
+
+    table = doc.add_table(rows=1, cols=3)
+    hdr_cells = table.rows[0].cells
+    hdr_cells[0].text = 'Qty'
+    hdr_cells[1].text = 'Id'
+    hdr_cells[2].text = 'Desc'
+    # for item in listofeval.objects.all():
+    #     row_cells = table.add_row().cells
+    #     row_cells[0].text = str(item.name)
+    #     row_cells[1].text = str(item.genre)
+    #     row_cells[2].text = item.artist
+
+    doc.add_page_break()
+
+    return doc
+
