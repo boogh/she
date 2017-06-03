@@ -16,29 +16,29 @@
             </div>
             <div class="col-sm-3 pull-left merge-bar">
                 <a class="btn btn-primary btn s_action" href="javascript:merge ({{ project.id }}) "> Merge Selected Evaluations</a>
-{#                <button id="merge-btn" type="button" class="btn btn-primary btn s_action" data-toggle="modal" data-target="#merge-dial" data="{{ eval_list.id }}"> Merge Selected Evaluations 2</button>#}
+                {#                <button id="merge-btn" type="button" class="btn btn-primary btn s_action" data-toggle="modal" data-target="#merge-dial" data="{{ eval_list.id }}"> Merge Selected Evaluations 2</button>#}
             </div>
         </div>
         <hr>
         <div class="row" style="height:50% "><!-- -->
             <div class="col-sm-3" ><!-- Evaluations panel  -->
                 <div class="text-center ">
-                    <div class="row"> <h4>Evaluations </h4> <hr></div>
+                    <div class="row"> <h4>Evaluations <small> (Not Merged) </small> </h4> <hr></div>
                     <div class="row">
-{#                        <div class="col-sm-offset-1">#}
-{#                            <a id = 'add-to-report'class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:addToReport({{ eval_list.id }})">Add to Report</a>#}
-{#                            <div id="eval-action" class="btn-group action-dropdown ">#}
-{#                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                                    Actions <span class="caret"></span>#}
-{#                                </button>#}
-{#                                <ul class="dropdown-menu">#}
-{#                                    <li><a href="javascript:">Edit</a></li>#}
-{#                                    <li><a href="#">Duplicate</a></li>#}
-{#                                    <li role="separator" class="divider"></li>#}
-{#                                    <li><a href="#">Delete</a></li>#}
-{#                                </ul>#}
-{#                            </div>#}
-{#                        </div>#}
+                        {#                        <div class="col-sm-offset-1">#}
+                        {#                            <a id = 'add-to-report'class="btn btn-sm btn-primary add-remove-to-report"  href="javascript:addToReport({{ eval_list.id }})">Add to Report</a>#}
+                        {#                            <div id="eval-action" class="btn-group action-dropdown ">#}
+                        {#                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+                        {#                                    Actions <span class="caret"></span>#}
+                        {#                                </button>#}
+                        {#                                <ul class="dropdown-menu">#}
+                        {#                                    <li><a href="javascript:">Edit</a></li>#}
+                        {#                                    <li><a href="#">Duplicate</a></li>#}
+                        {#                                    <li role="separator" class="divider"></li>#}
+                        {#                                    <li><a href="#">Delete</a></li>#}
+                        {#                                </ul>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                         <div class="col-sm-offset-7 ">
                             <input type="checkbox" id="eval-checkBoxes" />
                         </div>
@@ -49,40 +49,6 @@
                     {% include 'HE3/evaluations/e-panel-list.html' %}
                 </div>
             </div> <!-- End of Evaluations panel -->
-            <div class="col-sm-3" ><!-- Report panel  -->
-                {% block report %}
-                    <div class="text-center ">
-                        <div class="row">
-                            <div><h4> {{ eval_list.name | capfirst }} </h4>  <hr> </div></div>
-                        <div class="row">
-                            <div class="col-sm-offset-1">
-                                <a id='remove-from-report' class="btn btn-sm btn-primary add-remove-to-report"  href="">Remove from Report</a>
-                                <div id="report-action" class="btn-group action-dropdown">
-                                    <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Export <span class="caret"></span>
-                                    </button>
-{#                                    <ul class="dropdown-menu">#}
-{#                                        <li><a target="_blank" href="{% url 'merge:export-doc-file' eval_list.id %}"> Export as Docx </a></li>#}
-{#                                        <li><a target="_blank" href="{% url 'merge:export-html-file' eval_list.id %}"> Export as html </a></li>#}
-{#                                        <li><a target="_blank" href="{% url 'merge:export-csv-file' eval_list.id %}"> Export as csv </a></li>#}
-{#                                        <li role="separator" class="divider"></li>#}
-{#                                        <li><a href="#">Delete</a></li>#}
-{#                                    </ul>#}
-                                </div>
-                            </div>
-                            <div class="col-sm-offset-7">
-                                <input type="checkbox" id="report-checkBoxes" />
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="report-list"  class="common-action" style="overflow: scroll ; overflow-y: scroll">
-{#                        {% with eval_list.evaluations.all as evaluations %}#}
-{#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
-{#                        {% endwith %}#}
-                    </div>
-                {% endblock %}
-            </div> <!-- End of Report panel -->
             <div class=" col-sm-3 bg-info"><!-- Recome place base-->
                 <div class="" >
                     <div class="text-center">
@@ -114,58 +80,75 @@
                     </div>
                 </div>
             </div><!--  End of recommendation based of Tags-->
+            <div class="col-sm-3" ><!-- Report panel  -->
+                <div class="text-center">
+                    <div class="row"> <h4>Merged Evaluations </h4> <hr></div>
+                    <div class="row">
+                        <div class="col-sm-offset-7">
+                            <input type="checkbox" id="checkBoxes" />
+                        </div>
+                    </div>
+                    <div id="report-list"  class="common-action" style="overflow: scroll ; overflow-y: scroll">
+                        {% with mergedEvals as evaluations %}
+                            {% include 'HE3/evaluations/e-panel-list.html' %}
+                        {% endwith %}
+                    </div>
+
+                </div>
+            </div> <!-- End of Report panel -->
         </div>
     </div><!-- End of container -->
     <div class="modal fade" id="e-detail" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div id="e-detail-content" class="modal-content">
 
+
             </div>
         </div>
     </div>
-{#    <div class="modal fade" id="merge-dial" tabindex="-1" role="dialog">#}
-{#        <div class="modal-dialog modal-lg" role="document">#}
-{#            <div id="merge-content" class="modal-content">#}
-{#                <form>#}
-{#                    <input value="Name"/>#}
-{#                </form>#}
-{#                <a class="btn btn-primary btn s_action" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    {#    <div class="modal fade" id="merge-dial" tabindex="-1" role="dialog">#}
+    {#        <div class="modal-dialog modal-lg" role="document">#}
+    {#            <div id="merge-content" class="modal-content">#}
+    {#                <form>#}
+    {#                    <input value="Name"/>#}
+    {#                </form>#}
+    {#                <a class="btn btn-primary btn s_action" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
     <!-- Modal HTML Markup -->
-<div id="merge-dial" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-xs-center">Creating a new evaluation with the contents of the selected evaluations:</h4>
-            </div>
-            <div class="modal-body">
-                <form role="form" method="POST" action="">
-                    <input type="hidden" name="_token" value="">
-                    <div class="form-group">
-                        <label class="control-label">Enter a title:</label>
-                        <div>
-                            <input type="email" class="form-control input-lg" name="Title" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember"> Add the new evaluation to the report
-                                </label>
+    <div id="merge-dial" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-xs-center">Creating a new evaluation with the contents of the selected evaluations:</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action="">
+                        <input type="hidden" name="_token" value="">
+                        <div class="form-group">
+                            <label class="control-label">Enter a title:</label>
+                            <div>
+                                <input type="email" class="form-control input-lg" name="Title" value="">
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer text-xs-center">
-                <a class="btn btn-primary" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+                        <div class="form-group">
+                            <div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Add the new evaluation to the report
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer text-xs-center">
+                    <a class="btn btn-primary" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
 {% endblock %}
