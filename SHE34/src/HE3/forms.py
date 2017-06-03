@@ -71,7 +71,7 @@ class MergeEvaluationForm(forms.ModelForm):
         self.fields['heurPrincip'].queryset = princips
         self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
         self.fields['mergedScreenshots'].queryset = eval.mergedScreenshots.all()
-        print('screenshots: ' , eval.mergedScreenshots.count())
+        # print('screenshots: ' , eval.mergedScreenshots.count())
 
     class Meta:
         model = Evaluation

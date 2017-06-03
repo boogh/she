@@ -136,19 +136,18 @@ class Evaluation(models.Model):
     mergedFromEvaluations = models.ManyToManyField('self' ,verbose_name='Evaluators', related_name='fromEvaluations' , blank=True ,help_text='Evaluators who found this issue')
     mergedScreenshots = models.ManyToManyField(Screenshots ,blank=True , verbose_name="Merged-Screenshots" , related_name="screenshots")
 
-
-
     class Meta:
         ordering= ['evaluator', 'place' , '-severity' ]
 
     def get_absolute_url(self):
+
+        if self.merged == True:
+            return reverse('merge:merge-project-desktop', kwargs={'project_id': self.ofProject.pk})
         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
+
 
     def __str__(self):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
-
-
-
 
 # Name should be refactored to MergeLists
 class ListOfEval(models.Model):
