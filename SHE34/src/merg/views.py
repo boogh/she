@@ -52,19 +52,19 @@ def makeReport(request, project_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-def newEvalList(request , project_id):
-    project = Project.objects.get(pk=project_id)
-    if request.method == 'POST' :
-        # name = request.POST.get['name' , False]
-
-        if 'name' in request.POST and request.POST['name']:
-            name = request.POST['name']
-        else:
-            return redirect('merge:merge-project-desktop' , project_id )
-        evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
-
-        return redirect('merge:report-update',  evalList.id )
-    return redirect('merge:merge-project-desktop', project_id)
+# def newEvalList(request , project_id):
+#     project = Project.objects.get(pk=project_id)
+#     if request.method == 'POST' :
+#         # name = request.POST.get['name' , False]
+#
+#         if 'name' in request.POST and request.POST['name']:
+#             name = request.POST['name']
+#         else:
+#             return redirect('merge:merge-project-desktop' , project_id )
+#         evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
+#
+#         return redirect('merge:report-update',  evalList.id )
+#     return redirect('merge:merge-project-desktop', project_id)
 
 def updateReport (request ,list_id):
     eval_list = ListOfEval.objects.get(pk=list_id)
@@ -84,43 +84,43 @@ def updateReport (request ,list_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-def addEvalToReport(request , list_id):
+# def addEvalToReport(request , list_id):
+#
+#     list = ListOfEval.objects.get(pk = list_id)
+#     project = list.ofProject
+#     if request.is_ajax():
+#         ids = request.POST.getlist('ids[]')
+#         if ids:
+#             evals= Evaluation.objects.filter(pk__in= ids)
+#             list.evaluations.add(*evals)
+#     return HttpResponse('success!')
 
-    list = ListOfEval.objects.get(pk = list_id)
-    project = list.ofProject
-    if request.is_ajax():
-        ids = request.POST.getlist('ids[]')
-        if ids:
-            evals= Evaluation.objects.filter(pk__in= ids)
-            list.evaluations.add(*evals)
-    return HttpResponse('success!')
+# def removeEvalFromReport(request , list_id):
+#
+#     list = ListOfEval.objects.get(pk = list_id)
+#     project = list.ofProject
+#     if request.is_ajax():
+#         ids = request.POST.getlist('ids[]')
+#         if ids:
+#             evals= Evaluation.objects.filter(pk__in= ids)
+#             list.evaluations.remove(*evals)
+#     # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
+#     return HttpResponse('success!')
 
-def removeEvalFromReport(request , list_id):
+# def deleteList(request , list_id):
+#
+#     list = ListOfEval.objects.get(pk = list_id)
+#     project = list.ofProject
+#     list.delete()
+#     return redirect(request.META.get('HTTP_REFERER'))
 
-    list = ListOfEval.objects.get(pk = list_id)
-    project = list.ofProject
-    if request.is_ajax():
-        ids = request.POST.getlist('ids[]')
-        if ids:
-            evals= Evaluation.objects.filter(pk__in= ids)
-            list.evaluations.remove(*evals)
-    # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
-    return HttpResponse('success!')
-
-def deleteList(request , list_id):
-
-    list = ListOfEval.objects.get(pk = list_id)
-    project = list.ofProject
-    list.delete()
-    return redirect(request.META.get('HTTP_REFERER'))
-
-def display_meta(request):
-    values = request.META.items()
-    values.sort()
-    html = []
-    for k, v in values:
-        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-    return HttpResponse('<table>%s</table>' % '\n'.join(html))
+# def display_meta(request):
+#     values = request.META.items()
+#     values.sort()
+#     html = []
+#     for k, v in values:
+#         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+#     return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
 # def recommend(request , eval_id):
 #
@@ -179,47 +179,47 @@ def recommendAjax(request, eval_id):
     # return HttpResponse(json.dumps(result) , content_type='application/json')
     return render_to_response(template_name='HE3/evaluations/e-panel-list.html' , context= {'evaluations' : recPlaceBase})
 
-class EvaluationList(CreateView):
-    model = ListOfEval
-    template_name = 'merge/form-evaluation-list.html'
-    fields = ['name','evaluations']
-
-    def form_valid(self, form):
-        user = self.request.user
-        projectId = self.kwargs['pk']
-        project = Project.objects.get(pk=projectId)
-        form.instance.ofProject = project
-        form.instance.fromUser = user
-
-        return super(EvaluationList, self).form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super(EvaluationList, self).get_context_data(**kwargs)
-        context['project'] = self.kwargs
-        return context
-
-
-        # ofProject = models.ForeignKey(Project)
-        # fromUser = models.ForeignKey(User, related_name="Merge_manager")
-        # evaluations = models.ManyToManyField(Evaluation)
-        # name = models.CharField(max_length=50)
-        # logo = models.ImageField(name='Eval-Merg-Logo', upload_to='logo/%Y-%m-%d/', null=True, blank=True)
-        # mergeUrl = models.URLField(blank=True, null=True)
-        # exportedFile = models.FileField(blank=True, null=True)
-
-        # def form_valid(self, form):
-        #        user = self.request.user
-        #        projectId = self.kwargs['pk']
-        #        project = Project.objects.get(pk=projectId)
-        #        form.instance.ofProject = project
-        #        form.instance.evaluator = user
-        #
-        #        return super(EvaluationCreate, self).form_valid(form)
-        #
-        #    def get_context_data(self, **kwargs):
-        #        context= super(EvaluationCreate,self).get_context_data(**kwargs)
-        #        context['project'] = self.kwargs
-        #        return context
+# class EvaluationList(CreateView):
+#     model = ListOfEval
+#     template_name = 'merge/form-evaluation-list.html'
+#     fields = ['name','evaluations']
+#
+#     def form_valid(self, form):
+#         user = self.request.user
+#         projectId = self.kwargs['pk']
+#         project = Project.objects.get(pk=projectId)
+#         form.instance.ofProject = project
+#         form.instance.fromUser = user
+#
+#         return super(EvaluationList, self).form_valid(form)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(EvaluationList, self).get_context_data(**kwargs)
+#         context['project'] = self.kwargs
+#         return context
+#
+#
+#         # ofProject = models.ForeignKey(Project)
+#         # fromUser = models.ForeignKey(User, related_name="Merge_manager")
+#         # evaluations = models.ManyToManyField(Evaluation)
+#         # name = models.CharField(max_length=50)
+#         # logo = models.ImageField(name='Eval-Merg-Logo', upload_to='logo/%Y-%m-%d/', null=True, blank=True)
+#         # mergeUrl = models.URLField(blank=True, null=True)
+#         # exportedFile = models.FileField(blank=True, null=True)
+#
+#         # def form_valid(self, form):
+#         #        user = self.request.user
+#         #        projectId = self.kwargs['pk']
+#         #        project = Project.objects.get(pk=projectId)
+#         #        form.instance.ofProject = project
+#         #        form.instance.evaluator = user
+#         #
+#         #        return super(EvaluationCreate, self).form_valid(form)
+#         #
+#         #    def get_context_data(self, **kwargs):
+#         #        context= super(EvaluationCreate,self).get_context_data(**kwargs)
+#         #        context['project'] = self.kwargs
+#         #        return context
 
 @login_required
 def exportHtmlFile(request , list_id):
@@ -326,38 +326,36 @@ def mergeFields(evalList):
         heurPrincips.extend(list(e.heurPrincip.all()))
     heurPrincips = list(set(heurPrincips))
 
-    # TODO screenshots
-
     return result , heurPrincips
 
-def mergeEvals(request , list_id):
-
-    list = ListOfEval.objects.get(pk=list_id)
-    project = list.ofProject
-    resultEval = Evaluation(ofProject = project , evaluator = project.manager)
-
-    if request.is_ajax():
-        ids = request.POST.getlist('ids[]')
-        name = request.POST.get('name')
-        addtolist = request.POST.get('addtolist')
-        if ids and len(ids) > 1:
-            evals = Evaluation.objects.filter(pk__in=ids)
-            fields , heurPrincips = mergeFields(evals)
-            resultEval.__dict__.update(fields)
-            if name:
-                resultEval.title = name
-            else:
-                resultEval.title = 'Merged Evaluations'
-            resultEval.save()
-            resultEval.heurPrincip.add(*heurPrincips)
-
-            if addtolist :
-                list.evaluations.add(resultEval)
-
-            url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/'
-            response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
-            return HttpResponse(json.dumps(response), content_type='application/json')
-    return HttpResponse('not success')
+# def mergeEvals(request , list_id):
+#
+#     list = ListOfEval.objects.get(pk=list_id)
+#     project = list.ofProject
+#     resultEval = Evaluation(ofProject = project , evaluator = project.manager)
+#
+#     if request.is_ajax():
+#         ids = request.POST.getlist('ids[]')
+#         name = request.POST.get('name')
+#         addtolist = request.POST.get('addtolist')
+#         if ids and len(ids) > 1:
+#             evals = Evaluation.objects.filter(pk__in=ids)
+#             fields , heurPrincips = mergeFields(evals)
+#             resultEval.__dict__.update(fields)
+#             if name:
+#                 resultEval.title = name
+#             else:
+#                 resultEval.title = 'Merged Evaluations'
+#             resultEval.save()
+#             resultEval.heurPrincip.add(*heurPrincips)
+#
+#             if addtolist :
+#                 list.evaluations.add(resultEval)
+#
+#             url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/'
+#             response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
+#             return HttpResponse(json.dumps(response), content_type='application/json')
+#     return HttpResponse('not success')
 
 
 def mergeScreenshots(resultEval, listEvals):
