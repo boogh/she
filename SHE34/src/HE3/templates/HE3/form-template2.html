@@ -40,6 +40,7 @@
 
             {% else %}
                 {{ field |addcss:"form-control" }}
+                {{ field.help_text }}
             {% endif %}
         </div>
     {% endfor %}

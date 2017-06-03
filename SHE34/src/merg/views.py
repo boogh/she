@@ -320,7 +320,7 @@ class UpdateMergedEvaluation(UpdateView):
 
     # eval = Evaluation.objects.get(pk=eval_id)
     # project = eval.ofProject
-    template_name ='HE3/evaluations/evaluation-form-merged.html'
+    template_name ='HE3/evaluation_form.html'
 
     # form =MergeEvaluationForm(eval)
     model = Evaluation
