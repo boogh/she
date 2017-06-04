@@ -142,6 +142,8 @@ def makeReport(request, project_id):
 #     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
 #     return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
 
+
+# content base
 @login_required
 def recommend(request , eval_id):
 
@@ -156,12 +158,15 @@ def recommend(request , eval_id):
     recDesBase = project.evaluation_for_project.filter(pk__in =result['resultDes'])
     recRecBase = project.evaluation_for_project.filter(pk__in =result['resultRec'])
     recTagseBase = project.evaluation_for_project.filter(pk__in =result['resultTags'])
-    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-    # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
 
     if request.is_ajax():
         template_name = 'HE3/evaluations/e-panel-list.html'
-        context = {'evaluations' : set (list(recDesBase) + list(recTagseBase) + list(recRecBase))}
+        allRecommendedEvals = (recDesBase | recRecBase | recTagseBase).distinct()
+        allEvaluations = project.evaluation_for_project.all()
+        alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
+
+        context = {'evaluations' : allRecommendedEvals.exclude(pk__in= alreadyMerged) ,
+                   'used_evaluations': allRecommendedEvals.filter(pk__in =alreadyMerged),}
 
     else:
         template_name = 'merge/recommendations.html'
@@ -172,6 +177,7 @@ def recommend(request , eval_id):
 
     return render(request,template_name=template_name,context= context )
 
+# place base
 def recommendAjax(request, eval_id):
 
     eval = Evaluation.objects.get(id=eval_id)
@@ -181,7 +187,6 @@ def recommendAjax(request, eval_id):
     result['evaluations'] = resultplace
     recPlaceBase = project.evaluation_for_project.filter(pk__in =resultplace)
 
-    # return HttpResponse(json.dumps(result) , content_type='application/json')
     return render_to_response(template_name='HE3/evaluations/e-panel-list.html' , context= {'evaluations' : recPlaceBase})
 
 # class EvaluationList(CreateView):

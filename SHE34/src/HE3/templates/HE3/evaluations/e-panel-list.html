@@ -12,17 +12,25 @@
         <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
         </div>
         <a href="javascript:evalDetail({{ e.id }})" >
-            <div>
-                {{ e.title }} <br> <small>{{ e.evaluator.name }}</small>
+            <div class='eval-item'>
+                <div> {{ e.title }} <br> </div>
+                <div><small>{{ e.evaluator.name }}</small>
             </div>
         </a>
-        {#        <div>#}
-        {#            <a class="btn btn-sm btn-info" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>#}
-        {#        </div>#}
-
     </li>
-
 {% endfor %}
 
-{##}
-
+{% if used_evaluations %}
+    {% for e in used_evaluations %}
+        <li class="list-group-item">
+            <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
+            </div>
+            <a href="javascript:evalDetail({{ e.id }})" >
+                <div class='eval-item'>
+                    {{ e.title }} <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <br>
+                    <small>{{ e.evaluator.name }}</small>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}
