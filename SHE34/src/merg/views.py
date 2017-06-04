@@ -45,13 +45,13 @@ def makeReport(request, project_id):
         template_name = 'merge/merge.html'
         allEvaluations = project.evaluation_for_project.all()
         alreadyMerged = allEvaluations.filter(merged =True).values_list('mergedFromEvaluations' , flat = True)
-        remainedEvals = allEvaluations.exclude(pk__in = alreadyMerged)
+        remainedEvals = allEvaluations.filter(merged=False).exclude( pk__in = alreadyMerged)
 
         context = {'project': project,
                    'now': timezone.now().date(),
                    'evaluations': remainedEvals,
                    'mergedEvals': allEvaluations.filter(merged=True),
-                   'alreadyMerged': alreadyMerged,
+                   # 'alreadyMerged': alreadyMerged,
                    }
         return render(request,template_name,context)
     else:

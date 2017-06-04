@@ -9,13 +9,15 @@
 
 {% for e in evaluations %}
     <li class="list-group-item">
-        <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
-        </div>
+        {% if e.merged == False %}
+            <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
+            </div>
+        {% endif %}
         <a href="javascript:evalDetail({{ e.id }})" >
             <div class='eval-item'>
                 <div> {{ e.title }} <br> </div>
                 <div><small>{{ e.evaluator.name }}</small>
-            </div>
+                </div>
         </a>
     </li>
 {% endfor %}
