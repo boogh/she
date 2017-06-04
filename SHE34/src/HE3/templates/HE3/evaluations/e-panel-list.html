@@ -16,7 +16,7 @@
         <a href="javascript:evalDetail({{ e.id }})" >
             <div class='eval-item'>
                 <div> {{ e.title }} <br> </div>
-                <div><small>{{ e.evaluator.name }}</small>
+                    <div><small>{{ e.description | truncatewords:5 }} </small>
                 </div>
         </a>
     </li>
@@ -30,7 +30,7 @@
             <a href="javascript:evalDetail({{ e.id }})" >
                 <div class='eval-item'>
                     {{ e.title }} <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <br>
-                    <small>{{ e.evaluator.name }}</small>
+                    <div><small>{{ e.description | truncatewords:5 }} </small>
                 </div>
             </a>
         </li>
