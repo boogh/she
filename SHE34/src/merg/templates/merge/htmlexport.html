@@ -55,12 +55,16 @@
                         <td>{{ e.get_severity_display }}</td>
                         <td>{{ e.get_frequency_display }}</td>
                         {% if merged == False %}
-                            <td> <a href=""><img src="{{ e.screenshot.big.url }}"/> </a> </td>
+                            <td> <a href=""><img src="{{ e.screenshot.avatar.url }}"/> </a> </td>
                         {% else %}
                             <td> {% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" ><br> {% endfor %}
                             </td>
                         {% endif %}
-                        <td>{{ e.evaluator.name }}</td>
+                        {% if merged == True %}
+                            <td> {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %} </td>
+                        {% else %}
+                            <td>{{ e.evaluator.name }}</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
 
