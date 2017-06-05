@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse
 from django.views import generic
 from HE3.models import Project, Evaluation, SetOfHeuristics, HeuristicPrinciples, Environment , Screenshots
 from django.core.urlresolvers import reverse_lazy,reverse
@@ -132,7 +133,7 @@ class EvaluationCreate(CreateView):
     #     screenshotForm = ScreenshotForm()
     #     return self.render_to_response(
     #         self.get_context_data(form=form,
-    #                               screenshotForm=screenshotForm))
+    #                               screenshotdeForm=screenshotForm))
     # def post(self, request, *args, **kwargs):
     #     self.object = None
     #     form_class = self.get_form_class()
@@ -293,9 +294,10 @@ class HeuristicSetCreate(CreateView):
 @login_required
 def setDelete(request, set_id):
     set = SetOfHeuristics.objects.get(pk=set_id)
-    if request.user == set.creator :
+    if (Project.objects.filter(setOfHeuristics=set).count() > 0):
+        return HttpResponse ('ERROR ! This set can not be deleted, because there are some projects, which are defined based on this set!')
+    elif request.user == set.creator :
         set.delete()
-
     return redirect('profiles:dashboard:user-dashboard')
 
 
