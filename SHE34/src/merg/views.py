@@ -357,19 +357,25 @@ class UpdateMergedEvaluation(UpdateView):
 # --------Export methods  ---------------------------------------------------------------
 
 @login_required
-def exportHtmlFile(request , list_id):
+def exportHtmlFile(request , project_id , merge):
+    project = Project.objects.get(pk=project_id)
+    evals = project.evaluation_for_project.all()
+    merged = False
+    if int(merge[0]) == 0:
+        evals = evals.filter(merged=False)
+    elif int(merge[0]) == 1:
+        merged = True
+        evals = evals.filter(merged=True)
 
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
-    project = listofeval.ofProject
     template_name = 'merge/htmlexport.html'
-    context = { 'project' : project ,
-                'evaluations': evaluations}
+    context = { 'evaluations' : evals ,
+                'project': project ,
+                'merged' :merged ,}
 
     return render(request,template_name=template_name,context=context)
 
 @login_required
-def exportDocFile(request, list_id):
+def exportDocFile(request, list_id ):
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     response['Content-Disposition'] = 'attachment; filename=demo.docx'
 
@@ -381,7 +387,6 @@ def exportDocFile(request, list_id):
     return response
 @login_required
 def exportCsvFile(request,list_id):
-
     listofeval = ListOfEval.objects.get(pk=list_id)
     evaluations = listofeval.evaluations.all().order_by('heurPrincip')
     project = listofeval.ofProject

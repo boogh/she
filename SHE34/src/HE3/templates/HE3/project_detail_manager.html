@@ -93,7 +93,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a target="_blank" href=""> Export as Docx </a></li>
-                                <li><a target="_blank" href=""> Export as html </a></li>
+                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 1 %}"> Export as html </a></li>
                                 <li><a target="_blank" href=""> Export as csv </a></li>
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
@@ -133,7 +133,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a target="_blank" href=""> Export as Docx </a></li>
-                                <li><a target="_blank" href=""> Export as html </a></li>
+                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 0 %}"> Export as html </a></li>
                                 <li><a target="_blank" href=""> Export as csv </a></li>
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
