@@ -1,12 +1,4 @@
 
-{#{% if evaluations %}#}
-{#    <div class="row">#}
-{#    <div class="col-sm-offset-7 ">#}
-{#        <input type="checkbox" id="eval-checkBoxes" />#}
-{#    </div>#}
-{#    </div>#}
-{#{% endif %}#}
-
 {% for e in evaluations %}
     <li class="list-group-item">
         {% if e.merged == False %}
@@ -22,8 +14,8 @@
     </li>
 {% endfor %}
 
-{% if used_evaluations %}
-    {% for e in used_evaluations %}
+{% if used_evals %}
+    {% for e in used_evals %}
         <li class="list-group-item">
             <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
             </div>

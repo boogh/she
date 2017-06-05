@@ -46,12 +46,11 @@ def makeReport(request, project_id):
         allEvaluations = project.evaluation_for_project.all()
         alreadyMerged = allEvaluations.filter(merged =True).values_list('mergedFromEvaluations' , flat = True)
         remainedEvals = allEvaluations.filter(merged=False).exclude( pk__in = alreadyMerged)
-
         context = {'project': project,
                    'now': timezone.now().date(),
-                   'evaluations': remainedEvals,
+                   'evals': remainedEvals,
                    'mergedEvals': allEvaluations.filter(merged=True),
-                   # 'alreadyMerged': alreadyMerged,
+                   'evaluators': project.evaluators.filter(pk__in = remainedEvals.values_list('evaluator', flat= True).distinct()),
                    }
         return render(request,template_name,context)
     else:
@@ -160,13 +159,16 @@ def recommend(request , eval_id):
     recTagseBase = project.evaluation_for_project.filter(pk__in =result['resultTags'])
 
     if request.is_ajax():
-        template_name = 'HE3/evaluations/e-panel-list.html'
+        # template_name = 'HE3/evaluations/e-panel-list.html'
+        template_name = 'merge/user-based-evals.html'
         allRecommendedEvals = (recDesBase | recRecBase | recTagseBase).distinct()
         allEvaluations = project.evaluation_for_project.all()
         alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
 
-        context = {'evaluations' : allRecommendedEvals.exclude(pk__in= alreadyMerged) ,
-                   'used_evaluations': allRecommendedEvals.filter(pk__in =alreadyMerged),}
+        context = {'evals' : allRecommendedEvals.exclude(pk__in= alreadyMerged) ,
+                   'used_evaluations': allRecommendedEvals.filter(pk__in =alreadyMerged),
+                   'evaluators': project.evaluators.filter(pk__in = allRecommendedEvals.values_list('evaluator', flat= True).distinct()),
+                   }
 
     else:
         template_name = 'merge/recommendations.html'
