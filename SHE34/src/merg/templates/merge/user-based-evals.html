@@ -1,0 +1,32 @@
+{% load mytags %}
+{% for user in evaluators %}
+    {% evaluator_filter evals user as evaluations %}
+
+    {% if used_evaluations %}
+    {% evaluator_filter used_evaluations user as used_evals %}
+    {% endif %}
+
+    {% random user.id as ID %}
+    <div class="panel panel-default" id="panel2">
+        <div class="panel-heading">
+            <h6 class="lead">
+                <a data-toggle="collapse" data-target="#{{ ID }}"
+                   href="#{{ ID}}" class="collapsed">
+                    {{ user.name }} -
+                    <small>
+                        {% if used_evals %}
+                        {% add evaluations.count used_evals.count %}
+                        {% else %} {{ evaluations.count }}
+                        {% endif %}
+                        Evaluations
+                    </small>
+                </a>
+            </h6>
+        </div>
+        <div id="{{ ID}}" class="panel-collapse collapse">
+            <div class="panel-body">
+                {% include 'HE3/evaluations/e-panel-list.html' %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
