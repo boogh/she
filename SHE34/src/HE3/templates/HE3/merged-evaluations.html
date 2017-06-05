@@ -6,6 +6,8 @@
     <th>Found By</th>
 {% endblock %}
 
+{% block a_place %} {% endblock %}
+
 {% block other-td %}
     <td>{% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" <br> {% endfor %} </td>
     <td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>

@@ -20,6 +20,7 @@
                 <th>Operations</th>
             </tr>
             </thead>
+            <tbody>
             <tr>
                 {% if evaluation.merged == False %}
                     <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.evaluator.email }}</small></td>
@@ -38,6 +39,7 @@
                     <a class="btn btn-default btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>
                 </td>
             </tr>
+            </tbody>
         </table>
     </div>
 </div>
@@ -52,6 +54,6 @@
     {% endif %}
     <h4> Screenshot:</h4>
     <img src="{{ evaluation.screenshot.big.url }}" alt="" />
-    {% for scr in evaluation.mergedScreenshots.all %} <img src="{{ scr.screenshot.big.url }}" <br> {% endfor %}
+    {% for scr in evaluation.mergedScreenshots.all %} <img src="{{ scr.screenshot.big.url }}"> <br> {% endfor %}
 </div>
-<td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>
+{#<td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>#}
