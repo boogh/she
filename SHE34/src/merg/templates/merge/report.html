@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block titleOfPage %} {{ project.name | capfirst }} - Report{% endblock %}
+{% block title %} {{ project.name }} - Report {% endblock %}
+{% block navbar %} {% endblock %}
+{% block menubar %} {% endblock %}
+
+{% block container %}
+    <div class="container">
+{#    ------------------------------Title---------------------------------------#}
+        <div class="starter-template">
+            <h1 class="bg-info">   {{ project.name | capfirst }} - Report </h1>
+        </div>
+{#    --------------------------------project detail-----------------------------#}
+        <div>
+            <h2>Project Description:</h2> <br> <p>{{ project.description }} - {{ project.link }}</p>
+        </div>
+{#   ----------------------------------Evaluators -----------------------------#}
+        <div>Project evaluators</div>
+        <div>Evaluators Environments</div>
+        <div>Positive Merged evaluations</div>
+        <div>Negative Merged evaluations</div>
+        <div>Positive  evaluations</div>
+        <div>Negative  evaluations</div>
+
+{#    -------------------Heuristics---------------------------------------#}
+
+        <div>
+            <h2>Heuristic set:</h2> This project used <strong>{{ project.setOfHeuristics.title }} </strong> set of heuristcs.<br>
+            <h4>{{ project.setOfHeuristics.title }} : </h4>
+            <p>{{ project.setOfHeuristics.description }}</p>
+            {% for princip in project.setOfHeuristics.SetOfHeuristics.all %}
+                <h5>{{ princip.title }} : </h5>
+                <p>{{ princip.description }}</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -38,7 +38,7 @@ from HE3.forms import MergeEvaluationForm
 #                    }
 #         return context
 
-def makeReport(request, project_id):
+def mergeDesktop(request, project_id):
 
     project = Project.objects.get(pk = project_id);
     if (project.manager == request.user):
@@ -352,12 +352,25 @@ class UpdateMergedEvaluation(UpdateView):
 
     # return render(request, context={'project': project,'form' : form} ,template_name=template_name)
 
+# ------------Report ----------------
+def reportHtml(request , project_id):
+    project = Project.objects.get(pk=project_id)
+    mergedEvals = project.evaluation_for_project.filter(merged = True)
+    evals = project.evaluation_for_project.filter(merged = False)
+
+    context = { 'project' : project ,
+                'evaluations' : evals,
+                'mergedEvals' : mergedEvals,
+    }
+
+    return render (request , template_name='merge/report.html' , context=context)
+
 
 
 # --------Export methods  ---------------------------------------------------------------
 
 @login_required
-def exportHtmlFile(request , project_id , merge):
+def exportHtmlEvals(request, project_id, merge):
     project = Project.objects.get(pk=project_id)
     evals = project.evaluation_for_project.all()
     merged = False
