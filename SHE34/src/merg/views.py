@@ -359,7 +359,7 @@ def reportHtml(request , project_id):
     evals = project.evaluation_for_project.filter(merged = False)
     environments = Environment.objects.filter(creator__in = project.evaluators.all()).order_by('creator')
     context = { 'project' : project ,
-                'evaluations' : evals,
+                'evaluations' : evals.order_by('positivity' , 'evaluator' , 'severity'),
                 'mergedEvals' : mergedEvals,
                 'environments' :environments,
                 'pos_merge' :mergedEvals.filter(positivity = 'p'),

@@ -46,7 +46,14 @@
             <td>{{ e.get_frequency_display }}</td>
             {% block found-by-td %} <td>{{ e.evaluator.name }}</td> {% endblock %}
             {% block screenshot-td %}
-                <td> <img src="{{ e.screenshot.avatar.url }}"/></td>
+                <td>
+                    {% if e.screenshot %}
+                        <a href="{{ e.screenshot.url }}">
+                            <img src="{{ e.screenshot.avatar.url }}"/>
+                        </a>
+                    {% endif %}
+
+                </td>
             {% endblock %}
             {% block operations-td %}
                 {#                <td>#}

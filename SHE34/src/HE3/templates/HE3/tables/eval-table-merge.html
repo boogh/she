@@ -8,9 +8,9 @@
 
 
 {% block found-by-td %}
-<td>
-    {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %}
-</td>
+    <td>
+        {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %}
+    </td>
 {% endblock %}
 {#{% block screenshot-th %}#}
 
@@ -20,7 +20,14 @@
 
 {% block screenshot-td %}
     <td>
-        {% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" ><br> {% endfor %}
+        {% for scr in e.mergedScreenshots.all %}
+            {% if scr.screenshot %}
+                <a href="{{ scr.screenshot.url }}">
+                    <img src="{{ scr.screenshot.avatar.url }}" >
+                </a>
+                <br>
+            {% endif %}
+        {% endfor %}
     </td>
 {% endblock %}
 
