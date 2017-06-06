@@ -189,7 +189,12 @@ def recommendAjax(request, eval_id):
     result['evaluations'] = resultplace
     recPlaceBase = project.evaluation_for_project.filter(pk__in =resultplace)
 
-    return render_to_response(template_name='HE3/evaluations/e-panel-list.html' , context= {'evaluations' : recPlaceBase})
+    allEvaluations = project.evaluation_for_project.all()
+    alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
+
+    return render_to_response(template_name='merge/user-based-evals.html' , context= {'evals' : recPlaceBase.exclude(pk__in=alreadyMerged),
+                                                                                      'used_evaluations':recPlaceBase.filter(pk__in=alreadyMerged),
+                                                                                      'evaluators' : project.evaluators.filter(pk__in = recPlaceBase.values_list('evaluator', flat= True).distinct()) })
 
 # class EvaluationList(CreateView):
 #     model = ListOfEval
