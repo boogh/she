@@ -1,0 +1,26 @@
+
+{% extends 'HE3/tables/eval-table.html' %}
+
+
+{% block a_place-th %}{% endblock %}
+{% block a_place-td %}{% endblock %}
+
+
+
+{% block found-by-td %}
+<td>
+    {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %}
+</td>
+{% endblock %}
+{#{% block screenshot-th %}#}
+
+{% block screenshot-th %}
+    <th>Screenshots</th>
+{% endblock %}
+
+{% block screenshot-td %}
+    <td>
+        {% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" ><br> {% endfor %}
+    </td>
+{% endblock %}
+

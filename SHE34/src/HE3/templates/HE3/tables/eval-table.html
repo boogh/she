@@ -1,0 +1,72 @@
+<table class="table table-responsive table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+        {% block checkbox-th %}
+            {#            <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
+        {% endblock %}
+        <th>#</th>
+        {#        {% block user-th %} {% endblock %}#}
+        <th>Title</th>
+        <th>Heuristic Principe</th>
+        <th>Place</th>
+        {% block a_place-th %} <th>Alternative Name for Place</th>{% endblock %}
+        <th>Link</th>
+        <th>Description</th>
+        <th>Recommendation</th>
+        <th>Positivity</th>
+        <th>Severity</th>
+        <th>Frequency</th>
+        <th>Found By</th>
+        {% block screenshot-th %}
+            <th>Screenshot</th>
+        {% endblock %}
+        {% block operations-th %}
+        {% endblock %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in evaluations %}
+        <tr>
+            {% block checkbox-td %}
+                {#                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
+            {% endblock %}
+            <td> {{ forloop.counter }}</td>
+            {#            {% block user-td %} {% endblock %}#}
+            <td>  {% block title-td %} {{ e.title }} {% endblock %}</td>
+            <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>
+            <td>{{ e.place }}</td>
+            {% block a_place-td %}
+                <td>{{ e.a_place }}</td>
+            {% endblock %}
+            <td>{{ e.link }}</td>
+            <td>{{ e.description | truncatewords:5 }} </td>
+            <td>{{ e.recommendation | truncatewords:5 }} </td>
+            <td> {{ e.get_positivity_display }}</td>
+            <td>{{ e.get_severity_display }}</td>
+            <td>{{ e.get_frequency_display }}</td>
+            {% block found-by-td %} <td>{{ e.evaluator.name }}</td> {% endblock %}
+            {% block screenshot-td %}
+                <td> <img src="{{ e.screenshot.avatar.url }}"/></td>
+            {% endblock %}
+            {% block operations-td %}
+                {#                <td>#}
+                {#                    <div class="btn-group">#}
+                {#                        <a class="btn btn-primary btn-sm" target="_blank"#}
+                {#                                {% if e.merged == False %}#}
+                {#                           href="{% url 'profiles:dashboard:evaluation-update' e.id %}">#}
+                {#                                {% else %}#}
+                {#                                    href ="{% url 'merge:update-merged-evaluation' e.id %}" >#}
+                {#                                {% endif %}#}
+                {#                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit </a>#}
+                {#                        <button type="button" class="btn btn-sm btn-warning" data-project="{{ e.title }}" data-url= {% url 'profiles:dashboard:evaluation-delete' e.id %} data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+                {#                            Del#}
+                {#                        </button>#}
+                {#                        <a class="btn btn-sm btn-default" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>#}
+                {#                    </div>#}
+                {#                </td>#}
+            {% endblock %}
+        </tr>
+        {% block extra-row %} {% endblock %}
+    {% endfor %}
+    </tbody>
+</table>
