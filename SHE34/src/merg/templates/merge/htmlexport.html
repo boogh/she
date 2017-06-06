@@ -15,60 +15,66 @@
         </div>
 
         <div>
-            <table class="table table-responsive table-bordered table-striped table-hover">
-                <thead>
-                <tr>
-                    <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>
-                    <th>#</th>
-                    <th>title</th>
-                    <th>Heuristic Principe</th>
-                    <th>Place</th>
-                    {% if merged == False %}
-                        <th>Alternate Names of the Place </th>
-                    {% endif %}
-                    <th>Link</th>
-                    <th>Description</th>
-                    <th>Recommendation</th>
-                    <th>Positivity</th>
-                    <th>Severity</th>
-                    <th>Frequency</th>
-                    <th>Screenshot</th>
-                    <th>Found By</th>
-                </tr>
-                </thead>
-
-                {% for e in evaluations %}
-                    <tr>
-                        <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>
-                        <td> {{ forloop.counter }}</td>
-                        {% block user-td %} {% endblock %}
-                        <td> {{ e.title }}</td>
-                        <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>
-                        <td>{{ e.place }}</td>
-                        {% if merged == False %}
-                            <td>{{ e.a_place }}</td>
-                        {%  endif %}
-                        <td>{{ e.link }}</td>
-                        <td>{{ e.description  }} </td>
-                        <td>{{ e.recommendation }}</td>
-                        <td> {{ e.get_positivity_display }}</td>
-                        <td>{{ e.get_severity_display }}</td>
-                        <td>{{ e.get_frequency_display }}</td>
-                        {% if merged == False %}
-                            <td> <a href=""><img src="{{ e.screenshot.avatar.url }}"/> </a> </td>
-                        {% else %}
-                            <td> {% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" ><br> {% endfor %}
-                            </td>
-                        {% endif %}
-                        {% if merged == True %}
-                            <td> {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %} </td>
-                        {% else %}
-                            <td>{{ e.evaluator.name }}</td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-
-            </table>
+            {% if merged == False %}
+                {% include 'HE3/tables/eval-table.html' %}
+            {% else %}
+                {% include 'HE3/tables/eval-table-merge.html' %}
+            {% endif %}
+        <br>
+{#            <table class="table table-responsive table-bordered table-striped table-hover">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
+{#                    <th>#</th>#}
+{#                    <th>title</th>#}
+{#                    <th>Heuristic Principe</th>#}
+{#                    <th>Place</th>#}
+{#                    {% if merged == False %}#}
+{#                        <th>Alternate Names of the Place </th>#}
+{#                    {% endif %}#}
+{#                    <th>Link</th>#}
+{#                    <th>Description</th>#}
+{#                    <th>Recommendation</th>#}
+{#                    <th>Positivity</th>#}
+{#                    <th>Severity</th>#}
+{#                    <th>Frequency</th>#}
+{#                    <th>Screenshot</th>#}
+{#                    <th>Found By</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{##}
+{#                {% for e in evaluations %}#}
+{#                    <tr>#}
+{#                        <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
+{#                        <td> {{ forloop.counter }}</td>#}
+{#                        {% block user-td %} {% endblock %}#}
+{#                        <td> {{ e.title }}</td>#}
+{#                        <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>#}
+{#                        <td>{{ e.place }}</td>#}
+{#                        {% if merged == False %}#}
+{#                            <td>{{ e.a_place }}</td>#}
+{#                        {%  endif %}#}
+{#                        <td>{{ e.link }}</td>#}
+{#                        <td>{{ e.description  }} </td>#}
+{#                        <td>{{ e.recommendation }}</td>#}
+{#                        <td> {{ e.get_positivity_display }}</td>#}
+{#                        <td>{{ e.get_severity_display }}</td>#}
+{#                        <td>{{ e.get_frequency_display }}</td>#}
+{#                        {% if merged == False %}#}
+{#                            <td> <a href=""><img src="{{ e.screenshot.avatar.url }}"/> </a> </td>#}
+{#                        {% else %}#}
+{#                            <td> {% for scr in e.mergedScreenshots.all %} <img src="{{ scr.screenshot.avatar.url }}" ><br> {% endfor %}#}
+{#                            </td>#}
+{#                        {% endif %}#}
+{#                        {% if merged == True %}#}
+{#                            <td> {% for u in e.merdedFromEvaluators.all %} {{ u.name }} <br> {% endfor %} </td>#}
+{#                        {% else %}#}
+{#                            <td>{{ e.evaluator.name }}</td>#}
+{#                        {% endif %}#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{##}
+{#            </table>#}
         </div>
     </div>
 {% endblock %}

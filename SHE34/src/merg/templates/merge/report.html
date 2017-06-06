@@ -28,19 +28,20 @@
     {% if pos_merge %}
         <div><h2>Positive Merged evaluations:</h2>
         {% with pos_merge as evaluations %}
-            {% include 'HE3/evaluation-tables.html' %}
+            {% include 'HE3/tables/eval-table-merge.html' %}
         {% endwith %}
         </div>
     {% endif %}
     {% if neg_merge %}
-        <div> <h2>Negative Merged evaluations:</h2>
+        <div> <h2>Negative Merged Evaluations:</h2>
         {% with neg_merge as evaluations %}
-            {% include 'HE3/evaluation-tables.html' %}
+            {% include 'HE3/tables/eval-table-merge.html' %}
         {% endwith %}
         </div>
 {#-----------------------------Appendix--------------------------------------------#}
-        
+
     {% endif %}
+
         <div>Positive  evaluations</div>
         <div>Negative  evaluations</div>
 

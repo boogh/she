@@ -108,7 +108,8 @@
                         <div class="panel-body">
                             <div class="table table-responsive" >
                                 {% with mergedEvals as evaluations %}
-                                    {% include 'HE3/merged-evaluations.html' %}
+{#                                    {% include 'HE3/merged-evaluations.html' %}#}
+                                    {% include 'HE3/tables/eval-table-merge-operation.html' %}
                                 {% endwith %}
                                 {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
                             </div>
@@ -142,7 +143,9 @@
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
-                            {% include 'HE3/evaluation-table-with-user.html' %}
+{#                            {% include 'HE3/evaluation-table-with-user.html' %}#}
+                            {% include 'HE3/tables/eval-table-operation.html' %}
+
                         </div>
                     </div>
                 </div>
