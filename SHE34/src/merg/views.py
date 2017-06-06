@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect,render_to_respons
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView , UpdateView
-from HE3.models import Project, Evaluation, Screenshots, ListOfEval
+from HE3.models import Project, Evaluation, Screenshots,Environment, ListOfEval
 from django.utils import timezone
 from docx import Document
 import csv
@@ -357,10 +357,13 @@ def reportHtml(request , project_id):
     project = Project.objects.get(pk=project_id)
     mergedEvals = project.evaluation_for_project.filter(merged = True)
     evals = project.evaluation_for_project.filter(merged = False)
-
+    environments = Environment.objects.filter(creator__in = project.evaluators.all()).order_by('creator')
     context = { 'project' : project ,
                 'evaluations' : evals,
                 'mergedEvals' : mergedEvals,
+                'environments' :environments,
+                'pos_merge' :mergedEvals.filter(positivity = 'p'),
+                'neg_merge' :mergedEvals.filter(positivity = 'n'),
     }
 
     return render (request , template_name='merge/report.html' , context=context)

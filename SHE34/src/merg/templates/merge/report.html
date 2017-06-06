@@ -16,10 +16,31 @@
             <h2>Project Description:</h2> <br> <p>{{ project.description }} - {{ project.link }}</p>
         </div>
 {#   ----------------------------------Evaluators -----------------------------#}
-        <div>Project evaluators</div>
-        <div>Evaluators Environments</div>
-        <div>Positive Merged evaluations</div>
-        <div>Negative Merged evaluations</div>
+        <div><h2>Evaluators:</h2>
+            <p> These are the evalutors in this project:</p>
+            {% for ev in project.evaluators.all %}
+                <li> {{ ev.name }} - {{ ev.email }}</li>
+            {% endfor %}
+        </div>
+        <div><h4>Evaluator Environments:</h4>
+        {% include 'merge/environments.html' %}
+        </div>
+    {% if pos_merge %}
+        <div><h2>Positive Merged evaluations:</h2>
+        {% with pos_merge as evaluations %}
+            {% include 'HE3/evaluation-tables.html' %}
+        {% endwith %}
+        </div>
+    {% endif %}
+    {% if neg_merge %}
+        <div> <h2>Negative Merged evaluations:</h2>
+        {% with neg_merge as evaluations %}
+            {% include 'HE3/evaluation-tables.html' %}
+        {% endwith %}
+        </div>
+{#-----------------------------Appendix--------------------------------------------#}
+        
+    {% endif %}
         <div>Positive  evaluations</div>
         <div>Negative  evaluations</div>
 
@@ -30,7 +51,7 @@
             <h4>{{ project.setOfHeuristics.title }} : </h4>
             <p>{{ project.setOfHeuristics.description }}</p>
             {% for princip in project.setOfHeuristics.SetOfHeuristics.all %}
-                <h5>{{ princip.title }} : </h5>
+               <stron>Principle {{ forloop.counter }} :  {{ princip.title }} : </stron>
                 <p>{{ princip.description }}</p>
             {% endfor %}
         </div>

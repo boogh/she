@@ -1,0 +1,33 @@
+<div>
+    <table class="table table-responsive table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Evaluator</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Webbrowser</th>
+            <th>OS</th>
+            <th>Monitor Size</th>
+            <th>Monitor Resolution</th>
+            <th>Other Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for env in environments %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ env.creator }}</td>
+                <td>{{ env.age }}</td>
+                <td>{{ env.gender }}</td>
+                <td>{{ env.webbrowser }}</td>
+                <td>{{ env.os }}</td>
+                <td>{{ env.monitorSize }}</td>
+                <td>{{ env.monitorResolution }}</td>
+                <td>{{ env.otherData }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
