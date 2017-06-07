@@ -59,11 +59,11 @@
                 <div class="" >
                     <div class="text-center">
                         <div class="row"> <h4>Evaluations from similar place </h4> <hr></div>
-{#                        <div class="row">#}
-{#                            <div class="col-sm-offset-7">#}
-{#                                <input type="checkbox" id="checkBoxes" />#}
-{#                            </div>#}
-{#                        </div>#}
+                        {#                        <div class="row">#}
+                        {#                            <div class="col-sm-offset-7">#}
+                        {#                                <input type="checkbox" id="checkBoxes" />#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                     </div>
                     {#                    <div class="panel-body" style="overflow: scroll ; overflow-y: scroll">#}
                     <div id="output" class="common-action" onload=""> </div>
@@ -76,9 +76,9 @@
                         <div class="text-center">
                             <div class="row"> <h4>Evaluations with similar content</h4> <hr></div>
                             <div class="row">
-{#                                <div class="col-sm-offset-7">#}
-{#                                    <input type="checkbox" id="checkBoxes" />#}
-{#                                </div>#}
+                                {#                                <div class="col-sm-offset-7">#}
+                                {#                                    <input type="checkbox" id="checkBoxes" />#}
+                                {#                                </div>#}
                             </div>
 
                         </div>
@@ -104,14 +104,17 @@
             </div> <!-- End of Report panel -->
         </div>
     </div><!-- End of container -->
-    <div class="modal fade" id="e-detail" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div id="e-detail-content" class="modal-content">
+    {% include 'HE3/Evaluations/eval-modal.html' %}
+    {% include 'HE3/delete_confirmation.html' %}
 
-
-            </div>
-        </div>
-    </div>
+    {#    <div class="modal fade" id="e-detail" tabindex="-1" role="dialog">#}
+    {#        <div class="modal-dialog modal-lg" role="document">#}
+    {#            <div id="e-detail-content" class="modal-content">#}
+    {##}
+    {##}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
     {#    <div class="modal fade" id="merge-dial" tabindex="-1" role="dialog">#}
     {#        <div class="modal-dialog modal-lg" role="document">#}
     {#            <div id="merge-content" class="modal-content">#}
@@ -123,38 +126,38 @@
     {#        </div>#}
     {#    </div>#}
     <!-- Modal HTML Markup -->
-    <div id="merge-dial" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-xs-center">Creating a new evaluation with the contents of the selected evaluations:</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form" method="POST" action="">
-                        <input type="hidden" name="_token" value="">
-                        <div class="form-group">
-                            <label class="control-label">Enter a title:</label>
-                            <div>
-                                <input type="email" class="form-control input-lg" name="Title" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Add the new evaluation to the report
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer text-xs-center">
-                    <a class="btn btn-primary" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    {#    <div id="merge-dial" class="modal fade">#}
+    {#        <div class="modal-dialog">#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <h4 class="modal-title text-xs-center">Creating a new evaluation with the contents of the selected evaluations:</h4>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <form role="form" method="POST" action="">#}
+    {#                        <input type="hidden" name="_token" value="">#}
+    {#                        <div class="form-group">#}
+    {#                            <label class="control-label">Enter a title:</label>#}
+    {#                            <div>#}
+    {#                                <input type="email" class="form-control input-lg" name="Title" value="">#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <div>#}
+    {#                                <div class="checkbox">#}
+    {#                                    <label>#}
+    {#                                        <input type="checkbox" name="remember"> Add the new evaluation to the report#}
+    {#                                    </label>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </form>#}
+    {#                </div>#}
+    {#                <div class="modal-footer text-xs-center">#}
+    {#                    <a class="btn btn-primary" href="javascript:merge ({{ eval_list.id }}) "> Merge Selected Evaluations</a>#}
+    {#                </div>#}
+    {#            </div><!-- /.modal-content -->#}
+    {#        </div><!-- /.modal-dialog -->#}
+    {#    </div><!-- /.modal -->#}
 
 
 {% endblock %}
