@@ -7,56 +7,94 @@
 
 {% block container %}
     <div class="container">
-{#    ------------------------------Title---------------------------------------#}
-        <div class="starter-template">
-            <h1 class="bg-info">   {{ project.name | capfirst }} - Report </h1>
+        {#    ------------------------------Title---------------------------------------#}
+        <div class="jumbotron text-center">
+            <h1 class="">   {{ project.name | capfirst }} - Report </h1>
         </div>
-{#    --------------------------------project detail-----------------------------#}
-        <div>
-            <h2>Project Description:</h2> <br> <p>{{ project.description }} - {{ project.link }}</p>
+        {#    --------------------------------project detail-----------------------------#}
+        <div class="">
+            <h2>Project Description:</h2> <br>
+            <div class="col-sm-offset-1">
+                <p>{{ project.description }} - {{ project.link }}</p>
+            </div>
         </div>
-{#   ----------------------------------Evaluators -----------------------------#}
+        {#   ----------------------------------Evaluators -----------------------------#}
         <div><h2>Evaluators:</h2>
-            <p> These are the evalutors in this project:</p>
-            {% for ev in project.evaluators.all %}
-                <li> {{ ev.name }} - {{ ev.email }}</li>
-            {% endfor %}
+            <div class="col-sm-offset-1">
+                <p> These are the evalutors in this project:</p>
+                <div>
+                    {% for ev in project.evaluators.all %}
+                        <li> {{ ev.name }} - {{ ev.email }}</li>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
         </div>
-        <div><h4>Evaluator Environments:</h4>
-        {% include 'merge/environments.html' %}
+        <div>
+            <h2>Evaluator Environments:</h2>
+            <br>
+            <div>
+                {% include 'merge/environments.html' %}
+            </div>
+            <br>
         </div>
-    {% if pos_merge %}
-        <div><h2>Positive Merged evaluations:</h2>
-        {% with pos_merge as evaluations %}
-            {% include 'HE3/tables/eval-table-merge.html' %}
-        {% endwith %}
-        </div>
-    {% endif %}
-    {% if neg_merge %}
-        <div> <h2>Negative Merged Evaluations:</h2>
-        {% with neg_merge as evaluations %}
-            {% include 'HE3/tables/eval-table-merge.html' %}
-        {% endwith %}
-        </div>
-{#-----------------------------Appendix--------------------------------------------#}
+        {% if pos_merge %}
+            <div><h2>Positive Merged evaluations:</h2>
+                <div>
+                    {% with pos_merge as evaluations %}
+                        {% include 'HE3/tables/eval-table-merge.html' %}
+                    {% endwith %}
+                </div>
+            </div>
+            <br>
+        {% endif %}
+        {% if neg_merge %}
+            <div> <h2>Negative Merged Evaluations:</h2>
+                <div>
+                    {% with neg_merge as evaluations %}
+                        {% include 'HE3/tables/eval-table-merge.html' %}
+                    {% endwith %}
+                </div>
+                <br>
+            </div>
+            {#-----------------------------Appendix--------------------------------------------#}
 
-    {% endif %}
+        {% endif %}
 
         <div>
             <h2>All Evaluations: </h2>
-        {% include 'HE3/tables/eval-table.html' %}
+            <div>
+                {% include 'HE3/tables/eval-table.html' %}
+            </div>
         </div>
 
-{#    -------------------Heuristics---------------------------------------#}
+
+        {#    -------------------Heuristics---------------------------------------#}
 
         <div>
-            <h2>Heuristic set:</h2> This project used <strong>{{ project.setOfHeuristics.title }} </strong> set of heuristcs.<br>
-            <h4>{{ project.setOfHeuristics.title }} : </h4>
-            <p>{{ project.setOfHeuristics.description }}</p>
-            {% for princip in project.setOfHeuristics.SetOfHeuristics.all %}
-               <stron>Principle {{ forloop.counter }} :  {{ princip.title }} : </stron>
-                <p>{{ princip.description }}</p>
-            {% endfor %}
+            <h2>Heuristic set:</h2>
+            <div class="col-sm-offset-1">
+                <p>
+                    This project used <strong>{{ project.setOfHeuristics.title }} </strong> set of heuristcs.
+                </p>
+            </div>
+            <br>
+            <div class="col-sm-offset-1">
+                <h4>{{ project.setOfHeuristics.title }} : </h4> <br> <br>
+                <div class="col-sm-offset-1">
+                    <p>{{ project.setOfHeuristics.description }}</p>
+                </div>
+                <br>
+                <br>
+                <ol>
+                    {% for princip in project.setOfHeuristics.SetOfHeuristics.all %}
+                        <li>
+                            <h5>Principle {{ forloop.counter }} - {{ princip.title }} : </h5>
+                        </li>
+                        <p>{{ princip.description }}</p>
+                    {% endfor %}
+                </ol>
+            </div>
         </div>
 
     </div>
