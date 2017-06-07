@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^project/(?P<list_id>[0-9]+)/export-csv$', views.exportCsvFile, name='export-csv-file'),
 
     url(r'^project/(?P<eval_id>[0-9]+)/recommend$', views.recommend, name='recommend'),
-    url(r'^project/(?P<eval_id>[0-9]+)/recommend_ajax$', views.recommendAjax, name='recommend-ajax'),
+    url(r'^project/(?P<eval_id>[0-9]+)/recommend_ajax$', views.recommendPlaceBase, name='recommend-ajax'),
 
      # -----report  ------
     url(r'^project/(?P<project_id>[0-9]+)/report-html$', views.reportHtml, name='report-html'),

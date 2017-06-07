@@ -180,7 +180,7 @@ def recommend(request , eval_id):
     return render(request,template_name=template_name,context= context )
 
 # place base
-def recommendAjax(request, eval_id):
+def recommendPlaceBase(request, eval_id):
 
     eval = Evaluation.objects.get(id=eval_id)
     project = eval.ofProject
@@ -192,6 +192,9 @@ def recommendAjax(request, eval_id):
     allEvaluations = project.evaluation_for_project.all()
     alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
 
+    if eval.link:
+        sameLink = allEvaluations.filter(link__exact=eval.link)
+        recPlaceBase = (recPlaceBase | sameLink).distinct()
     return render_to_response(template_name='merge/user-based-evals.html' , context= {'evals' : recPlaceBase.exclude(pk__in=alreadyMerged),
                                                                                       'used_evaluations':recPlaceBase.filter(pk__in=alreadyMerged),
                                                                                       'evaluators' : project.evaluators.filter(pk__in = recPlaceBase.values_list('evaluator', flat= True).distinct()) })
