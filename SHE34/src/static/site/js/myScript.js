@@ -27,9 +27,9 @@ $(document).ready(function () {
         modal.find('#add-princip').attr('action' , p_url);
     });
 
-
+    //merge button hide
     $(".merge-bar").hide();
-    // $('.add-remove-to-report').hide();
+
     $("#eval-checkBoxes").click(function () {
         $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
         showActions('#eval-list');
@@ -44,18 +44,14 @@ $(document).ready(function () {
 
     });
 
-    // $("#report-checkBoxes").click(function () {
-    //     $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
-    //     showActions('#report-list');
-    //     showActions('.common-action');
-    //
-    // });
-
+    //avtivating javascript for placeRec after ajax load
     $('#output').on("click" ,'.checkBoxClass',function() {
         // if ($(this).is(':checked')) {
         showActions('.common-action');
         // }
     });
+
+    //avtivating javascript for contRec after ajax load
     $('#recContBase').on("click" ,'.checkBoxClass',function() {
         // if ($(this).is(':checked')) {
         showActions('.common-action');
@@ -66,6 +62,7 @@ $(document).ready(function () {
         showActions('.common-action');
     });
 
+    //getting recommendation after checking each checkbox
     $('#eval-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val());
@@ -74,6 +71,7 @@ $(document).ready(function () {
         showActions('#eval-list');
     });
 
+    //getting recommendation after checking each checkbox in Merged Evals
     $('#report-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val())
@@ -100,6 +98,7 @@ function getValueUsingClass(att){
     return chkArray;
 }
 
+//recommed pace base
 function recommend(eval_id){
     var url = '/merge/project/'+ eval_id + '/recommend_ajax';
     $.ajax({
@@ -108,12 +107,12 @@ function recommend(eval_id){
         dataType:'html',
         async : true ,
         success: function(html) {
-            // $('#output').html(html);
             $('#output').append(html);
         }
     });
 }
 
+//recommend content base
 function recommendContentBase(eval_id) {
     var url = '/merge/project/' + eval_id + '/recommend';
     $.ajax({
@@ -126,6 +125,7 @@ function recommendContentBase(eval_id) {
         }
     });
 }
+
 function evalDetail(e_id) {
     url = '/users/me/dashboard/project/EvaluationDetail/'+ e_id +'/';
     $('#e-detail-content').load(url);
@@ -133,25 +133,25 @@ function evalDetail(e_id) {
 
 }
 
-function addToReport(list_id) {
-    ids = getValueUsingClass('#eval-list');
-    url = '/merge/project/'+ list_id + '/add-evaluation-to-list';
-    $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
-    location.reload();
-}
-
-function removeFromReport(list_id) {
-    ids = getValueUsingClass('#report-list');
-    url = '/merge/project/'+ list_id + '/remove-evaluation-from-list';
-    // $.ajax({
-    //     type: 'POST',
-    //     url: url,
-    //     // contentType: 'data',
-    //     data : {ids: ids  , type: 'info' },
-    // });
-    $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
-    location.reload();
-}
+// function addToReport(list_id) {
+//     ids = getValueUsingClass('#eval-list');
+//     url = '/merge/project/'+ list_id + '/add-evaluation-to-list';
+//     $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
+//     location.reload();
+// }
+//
+// function removeFromReport(list_id) {
+//     ids = getValueUsingClass('#report-list');
+//     url = '/merge/project/'+ list_id + '/remove-evaluation-from-list';
+//     // $.ajax({
+//     //     type: 'POST',
+//     //     url: url,
+//     //     // contentType: 'data',
+//     //     data : {ids: ids  , type: 'info' },
+//     // });
+//     $.post(url , { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids });
+//     location.reload();
+// }
 
 
 /**
@@ -162,25 +162,25 @@ function removeFromReport(list_id) {
 function showActions(id){
     checkedList = getValueUsingClass(id);
 
-    if(id == '#eval-list') {
-        if (checkedList.length > 0) {
-            $("#add-to-report").show();
-
-        }
-        else {
-            $("#add-to-report").hide();
-        }
-    }
-    if (id =='#report-list') {
-        if (checkedList.length > 0) {
-            $("#remove-from-report").show();
-
-        }
-        else {
-            $("#remove-from-report").hide();
-        }
-
-    }
+    // if(id == '#eval-list') {
+    //     if (checkedList.length > 0) {
+    //         $("#add-to-report").show();
+    //
+    //     }
+    //     else {
+    //         $("#add-to-report").hide();
+    //     }
+    // }
+    // if (id =='#report-list') {
+    //     if (checkedList.length > 0) {
+    //         $("#remove-from-report").show();
+    //
+    //     }
+    //     else {
+    //         $("#remove-from-report").hide();
+    //     }
+    //
+    // }
 
     if(id == '.common-action'){
         if (checkedList.length > 1) {
