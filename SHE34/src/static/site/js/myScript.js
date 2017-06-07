@@ -14,6 +14,8 @@ $(document).ready(function () {
         modal.find('.project_name').text( project_name );
         modal.find('.modal-footer #deleteButton').attr('href' , url);
     });
+
+    //Modal for principle form
     $('#modal-princip').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var p_title = button.data('title');
@@ -27,7 +29,7 @@ $(document).ready(function () {
 
 
     $(".merge-bar").hide();
-    $('.add-remove-to-report').hide();
+    // $('.add-remove-to-report').hide();
     $("#eval-checkBoxes").click(function () {
         $("#eval-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
         showActions('#eval-list');
@@ -42,6 +44,24 @@ $(document).ready(function () {
 
     });
 
+    // $("#report-checkBoxes").click(function () {
+    //     $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+    //     showActions('#report-list');
+    //     showActions('.common-action');
+    //
+    // });
+
+    $('#output').on("click" ,'.checkBoxClass',function() {
+        // if ($(this).is(':checked')) {
+        showActions('.common-action');
+        // }
+    });
+    $('#recContBase').on("click" ,'.checkBoxClass',function() {
+        // if ($(this).is(':checked')) {
+        showActions('.common-action');
+        // }
+    });
+
     $('.common-action').find(".checkBoxClass").click(function() {
         showActions('.common-action');
     });
@@ -53,6 +73,7 @@ $(document).ready(function () {
         }
         showActions('#eval-list');
     });
+
     $('#report-list').find(".checkBoxClass").click(function() {
         if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val())
@@ -61,6 +82,8 @@ $(document).ready(function () {
         }
         showActions('#report-list')
     });
+
+
     $('a.popup').click(function(){
         newwindow=window.open($(this).attr('href'),'','height=200,width=150');
         if (window.focus) {newwindow.focus()}
@@ -85,7 +108,8 @@ function recommend(eval_id){
         dataType:'html',
         async : true ,
         success: function(html) {
-            $('#output').html(html);
+            // $('#output').html(html);
+            $('#output').append(html);
         }
     });
 }
@@ -139,13 +163,6 @@ function showActions(id){
     checkedList = getValueUsingClass(id);
 
     if(id == '#eval-list') {
-        // if (checkedList.length == 1) {
-        //     $("#eval-action").show();
-        // };
-
-        // if (checkedList.length != 1) {
-        //     $("#eval-action").hide();
-        // };
         if (checkedList.length > 0) {
             $("#add-to-report").show();
 
@@ -154,15 +171,7 @@ function showActions(id){
             $("#add-to-report").hide();
         }
     }
-
     if (id =='#report-list') {
-        //     if (checkedList.length == 1) {
-        //     $("#report-action").show();
-        // };
-
-        // if (checkedList.length != 1) {
-        //     $("#report-action").hide();
-        // };
         if (checkedList.length > 0) {
             $("#remove-from-report").show();
 
@@ -181,52 +190,24 @@ function showActions(id){
             $(".merge-bar").hide();
         }
     }
-
 }
 
-// function merge(list_id){
-//     ids = getValueUsingClass('.common-action');
-//     console.log(ids);
-//     // url = '/merge/project/'+ list_id + '/merge_selected_evaluations';
-//     url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
-//         console.log(url);
-//     name = 'ajax-title',
-//     addtolist = false
-//     $.ajax({
-//         type: 'POST',
-//         url: url,
-//         // contentType: 'data',
-//         data : {ids: ids  , type: 'info' , name: name , addtolist : addtolist },
-//         success:function (data) {
-//             if(data.status == 1){
-//                 open(data.url)
-//             }
-//         },
-//     });
-//     // location.reload();
-// }
-
+//Merging evaluations in merge.html
 function merge(project_id){
     ids = getValueUsingClass('.common-action');
-    // console.log(ids);
     url = '/merge/project/'+ project_id + '/merge_selected_evaluations';
-    // url ="{% url 'merge:merge_selected_evaluations' "+ list_id +" %}";
     name = 'ajax-title',
-        // addtolist = false
     $.post(url ,
         { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) },
         function (data) {
             if(data.status == 1){
                 open(data.url);
-                location.reload();
+                // location.reload();
             }
         });
-
 };
 
-
-
-// using jQuery
+//
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -243,6 +224,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+//Recommendation on and off
 $('.btn-toggle').click(function () {
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
