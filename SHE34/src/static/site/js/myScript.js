@@ -76,7 +76,6 @@ $(document).ready(function () {
         if ($(this).is(':checked') & rec_engin) {
             recommend($(this).val())
             recommendContentBase($(this).val())
-
         }
         showActions('#report-list')
     });
@@ -107,7 +106,7 @@ function recommend(eval_id){
         dataType:'html',
         async : true ,
         success: function(html) {
-            $('#output').append(html);
+            $('#output').html(html);
         }
     });
 }

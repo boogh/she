@@ -162,7 +162,7 @@ def recommend(request , eval_id):
         # template_name = 'HE3/evaluations/e-panel-list.html'
         template_name = 'merge/user-based-evals.html'
         allRecommendedEvals = (recDesBase | recRecBase | recTagseBase).distinct()
-        allEvaluations = project.evaluation_for_project.all()
+        allEvaluations = project.evaluation_for_project.all().exclude(pk=eval_id)
         alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
 
         context = {'evals' : allRecommendedEvals.exclude(pk__in= alreadyMerged) ,
@@ -189,7 +189,7 @@ def recommendPlaceBase(request, eval_id):
     result['evaluations'] = resultplace
     recPlaceBase = project.evaluation_for_project.filter(pk__in =resultplace)
 
-    allEvaluations = project.evaluation_for_project.all()
+    allEvaluations = project.evaluation_for_project.all().exclude(pk=eval_id)
     alreadyMerged = allEvaluations.filter(merged=True).values_list('mergedFromEvaluations', flat=True)
 
     if eval.link:
