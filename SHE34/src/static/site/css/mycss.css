@@ -9,3 +9,7 @@
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+
+#marge-desktop {
+    background-color: #f5f5f8;
+}
