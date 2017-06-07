@@ -11,6 +11,7 @@
                 {% endif %}
                 <th>Heuristic Principe</th>
                 <th>Place</th>
+                <th>Link</th>
                 <th>Positivity</th>
                 <th>Severity</th>
                 <th>Frequency</th>
@@ -27,6 +28,7 @@
                 {% endif %}
                 <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
                 <td>{{ evaluation.place }}</td>
+                <td> <a href="{{ evaluation.link }}">{{ evaluation.link | truncatechars:10}}</a></td>
                 <td> {{ evaluation.get_positivity_display }}</td>
                 <td>{{ evaluation.get_severity_display }}</td>
                 <td>{{ evaluation.get_frequency_display }}</td>
@@ -52,8 +54,14 @@
         <p> {{ evaluation.recommendation }}</p>
         <br>
     {% endif %}
-    <h4> Screenshot:</h4>
-    <img src="{{ evaluation.screenshot.big.url }}" alt="" />
-    {% for scr in evaluation.mergedScreenshots.all %} <img src="{{ scr.screenshot.big.url }}"> <br> {% endfor %}
+    {% if evaluation.screenshot or evaluation.mergedScreenshots %}
+        <h4> Screenshot:</h4>
+        <div class="text-center">
+            <img src="{{ evaluation.screenshot.big.url }}" alt="" /> <br> <p class="text-center">{{ evaluation.caption }}</p>
+            {% for scr in evaluation.mergedScreenshots.all %} <a href ={{ scr.screenshot.url }}><img src="{{ scr.screenshot.big.url }}"> </a> <br>
+                <p> {{ scr.caption }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>
 {#<td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>#}

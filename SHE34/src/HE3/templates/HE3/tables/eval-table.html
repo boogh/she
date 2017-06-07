@@ -38,7 +38,7 @@
             {% block a_place-td %}
                 <td>{{ e.a_place }}</td>
             {% endblock %}
-            <td>{{ e.link }}</td>
+            <td> <a href = '{{ e.link }}'>{{ e.link | truncatechars:10 }}</a></td>
             <td>{{ e.description | truncatewords:5 }} </td>
             <td>{{ e.recommendation | truncatewords:5 }} </td>
             <td> {{ e.get_positivity_display }}</td>
@@ -52,7 +52,6 @@
                             <img src="{{ e.screenshot.avatar.url }}"/>
                         </a>
                     {% endif %}
-
                 </td>
             {% endblock %}
             {% block operations-td %}
