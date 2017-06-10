@@ -1,5 +1,5 @@
-from HE3.models import Project
-from merg import recommend as rec
+from src.HE3.models import Project
+from src.merg import recommend as rec
 
 def script() :
 

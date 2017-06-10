@@ -249,7 +249,7 @@ def mergeFields(evalList):
     # result = {k : "" for k in evalList[0].__dict__.keys()}
     result ={}
     stringList = ['description' , 'recommendation']
-    stringWithKomma = ['place' , 'a_place' ]
+    stringWithKomma = ['place' ]
     forAvg = ['frequency' , 'severity']
     for field in stringList :
         allvalues = set([ i.__dict__[field] for i in evalList])
