@@ -119,7 +119,7 @@ class Evaluation(models.Model):
     heurPrincip= models.ManyToManyField(HeuristicPrinciples, related_name='heuristic_principle', verbose_name='Heuristic Principle', blank=True )
     title = models.CharField(max_length=300 , default='title' ,verbose_name='Title')
     place = models.CharField(max_length=300 , default='general' )
-    a_place = models.CharField(max_length=1000 , blank= True ,verbose_name="Alternate Names of the Place")
+    # a_place = models.CharField(max_length=1000 , blank= True ,verbose_name="Alternate Names of the Place")
     link = models.URLField(blank=True , verbose_name= 'Link', help_text='The link of the page to which evaluation refers')
     tags = models.CharField(max_length=400 , default='tags' ,blank=True , help_text= 'Keywords of this evaluation')
     description = models.TextField()
@@ -128,7 +128,7 @@ class Evaluation(models.Model):
     severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
     screenshot = ThumbnailerImageField(blank=True ,upload_to='screenshots/%Y-%m-%d/')
-    caption = models.CharField(blank=True , max_length=1000, help_text='Enter a caption for the screenshot')
+    # caption = models.CharField(blank=True , max_length=1000, help_text='Enter a caption for the screenshot')
 
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)

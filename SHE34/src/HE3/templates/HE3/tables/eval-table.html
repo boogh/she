@@ -9,7 +9,7 @@
         <th>Title</th>
         <th>Heuristic Principe</th>
         <th>Place</th>
-        {% block a_place-th %} <th>Alternative Name for Place</th>{% endblock %}
+{#        {% block a_place-th %} <th>Alternative Name for Place</th>{% endblock %}#}
         <th>Link</th>
         <th>Description</th>
         <th>Recommendation</th>
@@ -35,9 +35,9 @@
             <td>  {% block title-td %} {{ e.title }} {% endblock %}</td>
             <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>
             <td>{{ e.place }}</td>
-            {% block a_place-td %}
-                <td>{{ e.a_place }}</td>
-            {% endblock %}
+{#            {% block a_place-td %}#}
+{#                <td>{{ e.a_place }}</td>#}
+{#            {% endblock %}#}
             <td> <a href = '{{ e.link }}'>{{ e.link | truncatechars:10 }}</a></td>
             <td>{{ e.description | truncatewords:5 }} </td>
             <td>{{ e.recommendation | truncatewords:5 }} </td>
