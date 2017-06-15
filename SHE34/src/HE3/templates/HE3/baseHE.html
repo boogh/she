@@ -23,14 +23,14 @@
                     <li class="{% block createEnvironment %} {% endblock %}"><a href="{% url 'profiles:dashboard:environment-create' %}">Create a new evaluation environment</a></li>
                     {% block sidebar %} {% endblock %}
                 </ul><br>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Projects..">
-                    <span class="input-group-btn">
-                         <button class="btn btn-default" type="button">
-                               <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                     </span>
-                </div>
+{#                <div class="input-group">#}
+{#                    <input type="text" class="form-control" placeholder="Search Projects..">#}
+{#                    <span class="input-group-btn">#}
+{#                         <button class="btn btn-default" type="button">#}
+{#                               <span class="glyphicon glyphicon-search"></span>#}
+{#                            </button>#}
+{#                     </span>#}
+{#                </div>#}
             </div>
 
             {% block content %}
