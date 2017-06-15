@@ -376,6 +376,6 @@ def deleteEnvironment(request, env_id):
 class EnvironmentUpdate(UpdateView):
     model = Environment
     template_name = 'HE3/set/environment_form.html'
-    fields = ['age', 'gender', 'os', 'webbrowser' , 'monitorSize', 'monitorResolustion', 'otherData']
+    fields = ['age', 'gender', 'os', 'webbrowser' , 'monitorSize', 'monitorResolution', 'otherData']
     success_url = reverse_lazy('profiles:dashboard:user-dashboard')
 
