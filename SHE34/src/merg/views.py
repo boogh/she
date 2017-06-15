@@ -299,9 +299,10 @@ def mergeFields(evalList):
 
 def mergeScreenshots(resultEval, listEvals):
     for eval in listEvals:
-        screenobject =Screenshots(caption=eval.caption , screenshot =eval.screenshot)
-        screenobject.save()
-        resultEval.mergedScreenshots.add(screenobject)
+        if eval.screenshot:
+            screenobject =Screenshots( screenshot =eval.screenshot)
+            screenobject.save()
+            resultEval.mergedScreenshots.add(screenobject)
 
 # function to merge multiple evaluation
 def mergeEvaluations(request , project_id):

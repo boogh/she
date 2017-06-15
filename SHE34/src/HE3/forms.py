@@ -75,7 +75,7 @@ class MergeEvaluationForm(forms.ModelForm):
 
     class Meta:
         model = Evaluation
-        fields = ('title' , 'place' , 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
+        fields = ('title' , 'place' ,'link', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
         widgets = {
             'mergedScreenshots' : forms.CheckboxSelectMultiple()
         }

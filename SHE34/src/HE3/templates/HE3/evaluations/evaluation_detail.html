@@ -57,9 +57,13 @@
     {% if evaluation.screenshot or evaluation.mergedScreenshots.all %}
         <h4> Screenshot:</h4>
         <div class="text-center">
-            <a href="{{ evaluation.screenshot.url }}"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
-            {% for scr in evaluation.mergedScreenshots.all %} <a href ={{ scr.screenshot.url }}><img src="{{ scr.screenshot.biger.url }}"> </a> <br>
-                <p> {{ scr.caption }}</p>
+            {% if evaluation.merged == False %}
+                <a href="{{ evaluation.screenshot.url }}" target="_blank"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
+            {% endif %}
+            {% for scr in evaluation.mergedScreenshots.all %}
+                {% if scr.screenshot %}
+                    <a href ="{{ scr.screenshot.url }}" target="_blank" ><img src="{{ scr.screenshot.biger.url }}"> </a> <br>
+                {% endif %}
             {% endfor %}
         </div>
     {% endif %}
