@@ -9,12 +9,12 @@
     <div class="container">
         {#    ------------------------------Title---------------------------------------#}
         <div class="jumbotron text-center">
-            <h1 class="">   {{ project.name | capfirst }} - Report </h1>
+            <h1 class="text-primary">   {{ project.name | capfirst }} - Report </h1>
         </div>
         {#    --------------------------------project detail-----------------------------#}
         <div class="">
             <br> <br>
-            <h2>Project Description:</h2><hr>
+            <h2 class="text-info">Project Description:</h2><hr>
             <div class="col-sm-offset-1">
                 <p>{{ project.description }} - {{ project.link }}</p>
             </div>
@@ -22,7 +22,7 @@
         {#   ----------------------------------Evaluators -----------------------------#}
         <div>
             <br><br>
-            <h2>Evaluators:</h2> <hr>
+            <h2 class="text-info">Evaluators:</h2> <hr>
             <div class="col-sm-offset-1">
                 <p> These are the evalutors in this project:</p>
                 <div>
@@ -35,7 +35,7 @@
         </div>
         <div>
             <br>
-            <h2>Evaluator Environments:</h2><hr>
+            <h2 class="text-info">Evaluator Environments:</h2><hr>
             <br>
             <div>
                 {% include 'merge/environments.html' %}
@@ -44,7 +44,7 @@
         </div>
         {% if pos_merge %}
             <br><br>
-            <div><h2>Positive Merged evaluations:</h2> <hr>
+            <div><h2 class="text-info">Positive Merged evaluations:</h2> <hr>
                 <div>
                     {% with pos_merge as evaluations %}
                         {% include 'HE3/tables/eval-table-merge-desc.html' %}
@@ -55,7 +55,7 @@
         {% endif %}
         {% if neg_merge %}
             <br><br>
-            <div> <h2>Negative Merged Evaluations:</h2><hr>
+            <div> <h2 class="text-info">Negative Merged Evaluations:</h2><hr>
                 <div>
                     {% with neg_merge as evaluations %}
                         {% include 'HE3/tables/eval-table-merge-desc.html' %}
@@ -69,7 +69,7 @@
 
         <div>
             <br><br>
-            <h2>All Evaluations: </h2><hr>
+            <h2 class="text-info">All Evaluations: </h2><hr>
             <div>
                 {% include 'HE3/tables/eval-table-desc.html' %}
             </div>
@@ -80,7 +80,7 @@
 
         <div>
         <br><br>
-            <h2>Heuristic set:</h2><hr>
+            <h2 class="text-info">Heuristic set:</h2><hr>
             <div class="col-sm-offset-1">
                 <p>
                     This project used <strong>{{ project.setOfHeuristics.title }} </strong> set of heuristcs.
@@ -88,8 +88,8 @@
             </div>
             <br>
             <div class="col-sm-offset-1">
-                <h4>{{ project.setOfHeuristics.title }} : </h4> <br> <br>
-                <div class="col-sm-offset-1">
+                <h4>{{ project.setOfHeuristics.title }} : </h4> <br>
+                <div class="">
                     <p>{{ project.setOfHeuristics.description }}</p>
                 </div>
                 <br>
@@ -97,7 +97,7 @@
                 <ol>
                     {% for princip in project.setOfHeuristics.SetOfHeuristics.all %}
                         <li>
-                            <h5>Principle {{ forloop.counter }} - {{ princip.title }} : </h5>
+                            <p class="lead">Principle {{ forloop.counter }} - {{ princip.title }} : </p>
                         </li>
                         <p>{{ princip.description }}</p>
                     {% endfor %}
