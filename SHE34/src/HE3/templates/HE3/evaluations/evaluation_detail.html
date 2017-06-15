@@ -54,7 +54,7 @@
         <p> {{ evaluation.recommendation }}</p>
         <br>
     {% endif %}
-    {% if evaluation.screenshot or evaluation.mergedScreenshots %}
+    {% if evaluation.screenshot or evaluation.mergedScreenshots.all %}
         <h4> Screenshot:</h4>
         <div class="text-center">
             <img src="{{ evaluation.screenshot.big.url }}" alt="" /> <br> <p class="text-center">{{ evaluation.caption }}</p>
