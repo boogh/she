@@ -39,8 +39,10 @@
 {#                <td>{{ e.a_place }}</td>#}
 {#            {% endblock %}#}
             <td> <a href = '{{ e.link }}'>{{ e.link | truncatechars:10 }}</a></td>
+        {% block description %}
             <td>{{ e.description | truncatewords:5 }} </td>
             <td>{{ e.recommendation | truncatewords:5 }} </td>
+        {% endblock %}
             <td> {{ e.get_positivity_display }}</td>
             <td>{{ e.get_severity_display }}</td>
             <td>{{ e.get_frequency_display }}</td>

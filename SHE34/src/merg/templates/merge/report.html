@@ -13,13 +13,16 @@
         </div>
         {#    --------------------------------project detail-----------------------------#}
         <div class="">
-            <h2>Project Description:</h2> <br>
+            <br> <br>
+            <h2>Project Description:</h2><hr>
             <div class="col-sm-offset-1">
                 <p>{{ project.description }} - {{ project.link }}</p>
             </div>
         </div>
         {#   ----------------------------------Evaluators -----------------------------#}
-        <div><h2>Evaluators:</h2>
+        <div>
+            <br><br>
+            <h2>Evaluators:</h2> <hr>
             <div class="col-sm-offset-1">
                 <p> These are the evalutors in this project:</p>
                 <div>
@@ -31,7 +34,8 @@
             <br>
         </div>
         <div>
-            <h2>Evaluator Environments:</h2>
+            <br>
+            <h2>Evaluator Environments:</h2><hr>
             <br>
             <div>
                 {% include 'merge/environments.html' %}
@@ -39,20 +43,22 @@
             <br>
         </div>
         {% if pos_merge %}
-            <div><h2>Positive Merged evaluations:</h2>
+            <br><br>
+            <div><h2>Positive Merged evaluations:</h2> <hr>
                 <div>
                     {% with pos_merge as evaluations %}
-                        {% include 'HE3/tables/eval-table-merge.html' %}
+                        {% include 'HE3/tables/eval-table-merge-desc.html' %}
                     {% endwith %}
                 </div>
             </div>
             <br>
         {% endif %}
         {% if neg_merge %}
-            <div> <h2>Negative Merged Evaluations:</h2>
+            <br><br>
+            <div> <h2>Negative Merged Evaluations:</h2><hr>
                 <div>
                     {% with neg_merge as evaluations %}
-                        {% include 'HE3/tables/eval-table-merge.html' %}
+                        {% include 'HE3/tables/eval-table-merge-desc.html' %}
                     {% endwith %}
                 </div>
                 <br>
@@ -62,9 +68,10 @@
         {% endif %}
 
         <div>
-            <h2>All Evaluations: </h2>
+            <br><br>
+            <h2>All Evaluations: </h2><hr>
             <div>
-                {% include 'HE3/tables/eval-table.html' %}
+                {% include 'HE3/tables/eval-table-desc.html' %}
             </div>
         </div>
 
@@ -72,7 +79,8 @@
         {#    -------------------Heuristics---------------------------------------#}
 
         <div>
-            <h2>Heuristic set:</h2>
+        <br><br>
+            <h2>Heuristic set:</h2><hr>
             <div class="col-sm-offset-1">
                 <p>
                     This project used <strong>{{ project.setOfHeuristics.title }} </strong> set of heuristcs.
