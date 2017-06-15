@@ -146,5 +146,6 @@ THUMBNAIL_ALIASES = {
     '': {
         'avatar': {'size': (100, 100), 'crop': True},
         'big' : { 'size' : (400 ,400) , 'crop' : True},
+        'biger' : { 'size' : (600 ,600) , 'crop' : True},
     },
 }
