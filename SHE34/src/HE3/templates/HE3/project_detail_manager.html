@@ -92,9 +92,23 @@
                                 Export Merged Evaluations <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href=""> Export as Docx </a></li>
+                                <li><a target="_blank" href="{% url 'merge:export-doc-file' project.id 1 %}"> Export as Docx </a></li>
                                 <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 1 %}"> Export as html </a></li>
                                 <li><a target="_blank" href=""> Export as csv </a></li>
+                                {#                                        <li role="separator" class="divider"></li>#}
+                                {#                                        <li><a href="#">Delete</a></li>#}
+                            </ul>
+                        </div>
+
+                        <!--export-report dropt down-->
+                        <div id="report-action" class="btn-group action-dropdown">
+                            <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Export Report <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href=""> Export as Docx </a></li>
+                                <li><a target="_blank" href=""> Export as html </a></li>
+{#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
                             </ul>
@@ -108,7 +122,7 @@
                         <div class="panel-body">
                             <div class="table table-responsive" >
                                 {% with mergedEvals as evaluations %}
-{#                                    {% include 'HE3/merged-evaluations.html' %}#}
+                                    {#                                    {% include 'HE3/merged-evaluations.html' %}#}
                                     {% include 'HE3/tables/eval-table-merge-operation.html' %}
                                 {% endwith %}
                                 {#                            {% include 'HE3/evaluations/e-panel-list.html' %}#}
@@ -143,7 +157,7 @@
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
-{#                            {% include 'HE3/evaluation-table-with-user.html' %}#}
+                            {#                            {% include 'HE3/evaluation-table-with-user.html' %}#}
                             {% include 'HE3/tables/eval-table-operation.html' %}
 
                         </div>

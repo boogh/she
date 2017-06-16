@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^project/(?P<project_id>[0-9]+)/merge_selected_evaluations', views.mergeEvaluations , name='merge_evaluations' ),
     url(r'^project/(?P<pk>[0-9]+)/update-merged-evaluation', views.UpdateMergedEvaluation.as_view() , name='update-merged-evaluation' ),
 
-    url(r'^project/(?P<list_id>[0-9]+)/export-docx', views.exportDocFile, name='export-doc-file'),
+    url(r'^project/(?P<project_id>[0-9]+)/(?P<merge>\d{1})/export-docx', views.exportDocFile, name='export-doc-file'),
     url(r'^project/(?P<project_id>[0-9]+)/(?P<merge>\d{1})/export-html$', views.exportHtmlEvals, name='export-html-file'),
     url(r'^project/(?P<list_id>[0-9]+)/export-csv$', views.exportCsvFile, name='export-csv-file'),
 
