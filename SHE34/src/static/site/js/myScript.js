@@ -195,13 +195,13 @@ function showActions(id){
 function merge(project_id){
     ids = getValueUsingClass('.common-action');
     url = '/merge/project/'+ project_id + '/merge_selected_evaluations';
-    name = 'ajax-title',
+    name = 'DEFAULT TITLE',
     $.post(url ,
         { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids , name :JSON.stringify(name) },
         function (data) {
             if(data.status == 1){
                 open(data.url);
-                // location.reload();
+                location.reload();
             }
         });
 };

@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect,render_to_respons
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView , UpdateView
-from HE3.models import Project, Evaluation, Screenshots,Environment, ListOfEval
+from HE3.models import Project, Evaluation, Screenshots, Environment
 from django.utils import timezone
 from docx import Document
 import csv
@@ -400,44 +400,64 @@ def exportHtmlEvals(request, project_id, merge):
     return render(request,template_name=template_name,context=context)
 
 @login_required
-def exportDocFile(request, list_id ):
+def exportDocFile(request, project_id , merge):
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     response['Content-Disposition'] = 'attachment; filename=demo.docx'
+    # merged = False
+    project = Project.objects.get(pk=project_id)
+    evals = project.evaluation_for_project.all()
 
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    project = listofeval.ofProject
-    doc = fillDocFile(project, listofeval)
+    if int(merge[0]) == 0:
+        evals = evals.filter(merged=False)
+    elif int(merge[0]) == 1:
+        # merged = True
+        evals = evals.filter(merged=True)
+
+    doc = fillDocFileEval(evals)
     doc.save(response)
 
     return response
-@login_required
-def exportCsvFile(request,list_id):
-    listofeval = ListOfEval.objects.get(pk=list_id)
-    evaluations = listofeval.evaluations.all().order_by('heurPrincip')
-    project = listofeval.ofProject
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment;filename = "Report.csv"'
 
-    writer = csv.writer(response)
-    writer.writerow([ 'Project: ', project.name,' Description: ' ,project.description,' link: ', project.link , ' Manager: ', project.manager])
-    for e in evaluations:
-        writer.writerow([e.title ,
-                         e.place,
-                         e.heurPrincip,
-                         e.description,
-                         e.recommendation,
-                         e.get_positivity_display(),
-                         e.get_severity_display(),
-                         e.get_frequency_display(),
-                         e.tags,
-                         e.evaluator])
+# @login_required
+# def exportCsvFile(request,list_id):
+#     # # listofeval = ListOfEval.objects.get(pk=list_id)
+#     # # evaluations = listofeval.evaluations.all().order_by('heurPrincip')
+#     # # project = listofeval.ofProject
+#     # response = HttpResponse(content_type='text/csv')
+#     # response['Content-Disposition'] = 'attachment;filename = "Report.csv"'
+#     #
+#     # writer = csv.writer(response)
+#     # writer.writerow([ 'Project: ', project.name,' Description: ' ,project.description,' link: ', project.link , ' Manager: ', project.manager])
+#     # for e in evaluations:
+#     #     writer.writerow([e.title ,
+#     #                      e.place,
+#     #                      e.heurPrincip,
+#     #                      e.description,
+#     #                      e.recommendation,
+#     #                      e.get_positivity_display(),
+#     #                      e.get_severity_display(),
+#     #                      e.get_frequency_display(),
+#     #                      e.tags,
+#     #                      e.evaluator])
+#     pass
+#
+#     # return response
 
-    return response
-
-def fillDocFile(project, listofeval):
+def fillDocFile(project):
     doc = Document()
+    mergedEvals = project.evaluation_for_project.filter(merged=True)
+    evals = project.evaluation_for_project.filter(merged=False)
+    environments = Environment.objects.filter(creator__in=project.evaluators.all()).order_by('creator')
+    # context = {'project': project,
+    #            'evaluations': evals.order_by('positivity', 'evaluator', 'severity'),
+    #            'mergedEvals': mergedEvals,
+    #            'environments': environments,
+    #            'pos_merge': mergedEvals.filter(positivity='p'),
+    #            'neg_merge': mergedEvals.filter(positivity='n'),
+    #            }
+
     doc.add_heading(str(project.name + 'Report'))
-    p = doc.add_paragraph('A plain paragraph')
+    p = doc.add_paragraph(project.description)
     p.add_run('bold').bold = True
     p.add_run(' and some')
     p.add_run('italic.').italic = True
@@ -464,6 +484,32 @@ def fillDocFile(project, listofeval):
     #     row_cells[2].text = item.artist
 
     doc.add_page_break()
+
+    return doc
+
+def fillDocFileEval(evals):
+    doc = Document()
+    doc.add_heading('Evaluations')
+
+    # table = doc.add_table(rows=evals.count(), cols=12)
+    for e in evals :
+        table = doc.add_table(rows=1, cols=11)
+
+        hdr_cells = table.rows[0].cells
+        hdr_cells[0].text = '#'
+        hdr_cells[1].text = 'Title'
+        hdr_cells[2].text = 'Heuristic Principle'
+        hdr_cells[3].text = 'Place'
+        hdr_cells[4].text = 'Link'
+        hdr_cells[7].text = 'Positivity'
+        hdr_cells[8].text = 'Severity'
+        hdr_cells[9].text = 'Frequency'
+        hdr_cells[10].text = 'Found By'
+
+    doc.add_heading('Description', level=1)
+    doc.add_heading('Recommendation', level=1)
+    doc.add_heading('Screenshot', level=1)
+
 
     return doc
 

@@ -150,21 +150,21 @@ class Evaluation(models.Model):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
 
 # Name should be refactored to MergeLists
-class ListOfEval(models.Model):
-    ofProject = models.ForeignKey(Project)
-    fromUser = models.ForeignKey(User, related_name="Merge_manager")
-    evaluations = models.ManyToManyField(Evaluation , blank= True)
-    name = models.CharField(max_length= 50)
-
-    # these two should be deleted
-    mergeUrl = models.URLField(blank=True , null=True)
-    exportedFile= models.FileField(blank=True , null=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
+# class ListOfEval(models.Model):
+#     ofProject = models.ForeignKey(Project)
+#     fromUser = models.ForeignKey(User, related_name="Merge_manager")
+#     evaluations = models.ManyToManyField(Evaluation , blank= True)
+#     name = models.CharField(max_length= 50)
+#
+#     # these two should be deleted
+#     mergeUrl = models.URLField(blank=True , null=True)
+#     exportedFile= models.FileField(blank=True , null=True)
+#
+#     def __str__(self):
+#         return self.name
+#
+#     def get_absolute_url(self):
+#         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
 
 class Environment(models.Model):
 
