@@ -1,8 +1,8 @@
 
 {% load thumbnail %}
 <div class="modal-header">
-    <div class="panel">
-        <div class="page-header"> <h2> {{ evaluation.title }} : </h2> </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center"> <h2> {{ evaluation.title }} : </h2> </div>
         <table class="table table-responsive table-bordered table-striped table-hover">
             <thead>
             <tr>
@@ -46,26 +46,40 @@
     </div>
 </div>
 <div class="modal-body">
-    <h4> Description:</h4>
-    <p> {{ evaluation.description }}</p>
-    <br>
-    {% if evaluation.recommendation %}
-        <h4> Recommendaion:</h4>
-        <p> {{ evaluation.recommendation }}</p>
-        <br>
-    {% endif %}
-    {% if evaluation.screenshot or evaluation.mergedScreenshots.all %}
-        <h4> Screenshot:</h4>
-        <div class="text-center">
-            {% if evaluation.merged == False %}
-                <a href="{{ evaluation.screenshot.url }}" target="_blank"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
-            {% endif %}
-            {% for scr in evaluation.mergedScreenshots.all %}
-                {% if scr.screenshot %}
-                    <a href ="{{ scr.screenshot.url }}" target="_blank" ><img src="{{ scr.screenshot.biger.url }}"> </a> <br>
-                {% endif %}
-            {% endfor %}
+    <div class="panel panel-info">
+        <div class="panel-heading text-center">
+            <h4> Description:</h4>
         </div>
-    {% endif %}
+        <div class="panel-body">
+            <p> {{ evaluation.description }}</p>
+        </div>
+        <br>
+        {% if evaluation.recommendation %}
+            <div class="panel-heading text-center">
+                <h4> Recommendaion:</h4>
+            </div>
+            <div class="panel-body">
+                <p> {{ evaluation.recommendation }}</p>
+            </div>
+            <br>
+        {% endif %}
+        {% if evaluation.screenshot or evaluation.mergedScreenshots.all %}
+            <div class="panel-heading text-center">
+                <h4> Screenshot:</h4>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    {% if evaluation.merged == False %}
+                        <a href="{{ evaluation.screenshot.url }}" target="_blank"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
+                    {% endif %}
+                    {% for scr in evaluation.mergedScreenshots.all %}
+                        {% if scr.screenshot %}
+                            <a href ="{{ scr.screenshot.url }}" target="_blank" ><img src="{{ scr.screenshot.biger.url }}"> </a> <br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </div>
 {#<td> {% for evaluator in e.merdedFromEvaluators.all %} {{ evaluator.name }} <br> {% endfor %} </td>#}
