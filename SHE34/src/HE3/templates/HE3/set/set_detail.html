@@ -3,8 +3,7 @@
 {% load staticfiles %}
 
 {% block titleOfPage %}  Update {{ set.title }}  {% endblock %}
-{% block dashboard-active %} active {% endblock %}
-
+{% block createHeuristics %} active {% endblock %}
 {% block breadcrumb %}
     <li class="breadcrumb-reverse active"> <a class="" href="{% url 'profiles:dashboard:user-dashboard' %}"> Dashboard </a> </li>
     <li class="breadcrumb-reverse active"> <a class="text-muted" href=""> Update Heuristic Set </a> </li>

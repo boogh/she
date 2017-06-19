@@ -248,15 +248,15 @@ def recommendPlaceBase(request, eval_id):
 def mergeFields(evalList):
     # result = {k : "" for k in evalList[0].__dict__.keys()}
     result ={}
-    stringList = ['description' , 'recommendation']
-    stringWithKomma = ['place' ]
+    stringList = ['description' , 'recommendation' ]
+    stringWithKomma = ['place' , 'title' ]
     forAvg = ['frequency' , 'severity']
     for field in stringList :
         allvalues = set([ i.__dict__[field] for i in evalList])
         result [field] = "\n" .join(allvalues)
     for field in stringWithKomma :
         allvalues = set([i.__dict__[field]for i in evalList])
-        result[field] = ",".join(allvalues)
+        result[field] = ", ".join(allvalues)
     for field in forAvg :
         allvalues = [int(i.__dict__[field]) for i in evalList]
         result[field] = str(sum(allvalues) / len(allvalues))
@@ -312,16 +312,16 @@ def mergeEvaluations(request , project_id):
 
     if request.is_ajax():
         ids = request.POST.getlist('ids[]')
-        name = request.POST.get('name')
+        # name = request.POST.get('name')
 
         if ids and len(ids) > 1:
             evals = Evaluation.objects.filter(pk__in=ids)
             fields , heurPrincips = mergeFields(evals)
             resultEval.__dict__.update(fields)
-            if name:
-                resultEval.title = name
-            else:
-                resultEval.title = 'Merged Evaluations'
+            # if name:
+            #     resultEval.title = name
+            # else:
+            #     resultEval.title = 'Merged Evaluations'
             resultEval.save()
             resultEval.heurPrincip.add(*heurPrincips)
             mergeScreenshots(resultEval,evals)
