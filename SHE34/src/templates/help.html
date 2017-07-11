@@ -1,1 +1,107 @@
 {% extends 'base.html' %}
+
+
+{% load staticfiles %}
+
+{% block splash %}
+    <ul class="breadcrumb">
+        <li class="breadcrumb" > <a href="{% url 'home' %}">Home</a> </li>
+        <li class="breadcrumb"  > <a class="text-muted" href="{% url 'help' %}">Help</a> </li>
+    </ul>
+{% endblock %}
+
+{% block container %}
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-2 sidenav " >
+                <div class="page-header "> <h1 class="text-primary"> {% block titleOfPage %} SHE Walkthrough {% endblock %}</h1></div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="{% block dashboard-active%} {% endblock %}"><a href="" >How to be a user SHE</a></li>
+                    <li class="{% block createProjectActive %} {% endblock %}"><a href="">How to be an evaluator in SHE</a></li>
+                    <li class="{% block createHeuristics %} {% endblock %}"><a href="">How to be a manager in SHE</a></li>
+                </ul><br>
+            </div>
+
+{#            {% include 'guid.html' %}#}
+        <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Guid Entries Column -->
+            <div class="col-md-10">
+
+                <h1 id="guid-jumb" class="jumbotron">
+                    How to use SHE?
+{#                    <small> How to use SHE</small>#}
+                </h1>
+
+                <!-- First Blog Post -->
+                <h2>
+                    <a href="#">how to be a user?</a>
+                </h2>
+                <p class="lead">
+                   This section goes through some aspects of account managements in SHE, e.g. Signing up/in, profile management, password recovery, etc. Each functionality is described with the relevant screenshots.
+                </p>
+                <hr>
+                <h2>Signing Up</h2>
+                <p>                To use SHE having an account is necessary. Registering an account is done in a simple step with a name which will be used as the username and also an email
+</p>
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <hr>
+                <p></p>
+
+                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+
+                <!-- Second Blog Post -->
+                <h2>
+                    <a href="#">Blog Post Title</a>
+                </h2>
+                <p class="lead">
+                    by <a href="index.php">Start Bootstrap</a>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
+                <hr>
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <hr>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
+                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+
+                <!-- Third Blog Post -->
+                <h2>
+                    <a href="#">Blog Post Title</a>
+                </h2>
+                <p class="lead">
+                    by <a href="index.php">Start Bootstrap</a>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
+                <hr>
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <hr>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione.</p>
+                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+        </div>
+    </div>
+{% endblock container %}
