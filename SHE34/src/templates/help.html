@@ -16,31 +16,32 @@
             <div class="col-sm-2 sidenav " >
                 <div class="page-header "> <h1 class="text-primary"> {% block titleOfPage %} SHE Walkthrough {% endblock %}</h1></div>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class=""><a href="" >How to be a user SHE</a></li>
-                    <li class=""><a href="">How to be an evaluator in SHE</a></li>
-                    <li class=""><a href="">How to be a manager in SHE</a></li>
+                    <li class="lead-guid"><a href="#how-user" >How to Be a User in SHE</a></li>
+                    <li class="lead-guid"><a href="#how-evaluator">How to Be an Evaluator in SHE</a></li>
+                    <li class="lead-guid"><a href="#how-manager">How to Be a Manager in SHE</a></li>
                 </ul><br>
             </div>
 
             {#            {% include 'guid.html' %}#}
             <!-- Page Content -->
-            <div class="container">
+            <div class="container" id="top-of-page-help">
                 <div class="row">
                     <!-- Guid Entries Column -->
                     <div class="col-md-10">
-
                         <h1 id="guid-jumb" class="jumbotron text-center fa-4x">
                             How to use SHE?
                             {#                    <small> How to use SHE</small>#}
                         </h1>
                         <br>
                         <br>
-                        <br>
-
                         <!-- Sign up -->
-                        <h2>
-                            <a class="text-capitalize" href="#">How to Be a User in SHE?</a>
-                        </h2>
+
+                        <div id="how-user">
+                            <br>
+                            <br>
+                            <h2 >
+                                <span class="text-primary">How to Be a User in SHE?</span>
+                            </h2></div>
                         <br>
                         <p class="lead-guid">
                             This section introduces some aspects of account managements in SHE, e.g. Signing up/in, profile management, password recovery, etc. Each functionality is described with the relevant screenshots.
@@ -119,16 +120,19 @@
                         </h2>
                         <br>
                         <p class="lead-guid">
-                            A user can see the details of each project just by clicking on the title of the project and depending on being a manager or an evaluator he/she can see different information and operations for that project.                        </p>
+                            A user can see the details of each project just by clicking on the title of the project and depending on being a manager or an evaluator he/she can see different primaryrmation and operations for that project.                        </p>
                         <br>
                         <img class="img-responsive" src="/media/guid/evaluator/projectDetail.jpeg" alt="">
                         <hr>
 
                         <!-- Being an evaluator -->
                         <br>
-                        <h2>
-                            <a href="#" class="text-capitalize">how to be an evaluator?</a>
-                        </h2>
+                        <div id="how-evaluator">
+                            <br>
+                            <br>
+                            <h2 >
+                                <span class="text-primary" >How to Be an Evaluator in SHE?</span>
+                            </h2></div>
                         <br>
                         <p class="lead-guid">
                             Users will see in their dashboard whether or not they are an evaluator in a project of other users:                        </p>
@@ -145,31 +149,37 @@
                         <h2>
                             Adding a new evaluation:
                         </h2>
+                        <br>
                         <p class="lead-guid">
                             If the project deadline for the evaluation is not passed an evaluator can press the add evaluation button to open an evaluation form similar to the following screenshot. By filling the form and pressing the submit button at the bottom of the page the evaluation will be saved. In this form some fields are optional and some are necessary. Title, place and description fields are required to be filled. The rest is optional but recommended; e.g. the link field in the evaluation of a website page which should be filled in this form: http://www.example.com.
-                        <br>
-                        <img class="img-responsive" src="/media/guid/evaluator/evaluationForm.jpeg" alt="">
-                        <hr>
+                            <br>
+                            <img class="img-responsive" src="/media/guid/evaluator/evaluationForm.jpeg" alt="">
+                            <br>
                         <hr>
 
 
                         <!-- Adding env -->
+                        <br>
                         <h2>
-                            Adding a new environment:
+                            Adding a New Environment:
                         </h2>
+                        <br>
                         <p class="lead-guid">
                             Evaluators can register the specifics of their environment so the manager can see the circumstances of the evaluations e.g. monitor resolution, operation system, etc. Creating an environment item is done by clicking on the link <span class="text-capitalize strong text-info">create an evaluation environment </span> which is in the sidebar of the dashboard and will opens a form similar to the following screenshot. An evaluator can create multiple environments.
-                        <br>
-                        <img class="img-responsive" src="/media/guid/evaluator/createEnv.jpeg" alt="">
-                        <br>
+                            <br>
+                            <img class="img-responsive" src="/media/guid/evaluator/createEnv.jpeg" alt="">
+                            <br>
                         <hr>
 
 
                         <!-- Being an manager -->
                         <br>
-                        <h2>
-                            <a href="#" class="text-capitalize">how to be an manager?</a>
-                        </h2>
+                        <div id="how-manager">
+                            <br>
+                            <br>
+                            <h2 >
+                                <span class="text-primary" >How to Be a Manager in SHE?</span>
+                            </h2></div>
                         <br>
                         <p class="lead-guid">
                             Being a manager means to define and edit a project. A manager can add and delete other users as evaluators of the project and finally can merge the evaluations and create reports of the results of the evaluation. A manager can define and edit heuristic sets upon which a project is defined.
@@ -181,76 +191,92 @@
                         <h2>
                             Defining a Heuristic Set:
                         </h2>
+                        <br>
                         <p class="lead-guid">
-                            SHE already has some widely used set of heuristics like Nielsen heuristics, but a managers can define their own custom set of heuristic sets by clicking on the create a new heuristic set tab in the sidebar. A page similar to the the following screenshot will opens and after entering a name and a description the set will be created after submitting and a page similar to the following screenshot will be opened. The set still does not have any principle and therefore is empty. Adding new principles is done by clicking Add New Heuristic Principle button.                        <hr>
+                            SHE already has some widely used set of heuristics like Nielsen heuristics, but a managers can define their own custom set of heuristic sets by clicking on the create a new heuristic set tab in the sidebar. A page similar to the the following screenshot will opens and after entering a name and a description the set will be created after submitting and a page similar to the following screenshot will be opened. The set still does not have any principle and therefore is empty. </p>
+                        <br>
+                        <br>
                         <img class="img-responsive" src="/media/guid/manager/createSet.jpeg" alt="">
                         <br>
+                        <p class="lead-guid">Adding new principles is done by clicking Add New Heuristic Principle button:</p>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/emptyHeuristicSet.jpeg" alt="">
-                        <br>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/addingPrinciple.jpeg" alt="">
                         <br>
 
                         <br>
                         <p class="lead-guid">
-                            After adding some principles the set will be similar to the following screenshot. Each principle can be edited or even deleted using operation buttons in the last columns.
+                            After adding some principles the set will be similar to the following screenshot. Each principle can be edited or be deleted using operation buttons in the last columns.
                         </p>
                         <br>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/filledSet.jpeg" alt="">
-                        <br>
+                        <hr>
                         <br>
                         <h3 class="text-warning">NOTE:</h3>
                         <p class="lead-guid">
                             A set of heuristics which is in use in a project cannot be deleted as long as that project is using the set. To delete this set the manager can edit that project and chose another set of heuristics or even delete the whole project to make the set free to delete.
                         </p>
                         <br>
-                        <br>
+                        <hr>
                         <br>
 
                         <!-- def project -->
+                        <br>
                         <h2>
                             Defining a Project:
                         </h2>
                         <br>
                         <p class="lead-guid">
-                            Defining a new project is done by clicking on the New Project link in the sidebar of the dashboard to see a form like the following screenshot. Except the filed link, the other fields are required to be filled. After filling the form clicking submit will create the new project.                        <hr>
+                            Defining a new project is done by clicking on the <span class="text-info strong">Creare a New Project </span>link in the sidebar of the dashboard to see a form like the following screenshot. Except the filed link, the other fields are required to be filled. After filling the form clicking submit will create the new project.
+                        </p>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/defineProject.jpeg" alt="">
                         <hr>
                         <br>
 
                         <!-- Merging Evaluations: -->
+                        <br>
                         <h2>
                             Merging Evaluations:
                         </h2>
                         <br>
                         <p class="lead-guid">
-                            Manager can merge existing evaluations and make merged evaluation. The merging can be done anytime but it is better to be after the deadline of the project. After clicking on the Merge Evaluations button in the project detail or in the overview of the project in the dashboard merge desktop opens a similar page to the following screenshot. In the first column with the name Evaluations (not merged) you can see all the evaluations which are not already merged, categorized by the name of their evaluators. By clicking on each evaluation you can see the details of that evaluation like in the following screenshot. Getting similar evaluations is done after clicking the checkbox of any evaluation. Each time a checkbox is checked place-based and content-based recommendation for merge appears in the middle columns:
-                            <br>
-                            <img class="img-responsive" src="/media/guid/manager/mergeBeforeClick.jpg" alt="">
-
-                            <br>
-                            <img class="img-responsive" src="/media/guid/manager/mergeAfterClick.jpeg" alt="">
-
-                            <br>
-                        <p class="lead-guid">
-                            By choosing more than two checkboxes a blue button with the name Merge Selected Evaluations appears on the top left of the page. Clicking this button will combines the information of all the selected evaluations to create a new merged evaluation. An evaluation form page with the information of the new merged evaluation will be opened which can/should be edited to summarize the combined data in its fields.
+                            Manager can merge existing evaluations and make merged evaluation. The merging can be done anytime but it is better to be after the deadline of the project. After clicking on the <span class="text-info strong">Merge Evaluations </span>button in the project detail or in the overview of the project in the dashboard merge desktop opens a similar page to the following screenshot. In the first column with the name Evaluations (not merged) you can see all the evaluations which are not already merged, categorized by the name of their evaluators.
                         </p>
+                        <br>
+                        <br>
+                        <img class="img-responsive" src="/media/guid/manager/mergeBeforeClick.jpg" alt="">
+                        <br>
+                        <br>
+                        <p class="lead-guid">By clicking on each evaluation you can see the details of that evaluation. Getting similar evaluations is done after clicking the checkbox of any evaluation. Each time a checkbox is checked place-based and content-based recommendation for merge appears in the middle columns:</p>
+                        <br>
+                        <img class="img-responsive" src="/media/guid/manager/mergeAfterClick.jpeg" alt="">
+                        <br>
+                        <br>
+                        <p class="lead-guid">
+                            By choosing more than two checkboxes a blue button with the name Merge Selected Evaluations appears on the top left of the page:
+                        </p>
+                        <br>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/mergeBtn.jpg" alt="">
                         <br>
+                        <br>
+                        <p class="lead-guid">Clicking this button will combines the information of all the selected evaluations to create a new merged evaluation. A form-page for evaluation with the information of the new merged evaluation will be opened which can/should be edited and the combined data in its fields be summerized.</p>
+                        <br>
                         <hr>
+                        <br>
                         <br>
 
                         <!-- Export -->
                         <h2>
                             Exporting Report or Evaluations:
                         </h2>
+                        <br>
                         <p class="lead-guid">
-                            In project detail page a manger can find different Export buttons which gives different export options in a dropdown menu to export both merged evaluations and normal evaluations separately.
-                        <p class="lead-guid">The same as exporting evaluations in project detail page and also on the top of the merge desktop page the manager can find Export button for producing and exporting a report in different format.</p>
+                            In project detail page a manger can find different <span class="text-info strong">Export</span> buttons which gives different export options in a dropdown menu to export both merged evaluations and normal evaluations separately.
+                        <p class="lead-guid">The same as exporting evaluations in project detail page and also on the top of the merge desktop page the manager can find <span class="text-info strong">Export</span> button for producing and exporting a report in different format.</p>
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/export.jpg" alt="">
                         <hr>
@@ -267,7 +293,10 @@
                         {#                        </ul>#}
 
                     </div>
-
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="text-left">
+                    <a class="btn btn-info" href="#top-of-page-help"> <span class="glyphicon glyphicon-triangle-top"></span></a>
                 </div>
                 <!-- /.row -->
             </div>
