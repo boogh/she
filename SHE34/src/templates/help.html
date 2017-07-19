@@ -9,6 +9,9 @@
         <li class="breadcrumb"  > <a class="text-muted" href="{% url 'help' %}">Help</a> </li>
     </ul>
 {% endblock %}
+{% block navbar-left %}
+    {% include "_navbar.html" with active_link="help" %}
+{% endblock %}
 
 {% block container %}
     <div class="container-fluid">
