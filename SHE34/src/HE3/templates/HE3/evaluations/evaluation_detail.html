@@ -3,50 +3,52 @@
 <div class="modal-header">
     <div class="panel panel-primary">
         <div class="panel-heading text-center"> <h2> {{ evaluation.title }} : </h2> </div>
-        <table class="table table-responsive table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-                {% if evaluation.merged == False %}
-                    <th>Evaluator</th>
-                {% endif %}
-                <th>Heuristic Principe</th>
-                <th>Place</th>
-                <th>Link</th>
-                <th>Positivity</th>
-                <th>Severity</th>
-                <th>Frequency</th>
-                {% if evaluation.merged == True %}
-                    <th>Found By</th>
-                {% endif %}
-                <th>Operations</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                {% if evaluation.merged == False %}
-                    <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.evaluator.email }}</small></td>
-                {% endif %}
-                <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
-                <td>{{ evaluation.place }}</td>
-                <td> <a href="{{ evaluation.link }}">{{ evaluation.link | truncatechars:10}}</a></td>
-                <td> {{ evaluation.get_positivity_display }}</td>
-                <td>{{ evaluation.get_severity_display }}</td>
-                <td>{{ evaluation.get_frequency_display }}</td>
-                {% if evaluation.merged == True %}
-                    <td> {% for e in evaluation.merdedFromEvaluators.all %} {{ e.name }} <br> {% endfor %} </td>
-                {% endif %}
-                <td>
-                    <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"> Edit </a>
-                    <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
-                    <a class="btn btn-default btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    {% if evaluation.merged == False %}
+                        <th>Evaluator</th>
+                    {% endif %}
+                    <th>Heuristic Principe</th>
+                    <th>Place</th>
+                    <th>Link</th>
+                    <th>Positivity</th>
+                    <th>Severity</th>
+                    <th>Frequency</th>
+                    {% if evaluation.merged == True %}
+                        <th>Found By</th>
+                    {% endif %}
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% if evaluation.merged == False %}
+                        <td>{{ evaluation.evaluator.name }} - <small>{{ evaluation.evaluator.email }}</small></td>
+                    {% endif %}
+                    <td>  {% for e in evaluation.heurPrincip.all %} {{ e.title }} <br> {% endfor %} </td>
+                    <td>{{ evaluation.place }}</td>
+                    <td> <a href="{{ evaluation.link }}">{{ evaluation.link | truncatechars:10}}</a></td>
+                    <td> {{ evaluation.get_positivity_display }}</td>
+                    <td>{{ evaluation.get_severity_display }}</td>
+                    <td>{{ evaluation.get_frequency_display }}</td>
+                    {% if evaluation.merged == True %}
+                        <td> {% for e in evaluation.merdedFromEvaluators.all %} {{ e.name }} <br> {% endfor %} </td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-primary btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"> Edit </a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
+                        <a class="btn btn-default btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<div class="modal-body">
-    <div class="panel panel-info">
+<div class="modal-body ScrollbarLayout_mainVertical">
+    <div class="panel panel-info ">
         <div class="panel-heading text-center">
             <h4> Description:</h4>
         </div>
@@ -64,21 +66,23 @@
             <br>
         {% endif %}
         {% if evaluation.screenshot or evaluation.mergedScreenshots.all %}
-            <div class="panel-heading text-center">
-                <h4> Screenshot:</h4>
-            </div>
-            <div class="panel-body">
-                <div class="text-center">
-                    {% if evaluation.merged == False %}
-                        <a href="{{ evaluation.screenshot.url }}" target="_blank"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
-                    {% endif %}
-                    {% for scr in evaluation.mergedScreenshots.all %}
-                        {% if scr.screenshot %}
-                            <a href ="{{ scr.screenshot.url }}" target="_blank" ><img src="{{ scr.screenshot.biger.url }}"> </a> <br>
-                        {% endif %}
-                    {% endfor %}
+                <div class="panel-heading text-center">
+                    <h4> Screenshot:</h4>
                 </div>
-            </div>
+                <div class="panel-body">
+                    <div class="text-center">
+                        {% if evaluation.merged == False %}
+                            <a href="{{ evaluation.screenshot.url }}" target="_blank"><img src="{{ evaluation.screenshot.biger.url }}" alt="" /></a> <br>
+                        {% endif %}
+                        {% for scr in evaluation.mergedScreenshots.all %}
+                            <div class="">
+                                {% if scr.screenshot %}
+                                    <a href ="{{ scr.screenshot.url }}" target="_blank" ><img class="img-responsive" src="{{ scr.screenshot.biger.url }}"> </a> <br>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
         {% endif %}
     </div>
 </div>

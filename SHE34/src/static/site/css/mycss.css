@@ -26,3 +26,12 @@
     font-style: normal;
     text-align: justify ;
 }
+
+.modal-body {
+    max-height: 60vh; //Sets the height to 80/100ths of the viewport.
+    overflow-y:auto;
+    overflow-x:auto;
+}
+.modal-header {
+    max-height: 60vh; //Sets the height to 80/100ths of the viewport.
+}
