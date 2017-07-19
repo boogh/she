@@ -366,11 +366,15 @@ def reportHtml(request , project_id):
     project = Project.objects.get(pk=project_id)
     mergedEvals = project.evaluation_for_project.filter(merged = True)
     evals = project.evaluation_for_project.filter(merged = False)
-    environments = Environment.objects.filter(creator__in = project.evaluators.all()).order_by('creator')
+    evaluator_ids = evals.values_list('evaluator_id' , flat=True).distinct()
+    evaluators = project.evaluators.filter(pk__in = evaluator_ids)
+    environments = Environment.objects.filter(creator__in = evaluators).order_by('creator')
+
     context = { 'project' : project ,
                 'evaluations' : evals.order_by('positivity' , 'evaluator' , 'severity'),
                 'mergedEvals' : mergedEvals,
                 'environments' :environments,
+                'evaluators' : evaluators ,
                 'pos_merge' :mergedEvals.filter(positivity = 'p'),
                 'neg_merge' :mergedEvals.filter(positivity = 'n'),
     }

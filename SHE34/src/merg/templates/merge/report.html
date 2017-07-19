@@ -26,8 +26,8 @@
             <div class="col-sm-offset-1">
                 <p> These are the evalutors in this project:</p>
                 <div>
-                    {% for ev in project.evaluators.all %}
-                        <li> {{ ev.name }} - {{ ev.email }}</li>
+                    {% for ev in evaluators %}
+                        <li> {{ ev.name }} - {{ ev.email }} </li>
                     {% endfor %}
                 </div>
             </div>
