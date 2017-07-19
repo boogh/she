@@ -37,13 +37,18 @@ $(document).ready(function () {
 
     });
 
-    $("#report-checkBoxes").click(function () {
-        $("#report-list").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
-        showActions('#report-list');
+    $("#place-checkBoxes").click(function () {
+        $("#output").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        showActions('#output');
         showActions('.common-action');
 
     });
+    $("#content-checkBoxes").click(function () {
+        $("#recContBase").find(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        showActions('#recContBase');
+        showActions('.common-action');
 
+    });
     //avtivating javascript for placeRec after ajax load
     $('#output').on("click" ,'.checkBoxClass',function() {
         // if ($(this).is(':checked')) {
@@ -160,7 +165,6 @@ function evalDetail(e_id) {
  */
 function showActions(id){
     checkedList = getValueUsingClass(id);
-
     // if(id == '#eval-list') {
     //     if (checkedList.length > 0) {
     //         $("#add-to-report").show();
