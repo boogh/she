@@ -275,11 +275,11 @@ class ProjectDetail(DetailView):
         return context
 
 def evaluationDelete(request , eval_id):
-    Evaluation.objects.get(pk = eval_id).delete()
+    get_object_or_404(Evaluation,pk = eval_id).delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
 def mergeEvaluationDelete(request , eval_id):
-    eval = Evaluation.objects.get(pk = eval_id)
+    eval = get_object_or_404(Evaluation,pk=eval_id)
     pk =eval.ofProject.id
     eval.delete()
     url ='/users/me/dashboard/project/'+str(pk)
