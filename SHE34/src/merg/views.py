@@ -1,4 +1,5 @@
 from django.shortcuts import render,get_object_or_404,redirect,render_to_response
+from django.contrib import messages
 from django.http import HttpResponse , HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView,CreateView , UpdateView
@@ -12,31 +13,6 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse_lazy
 from HE3.forms import MergeEvaluationForm
-
-# Create your views here.
-
-#
-# class DesktopMerge(DetailView):
-#     model = Project
-#     template_name = 'merge/project-merge-desktop.html'
-#
-#     def get_object(self, queryset=None):
-#         return get_object_or_404(Project, pk=self.kwargs.get('pk'))
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(DesktopMerge, self).get_context_data(**kwargs)
-#         project = self.get_object()
-#         allEvaluations = project.evaluation_for_project.all()
-#         # evaluationsOfUser = allEvaluations.filter(evaluator=self.request.user)
-#         # evaluators = project.evaluators.all()
-#         # tableAllE = EvaluationsTablesForManager(allEvaluations)
-#         # RequestConfig(self.request).configure(tableAllE)
-#
-#         context = {'project': project,
-#                    'now': timezone.now().date(),
-#                    'evaluations': allEvaluations,
-#                    }
-#         return context
 
 def mergeDesktop(request, project_id):
 
@@ -56,93 +32,6 @@ def mergeDesktop(request, project_id):
     else:
         return HttpResponse('Only Manager can access this page!')
 
-# def newEvalList(request , project_id):
-#     project = Project.objects.get(pk=project_id)
-#     if request.method == 'POST' :
-#         # name = request.POST.get['name' , False]
-#
-#         if 'name' in request.POST and request.POST['name']:
-#             name = request.POST['name']
-#         else:
-#             return redirect('merge:merge-project-desktop' , project_id )
-#         evalList = ListOfEval.objects.create(ofProject = project , fromUser =request.user , name = name )
-#
-#         return redirect('merge:report-update',  evalList.id )
-#     return redirect('merge:merge-project-desktop', project_id)
-
-# def updateReport (request ,list_id):
-#     eval_list = ListOfEval.objects.get(pk=list_id)
-#     project = eval_list.ofProject
-#
-#     if project.manager == request.user:
-#         template_name = 'merge/merge_update.html'
-#         allEvaluations = project.evaluation_for_project.all()
-#         evalInList= eval_list.evaluations.all()
-#         evaluations = allEvaluations.exclude(id__in = evalInList)
-#         context = {'project': project,
-#                    'now': timezone.now().date(),
-#                    'evaluations': evaluations,
-#                     'eval_list' : eval_list,
-#                    }
-#         return render(request, template_name, context)
-#     else:
-#         return HttpResponse('Only Manager can access this page!')
-
-# def addEvalToReport(request , list_id):
-#
-#     list = ListOfEval.objects.get(pk = list_id)
-#     project = list.ofProject
-#     if request.is_ajax():
-#         ids = request.POST.getlist('ids[]')
-#         if ids:
-#             evals= Evaluation.objects.filter(pk__in= ids)
-#             list.evaluations.add(*evals)
-#     return HttpResponse('success!')
-
-# def removeEvalFromReport(request , list_id):
-#
-#     list = ListOfEval.objects.get(pk = list_id)
-#     project = list.ofProject
-#     if request.is_ajax():
-#         ids = request.POST.getlist('ids[]')
-#         if ids:
-#             evals= Evaluation.objects.filter(pk__in= ids)
-#             list.evaluations.remove(*evals)
-#     # return HttpResponseRedirect(reverse ( 'merge:report-update', args = (list.id ,  )))
-#     return HttpResponse('success!')
-
-# def deleteList(request , list_id):
-#
-#     list = ListOfEval.objects.get(pk = list_id)
-#     project = list.ofProject
-#     list.delete()
-#     return redirect(request.META.get('HTTP_REFERER'))
-
-# def display_meta(request):
-#     values = request.META.items()
-#     values.sort()
-#     html = []
-#     for k, v in values:
-#         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-#     return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-# def recommend(request , eval_id):
-#
-#     template_name = 'merge/recommendations.html'
-#     eval = Evaluation.objects.get(id = eval_id)
-#     project =eval.ofProject
-#     resultplace = rec.placebase(eval)
-#     resultdes = rec.descriptionBase(eval)
-#     # result = rec.nearestN(eval)
-#     # context = {'result': eval.ofProject}
-#     resultids = set(resultplace + resultdes)
-#     recommendList = project.evaluation_for_project.filter(pk__in =resultids)
-#     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-#     # return render(request,template_name="merge/project-merge-desktop.html" , context=context )
-#     return render(request,template_name=template_name,context={'recommendList' :recommendList}  )
-
-
-# content base
 @login_required
 def recommend(request , eval_id):
 
@@ -199,52 +88,6 @@ def recommendPlaceBase(request, eval_id):
                                                                                       'used_evaluations':recPlaceBase.filter(pk__in=alreadyMerged),
                                                                                       'evaluators' : project.evaluators.filter(pk__in = recPlaceBase.values_list('evaluator', flat= True).distinct()) })
 
-# class EvaluationList(CreateView):
-#     model = ListOfEval
-#     template_name = 'merge/form-evaluation-list.html'
-#     fields = ['name','evaluations']
-#
-#     def form_valid(self, form):
-#         user = self.request.user
-#         projectId = self.kwargs['pk']
-#         project = Project.objects.get(pk=projectId)
-#         form.instance.ofProject = project
-#         form.instance.fromUser = user
-#
-#         return super(EvaluationList, self).form_valid(form)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(EvaluationList, self).get_context_data(**kwargs)
-#         context['project'] = self.kwargs
-#         return context
-#
-#
-#         # ofProject = models.ForeignKey(Project)
-#         # fromUser = models.ForeignKey(User, related_name="Merge_manager")
-#         # evaluations = models.ManyToManyField(Evaluation)
-#         # name = models.CharField(max_length=50)
-#         # logo = models.ImageField(name='Eval-Merg-Logo', upload_to='logo/%Y-%m-%d/', null=True, blank=True)
-#         # mergeUrl = models.URLField(blank=True, null=True)
-#         # exportedFile = models.FileField(blank=True, null=True)
-#
-#         # def form_valid(self, form):
-#         #        user = self.request.user
-#         #        projectId = self.kwargs['pk']
-#         #        project = Project.objects.get(pk=projectId)
-#         #        form.instance.ofProject = project
-#         #        form.instance.evaluator = user
-#         #
-#         #        return super(EvaluationCreate, self).form_valid(form)
-#         #
-#         #    def get_context_data(self, **kwargs):
-#         #        context= super(EvaluationCreate,self).get_context_data(**kwargs)
-#         #        context['project'] = self.kwargs
-#         #        return context
-
-#---- export methods ---
-
-# -----------merging evaluations -----------------------------------------------------
-
 def mergeFields(evalList):
     # result = {k : "" for k in evalList[0].__dict__.keys()}
     result ={}
@@ -267,35 +110,6 @@ def mergeFields(evalList):
     heurPrincips = list(set(heurPrincips))
 
     return result , heurPrincips
-
-# def mergeEvals(request , list_id):
-#
-#     list = ListOfEval.objects.get(pk=list_id)
-#     project = list.ofProject
-#     resultEval = Evaluation(ofProject = project , evaluator = project.manager)
-#
-#     if request.is_ajax():
-#         ids = request.POST.getlist('ids[]')
-#         name = request.POST.get('name')
-#         addtolist = request.POST.get('addtolist')
-#         if ids and len(ids) > 1:
-#             evals = Evaluation.objects.filter(pk__in=ids)
-#             fields , heurPrincips = mergeFields(evals)
-#             resultEval.__dict__.update(fields)
-#             if name:
-#                 resultEval.title = name
-#             else:
-#                 resultEval.title = 'Merged Evaluations'
-#             resultEval.save()
-#             resultEval.heurPrincip.add(*heurPrincips)
-#
-#             if addtolist :
-#                 list.evaluations.add(resultEval)
-#
-#             url = '/users/me/dashboard/project/UpdateEvaluation/' + str(resultEval.id) + '/'
-#             response = {'status' : 1 , 'message' : 'You can edit the result of merge!' , 'url' : url}
-#             return HttpResponse(json.dumps(response), content_type='application/json')
-#     return HttpResponse('not success')
 
 def mergeScreenshots(resultEval, listEvals):
     for eval in listEvals:
@@ -360,6 +174,14 @@ class UpdateMergedEvaluation(UpdateView):
         return kwargs
 
     # return render(request, context={'project': project,'form' : form} ,template_name=template_name)
+
+@login_required
+def removeSelectedEval(request , eval_id ,se_eval_id):
+    # print('eval 1 ' , get_object_or_404(Evaluation,pk=eval_id).id)
+    # print('eval selected ' , get_object_or_404(Evaluation,pk=se_eval_id).id)
+    get_object_or_404(Evaluation,pk=eval_id).mergedFromEvaluations.remove(get_object_or_404(Evaluation,pk=se_eval_id))
+    messages.success(request , '<h4>Selected Evaluation is removed! </h2>')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 # ------------Report ----------------
 def reportHtml(request , project_id):
