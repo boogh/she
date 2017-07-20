@@ -206,7 +206,7 @@ function merge(project_id){
         { csrfmiddlewaretoken: getCookie('csrftoken'), ids:ids },
         function (data) {
             if(data.status == 1){
-                open(data.url);
+                window.open(data.url , "_self");
                 // location.reload();
             }
         });

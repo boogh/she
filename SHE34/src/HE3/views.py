@@ -282,7 +282,7 @@ def mergeEvaluationDelete(request , eval_id):
     eval = get_object_or_404(Evaluation,pk=eval_id)
     pk =eval.ofProject.id
     eval.delete()
-    url ='/users/me/dashboard/project/'+str(pk)
+    url ='/merge/project/'+str(pk)
     return redirect(url)
 
 class HeuristicSetCreate(CreateView):
