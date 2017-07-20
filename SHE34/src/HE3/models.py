@@ -132,8 +132,8 @@ class Evaluation(models.Model):
 
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)
-    merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators')
-    mergedFromEvaluations = models.ManyToManyField('self' ,verbose_name='Evaluators', related_name='fromEvaluations' , blank=True ,help_text='Evaluators who found this issue')
+    merdedFromEvaluators = models.ManyToManyField(User, related_name='fromEvaluators' , blank=True, verbose_name='Evaluators',help_text='Evaluators who found this issue')
+    mergedFromEvaluations = models.ManyToManyField('self' ,verbose_name='Merged-From-Evaluations', related_name='fromEvaluations' , blank=True  )
     mergedScreenshots = models.ManyToManyField(Screenshots ,blank=True , verbose_name="Merged-Screenshots" , related_name="screenshots")
 
     class Meta:

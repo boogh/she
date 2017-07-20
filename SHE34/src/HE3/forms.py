@@ -71,13 +71,15 @@ class MergeEvaluationForm(forms.ModelForm):
         self.fields['heurPrincip'].queryset = princips
         self.fields['merdedFromEvaluators'].queryset = eval.ofProject.evaluators
         self.fields['mergedScreenshots'].queryset = eval.mergedScreenshots.all()
+        # self.fields['mergedFromEvaluations'].queryset = eval.mergedFromEvaluations.all()
         # print('screenshots: ' , eval.mergedScreenshots.count())
 
     class Meta:
         model = Evaluation
         fields = ('title' , 'place' ,'link', 'description', 'recommendation' , 'positivity', 'severity' ,'frequency','heurPrincip' , 'merdedFromEvaluators', 'mergedScreenshots' )
         widgets = {
-            'mergedScreenshots' : forms.CheckboxSelectMultiple()
+            'mergedScreenshots' : forms.CheckboxSelectMultiple(),
+            # 'mergedFromEvaluations' : forms.CheckboxSelectMultiple()
         }
 
 # class MergeEvaluationForm(forms.ModelForm):

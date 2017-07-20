@@ -12,19 +12,21 @@
 
 {% block container %}
     <div class="container">
-        <div class="row"> <h2>Evaluation-Form:</h2> </div>
-
+        <div class="row text-center"> {% block headline %}<h2>Evaluation-Form:</h2> {% endblock %}  <br> <br> <hr></div>
+        {% block hint %} {% endblock %}
         <form class="from-horizontal" action="" method ='post' enctype="multipart/form-data">
+            <br>
             {% csrf_token %}
-            {#            {% include 'HE3/form-template.html' %}#}
             {% block file %}
-                {% include 'HE3/form-template2.html' %}
+                {% include 'HE3/form-template.html' %}
             {% endblock  %}
             <div class="from-group">
                 <div class="col-sm-offset-2 col-sm-10" >
-                    <button type="submit" class="btn btn-primary"> Submit</button>
-                    {#                    <input type="submit" value='Save and add another one!' action="{% url 'profiles:dashboard:Add-Evaluation-2' project.pk %}" class="btn btn-info" />#}
-                    <a class="btn btn-default" href= "{% url 'profiles:dashboard:project_detail'  project.pk %}"> Cancel</a>
+                    {% block buttons %}
+                        <button type="submit" class="btn btn-primary"> Submit</button>
+                        {#                    <input type="submit" value='Save and add another one!' action="{% url 'profiles:dashboard:Add-Evaluation-2' project.pk %}" class="btn btn-info" />#}
+                        <a class="btn btn-default" href= "{% url 'profiles:dashboard:project_detail'  project.pk %}"> Cancel</a>
+                    {% endblock %}
                 </div>
             </div>
         </form>

@@ -24,10 +24,20 @@
 
 <div class="form-horizontal">
     {% for field in form %}
+{#        {% if field.id_for_label == 'id_mergedFromEvaluations_0' %}#}
+{#            <h2> In this page you see the data combination of the following evaluations:</h2>#}
+{##}
+{#                {% for checkbox in form.mergedFromEvaluations %}#}
+{#                    <div class="row">  {{ checkbox.choice_label  }} </div> {{ checkbox.instance}}#}
+{#                {% endfor %}#}
+{#        {% else %}#}
         <div class="form-group">
             {{ field.errors }}
             <label class="">
-                {{ field.label_tag }}
+                {% if field.field.required %} <strong>{{ field.label_tag }} </strong>   <span class="glyphicon-asterisk"></span>
+                {% else %}
+                    <small class="text-muted">{{ field.label_tag }}</small>
+                {% endif %}
             </label>
             {% if field.id_for_label == 'id_mergedScreenshots_0' %}
                 <div class="">
@@ -40,7 +50,7 @@
 
             {% else %}
                 {{ field |addcss:"form-control" }}
-                {{ field.help_text }}
+                <div class="text-muted">{{ field.help_text }}</div>
             {% endif %}
         </div>
     {% endfor %}

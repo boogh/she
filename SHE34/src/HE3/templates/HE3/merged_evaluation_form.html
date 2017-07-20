@@ -1,0 +1,21 @@
+{% extends 'HE3/evaluation_form.html' %}
+{% block headline %}
+    <h1>Merged Evaluation Form</h1>
+    <br>
+    <hr>
+<h2> To see and reselect which evaluations are used in creating this merged evaluation: </h2>
+     <a class="btn btn-primary" href="{% url 'profiles:dashboard:evaluation-detail' form.instance.id %}">edit</a>
+{% endblock %}
+
+{% block file %}
+    {% include 'HE3/form-template2.html' %}
+{% endblock  %}
+
+{% block buttons %}
+    <br><hr>
+    <div class="btn-group-lg">
+        <button type="submit" class="btn btn-primary"> Save Changes</button>
+        <a class="btn btn-default" href= "{% url 'profiles:dashboard:project_detail'  project.pk %}"> Don't Save Changes</a>
+        <a class="btn btn-warning" href= "{% url 'profiles:dashboard:merged-evaluation-delete' form.instance.id %}"> Delete Merged Evaluation </a>
+    </div>
+{% endblock %}
