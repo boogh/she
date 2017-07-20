@@ -20,8 +20,8 @@
         <div class="btn-group">
             <a type="button" class="btn btn-sm btn-warning" href="{% url 'merge:remove-selected-evaluation' evaluation.id e.id %}" data-toggle="tooltip" title="Removes the evaluation from selected evaluations but its data remains in the merged evaluation."> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
-            <button type="button" class="btn btn-sm btn-danger" data-project="{{ e.title }}"  data-toggle="tooltip" title="Removes the evaluation and create a new merged evaluation with other selected evaluations. This means the current merged evaluation will be deleted"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </button>
+            <a type="button" class="btn btn-sm btn-danger" href="{% url 'merge:make-new-merge-evaluation' evaluation.id e.id %}" data-project="{{ e.title }}"  data-toggle="tooltip" title="Removes the evaluation and create a new merged evaluation with other selected evaluations. This means the current merged evaluation will be deleted"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
         </div>
     </td>
 {% endblock %}

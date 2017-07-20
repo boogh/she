@@ -22,6 +22,8 @@ def mergeDesktop(request, project_id):
         allEvaluations = project.evaluation_for_project.all()
         alreadyMerged = allEvaluations.filter(merged =True).values_list('mergedFromEvaluations' , flat = True)
         remainedEvals = allEvaluations.filter(merged=False).exclude( pk__in = alreadyMerged)
+        print('all , alreadymerged , remained' , allEvaluations.count() , alreadyMerged.count() , remainedEvals.count())
+
         context = {'project': project,
                    'now': timezone.now().date(),
                    'evals': remainedEvals,
@@ -102,7 +104,11 @@ def mergeFields(evalList):
         result[field] = ", ".join(allvalues)
     for field in forAvg :
         allvalues = [int(i.__dict__[field]) for i in evalList]
-        result[field] = str(sum(allvalues) / len(allvalues))
+        if (len(allvalues) > 0):
+            result[field] = str(sum(allvalues) / len(allvalues))
+        else:
+            result[field] = str(1)
+
 
     heurPrincips =[]
     for e in evalList:
@@ -151,6 +157,19 @@ def mergeEvaluations(request , project_id):
             return HttpResponse(json.dumps(response), content_type='application/json')
     return HttpResponse('not success')
 
+def mergeFuncion( resultEval , evals):
+    fields, heurPrincips = mergeFields(evals)
+    resultEval.__dict__.update(fields)
+    resultEval.save()
+    resultEval.heurPrincip.add(*heurPrincips)
+    mergeScreenshots(resultEval, evals)
+    eval_ids = evals.values_list('pk', flat=True)
+    evaluator_ids = evals.values_list('evaluator_id', flat=True).distinct()
+    resultEval.mergedFromEvaluations.add(*eval_ids)
+    resultEval.merdedFromEvaluators.add(*evaluator_ids)
+    return resultEval
+
+
 class UpdateMergedEvaluation(UpdateView):
 
     # eval = Evaluation.objects.get(pk=eval_id)
@@ -177,11 +196,32 @@ class UpdateMergedEvaluation(UpdateView):
 
 @login_required
 def removeSelectedEval(request , eval_id ,se_eval_id):
-    # print('eval 1 ' , get_object_or_404(Evaluation,pk=eval_id).id)
-    # print('eval selected ' , get_object_or_404(Evaluation,pk=se_eval_id).id)
-    get_object_or_404(Evaluation,pk=eval_id).mergedFromEvaluations.remove(get_object_or_404(Evaluation,pk=se_eval_id))
-    messages.success(request , '<h4>Selected Evaluation is removed! </h2>')
+    allSelected = get_object_or_404(Evaluation,pk=eval_id).mergedFromEvaluations
+    if allSelected.count() > 1:
+        allSelected.remove(get_object_or_404(Evaluation,pk=se_eval_id))
+        messages.success(request , '<h4>Selected Evaluation is removed! </h4>')
+    else:
+        messages.error(request , '<h4>Selected Evaluation can not be removed. At least one evaluation should be in the merged evaluation! </h4>')
+
     return redirect(request.META.get('HTTP_REFERER'))
+
+def makeNewMergeEval(request , eval_id , se_eval_id):
+    mergedEval = get_object_or_404(Evaluation,pk=eval_id)
+    allSelected = mergedEval.mergedFromEvaluations
+
+    if allSelected.count() > 1 :
+        mergedEval.mergedFromEvaluations.remove(get_object_or_404(Evaluation, pk=se_eval_id))
+        resultEval = Evaluation(ofProject=mergedEval.ofProject, evaluator=mergedEval.ofProject.manager, merged=True)
+        result = mergeFuncion(resultEval , allSelected.all())
+        mergedEval.delete()
+        messages.success(request , '<h4>  The selected evaluation is removed and a new merged Evaluation is created with the remaining selected evaluations! </h4>')
+        return redirect('/merge/project/'+str(result.id)+'/update-merged-evaluation/')
+
+    else:
+        messages.error(request , '<h4>Selected Evaluation can not be removed. At least one evaluation should be in the merged evaluation! </h4>')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
 
 # ------------Report ----------------
 def reportHtml(request , project_id):
@@ -202,7 +242,6 @@ def reportHtml(request , project_id):
     }
 
     return render (request , template_name='merge/report.html' , context=context)
-
 
 
 # --------Export methods  ---------------------------------------------------------------
