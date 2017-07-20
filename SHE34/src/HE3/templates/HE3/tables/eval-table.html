@@ -4,7 +4,9 @@
         {% block checkbox-th %}
             {#            <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
         {% endblock %}
+    {% block counter-th %}
         <th>#</th>
+    {% endblock %}
         {#        {% block user-th %} {% endblock %}#}
         <th>Title</th>
         <th>Heuristic Principe</th>
@@ -34,7 +36,9 @@
             {% block checkbox-td %}
                 {#                <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
             {% endblock %}
+        {% block counter-td %}
             <td> {{ forloop.counter }}</td>
+        {% endblock %}
             {#            {% block user-td %} {% endblock %}#}
             <td>  {% block title-td %} {{ e.title }} {% endblock %}</td>
             <td>  {% for eval in e.heurPrincip.all %} {{ eval.title }} <br> {% endfor %} </td>

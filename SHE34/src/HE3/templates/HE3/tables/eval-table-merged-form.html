@@ -1,0 +1,29 @@
+{% extends 'HE3/tables/eval-table.html' %}
+{#{% block checkbox-th %}#}
+{#    <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
+{#{% endblock %}#}
+{#{% block checkbox-td %}#}
+{#    <td class=" action-checkbox-column"> <label> <input type="checkbox"></label></td>#}
+{#{% endblock %}#}
+
+
+{% block checkbox-th %}
+    <th> Operations </th>
+{% endblock %}
+{% block counter-th%}{% endblock %}
+{% block counter-td%}{% endblock %}
+
+{% block title-td %} <a href="javascript:evalDetail({{ e.id }})">{{ e.title }}</a> {% endblock %}
+
+{% block checkbox-td %}
+    <td>
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-warning" data-project="{{ e.title }}" data-url="" data-toggle="tooltip" title="Removes the evaluation from selected evaluations but its data remains in the merged evaluation. "
+            > <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" data-project="{{ e.title }}" data-url= "" data-toggle="tooltip" title="Removes the evaluation and create a new merged evaluation with other selected evaluations. This means the current merged evaluation will be deleted"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </td>
+
+{% endblock %}

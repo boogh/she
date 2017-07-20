@@ -1,10 +1,29 @@
 {% extends 'HE3/evaluation_form.html' %}
 {% block headline %}
-    <h1>Merged Evaluation Form</h1>
+    <h1>Merged Evaluation - Edit</h1>
     <br>
     <hr>
-<h2> To see and reselect which evaluations are used in creating this merged evaluation: </h2>
-     <a class="btn btn-primary" href="{% url 'profiles:dashboard:evaluation-detail' form.instance.id %}">edit</a>
+    <h2> In this page you can edit the merged evaluation. To see and reselect which evaluations are used in creating this merged evaluation: </h2> <br>
+    <div class="panel panel-default" id="panel-selected-evals">
+        <div class="panel-heading">
+            <h4 class="lead">
+                <a data-toggle="collapse" data-target="#collapse1"
+                   href="#collapseTwo" class="collapsed">
+                    Selected Evaluations
+                </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <div class="table-responsive">
+                {% with evaluation.mergedFromEvaluations.all as evaluations %}
+{#                    {% include 'HE3/tables/eval-table-merge.html' %}#}
+                    {% include 'HE3/tables/eval-table-merged-form.html' %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    {% include 'HE3/evaluations/eval-modal.html' %}
+
 {% endblock %}
 
 {% block file %}

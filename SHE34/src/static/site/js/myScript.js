@@ -91,6 +91,9 @@ $(document).ready(function () {
         if (window.focus) {newwindow.focus()}
         return false;
     });
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'bottom'
+    });
 
 });
 
