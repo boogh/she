@@ -22,7 +22,7 @@ def mergeDesktop(request, project_id):
         allEvaluations = project.evaluation_for_project.all()
         alreadyMerged = allEvaluations.filter(merged =True).values_list('mergedFromEvaluations' , flat = True)
         remainedEvals = allEvaluations.filter(merged=False).exclude( pk__in = alreadyMerged)
-        print('all , alreadymerged , remained' , allEvaluations.count() , alreadyMerged.count() , remainedEvals.count())
+        # print('all , alreadymerged , remained' , allEvaluations.count() , alreadyMerged.count() , remainedEvals.count())
 
         context = {'project': project,
                    'now': timezone.now().date(),

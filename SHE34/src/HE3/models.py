@@ -88,7 +88,7 @@ class Project(models.Model):
     name = models.CharField(max_length=40)
     link = models.URLField(blank=True)
     description = models.TextField()
-    creationTime = models.DateField(default= utils.timezone.now)
+    creationTime = models.DateField(auto_now_add=True)
     deadline = models.DateField(default= date.today() + timedelta(days=15))
 
     class Meta:

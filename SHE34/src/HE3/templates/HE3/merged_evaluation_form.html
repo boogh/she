@@ -20,11 +20,16 @@
             </h4>
         </div>
         <div id="collapse1" class="panel-collapse collapse">
-            <div class="table-responsive">
-                {% with evaluation.mergedFromEvaluations.all as evaluations %}
-{#                    {% include 'HE3/tables/eval-table-merge.html' %}#}
-                    {% include 'HE3/tables/eval-table-merged-form.html' %}
-                {% endwith %}
+            <div class="panel-body">
+                <div class="table">
+                    {% with evaluation.mergedFromEvaluations.all as evaluations %}
+                        {#                    {% include 'HE3/tables/eval-table-merge.html' %}#}
+                        {% include 'HE3/tables/eval-table-merged-form.html' %}
+                    {% endwith %}
+                </div>
+                <br>
+                <br>
+                <br>
             </div>
         </div>
     </div>

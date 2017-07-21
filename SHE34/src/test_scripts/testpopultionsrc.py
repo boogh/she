@@ -5,7 +5,7 @@ import django
 django.setup()
 
 from authtools.models import User
-from src.HE3.models import Project, Evaluation, SetOfHeuristics , HeuristicPrinciples
+from HE3.models import Project, Evaluation, SetOfHeuristics , HeuristicPrinciples
 from random import choice
 
 HEURISTICLIST = (("1", "Visibility of System Status"),
