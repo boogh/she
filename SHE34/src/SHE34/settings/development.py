@@ -4,6 +4,7 @@ import logging.config
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 TEMPLATES[0]['OPTIONS'].update({'debug': True})
 
 # Turn off debug while imported by Celery with a workaround
