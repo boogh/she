@@ -11,7 +11,16 @@
 
 {% block content %}
     <div class="col-sm-9">
-{#        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Add Heuristic Principle</button>#}
+    <div class="jumbotron text-center">
+        <h1> {{ set.title }}</h1>
+    </div>
+    <br> <br>
+    {% if set.description %}
+    <div class="col-sm-offset-1"><h4>Description:</h4><p class="lead"> {{ set.description }}</p></div>
+    <br>
+    {% endif %}
+    <hr>
+
         {% if princips %}
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -62,7 +71,7 @@
 
         {% else %}
             <div class="jumbotron">
-                <div> <p class="lead text-primary"> Add Heuristic Principle to This Set</p>
+                <div> <h2> Add Heuristic Principle to This Set</h2>
                     <div class="col-sm-offset-6">
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-princip" data-title="" data-des="" data-url="{% url 'profiles:dashboard:add-principle' set.id %}" >
                                 Add New Heuristic Principle

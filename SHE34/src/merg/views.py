@@ -23,6 +23,8 @@ def mergeDesktop(request, project_id):
         alreadyMerged = allEvaluations.filter(merged =True).values_list('mergedFromEvaluations' , flat = True)
         remainedEvals = allEvaluations.filter(merged=False).exclude( pk__in = alreadyMerged)
         # print('all , alreadymerged , remained' , allEvaluations.count() , alreadyMerged.count() , remainedEvals.count())
+        if remainedEvals.count() == 0:
+            messages.error(request,'<h3>All evaluations are already included in the merged evaluations and there is no evaluation remained to be merged!</h3>')
 
         context = {'project': project,
                    'now': timezone.now().date(),

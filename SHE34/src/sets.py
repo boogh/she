@@ -62,7 +62,7 @@ setItems=[
         ]
 
 def addUser():
-    user = User.objects.get_or_create(email='admin_set@admin_set.com' , name='admin_set')[0]
+    user = User.objects.get_or_create(email='adminset@adminset.com' , name='adminset')[0]
     user.set_password('admin_set_313')
     user.save()
     print("Added admin_set!")

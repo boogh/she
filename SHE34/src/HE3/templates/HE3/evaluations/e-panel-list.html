@@ -1,15 +1,15 @@
 
 {% for e in evaluations %}
     <li class="list-group-item">
-{#        {% if e.merged == False %}#}
-            <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass big-checkbox'/>
-            </div>
-{#        {% endif %}#}
+        {#        {% if e.merged == False %}#}
+        <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass big-checkbox'/>
+        </div>
+        {#        {% endif %}#}
         <a href="javascript:evalDetail({{ e.id }})" >
             <div class='eval-item'>
-                <div> {{ e.title }} <br> </div>
+                <div class="lead"> {{ e.title | truncatewords:5}} <br> </div>
                 <div><small>{{ e.description | truncatewords:5 }} </small></div>
-                </div>
+            </div>
         </a>
     </li>
 {% endfor %}
@@ -17,12 +17,14 @@
 {% if used_evals %}
     {% for e in used_evals %}
         <li class="list-group-item">
-            <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass'/>
+            <div class="checkbox pull-right">  <input type="checkbox" value={{ e.id }} class='checkBoxClass big-checkbox'/>
             </div>
             <a href="javascript:evalDetail({{ e.id }})" >
                 <div class='eval-item'>
-                    {{ e.title }} <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <br>
-                    <div><small>{{ e.description | truncatewords:5 }} </small>
+                   <div class="lead"> {{ e.title | truncatewords:5 }}</div> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <br>
+                    <div>
+                        <small>{{ e.description | truncatewords:5 }} </small>
+                    </div>
                 </div>
             </a>
         </li>
