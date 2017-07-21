@@ -92,9 +92,9 @@
                                 Export Merged Evaluations <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="{% url 'merge:export-doc-file' project.id 1 %}"> Export as Docx </a></li>
-                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 1 %}"> Export as html </a></li>
-                                <li><a target="_blank" href=""> Export as csv </a></li>
+                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 1 %}"> Export as HTML </a></li>
+{#                                <li><a target="_blank" href=""> Export as Spreadsheet </a></li>#}
+{#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
                             </ul>
@@ -106,23 +106,24 @@
                                 Export Report <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href=""> Export as Docx </a></li>
-                                <li><a target="_blank" href=""> Export as html </a></li>
-{#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
+                                <li><a target="_blank" href="{% url 'merge:report-html' project.id %}"> Export as HTML </a></li>
+{#                                <li><a target="_blank" href=""> Export as Spreadsheet </a></li>#}
+
+                                {#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
                             </ul>
                         </div>
 
                         <!-- report btn -->
-{#                        <a class="btn btn-info" href="{% url 'merge:report-html' project.id %}"> <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>Export a Report</a>#}
+                        {#                        <a class="btn btn-info" href="{% url 'merge:report-html' project.id %}"> <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>Export a Report</a>#}
 
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse">
-                            <div class="table table-responsive" >
-                                {% with mergedEvals as evaluations %}
-                                    {% include 'HE3/tables/eval-table-merge-operation.html' %}
-                                {% endwith %}
+                        <div class="table table-responsive" >
+                            {% with mergedEvals as evaluations %}
+                                {% include 'HE3/tables/eval-table-merge-operation.html' %}
+                            {% endwith %}
                         </div>
                     </div>
                 </div>
@@ -143,9 +144,9 @@
                                 Export Evaluations <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href=""> Export as Docx </a></li>
-                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 0 %}"> Export as html </a></li>
-                                <li><a target="_blank" href=""> Export as csv </a></li>
+                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 0 %}"> Export as HTML </a></li>
+{#                                <li><a target="_blank" href=""> Export as Spreadsheet </a></li>#}
+                                {#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
                                 {#                                        <li role="separator" class="divider"></li>#}
                                 {#                                        <li><a href="#">Delete</a></li>#}
                             </ul>

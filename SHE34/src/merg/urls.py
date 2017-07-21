@@ -28,7 +28,7 @@ urlpatterns = [
 
 
 
-    url(r'^project/(?P<project_id>[0-9]+)/(?P<merge>\d{1})/export-docx', views.exportDocFile, name='export-doc-file'),
+    # url(r'^project/(?P<project_id>[0-9]+)/(?P<merge>\d{1})/export-docx', views.exportDocFile, name='export-doc-file'),
     url(r'^project/(?P<project_id>[0-9]+)/(?P<merge>\d{1})/export-html$', views.exportHtmlEvals, name='export-html-file'),
     # url(r'^project/(?P<list_id>[0-9]+)/export-csv$', views.exportCsvFile, name='export-csv-file'),
 

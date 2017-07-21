@@ -266,24 +266,24 @@ def exportHtmlEvals(request, project_id, merge):
 
     return render(request,template_name=template_name,context=context)
 
-@login_required
-def exportDocFile(request, project_id , merge):
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    response['Content-Disposition'] = 'attachment; filename=demo.docx'
-    # merged = False
-    project = Project.objects.get(pk=project_id)
-    evals = project.evaluation_for_project.all()
-
-    if int(merge[0]) == 0:
-        evals = evals.filter(merged=False)
-    elif int(merge[0]) == 1:
-        # merged = True
-        evals = evals.filter(merged=True)
-
-    doc = fillDocFileEval(evals)
-    doc.save(response)
-
-    return response
+# @login_required
+# def exportDocFile(request, project_id , merge):
+#     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+#     response['Content-Disposition'] = 'attachment; filename=demo.docx'
+#     # merged = False
+#     project = Project.objects.get(pk=project_id)
+#     evals = project.evaluation_for_project.all()
+#
+#     if int(merge[0]) == 0:
+#         evals = evals.filter(merged=False)
+#     elif int(merge[0]) == 1:
+#         # merged = True
+#         evals = evals.filter(merged=True)
+#
+#     doc = fillDocFileEval(evals)
+#     doc.save(response)
+#
+#     return response
 
 # @login_required
 # def exportCsvFile(request,list_id):
@@ -310,73 +310,73 @@ def exportDocFile(request, project_id , merge):
 #
 #     # return response
 
-def fillDocFile(project):
-    doc = Document()
-    mergedEvals = project.evaluation_for_project.filter(merged=True)
-    evals = project.evaluation_for_project.filter(merged=False)
-    environments = Environment.objects.filter(creator__in=project.evaluators.all()).order_by('creator')
-    # context = {'project': project,
-    #            'evaluations': evals.order_by('positivity', 'evaluator', 'severity'),
-    #            'mergedEvals': mergedEvals,
-    #            'environments': environments,
-    #            'pos_merge': mergedEvals.filter(positivity='p'),
-    #            'neg_merge': mergedEvals.filter(positivity='n'),
-    #            }
+# def fillDocFile(project):
+#     doc = Document()
+#     mergedEvals = project.evaluation_for_project.filter(merged=True)
+#     evals = project.evaluation_for_project.filter(merged=False)
+#     environments = Environment.objects.filter(creator__in=project.evaluators.all()).order_by('creator')
+#     # context = {'project': project,
+#     #            'evaluations': evals.order_by('positivity', 'evaluator', 'severity'),
+#     #            'mergedEvals': mergedEvals,
+#     #            'environments': environments,
+#     #            'pos_merge': mergedEvals.filter(positivity='p'),
+#     #            'neg_merge': mergedEvals.filter(positivity='n'),
+#     #            }
+#
+#     doc.add_heading(str(project.name + 'Report'))
+#     p = doc.add_paragraph(project.description)
+#     p.add_run('bold').bold = True
+#     p.add_run(' and some')
+#     p.add_run('italic.').italic = True
+#
+#     doc.add_heading('Heading, level 1', level=1)
+#     doc.add_paragraph('Intense quote', style='IntenseQuote')
+#
+#     doc.add_paragraph(
+#         'first item in unordered list', style='ListBullet'
+#     )
+#     doc.add_paragraph(
+#         'first item in ordered list', style='ListNumber'
+#     )
+#
+#     table = doc.add_table(rows=1, cols=3)
+#     hdr_cells = table.rows[0].cells
+#     hdr_cells[0].text = 'Qty'
+#     hdr_cells[1].text = 'Id'
+#     hdr_cells[2].text = 'Desc'
+#     # for item in listofeval.objects.all():
+#     #     row_cells = table.add_row().cells
+#     #     row_cells[0].text = str(item.name)
+#     #     row_cells[1].text = str(item.genre)
+#     #     row_cells[2].text = item.artist
+#
+#     doc.add_page_break()
+#
+#     return doc
 
-    doc.add_heading(str(project.name + 'Report'))
-    p = doc.add_paragraph(project.description)
-    p.add_run('bold').bold = True
-    p.add_run(' and some')
-    p.add_run('italic.').italic = True
-
-    doc.add_heading('Heading, level 1', level=1)
-    doc.add_paragraph('Intense quote', style='IntenseQuote')
-
-    doc.add_paragraph(
-        'first item in unordered list', style='ListBullet'
-    )
-    doc.add_paragraph(
-        'first item in ordered list', style='ListNumber'
-    )
-
-    table = doc.add_table(rows=1, cols=3)
-    hdr_cells = table.rows[0].cells
-    hdr_cells[0].text = 'Qty'
-    hdr_cells[1].text = 'Id'
-    hdr_cells[2].text = 'Desc'
-    # for item in listofeval.objects.all():
-    #     row_cells = table.add_row().cells
-    #     row_cells[0].text = str(item.name)
-    #     row_cells[1].text = str(item.genre)
-    #     row_cells[2].text = item.artist
-
-    doc.add_page_break()
-
-    return doc
-
-def fillDocFileEval(evals):
-    doc = Document()
-    doc.add_heading('Evaluations')
-
-    # table = doc.add_table(rows=evals.count(), cols=12)
-    for e in evals :
-        table = doc.add_table(rows=1, cols=11)
-
-        hdr_cells = table.rows[0].cells
-        hdr_cells[0].text = '#'
-        hdr_cells[1].text = 'Title'
-        hdr_cells[2].text = 'Heuristic Principle'
-        hdr_cells[3].text = 'Place'
-        hdr_cells[4].text = 'Link'
-        hdr_cells[7].text = 'Positivity'
-        hdr_cells[8].text = 'Severity'
-        hdr_cells[9].text = 'Frequency'
-        hdr_cells[10].text = 'Found By'
-
-    doc.add_heading('Description', level=1)
-    doc.add_heading('Recommendation', level=1)
-    doc.add_heading('Screenshot', level=1)
-
-
-    return doc
+# def fillDocFileEval(evals):
+#     doc = Document()
+#     doc.add_heading('Evaluations')
+#
+#     # table = doc.add_table(rows=evals.count(), cols=12)
+#     for e in evals :
+#         table = doc.add_table(rows=1, cols=11)
+#
+#         hdr_cells = table.rows[0].cells
+#         hdr_cells[0].text = '#'
+#         hdr_cells[1].text = 'Title'
+#         hdr_cells[2].text = 'Heuristic Principle'
+#         hdr_cells[3].text = 'Place'
+#         hdr_cells[4].text = 'Link'
+#         hdr_cells[7].text = 'Positivity'
+#         hdr_cells[8].text = 'Severity'
+#         hdr_cells[9].text = 'Frequency'
+#         hdr_cells[10].text = 'Found By'
+#
+#     doc.add_heading('Description', level=1)
+#     doc.add_heading('Recommendation', level=1)
+#     doc.add_heading('Screenshot', level=1)
+#
+#
+#     return doc
 
