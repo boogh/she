@@ -49,7 +49,7 @@
                             <tr>
                                 <td>  {{ forloop.counter }} </td>
                                 <td> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name }} </a></td>
-                                <td> {{ project.description }} </td>
+                                <td> {{ project.description |truncatewords:10 }} </td>
 
                                 <td> <a href="{{ project.link }}"> {{ project.link }} </a> </td>
 
@@ -121,7 +121,7 @@
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td> <a href="{% url 'profiles:dashboard:project_detail' project.id %}"> {{ project.name}}  </a>  </td>
-                                <td>{{ project.description }} </td>
+                                <td>{{ project.description |truncatewords:10 }} </td>
                                 <td><a href="{{ project.link }}">{{ project.link }} </a> </td>
 
                                 <td> {{ project.deadline }}

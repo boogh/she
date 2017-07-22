@@ -75,8 +75,6 @@ INSTALLED_APPS = (
     'crispy_forms',
     'easy_thumbnails',
 
-    'django_extensions',
-
     'profiles',
     'accounts',
     'HE3',
