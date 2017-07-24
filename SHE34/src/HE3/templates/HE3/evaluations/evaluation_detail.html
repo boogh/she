@@ -37,16 +37,18 @@
                         <td> {% for e in evaluation.merdedFromEvaluators.all %} {{ e.name }} <br> {% endfor %} </td>
                     {% endif %}
                     <td>
-                        <a class="btn btn-primary btn-sm" target="_blank"
-                                {% if evaluation.merged %}
-                           href="{% url 'merge:update-merged-evaluation' evaluation.id %}"
-                                {% else %}
-                           href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"
-                                {% endif %}>
+                        <div class="btn-group-sm">
+                            <a class="btn btn-primary btn-sm" target="_blank"
+                                    {% if evaluation.merged %}
+                               href="{% url 'merge:update-merged-evaluation' evaluation.id %}"
+                                    {% else %}
+                               href="{% url 'profiles:dashboard:evaluation-update' evaluation.id %}"
+                                    {% endif %}>
+                                Edit </a>
+                            <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
+{#                            <a class="btn btn-default btn-sm</div>" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>#}
+                        </div>
 
-                            Edit </a>
-                        <a class="btn btn-warning btn-sm" href="{% url 'profiles:dashboard:evaluation-delete' evaluation.id %}"> Delete </a>
-                        <a class="btn btn-default btn-sm" target="_blank" href="{% url 'profiles:dashboard:evaluation-duplicate' evaluation.id %}"> Duplicate </a>
                     </td>
                 </tr>
                 </tbody>
