@@ -24,13 +24,13 @@
 
 <div class="form-horizontal">
     {% for field in form %}
-{#        {% if field.id_for_label == 'id_mergedFromEvaluations_0' %}#}
-{#            <h2> In this page you see the data combination of the following evaluations:</h2>#}
-{##}
-{#                {% for checkbox in form.mergedFromEvaluations %}#}
-{#                    <div class="row">  {{ checkbox.choice_label  }} </div> {{ checkbox.instance}}#}
-{#                {% endfor %}#}
-{#        {% else %}#}
+        {#        {% if field.id_for_label == 'id_mergedFromEvaluations_0' %}#}
+        {#            <h2> In this page you see the data combination of the following evaluations:</h2>#}
+        {##}
+        {#                {% for checkbox in form.mergedFromEvaluations %}#}
+        {#                    <div class="row">  {{ checkbox.choice_label  }} </div> {{ checkbox.instance}}#}
+        {#                {% endfor %}#}
+        {#        {% else %}#}
         <div class="form-group">
             {{ field.errors }}
             <label class="">
@@ -43,8 +43,11 @@
                 <div class="">
                     <br>
                     {% for checkbox in form.mergedScreenshots %}
-                        {{ checkbox.tag }}
-                        <img src="{{ checkbox.choice_label  }}" /><br>
+                        <div class="">{{ checkbox.tag }}</div> <br> {{ checkbox.tag.class }}
+                        <div class="img-responsive">
+                            <a href="{{ checkbox.choice_label }}" ><img src="{{ checkbox.choice_label}}" /> </a><br>
+                        </div>
+                        <br> <hr>
                     {% endfor %}
                 </div>
 
