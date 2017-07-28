@@ -34,3 +34,7 @@
 .modal-header {
     max-height: 80vh; //Sets the height to 80/100ths of the viewport.
 }
+.img-responsive {
+  max-width: 70%; /* or to whatever you want here */
+  max-height: auto; /* or to whatever you want here */
+}
