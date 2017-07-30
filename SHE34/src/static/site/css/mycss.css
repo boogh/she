@@ -21,17 +21,20 @@
 }
 .lead-guid {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 400;
     font-style: normal;
-    text-align: justify ;
 }
 
 .modal-body {
-    max-height: 60vh; //Sets the height to 80/100ths of the viewport.
+    max-height: 80vh; //Sets the height to 80/100ths of the viewport.
     overflow-y:auto;
     overflow-x:auto;
 }
 .modal-header {
-    max-height: 60vh; //Sets the height to 80/100ths of the viewport.
+    max-height: 80vh; //Sets the height to 80/100ths of the viewport.
+}
+.img-responsive {
+  max-width: 70%; /* or to whatever you want here */
+  max-height: auto; /* or to whatever you want here */
 }

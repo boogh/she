@@ -67,21 +67,21 @@
                                 <td> {{ project.evaluators.all | length }} evaluators</td>
                                 <td>{{ project.evaluation_for_project.all | length }} submitted evaluations</td>
                                 <td class="text-center btn-group-sm">
-                                    <span class="btn-group-sm">
-                                    <a class="btn btn-info" href=" {% url 'profiles:dashboard:project_update' project.id %}">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-primary" href="{% url 'merge:merge-project-desktop' project.id %}" >
-                                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                                        Merge Evaluations
-                                    </a>
-                                    </span>
+                                    <div class="btn-group-sm">
+                                        <a class="btn btn-info" href=" {% url 'profiles:dashboard:project_update' project.id %}">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-primary" href="{% url 'merge:merge-project-desktop' project.id %}" >
+                                            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                                            Merge Evaluations
+                                        </a>
 
-                                    {#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                    <button type="button" class="btn btn-warning" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:project_delete' project.id %}" data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        Del </button>
-                                    {#                                    </button>#}
+                                        {#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
+                                        <button type="button" class="btn btn-warning" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:project_delete' project.id %}" data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            Del
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -128,7 +128,7 @@
 
                                     <span class="small">
                                     {% if project.deadline > now %}
-                                        ( Deadline is in
+                                        (Deadline is in
                                         {{ project.deadline|timeuntil }} )
                                     {% else %}
                                         (Evaluation time is finished!)
@@ -140,7 +140,6 @@
                                 <td class="text-center">
                                     <span class="btn-group-sm">
                                     {% if project.deadline > now %}
-
                                         <a class="btn btn-info" href=" {% url 'profiles:dashboard:Add-Evaluation' project.id %}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
