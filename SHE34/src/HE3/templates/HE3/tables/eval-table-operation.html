@@ -27,7 +27,7 @@
             <button type="button" class="btn btn-sm btn-warning" data-project="{{ e.title }}" data-url= {% url 'profiles:dashboard:evaluation-delete' e.id %} data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 Del
             </button>
-            <a class="btn btn-sm btn-default" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>
+{#            <a class="btn btn-sm btn-default" href="{% url 'merge:recommend' e.id %}">Similar Evaluations</a>#}
         </div>
     </td>
 {% endblock %}
