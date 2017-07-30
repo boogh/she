@@ -71,10 +71,8 @@ def placebase(eval):
     # updateAllSearchModels()
     # result = projectsSearchModelsDic[project.id]['placeSearchModel'].query(eval.place)
     sf= getPlaceSF(project)
-    print('place : ' , eval.place)
     placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place' ,'tags'])
     result = placeSearchModel.query(eval.place).filter_by(str(eval.id) , 'id' , exclude= True)
-    print('ids : ,' , result['id'])
     return  list(result['id'])
 
 
