@@ -20,41 +20,39 @@
             </div>
         </div>
         {#   ----------------------------------Evaluators -----------------------------#}
-        <div>
-            <br><br>
-            <h2 class="text-info">Evaluators:</h2> <hr>
-            <div class="col-sm-offset-1">
-                <p> These are the evalutors in this project:</p>
-                <div>
-                    {% if evaluators %}
+        {% if evaluators %}
+            <div>
+                <br><br>
+                <h2 class="text-info">Evaluators:</h2> <hr>
+                <div class="col-sm-offset-1">
+                    <p> These are the evalutors in this project:</p>
+                    <div>
                         {% for ev in evaluators %}
                             <li> {{ ev.name }} - {{ ev.email }} </li>
                         {% endfor %}
-                    {% endif %}
+                    </div>
                 </div>
+                <br>
             </div>
-            <br>
-        </div>
-        <div>
-            <br>
-            <h2 class="text-info">Evaluator Environments:</h2><hr>
-            <br>
+        {% endif %}
+        {% if environments %}
             <div>
-                {% if environments %}
+                <br>
+                <h2 class="text-info">Evaluator Environments:</h2><hr>
+                <br>
+                <div>
                     {% include 'merge/environments.html' %}
-                {% endif %}
+                </div>
+                <br>
             </div>
-            <br>
-        </div>
+        {% endif %}
         {% if pos_merge %}
             <br><br>
             <div><h2 class="text-info">Positive Merged evaluations:</h2> <hr>
                 <div>
-                    {% if pos_merge %}
-                        {% with pos_merge as evaluations %}
-                            {% include 'HE3/tables/eval-table-merge-desc.html' %}
-                        {% endwith %}
-                    {% endif %}
+                    {% with pos_merge as evaluations %}
+                        {% include 'HE3/tables/eval-table-merge-desc.html' %}
+                    {% endwith %}
                 </div>
             </div>
             <br>
@@ -63,27 +61,24 @@
             <br><br>
             <div> <h2 class="text-info">Negative Merged Evaluations:</h2><hr>
                 <div>
-                    {% if neg_merge %}
-                        {% with neg_merge as evaluations %}
-                            {% include 'HE3/tables/eval-table-merge-desc.html' %}
-                        {% endwith %}
-                    {% endif %}
+                    {% with neg_merge as evaluations %}
+                        {% include 'HE3/tables/eval-table-merge-desc.html' %}
+                    {% endwith %}
                 </div>
                 <br>
             </div>
-            {#-----------------------------Appendix--------------------------------------------#}
-
         {% endif %}
+        {#-----------------------------Appendix--------------------------------------------#}
 
-        <div>
-            <br><br>
-            <h2 class="text-info">All Evaluations: </h2><hr>
+        {% if evaluations %}
             <div>
-                {% if evaluations %}
+                <br><br>
+                <h2 class="text-info">All Evaluations: </h2><hr>
+                <div>
                     {% include 'HE3/tables/eval-table-desc.html' %}
-                {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
 
         {#    -------------------Heuristics---------------------------------------#}
@@ -114,7 +109,5 @@
                 </ol>
             </div>
         </div>
-
     </div>
-
 {% endblock %}
