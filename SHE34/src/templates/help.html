@@ -19,10 +19,37 @@
             <div class="col-sm-2 sidenav " >
                 <div class="page-header "> <h1 class="text-primary"> {% block titleOfPage %} SHE Walkthrough {% endblock %}</h1></div>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="lead-guid"><a href="#how-user" >How to Be a User in SHE</a></li>
-                    <li class="lead-guid"><a href="#how-evaluator">How to Be an Evaluator in SHE</a></li>
-                    <li class="lead-guid"><a href="#how-manager">How to Be a Manager in SHE</a></li>
+                    <li class="lead-guid"><a href="#about-she" >About SHE</a></li>
+                    <br>
+                    <li class="lead-guid"><a href="#user-list" data-toggle="collapse" aria-expanded="false" aria-controls="user-list" >How to Be a User in SHE <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span> </a></li>
+                    <br>
+                    <ul class="lead-guid collapse" id="user-list">
+                        <li><a href="#signing-up">Signing up</a></li>
+                        <li><a href="#signing-in">Signing in</a></li>
+                        <li><a href="#password-recovery">Password Recovery</a></li>
+                        <li><a href="#user-profile"> Editing User Profile</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#project-detail">Project Detail</a></li>
+                        <br>
+                    </ul>
+                    <li class="lead-guid"><a href="#evaluator-list" data-toggle="collapse" aria-expanded="false" aria-controls="evaluator-list">How to Be an Evaluator in SHE <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></a></li>
+                    <br>
+                    <ul class="lead-guid collapse" id="evaluator-list">
+                        <li><a href="#adding-evaluation">Adding a New Evaluation</a> </li>
+                        <li><a href="#adding-env">Adding a New Environment</a> </li>
+                        <br>
+                    </ul>
+                    <li class="lead-guid"><a href="#manager-list" data-toggle="collapse" aria-expanded="false" aria-controls="manager-list">How to Be a Manager in SHE <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></a></li>
+                    <br>
+                    <ul class="lead-guid collapse" id="manager-list">
+                        <li><a href="#defining-set">Defining a Heuristic Set</a></li>
+                        <li><a href="#defining-project">Defining a Project</a></li>
+                        <li><a href="#merging-evaluation">Merging Evaluations</a></li>
+                        <li><a href="#export">Exporting a Report</a></li>
+                        <br>
+                    </ul>
                 </ul><br>
+
             </div>
 
             {#            {% include 'guid.html' %}#}
@@ -37,6 +64,19 @@
                         </h1>
                         <br>
                         <br>
+
+
+                        <div id="about-she">
+                            <br>
+                            <br>
+                            <h2 class="text-primary">About SHE</h2>
+                        </div>
+                        <br>
+                        <p class="lead-guid"><span class="text-primary">SHE</span> or <span class="text-primary">Smart Heurisic Evaluation </span>is a collaborative web application for supporting <a href="https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/">Heuristic Evaluation</a>.
+                            The process of systematic development of user friendly interfaces or <a href="https://en.wikipedia.org/wiki/Usability_engineering">usability engineering</a> involves constant evaluation of a system design through usability tests and inspection methods. Heuristic evaluation (HE) is one of the most important inspection methods in usability engineering, in which a number of usability experts evaluate the user interfaces based on a set of pre-defined principles or the so called <em>"heuristics"</em> and at the end, their findings will be merged in a summary report.</p>
+                        <p class="lead-guid">  SHE is tool for supporting the whole process of heuristic evaluation.  It is smart enough to recognize similarities between evaluations and recommend them as a potential merging candidate in the final report.
+                        </p>
+
                         <!-- Sign up -->
 
                         <div id="how-user">
@@ -51,7 +91,7 @@
                         </p>
                         <hr>
                         <br>
-                        <h1>Signing Up:</h1>
+                        <div id="signing-up"><br><br> <h2>Signing Up:</h2></div>
                         <p class="lead-guid">  To use SHE having an account is necessary. Registering an account is done in a simple step with a <strong>name </strong><small>(will be used as the username)</small> and also an <strong>email</strong> <small>(will be used for password recovery)</small>.
                         </p>
                         <img class="img-responsive" src="/media/guid/user/signup.jpeg">
@@ -59,9 +99,7 @@
                         <br>
 
                         <!-- Sign in -->
-                        <h1>
-                            Signin in:
-                        </h1>
+                        <div id="signing-in"><br><br> <h2>Signing in:</h2></div>
                         <br>
                         <p class="lead-guid">
                             A registered user should log in to be able to use SHE:
@@ -71,9 +109,8 @@
                         <br>
 
                         <!-- password revcovery -->
-                        <h2>
-                            Password recovery:
-                        </h2>
+                        <div id="password-recovery"><br><br> <h2>Password Recovery:</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             If users forgot their passwords it is possible for them to recover their password using their registered email:
@@ -86,9 +123,8 @@
                         <br>
 
                         <!-- Editing profile -->
-                        <h2>
-                            Editing user profile:
-                        </h2>
+                        <div id="user-profile"><br><br> <h2>Editing User Profile</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             Users can have an editable profile with a photo and a short bio:
@@ -99,9 +135,8 @@
                         <hr>
                         <br>
                         <!-- Dashboard -->
-                        <h2>
-                            Dashboard View:
-                        </h2>
+                        <div id="dashboard"><br><br> <h2>Dashboard</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             Once a user logged in, he/she sees the dashboard. For the first time dashboard is empty and will be look like this:                        </p>
@@ -118,9 +153,8 @@
                         <br>
 
                         <!-- Project Detail -->
-                        <h2>
-                            Project Detail:
-                        </h2>
+                        <div id="project-detail"><br><br> <h2>Project Detail</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             A user can see the details of each project just by clicking on the title of the project and depending on being a manager or an evaluator he/she can see different primaryrmation and operations for that project.                        </p>
@@ -149,9 +183,8 @@
 
                         <!-- Adding a new evaluation -->
                         <br>
-                        <h2>
-                            Adding a new evaluation:
-                        </h2>
+                        <div id="adding-evaluation"><br><br> <h2>Adding a New Evaluation</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             If the project deadline for the evaluation is not passed an evaluator can press the add evaluation button to open an evaluation form similar to the following screenshot. By filling the form and pressing the submit button at the bottom of the page the evaluation will be saved. In this form some fields are optional and some are necessary. Title, place and description fields are required to be filled. The rest is optional but recommended; e.g. the link field in the evaluation of a website page which should be filled in this form: http://www.example.com.
@@ -163,9 +196,7 @@
 
                         <!-- Adding env -->
                         <br>
-                        <h2>
-                            Adding a New Environment:
-                        </h2>
+                        <div id="adding-env"><br><br> <h2>Adding a New Environment</h2></div>
                         <br>
                         <p class="lead-guid">
                             Evaluators can register the specifics of their environment so the manager can see the circumstances of the evaluations e.g. monitor resolution, operation system, etc. Creating an environment item is done by clicking on the link <span class="text-capitalize strong text-info">create an evaluation environment </span> which is in the sidebar of the dashboard and will opens a form similar to the following screenshot. An evaluator can create multiple environments.
@@ -191,9 +222,7 @@
                         <br>
 
                         <!-- Defining a heuristic set -->
-                        <h2>
-                            Defining a Heuristic Set:
-                        </h2>
+                        <div id="defining-set"><br><br> <h2>Defining a Heuristic Set</h2></div>
                         <br>
                         <p class="lead-guid">
                             SHE already has some widely used set of heuristics like Nielsen heuristics, but a managers can define their own custom set of heuristic sets by clicking on the create a new heuristic set tab in the sidebar. A page similar to the the following screenshot will opens and after entering a name and a description the set will be created after submitting and a page similar to the following screenshot will be opened. The set still does not have any principle and therefore is empty. </p>
@@ -227,9 +256,7 @@
 
                         <!-- def project -->
                         <br>
-                        <h2>
-                            Defining a Project:
-                        </h2>
+                        <div id="defining-project"><br><br> <h2>Defining a Project</h2></div>
                         <br>
                         <p class="lead-guid">
                             Defining a new project is done by clicking on the <span class="text-info strong">Creare a New Project </span>link in the sidebar of the dashboard to see a form like the following screenshot. Except the filed link, the other fields are required to be filled. After filling the form clicking submit will create the new project.
@@ -241,9 +268,8 @@
 
                         <!-- Merging Evaluations: -->
                         <br>
-                        <h2>
-                            Merging Evaluations:
-                        </h2>
+                        <div id="merging-evaluation"><br><br> <h2>Merging Evaluations</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             Manager can merge existing evaluations and make merged evaluation. The merging can be done anytime but it is better to be after the deadline of the project. After clicking on the <span class="text-info strong">Merge Evaluations </span>button in the project detail or in the overview of the project in the dashboard merge desktop opens a similar page to the following screenshot. In the first column with the name Evaluations (not merged) you can see all the evaluations which are not already merged, categorized by the name of their evaluators.
@@ -273,9 +299,8 @@
                         <br>
 
                         <!-- Export -->
-                        <h2>
-                            Exporting Report or Evaluations:
-                        </h2>
+                        <div id="export"><br><br> <h2>Exporing a Report</h2></div>
+
                         <br>
                         <p class="lead-guid">
                             In project detail page a manger can find different <span class="text-info strong">Export</span> buttons which gives different export options in a dropdown menu to export both merged evaluations and normal evaluations separately.
