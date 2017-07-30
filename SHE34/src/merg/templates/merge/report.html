@@ -16,7 +16,11 @@
             <br> <br>
             <h2 class="text-info">Project Description:</h2><hr>
             <div class="col-sm-offset-1">
-                <p>{{ project.description }} - {{ project.link }}</p>
+                <p>{{ project.description }}
+                    {% if project.link %}
+                        - {{ project.link }}
+                    {% endif %}
+                </p>
             </div>
         </div>
         {#   ----------------------------------Evaluators -----------------------------#}

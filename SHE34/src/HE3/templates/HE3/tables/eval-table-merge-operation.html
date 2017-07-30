@@ -1,18 +1,11 @@
 
 {% extends 'HE3/tables/eval-table-merge.html' %}
-{#{% block checkbox-th %}#}
-{#        <th class=" action-checkbox-column"> <label> <input type="checkbox"></label></th>#}
-{#{% endblock %}#}
-
-{##}
 
 {% block operations-th %}
             <th>Operations</th>
 {% endblock %}
 
-
 {% block title-td %} <a href="javascript:evalDetail({{ e.id }})">{{ e.title }}</a> {% endblock %}
-
 
 {% block operations-td %}
     <td>
