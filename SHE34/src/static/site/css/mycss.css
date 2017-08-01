@@ -38,3 +38,7 @@
   max-width: 70%; /* or to whatever you want here */
   max-height: auto; /* or to whatever you want here */
 }
+
+.modal-dialog{
+    max-width: 80vh;
+}

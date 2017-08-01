@@ -17,7 +17,7 @@
 {% block operations-td %}
     <td>
         <div class="btn-group">
-            <a class="btn btn-primary btn-sm" target="_blank"
+            <a class="btn btn-primary btn-sm"
                     {% if e.merged == False %}
                href="{% url 'profiles:dashboard:evaluation-update' e.id %}">
                     {% else %}
