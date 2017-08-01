@@ -253,11 +253,18 @@ def exportHtmlEvals(request, project_id, merge):
     project = Project.objects.get(pk=project_id)
     evals = project.evaluation_for_project.all()
     merged = False
-    if int(merge[0]) == 0:
-        evals = evals.filter(merged=False)
-    elif int(merge[0]) == 1:
-        merged = True
-        evals = evals.filter(merged=True)
+    user = request.user
+    if project.manager == user:
+        if int(merge[0]) == 0:
+            evals = evals.filter(merged=False)
+        elif int(merge[0]) == 1:
+            merged = True
+            evals = evals.filter(merged=True)
+    elif user in project.evaluators.all():
+            evals = evals.filter(evaluator=request.user)
+    else:
+        return HttpResponse('<h2> Page not found!</h2>')
+
 
     template_name = 'merge/htmlexport.html'
     context = { 'evaluations' : evals ,

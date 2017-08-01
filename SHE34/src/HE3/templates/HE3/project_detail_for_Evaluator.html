@@ -76,7 +76,20 @@
         {% if evaluations %}
             <div class="row">
                 <div class="panel panel-success">
-                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4> </div>
+                    <div class="panel-heading text-center"> <h4 class="lead text-success">Submitted Evaluations </h4>
+                        <div id="report-action" class="btn-group action-dropdown">
+                            <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Export Evaluations <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 2 %}"> Export as HTML </a></li>
+                                {#                                <li><a target="_blank" href=""> Export as Spreadsheet </a></li>#}
+                                {#                                <li><a target="_blank" href=""> Export as csv </a></li>#}
+                                {#                                        <li role="separator" class="divider"></li>#}
+                                {#                                        <li><a href="#">Delete</a></li>#}
+                            </ul>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         {% include 'HE3/tables/eval-table-operation-forEvaluator.html' %}
                     </div>
