@@ -21,6 +21,9 @@
                         - {{ project.link }}
                     {% endif %}
                 </p>
+            <br>
+            <h4> Project Manager:</h4>
+            <p>{{ project.manager.name }} - {{ project.manager.email }}</p>
             </div>
         </div>
         {#   ----------------------------------Evaluators -----------------------------#}
@@ -29,7 +32,7 @@
                 <br><br>
                 <h2 class="text-info">Evaluators:</h2> <hr>
                 <div class="col-sm-offset-1">
-                    <p> These are the evalutors in this project:</p>
+                    <p> These are the evaluators in this project:</p>
                     <div>
                         {% for ev in evaluators %}
                             <li> {{ ev.name }} - {{ ev.email }} </li>
