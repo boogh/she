@@ -78,7 +78,7 @@
                                         </a>
 
                                         {#                                    <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#project_delete_confirmation">#}
-                                        <button type="button" class="btn btn-warning" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:project_delete' project.id %}" data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-warning" data-project="this project" data-url="{% url 'profiles:dashboard:project_delete' project.id %}" data-toggle="modal" data-target="#delModal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             Del
                                         </button>
                                     </div>
@@ -144,7 +144,7 @@
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Evaluate
                                     </a>
                                     {% endif %}
-                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ project.name }}" data-url="{% url 'profiles:dashboard:delete-evaluator' project.id %}">
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="this project" data-url="{% url 'profiles:dashboard:delete-evaluator' project.id %}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
                                         </button>
@@ -186,7 +186,7 @@
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                                     </a>
 
-                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="{{ set.title }}"
+                                        <button type='button' class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delModal" data-project="this set"
                                                 data-url=" {% url 'profiles:dashboard:HeuristicSet_delete' set.id %}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Del
