@@ -100,6 +100,7 @@ def mergeFields(evalList):
     forAvg = ['frequency' , 'severity']
     for field in stringList :
         allvalues = set([ i.__dict__[field] for i in evalList])
+        allvalues = [str(j) + ')  ' + v for j , v in zip(list(range(1 , len(allvalues)+1)) , allvalues) ]
         result [field] = "\n" .join(allvalues)
     for field in stringWithKomma :
         allvalues = set([i.__dict__[field]for i in evalList])
