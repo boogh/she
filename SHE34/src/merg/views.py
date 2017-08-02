@@ -122,7 +122,10 @@ def mergeFields(evalList):
 
 def mergeScreenshots(resultEval, listEvals):
     for eval in listEvals:
-        if eval.screenshot:
+        if eval.merged:
+                if eval.mergedScreenshots:
+                    resultEval.mergedScreenshots.add(*eval.mergedScreenshots.all())
+        elif eval.screenshot:
             screenobject =Screenshots( screenshot =eval.screenshot)
             screenobject.save()
             resultEval.mergedScreenshots.add(screenobject)
