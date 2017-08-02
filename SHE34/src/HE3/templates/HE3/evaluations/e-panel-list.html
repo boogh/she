@@ -10,7 +10,7 @@
                 <div class="lead">
                     {{ e.title | truncatewords:5}} <br> </div>
                 <div>
-                    {% if e.merged %}
+                   <div class="text-center"> {% if e.merged %}
                         <small>
                             <span class="glyphicon glyphicon-th-list"></span>
                         </small>
@@ -19,7 +19,7 @@
                         <small>
                             <span class="glyphicon glyphicon-plus"></span>
                         </small>
-                    {% endif %}
+                    {% endif %}</div>
                 </div>
             </div>
         </a>
@@ -33,8 +33,9 @@
             </div>
             <a href="javascript:evalDetail({{ e.id }})" >
                 <div class='eval-item'>
-                    <div class="lead"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> {{ e.title | truncatewords:5 }}</div> <br>
-                    <div>
+                    <div class="lead"> {{ e.title | truncatewords:5 }}</div> <br>
+                    <div class="text-center">
+                    <small><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span></small>
                         {% if e.positivity == 'p' %}
                             <small>
                                 <span class="glyphicon glyphicon-plus"></span>
