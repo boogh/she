@@ -19,21 +19,45 @@
                 </a>
             </h4>
         </div>
-        <div id="collapse1" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="table">
-                    {% with evaluation.mergedFromEvaluations.all as evaluations %}
-                        {#                    {% include 'HE3/tables/eval-table-merge.html' %}#}
-                        {% include 'HE3/tables/eval-table-merged-form.html' %}
-                    {% endwith %}
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        {#            <div class="panel-body">#}
+        <div class="table-responsive">
+            {% with evaluation.mergedFromEvaluations.all as evaluations %}
+                {#                    {% include 'HE3/tables/eval-table-merge.html' %}#}
+                {% include 'HE3/tables/eval-table-merged-form.html' %}
+            {% endwith %}
+        </div>
+        <br>
+        <br>
+        <br>
+        {#            </div>#}
+    </div>
+    {#    </div>#}
+    {% include 'HE3/evaluations/eval-modal.html' %}
+    <!-- Modal -->
+    <div class="modal fade" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Note:</h3>
                 </div>
-                <br>
-                <br>
-                <br>
+                <div class="modal-body text-left">
+                    <p class="lead"> <a type="button" class="btn btn-sm btn-warning" > <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                         Removes the evaluation from the selected evaluations but its data remains in the merged evaluation.
+                    </p>
+                    <br>
+                    <p class="lead"><a type="button" class="btn btn-sm btn-danger"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a> Removes the evaluation and create a new merged evaluation with other selected evaluations. This means the current merged evaluation will be deleted!"</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-    {% include 'HE3/evaluations/eval-modal.html' %}
+
 
 {% endblock %}
 
