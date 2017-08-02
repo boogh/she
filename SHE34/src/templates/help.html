@@ -54,17 +54,15 @@
 
             {#            {% include 'guid.html' %}#}
             <!-- Page Content -->
-            <div class="container" id="top-of-page-help">
+            <div class="col-xs-8 col-xs-offset-1" id="top-of-page-help">
                 <div class="row">
                     <!-- Guid Entries Column -->
-                    <div class="col-md-10">
+                    <div class="col-xs-8">
                         <h1 id="guid-jumb" class="jumbotron text-center fa-4x">
                             How to use SHE?
                             {#                    <small> How to use SHE</small>#}
                         </h1>
                         <br>
-                        <br>
-
 
                         <div id="about-she">
                             <br>
@@ -90,13 +88,11 @@
                             This section introduces some aspects of account managements in SHE, e.g. Signing up/in, profile management, password recovery, etc. Each functionality is described with the relevant screenshots.
                         </p>
                         <hr>
-                        <br>
-                        <div id="signing-up"><br><br> <h2>Signing Up:</h2></div>
+                        <div id="signing-up"><br> <br><h2>Signing Up:</h2></div>
                         <p class="lead-guid">  To use SHE having an account is necessary. Registering an account is done in a simple step with a <strong>name </strong><small>(will be used as the username)</small> and also an <strong>email</strong> <small>(will be used for password recovery)</small>.
                         </p>
                         <img class="img-responsive" src="/media/guid/user/signup.jpeg">
                         <hr>
-                        <br>
 
                         <!-- Sign in -->
                         <div id="signing-in"><br><br> <h2>Signing in:</h2></div>
@@ -106,11 +102,8 @@
                         </p>
                         <img class="img-responsive" src="/media/guid/user/login.jpeg" alt="">
                         <hr>
-                        <br>
-
                         <!-- password revcovery -->
                         <div id="password-recovery"><br><br> <h2>Password Recovery:</h2></div>
-
                         <br>
                         <p class="lead-guid">
                             If users forgot their passwords it is possible for them to recover their password using their registered email:
@@ -118,9 +111,7 @@
                         <div class="text-center">
                             <img class="img-responsive col-sm-offset-4" src="/media/guid/user/passRecovery.jpeg" alt="">
                         </div>
-                        <br>
                         <hr>
-                        <br>
 
                         <!-- Editing profile -->
                         <div id="user-profile"><br><br> <h2>Editing User Profile</h2></div>
@@ -131,9 +122,7 @@
                         </p>
                         <br>
                         <img class="img-responsive" src="/media/guid/user/editprofile.jpeg" alt="">
-                        <br>
                         <hr>
-                        <br>
                         <!-- Dashboard -->
                         <div id="dashboard"><br><br> <h2>Dashboard</h2></div>
 
@@ -148,9 +137,7 @@
                         </p>
                         <br>
                         <img class="img-responsive" src="/media/guid/user/dashboardFull.jpeg" alt="">
-                        <br>
                         <hr>
-                        <br>
 
                         <!-- Project Detail -->
                         <div id="project-detail"><br><br> <h2>Project Detail</h2></div>
@@ -163,7 +150,6 @@
                         <hr>
 
                         <!-- Being an evaluator -->
-                        <br>
                         <div id="how-evaluator">
                             <br>
                             <br>
@@ -178,11 +164,9 @@
                         <br>
                         <p class="lead-guid"> If the deadline of a project is not passed an evaluator can see the blue button Evaluate. By clicking this button an evaluator can start adding his/her evaluations to the project. Evaluators can remove themselves as an evaluator in a specific project by pressing the Del button. The delete process will be finished after the confirmation in a pop up warning window.
                         </p>
-                        <br>
                         <hr>
 
                         <!-- Adding a new evaluation -->
-                        <br>
                         <div id="adding-evaluation"><br><br> <h2>Adding a New Evaluation</h2></div>
 
                         <br>
@@ -190,24 +174,20 @@
                             If the project deadline for the evaluation is not passed an evaluator can press the add evaluation button to open an evaluation form similar to the following screenshot. By filling the form and pressing the submit button at the bottom of the page the evaluation will be saved. In this form some fields are optional and some are necessary. Title, place and description fields are required to be filled. The rest is optional but recommended; e.g. the link field in the evaluation of a website page which should be filled in this form: http://www.example.com.
                             <br>
                             <img class="img-responsive" src="/media/guid/evaluator/evaluationForm.jpeg" alt="">
-                            <br>
                         <hr>
 
 
                         <!-- Adding env -->
-                        <br>
                         <div id="adding-env"><br><br> <h2>Adding a New Environment</h2></div>
                         <br>
                         <p class="lead-guid">
                             Evaluators can register the specifics of their environment so the manager can see the circumstances of the evaluations e.g. monitor resolution, operation system, etc. Creating an environment item is done by clicking on the link <span class="text-capitalize strong text-info">create an evaluation environment </span> which is in the sidebar of the dashboard and will opens a form similar to the following screenshot. An evaluator can create multiple environments.
                             <br>
                             <img class="img-responsive" src="/media/guid/evaluator/createEnv.jpeg" alt="">
-                            <br>
                         <hr>
 
 
                         <!-- Being an manager -->
-                        <br>
                         <div id="how-manager">
                             <br>
                             <br>
@@ -218,9 +198,6 @@
                         <p class="lead-guid">
                             Being a manager means to define and edit a project. A manager can add and delete other users as evaluators of the project and finally can merge the evaluations and create reports of the results of the evaluation. A manager can define and edit heuristic sets upon which a project is defined.
                         <hr>
-                        <br>
-                        <br>
-
                         <!-- Defining a heuristic set -->
                         <div id="defining-set"><br><br> <h2>Defining a Heuristic Set</h2></div>
                         <br>
@@ -250,12 +227,8 @@
                         <p class="lead-guid">
                             A set of heuristics which is in use in a project cannot be deleted as long as that project is using the set. To delete this set the manager can edit that project and chose another set of heuristics or even delete the whole project to make the set free to delete.
                         </p>
-                        <br>
                         <hr>
-                        <br>
-
                         <!-- def project -->
-                        <br>
                         <div id="defining-project"><br><br> <h2>Defining a Project</h2></div>
                         <br>
                         <p class="lead-guid">
@@ -264,10 +237,7 @@
                         <br>
                         <img class="img-responsive" src="/media/guid/manager/defineProject.jpeg" alt="">
                         <hr>
-                        <br>
-
                         <!-- Merging Evaluations: -->
-                        <br>
                         <div id="merging-evaluation"><br><br> <h2>Merging Evaluations</h2></div>
 
                         <br>
@@ -293,11 +263,7 @@
                         <br>
                         <br>
                         <p class="lead-guid">Clicking this button will combines the information of all the selected evaluations to create a new merged evaluation. A form-page for evaluation with the information of the new merged evaluation will be opened which can/should be edited and the combined data in its fields be summerized.</p>
-                        <br>
                         <hr>
-                        <br>
-                        <br>
-
                         <!-- Export -->
                         <div id="export"><br><br> <h2>Exporing a Report</h2></div>
 
@@ -310,18 +276,7 @@
                         <hr>
                         <br>
 
-                        {#                        <!-- Pager -->#}
-                        {#                        <ul class="pager">#}
-                        {#                            <li class="previous">#}
-                        {#                                <a href="#">&larr; Older</a>#}
-                        {#                            </li>#}
-                        {#                            <li class="next">#}
-                        {#                                <a href="#">Newer &rarr;</a>#}
-                        {#                            </li>#}
-                        {#                        </ul>#}
-
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
                 <div class="text-left">
                     <a class="btn btn-info" href="#top-of-page-help"> <span class="glyphicon glyphicon-triangle-top"></span></a>

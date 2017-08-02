@@ -16,32 +16,43 @@
             <br> <br>
             <h2 class="text-info">Project Description:</h2><hr>
             <div class="col-sm-offset-1">
-                <p>{{ project.description }} - {{ project.link }}</p>
+                <p>{{ project.description }}
+                    {% if project.link %}
+                        - {{ project.link }}
+                    {% endif %}
+                </p>
+            <br>
+            <h4> Project Manager:</h4>
+            <p>{{ project.manager.name }} - {{ project.manager.email }}</p>
             </div>
         </div>
         {#   ----------------------------------Evaluators -----------------------------#}
-        <div>
-            <br><br>
-            <h2 class="text-info">Evaluators:</h2> <hr>
-            <div class="col-sm-offset-1">
-                <p> These are the evalutors in this project:</p>
-                <div>
-                    {% for ev in evaluators %}
-                        <li> {{ ev.name }} - {{ ev.email }} </li>
-                    {% endfor %}
-                </div>
-            </div>
-            <br>
-        </div>
-        <div>
-            <br>
-            <h2 class="text-info">Evaluator Environments:</h2><hr>
-            <br>
+        {% if evaluators %}
             <div>
-                {% include 'merge/environments.html' %}
+                <br><br>
+                <h2 class="text-info">Evaluators:</h2> <hr>
+                <div class="col-sm-offset-1">
+                    <p> These are the evaluators in this project:</p>
+                    <div>
+                        {% for ev in evaluators %}
+                            <li> {{ ev.name }} - {{ ev.email }} </li>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
             </div>
-            <br>
-        </div>
+        {% endif %}
+        {% if environments %}
+            <div>
+                <br>
+                <h2 class="text-info">Evaluator Environments:</h2><hr>
+                <br>
+                <div>
+                    {% include 'merge/environments.html' %}
+                </div>
+                <br>
+            </div>
+        {% endif %}
         {% if pos_merge %}
             <br><br>
             <div><h2 class="text-info">Positive Merged evaluations:</h2> <hr>
@@ -63,23 +74,24 @@
                 </div>
                 <br>
             </div>
-            {#-----------------------------Appendix--------------------------------------------#}
-
         {% endif %}
+        {#-----------------------------Appendix--------------------------------------------#}
 
-        <div>
-            <br><br>
-            <h2 class="text-info">All Evaluations: </h2><hr>
+        {% if evaluations %}
             <div>
-                {% include 'HE3/tables/eval-table-desc.html' %}
+                <br><br>
+                <h2 class="text-info">All Evaluations: </h2><hr>
+                <div>
+                    {% include 'HE3/tables/eval-table-desc.html' %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
 
         {#    -------------------Heuristics---------------------------------------#}
 
         <div>
-        <br><br>
+            <br><br>
             <h2 class="text-info">Heuristic set:</h2><hr>
             <div class="col-sm-offset-1">
                 <p>
@@ -104,7 +116,5 @@
                 </ol>
             </div>
         </div>
-
     </div>
-
 {% endblock %}

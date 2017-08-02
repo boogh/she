@@ -44,15 +44,34 @@ def evaltfidf(project):
     evalsf['tfidfTags'] = tfidfTags
 
     return evalsf
+def getPlaceSF(project):
+    '''
+    A method which get a project and return a SFrame of it`s evaluations
+    :param project:
+    :return: A SFrame of Evaluation in the project
+    '''
 
+    evaldic = [e.__dict__ for e in project.evaluation_for_project.all()]
+
+    evalsf = gl.SFrame()
+    evalsf['id'] = [str(i['id']) for i in evaldic]
+    # evalsf['title'] = [i['title'] for i in evaldic]
+    evalsf['place'] = [i['place'] for i in evaldic]
+    # evalsf['a_place'] = [i['a_place'] for i in evaldic]
+    # evalsf['description'] = [i['description'] for i in evaldic]
+    # evalsf['recommendation'] = [i['recommendation'] for i in evaldic]
+    evalsf['tags'] = [i['tags'] for i in evaldic]
+    # evalsf['heurPrincip_id'] = [str(i['heurPrincip_id']) for i in evaldic]
+
+    return evalsf
 
 def placebase(eval):
 
     project = eval.ofProject
     # updateAllSearchModels()
     # result = projectsSearchModelsDic[project.id]['placeSearchModel'].query(eval.place)
-    sf= getEvalSF(project)
-    placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place'])
+    sf= getPlaceSF(project)
+    placeSearchModel = gl.toolkits._internal.search.create(sf , features= ['id','place' ,'tags'])
     result = placeSearchModel.query(eval.place).filter_by(str(eval.id) , 'id' , exclude= True)
     return  list(result['id'])
 

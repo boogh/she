@@ -229,18 +229,18 @@ function getCookie(name) {
     return cookieValue;
 }
 
-//Recommendation on and off
-$('.btn-toggle').click(function () {
-    $(this).find('.btn').toggleClass('btn-primary');
-    $(this).find('.btn').toggleClass('btn-default');
-    if ($(this).find('.btn-primary').html() == 'OFF') {
-        rec_engin = false;
-    }
-    else{
-        rec_engin = true;
-    };
-
-});
+// //Recommendation on and off
+// $('.btn-toggle').click(function () {
+//     $(this).find('.btn').toggleClass('btn-primary');
+//     $(this).find('.btn').toggleClass('btn-default');
+//     if ($(this).find('.btn-primary').html() == 'OFF') {
+//         rec_engin = false;
+//     }
+//     else{
+//         rec_engin = true;
+//     };
+//
+// });
 
 //
 // function listname() {

@@ -7,7 +7,7 @@
     <div class="container">
         <div class="starter-template">
             {% if merged == False %}
-                <h1>All Submitted Evaluations</h1>
+                <h1>All The Submitted Evaluations</h1>
             {% else %}
                 <h1>Merged Evaluations</h1>
             {% endif %}
@@ -16,9 +16,9 @@
 
         <div>
             {% if merged == False %}
-                {% include 'HE3/tables/eval-table.html' %}
+                {% include 'HE3/tables/eval-table-desc.html' %}
             {% else %}
-                {% include 'HE3/tables/eval-table-merge.html' %}
+                {% include 'HE3/tables/eval-table-merge-desc.html' %}
             {% endif %}
         <br>
 {#            <table class="table table-responsive table-bordered table-striped table-hover">#}

@@ -6,42 +6,10 @@ from django.urls import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
 
 
-
-HEURISTICLIST = (("1", "Visibility of System Status"),
-                 ("2", "Match Between System and Real World"),
-                 ("3", "User Control and Freedom"),
-                 ("4", "Consistency and Standards"),
-                 ("5", "Error Prevention"),
-                 ("6", "Recognition Rather than Recall"),
-                 ("7", "Flexibility and Efficiency of Use"),
-                 ("8", "Aesthetic and Minimalistic Design"),
-                 ("9", "Help Users Recognize, Diagnose, and Recover from Errors"),
-                 ("10", "Help and Documentation"))
-
 POSITIVITY= (("p" , "Positive") , ("n" , "Negative"))
 SEVERITY= (("1" , "No problem at all"), ("2", "Cosmetic problem"), ("3" , "Minor usability problem") , ("4", "Major usability problem"), ("5", "Catastrophic"))
 FREQUENCY=(("1", "almost never"), ("2", "rarely (< 10 % )") , ("3", "occasionally (11-50 %"), ("4" , "regularly(51-89 %"), ("5" , "constantly (>90 %"))
 
-
-
-# class HEset(models.Model):
-#     HEURISTICLIST = (("1" , "Visibility of System Status"),
-#                 ("2" , "Match Between System and Real World"),
-#                 ("3","User Control and Freedom"),
-#                 ("4","Consistency and Standards"),
-#                 ("5", "Error Prevention"),
-#                 ("6", "Recognition Rather than Recall"),
-#                 ("7", "Flexibility and Efficiency of Use"),
-#                 ("8", "Aesthetic and Minimalistic Design"),
-#                 ("9", "Help Users Recognize, Diagnose, and Recover from Errors"),
-#                 ("10", "Help and Documentation"))
-#
-#
-#     name = models.CharField(max_length=50)
-#     set = models.CharField(max_length=200 , choices=HEURISTICLIST)
-#
-#     def __str__(self):
-#         return self.name
 
 class SetOfHeuristics(models.Model):
     creator = models.ForeignKey(User , null=True)
@@ -97,16 +65,6 @@ class Project(models.Model):
         return self.name
 
 
-    # def __iter__(self):
-    #     return [self.name,
-    #             self.link,
-    #             self.description,
-    #             self.manger,
-    #             self.evaluators,
-    #             self.creationTime,
-    #             self.deadline,
-    #            ]
-
 class Evaluation(models.Model):
     POSITIVITY = (("p", "Positive"), ("n", "Negative"))
     SEVERITY = (("1", "No problem at all"), ("2", "Cosmetic problem"), ("3", "Minor usability problem"),
@@ -128,7 +86,6 @@ class Evaluation(models.Model):
     severity = models.CharField(max_length=10, choices=SEVERITY, default="1")
     frequency = models.CharField(max_length=10, choices=FREQUENCY, default="1")
     screenshot = ThumbnailerImageField(blank=True ,upload_to='screenshots/%Y-%m-%d/')
-    # caption = models.CharField(blank=True , max_length=1000, help_text='Enter a caption for the screenshot')
 
     # Fiels for merged evaluations
     merged = models.BooleanField(default=False)
@@ -149,22 +106,6 @@ class Evaluation(models.Model):
     def __str__(self):
         return self.title +' - place = ' + self.place + ' - from = ' + self.evaluator.name
 
-# Name should be refactored to MergeLists
-# class ListOfEval(models.Model):
-#     ofProject = models.ForeignKey(Project)
-#     fromUser = models.ForeignKey(User, related_name="Merge_manager")
-#     evaluations = models.ManyToManyField(Evaluation , blank= True)
-#     name = models.CharField(max_length= 50)
-#
-#     # these two should be deleted
-#     mergeUrl = models.URLField(blank=True , null=True)
-#     exportedFile= models.FileField(blank=True , null=True)
-#
-#     def __str__(self):
-#         return self.name
-#
-#     def get_absolute_url(self):
-#         return reverse('profiles:dashboard:project_detail', kwargs={'pk': self.ofProject.pk})
 
 class Environment(models.Model):
 
