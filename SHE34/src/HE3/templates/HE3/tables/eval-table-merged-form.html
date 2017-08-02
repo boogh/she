@@ -8,7 +8,11 @@
 
 
 {% block checkbox-th %}
-    <th> Operations </th>
+    <th>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#help-modal">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    </button>
+    </th>
 {% endblock %}
 {% block counter-th%}{% endblock %}
 {% block counter-td%}{% endblock %}
@@ -18,9 +22,9 @@
 {% block checkbox-td %}
     <td>
         <div class="btn-group">
-            <a type="button" class="btn btn-sm btn-warning" href="{% url 'merge:remove-selected-evaluation' evaluation.id e.id %}" data-toggle="tooltip" title="Removes the evaluation from selected evaluations but its data remains in the merged evaluation."> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <a type="button" class="btn btn-sm btn-warning" href="{% url 'merge:remove-selected-evaluation' evaluation.id e.id %}" > <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
-            <a type="button" class="btn btn-sm btn-danger" href="{% url 'merge:make-new-merge-evaluation' evaluation.id e.id %}" data-project="{{ e.title }}"  data-toggle="tooltip" title="Removes the evaluation and create a new merged evaluation with other selected evaluations. This means the current merged evaluation will be deleted"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <a type="button" class="btn btn-sm btn-danger" href="{% url 'merge:make-new-merge-evaluation' evaluation.id e.id %}" data-project="{{ e.title }}"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
         </div>
     </td>
