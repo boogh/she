@@ -1,4 +1,3 @@
-
 # SHE
 
 SHE or Smart Heurisic Evaluation is a collaborative web application for supporting Heuristic Evaluation. The process of systematic development of user friendly interfaces or usability engineering involves constant evaluation of a system design through usability tests and inspection methods. Heuristic evaluation (HE) is one of the most important inspection methods in usability engineering, in which a number of usability experts evaluate the user interfaces based on a set of pre-defined principles or the so called "heuristics" and at the end, their findings will be merged in a summary report.
@@ -16,7 +15,7 @@ To run SHE on your local machine follow these steps:
     
     Or alternatively from github: 
 
-    `$ git clone https://github.com/boogh/she.git`
+    $ git clone https://github.com/boogh/she.git
 
 2) Creating a graphlab environment using Anaconda Python Environment (See [this installation guid][3])
 
@@ -24,24 +23,24 @@ To run SHE on your local machine follow these steps:
     Create a new conda environment with Python 2.7.x
    
     
-     `$ conda create -n gl-env python=2.7 anaconda=4.0.0`
+     $ conda create -n gl-env python=2.7 anaconda=4.0.0
      
   
     Activate the conda environment
     
-     `$ activate gl-env`
+     $ activate gl-env
      
 
     Ensure pip is updated to the latest version
  
-     `$ conda update pip`
+     $ conda update pip
      
 
     Install licensed copy of GraphLab Create
   
-    `$ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-
+    $ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-
     Create/2.1/your registered email address here/your product key here/Graph
-    Lab-Create-License.tar.gz`
+    Lab-Create-License.tar.gz
     
 3) Installing the requirements of SHE and finally running SHE:
 
