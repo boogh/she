@@ -22,27 +22,27 @@ To run SHE on your local machine follow these steps:
 2) Creating a graphlab environment using Anaconda Python Environment (See [this installation guid][3])
 
   
-    # Create a new conda environment with Python 2.7.x
+    Create a new conda environment with Python 2.7.x
    
     
-     $ conda create -n gl-env python=2.7 anaconda=4.0.0
+     `$ conda create -n gl-env python=2.7 anaconda=4.0.0`
      
   
-    # Activate the conda environment
+    Activate the conda environment
     
-     $ activate gl-env
+     `$ activate gl-env`
      
 
-    # Ensure pip is updated to the latest version
+    Ensure pip is updated to the latest version
  
-     $ conda update pip
+     `$ conda update pip`
      
 
-    # Install licensed copy of GraphLab Create
+    Install licensed copy of GraphLab Create
   
-    $ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-
+    `$ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-
     Create/2.1/your registered email address here/your product key here/Graph
-    Lab-Create-License.tar.gz
+    Lab-Create-License.tar.gz`
     
 3) Installing the requirements of SHE and finally running SHE:
 
