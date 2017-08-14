@@ -19,18 +19,23 @@
         <hr class="divider">
         <div class="row">
             <div class="btn-group-sm">
-{#                <div class="col-xs-3 pull-right btn-group btn-toggle">#}
-{#                    <button class="btn btn-default btn-sm">OFF</button>#}
-{#                    <button class="btn btn-primary btn-sm active">Reommendation ON</button>#}
-{#                </div>#}
-                <div id="report-action" class="col-xs-3 pull-right btn-group action-dropdown">
+                {#                <div class="col-xs-3 pull-right btn-group btn-toggle">#}
+                {#                    <button class="btn btn-default btn-sm">OFF</button>#}
+                {#                    <button class="btn btn-primary btn-sm active">Reommendation ON</button>#}
+                {#                </div>#}
+                <div class="pull-right">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#help-modal-merge">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="pull-right btn-group action-dropdown">
                     <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Export <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a target="_blank" href="{% url 'merge:report-html' project.id %}"> Export a Report</a></li>
                         <li><a target="_blank" href="{% url 'merge:export-html-file' project.id 1 %}"> Export Merged Evaluations</a></li>
-{#                        <li><a target="_blank" href=""> Export Merged Evaluation as Spreadsheet </a></li>#}
+                        {#                        <li><a target="_blank" href=""> Export Merged Evaluation as Spreadsheet </a></li>#}
                     </ul>
                 </div>
                 <div class="col-xs-3 pull-left merge-bar">
@@ -106,6 +111,36 @@
     </div><!-- End of container -->
     {% include 'HE3/evaluations/eval-modal.html' %}
     {% include 'HE3/delete_confirmation.html' %}
+    <div class="modal fade" id="help-modal-merge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title text-info" id="myModalLabel">Note:</h2>
+                </div>
+                <div class="modal-body text-left">
+                    <p class="lead"></p>
+                    <p class="lead"></p>
+                    <p class="lead">  <span class="glyphicon glyphicon-th-list text-info" aria-hidden="true"></span>
+                        The evaluations with this symbole are merged evaluations and they also can be also selected to be merged with other evaluations.
+                    </p>
+                    <br>
+                    <p class="lead"><span class="glyphicon glyphicon-paperclip text-info" aria-hidden="true"></span>
+                        The evaluations with this symbole are already selected and contained in a merged evaluation.
+                    </p>
+                    <br>
+                    <p class="lead">
+                        <span class="glyphicon glyphicon-plus text-info"></span>
+                        The evaluations with this sign are positive evaluations, as appose to the other evaluations without this sign which have a negative review.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     {#    <div class="modal fade" id="e-detail" tabindex="-1" role="dialog">#}
     {#        <div class="modal-dialog modal-lg" role="document">#}

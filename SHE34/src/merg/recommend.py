@@ -110,9 +110,9 @@ def nearestN(eval):
     resultDes = modelDes.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
     resultRec = modelRec.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
     resultTags = modelTags.query(evalrow).filter_by(str(eval.id) , 'reference_label' , exclude= True)
-    resultDes = resultDes[resultDes['distance'] <= 0.6]['reference_label']
-    resultRec = resultRec[resultRec['distance'] <= 0.6]['reference_label']
-    resultTags = resultTags[resultTags['distance'] <= 0.6]['reference_label']
+    resultDes = resultDes[resultDes['distance'] <= 0.85]['reference_label']
+    resultRec = resultRec[resultRec['distance'] <= 0.85]['reference_label']
+    resultTags = resultTags[resultTags['distance'] <= 0.85]['reference_label']
 
     result = {'resultDes' : resultDes ,
               'resultRec' : resultRec ,

@@ -12,7 +12,7 @@
             <h6 class="lead">
                 <a data-toggle="collapse" data-target="#{{ ID }}"
                    href="#{{ ID}}" class="collapsed">
-                    {{ user.name }} -
+                    {{ user.name | truncatewords:3 }} -
                     <small>
                         {% if used_evals %}
                         {% add evaluations.count used_evals.count %}
