@@ -7,7 +7,7 @@ SHE or Smart Heurisic Evaluation is a collaborative web application for supporti
 SHE is tool for supporting the whole process of heuristic evaluation. It is smart enough to recognize similarities between evaluations and recommend them as a potential merging candidate in the final report.
 .It is built with [Python][0] using the [Django Web Framework][1].
 
-###Running SHE 
+### Running SHE 
 
 To run SHE on your local machine follow these steps:
 
@@ -52,7 +52,7 @@ To run SHE on your local machine follow these steps:
         $ python manage.py runserver
         
 
-####Note: 
+#### Note: 
 In windows Django should be added to the path.
 
 
