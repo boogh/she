@@ -1,5 +1,4 @@
 
-
 # SHE
 
 SHE or Smart Heurisic Evaluation is a collaborative web application for supporting Heuristic Evaluation. The process of systematic development of user friendly interfaces or usability engineering involves constant evaluation of a system design through usability tests and inspection methods. Heuristic evaluation (HE) is one of the most important inspection methods in usability engineering, in which a number of usability experts evaluate the user interfaces based on a set of pre-defined principles or the so called "heuristics" and at the end, their findings will be merged in a summary report.
@@ -13,7 +12,7 @@ To run SHE on your local machine follow these steps:
 
 1) Cloning the source code from gitlab or github:
 
-    `$ git clone https://erahnema@git.cs.upb.de/erahnema/she.git`
+    $ git clone https://erahnema@git.cs.upb.de/erahnema/she.git
     
     Or alternatively from github: 
 
